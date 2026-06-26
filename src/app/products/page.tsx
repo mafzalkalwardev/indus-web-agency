@@ -1,22 +1,16 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { PRODUCTS, CATEGORY_LABELS, type ProductCategory } from "@/lib/products";
 import { ProductCard } from "@/components/products/ProductCard";
 
-export const metadata = {
-  title: "Products — INDUS Web Agency",
-};
-
-export default async function ProductsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ cat?: string }>;
-}) {
-  const { cat } = await searchParams;
-  const category = cat as ProductCategory | undefined;
-  const filtered = category
-    ? PRODUCTS.filter((p) => p.category === category)
-    : PRODUCTS;
-
+function ProductsContent() {
+  const searchParams = useSearchParams();
+  const cat = searchParams.get("cat") as ProductCategory | null;
+  const filtered = cat ? PRODUCTS.filter((p) => p.category === cat) : PRODUCTS;
   const categories = Object.entries(CATEGORY_LABELS) as [ProductCategory, string][];
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
@@ -27,9 +21,9 @@ export default async function ProductsPage({
 
       <div className="mt-6 flex flex-wrap gap-2">
         <a
-          href="/products"
+          href={`${basePath}/products`}
           className={`rounded-full px-4 py-1.5 text-sm font-medium ${
-            !category ? "bg-[#0c2340] text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+            !cat ? "bg-[#0c2340] text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
           }`}
         >
           All
@@ -37,9 +31,9 @@ export default async function ProductsPage({
         {categories.map(([key, label]) => (
           <a
             key={key}
-            href={`/products?cat=${key}`}
+            href={`${basePath}/products?cat=${key}`}
             className={`rounded-full px-4 py-1.5 text-sm font-medium ${
-              category === key ? "bg-[#0c2340] text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+              cat === key ? "bg-[#0c2340] text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
             }`}
           >
             {label}
@@ -53,5 +47,13 @@ export default async function ProductsPage({
         ))}
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="p-12 text-center">Loading products...</div>}>
+      <ProductsContent />
+    </Suspense>
   );
 }
