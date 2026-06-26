@@ -4,8 +4,10 @@ Professional automation tools marketplace — subscribe to auto dialers, email m
 
 ## Live URLs
 
-- **Vercel**: Deployed after push (see README badge)
-- **GitHub Pages**: https://mafzalkalwardev.github.io/indus-web-agency/
+- **Vercel (full app — auth, subscriptions, downloads):** https://indus-web-agency.vercel.app
+- **GitHub Pages (marketing site):** https://mafzalkalwardev.github.io/indus-web-agency/
+- **GitHub Repository:** https://github.com/mafzalkalwardev/indus-web-agency
+- **Release v1.0.0:** https://github.com/mafzalkalwardev/indus-web-agency/releases/tag/v1.0.0
 
 ## Features
 
