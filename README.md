@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# INDUS Web Agency
 
-## Getting Started
+Professional automation tools marketplace — subscribe to auto dialers, email marketing tools, and web scrapers individually.
 
-First, run the development server:
+## Live URLs
+
+- **Vercel**: Deployed after push (see README badge)
+- **GitHub Pages**: https://mafzalkalwardev.github.io/indus-web-agency/
+
+## Features
+
+- Customer sign up / login with JWT sessions
+- Admin portal for user & subscription management
+- 13 products across email, dialer, scraper, and bundle categories
+- 4 auto dialer tiers with side-by-side comparison
+- Time-limited subscriptions with download access
+- Screenshots from live Auto Dialer application
+
+## Products
+
+### Email Tools
+- Email Verifier Pro
+- Bulk Email Verifier
+- Auto Email Sender
+- Unified Inbox
+- Mailforge (bundle)
+
+### Auto Dialers
+1. **DOM/BOM Starter** — PyAutoGUI + DOM automation
+2. **Multi-Slot Agent** — 5 parallel lines, agent sees picked call only
+3. **AI Agent Solo** — AI talks automatically on every call
+4. **Enterprise AI Multi-Slot** — Multi-slot + AI on picked call
+
+### Web Scrapers
+- Playwright Website Scraper Pro
+- FMCSA SAFER Scraper
+- Canadian Website Scraper
+- Fiverr Lead Extractor CRM
+
+## Quick Start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Default Admin Credentials
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Email: `admin@induswebagency.com`
+- Password: `Admin@Indus2026!`
 
-## Learn More
+Change via environment variables:
+```
+ADMIN_EMAIL=your@email.com
+ADMIN_PASSWORD=your-secure-password
+JWT_SECRET=your-jwt-secret
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Vercel
+```bash
+npx vercel --prod
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### GitHub Pages
+```bash
+npm run build:static
+# Output in out/ — served via gh-pages branch
+```
 
-## Deploy on Vercel
+## Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS 4
+- JWT auth (jose + bcryptjs)
+- JSON file storage (upgradeable to database)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT
