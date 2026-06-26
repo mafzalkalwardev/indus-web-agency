@@ -37,3 +37,5 @@ yarn-debug.log*
 # TypeScript
 next-env.d.ts
 *.tsbuildinfo
+
+.vercel

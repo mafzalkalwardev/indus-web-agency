@@ -26,6 +26,10 @@ jobs:
           cache: npm
 
       - run: npm ci
+
+      - name: Remove server-only routes for static export
+        run: rm -rf src/app/api src/app/admin src/app/dashboard
+
       - run: npm run build:static
         env:
           GITHUB_PAGES: "true"

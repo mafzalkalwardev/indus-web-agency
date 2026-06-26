@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ExternalLink, Code2, Check } from "lucide-react";
 import { getProduct, PRODUCTS, CATEGORY_LABELS } from "@/lib/products";
 import { SubscribeButton } from "@/components/products/SubscribeButton";
-import { getSession } from "@/lib/auth";
 
 export async function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
@@ -25,9 +24,6 @@ export default async function ProductDetailPage({
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) notFound();
-
-  const session = await getSession();
-  const isLoggedIn = !!session;
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
@@ -140,7 +136,7 @@ export default async function ProductDetailPage({
                 ))}
               </ul>
               <div className="mt-6">
-                <SubscribeButton productSlug={product.slug} plan={plan} isLoggedIn={isLoggedIn} />
+                <SubscribeButton productSlug={product.slug} plan={plan} isLoggedIn={false} />
               </div>
             </div>
           ))}
