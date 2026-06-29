@@ -58,7 +58,19 @@ Change via environment variables:
 ADMIN_EMAIL=your@email.com
 ADMIN_PASSWORD=your-secure-password
 JWT_SECRET=your-jwt-secret
+NEXT_PUBLIC_SITE_URL=https://indus-web-agency.vercel.app
 ```
+
+### Persistent storage (recommended for production)
+
+By default on Vercel, user data is stored in `/tmp` and resets on cold starts. For persistent storage, add a free [Upstash Redis](https://upstash.com) database and set:
+
+```
+UPSTASH_REDIS_REST_URL=your-url
+UPSTASH_REDIS_REST_TOKEN=your-token
+```
+
+The admin dashboard shows **Storage: redis** when connected.
 
 ## Deploy
 

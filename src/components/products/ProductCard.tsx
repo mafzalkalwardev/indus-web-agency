@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Mail, Phone, Globe, Package } from "lucide-react";
 import type { Product, ProductCategory } from "@/lib/products";
 import { CATEGORY_LABELS } from "@/lib/products";
+import { href } from "@/lib/paths";
 
 const categoryIcons: Record<ProductCategory, React.ReactNode> = {
   email: <Mail className="h-5 w-5" />,
@@ -22,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link
-      href={`/products/${product.slug}`}
+      href={href(`/products/${product.slug}`)}
       className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-cyan-300 hover:shadow-lg"
     >
       <div className="flex items-start justify-between">

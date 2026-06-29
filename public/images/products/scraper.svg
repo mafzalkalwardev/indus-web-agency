@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#faf5ff"/>
+  <rect x="60" y="50" width="280" height="140" rx="8" fill="#fff" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="80" y="70" width="80" height="50" rx="4" fill="#ede9fe"/>
+  <rect x="170" y="70" width="80" height="50" rx="4" fill="#ede9fe"/>
+  <rect x="260" y="70" width="60" height="50" rx="4" fill="#ede9fe"/>
+  <text x="200" y="210" text-anchor="middle" fill="#0c2340" font-family="Arial,sans-serif" font-size="13" font-weight="bold">Playwright Scraper Pro</text>
+</svg>

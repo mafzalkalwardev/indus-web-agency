@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#f8fafc"/>
+  <rect x="50" y="50" width="300" height="140" rx="8" fill="#fff" stroke="#0c2340" stroke-width="2"/>
+  <rect x="70" y="70" width="260" height="30" rx="4" fill="#ecfeff"/>
+  <rect x="70" y="110" width="260" height="30" rx="4" fill="#f1f5f9"/>
+  <rect x="70" y="150" width="260" height="30" rx="4" fill="#f1f5f9"/>
+  <text x="200" y="225" text-anchor="middle" fill="#0c2340" font-family="Arial,sans-serif" font-size="13" font-weight="bold">Unified Inbox</text>
+</svg>

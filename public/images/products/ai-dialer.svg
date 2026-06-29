@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#faf5ff"/>
+  <circle cx="200" cy="110" r="50" fill="#7c3aed" opacity="0.2"/>
+  <circle cx="200" cy="110" r="30" fill="#7c3aed"/>
+  <text x="200" y="115" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="14" font-weight="bold">AI</text>
+  <text x="200" y="190" text-anchor="middle" fill="#0c2340" font-family="Arial,sans-serif" font-size="14" font-weight="bold">AI Dispatch Agent</text>
+</svg>

@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Users, CreditCard } from "lucide-react";
+import { Users, CreditCard, PlusCircle } from "lucide-react";
 import { formatDate, isExpired } from "@/lib/utils";
-import { getProduct } from "@/lib/products";
+import { getProduct, PRODUCTS } from "@/lib/products";
 
 interface UserRow {
   id: string;
@@ -27,7 +27,25 @@ export default function AdminPage() {
   const [users, setUsers] = useState<UserRow[]>([]);
   const [subs, setSubs] = useState<SubRow[]>([]);
   const [loading, setLoading] = useState(true);
-  const [tab, setTab] = useState<"users" | "subscriptions">("subscriptions");
+  const [tab, setTab] = useState<"subscriptions" | "users" | "grant">("subscriptions");
+  const [storage, setStorage] = useState<string>("");
+  const [grantEmail, setGrantEmail] = useState("");
+  const [grantProduct, setGrantProduct] = useState(PRODUCTS[0]?.slug || "");
+  const [grantPlan, setGrantPlan] = useState(PRODUCTS[0]?.plans[0]?.id || "");
+  const [grantMsg, setGrantMsg] = useState("");
+
+  function loadData() {
+    return Promise.all([
+      fetch("/api/admin/users").then((r) => r.json()),
+      fetch("/api/admin/subscriptions").then((r) => r.json()),
+      fetch("/api/health").then((r) => r.json()),
+    ]).then(([userData, subData, health]) => {
+      setUsers(userData.users || []);
+      setSubs(subData.subscriptions || []);
+      setStorage(health.storage || "file");
+      setLoading(false);
+    });
+  }
 
   useEffect(() => {
     fetch("/api/auth/me")
@@ -37,19 +55,30 @@ export default function AdminPage() {
           window.location.href = "/admin/login";
           return;
         }
-        return Promise.all([
-          fetch("/api/admin/users").then((r) => r.json()),
-          fetch("/api/admin/subscriptions").then((r) => r.json()),
-        ]);
-      })
-      .then((data) => {
-        if (!data) return;
-        const [userData, subData] = data;
-        setUsers(userData.users || []);
-        setSubs(subData.subscriptions || []);
-        setLoading(false);
+        return loadData();
       });
   }, []);
+
+  async function handleGrant(e: React.FormEvent) {
+    e.preventDefault();
+    setGrantMsg("");
+    const res = await fetch("/api/admin/grant", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userEmail: grantEmail, productSlug: grantProduct, planId: grantPlan }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      setGrantMsg(data.error || "Failed");
+      return;
+    }
+    setGrantMsg("Subscription granted successfully!");
+    setGrantEmail("");
+    await loadData();
+    setTab("subscriptions");
+  }
+
+  const selectedProduct = getProduct(grantProduct);
 
   if (loading) {
     return (
@@ -61,10 +90,19 @@ export default function AdminPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-      <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-      <p className="text-sm text-slate-600">Manage users and subscriptions</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+          <p className="text-sm text-slate-600">Manage users and subscriptions</p>
+        </div>
+        <span className={`rounded-full px-3 py-1 text-xs font-medium ${
+          storage === "redis" ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"
+        }`}>
+          Storage: {storage === "redis" ? "Redis (persistent)" : "File (ephemeral on Vercel)"}
+        </span>
+      </div>
 
-      <div className="mt-6 flex gap-2">
+      <div className="mt-6 flex flex-wrap gap-2">
         <button
           onClick={() => setTab("subscriptions")}
           className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium ${
@@ -81,7 +119,70 @@ export default function AdminPage() {
         >
           <Users className="h-4 w-4" /> Users ({users.length})
         </button>
+        <button
+          onClick={() => setTab("grant")}
+          className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium ${
+            tab === "grant" ? "bg-cyan-600 text-white" : "bg-slate-100 text-slate-700"
+          }`}
+        >
+          <PlusCircle className="h-4 w-4" /> Grant Subscription
+        </button>
       </div>
+
+      {tab === "grant" && (
+        <form onSubmit={handleGrant} className="mt-6 max-w-lg rounded-2xl border border-slate-200 bg-white p-6">
+          <h2 className="font-bold">Grant subscription to customer</h2>
+          <div className="mt-4 space-y-4">
+            <div>
+              <label className="block text-sm font-medium">Customer email</label>
+              <input
+                type="email"
+                required
+                value={grantEmail}
+                onChange={(e) => setGrantEmail(e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+                placeholder="client@company.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium">Product</label>
+              <select
+                value={grantProduct}
+                onChange={(e) => {
+                  setGrantProduct(e.target.value);
+                  const p = getProduct(e.target.value);
+                  setGrantPlan(p?.plans[0]?.id || "");
+                }}
+                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              >
+                {PRODUCTS.map((p) => (
+                  <option key={p.slug} value={p.slug}>{p.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium">Plan</label>
+              <select
+                value={grantPlan}
+                onChange={(e) => setGrantPlan(e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              >
+                {selectedProduct?.plans.map((pl) => (
+                  <option key={pl.id} value={pl.id}>{pl.name} — ${pl.price}/mo</option>
+                ))}
+              </select>
+            </div>
+            {grantMsg && (
+              <p className={`text-sm ${grantMsg.includes("success") ? "text-emerald-600" : "text-red-600"}`}>
+                {grantMsg}
+              </p>
+            )}
+            <button type="submit" className="rounded-lg bg-[#0c2340] px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a5c]">
+              Grant Subscription
+            </button>
+          </div>
+        </form>
+      )}
 
       {tab === "subscriptions" && (
         <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200 bg-white">

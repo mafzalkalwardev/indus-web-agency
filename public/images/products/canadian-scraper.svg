@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#fef2f2"/>
+  <rect x="50" y="50" width="300" height="140" rx="8" fill="#fff" stroke="#dc2626" stroke-width="2"/>
+  <text x="200" y="115" text-anchor="middle" fill="#0c2340" font-family="Arial,sans-serif" font-size="15" font-weight="bold">Canadian Scraper</text>
+  <text x="200" y="140" text-anchor="middle" fill="#64748b" font-family="Arial,sans-serif" font-size="12">Playwright Content Extract</text>
+</svg>

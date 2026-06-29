@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" fill="none">
+  <rect width="400" height="240" rx="16" fill="#eff6ff"/>
+  <rect x="60" y="60" width="280" height="120" rx="8" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+  <path d="M100 120 L140 120 L140 100 L180 130 L140 160 L140 140 L100 140 Z" fill="#2563eb"/>
+  <text x="240" y="125" text-anchor="middle" fill="#0c2340" font-family="Arial,sans-serif" font-size="14" font-weight="bold">Auto Email</text>
+  <text x="240" y="145" text-anchor="middle" fill="#64748b" font-family="Arial,sans-serif" font-size="12">Multi-SMTP Sender</text>
+</svg>

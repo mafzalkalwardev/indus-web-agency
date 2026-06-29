@@ -2,6 +2,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcryptjs";
+import { hasRedis, redisGet, redisSet, REDIS_KEYS } from "./redis";
 
 const DATA_DIR = process.env.VERCEL
   ? path.join("/tmp", "indus-data")
@@ -33,7 +34,7 @@ async function ensureDataDir() {
   await fs.mkdir(DATA_DIR, { recursive: true });
 }
 
-async function readJson<T>(filename: string, fallback: T): Promise<T> {
+async function readJsonFile<T>(filename: string, fallback: T): Promise<T> {
   await ensureDataDir();
   const filePath = path.join(DATA_DIR, filename);
   try {
@@ -44,18 +45,32 @@ async function readJson<T>(filename: string, fallback: T): Promise<T> {
   }
 }
 
-async function writeJson<T>(filename: string, data: T): Promise<void> {
+async function writeJsonFile<T>(filename: string, data: T): Promise<void> {
   await ensureDataDir();
   const filePath = path.join(DATA_DIR, filename);
   await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
 }
 
+async function readStore<T>(redisKey: string, filename: string, fallback: T): Promise<T> {
+  if (hasRedis()) {
+    return redisGet(redisKey, fallback);
+  }
+  return readJsonFile(filename, fallback);
+}
+
+async function writeStore<T>(redisKey: string, filename: string, data: T): Promise<void> {
+  if (hasRedis()) {
+    await redisSet(redisKey, data);
+  }
+  await writeJsonFile(filename, data);
+}
+
 export async function getUsers(): Promise<User[]> {
-  return readJson<User[]>("users.json", []);
+  return readStore(REDIS_KEYS.users, "users.json", []);
 }
 
 export async function saveUsers(users: User[]): Promise<void> {
-  await writeJson("users.json", users);
+  await writeStore(REDIS_KEYS.users, "users.json", users);
 }
 
 export async function getUserByEmail(email: string): Promise<User | undefined> {
@@ -96,11 +111,11 @@ export async function verifyPassword(user: User, password: string): Promise<bool
 }
 
 export async function getSubscriptions(): Promise<Subscription[]> {
-  return readJson<Subscription[]>("subscriptions.json", []);
+  return readStore(REDIS_KEYS.subscriptions, "subscriptions.json", []);
 }
 
 export async function saveSubscriptions(subs: Subscription[]): Promise<void> {
-  await writeJson("subscriptions.json", subs);
+  await writeStore(REDIS_KEYS.subscriptions, "subscriptions.json", subs);
 }
 
 export async function getUserSubscriptions(userId: string): Promise<Subscription[]> {
@@ -147,4 +162,8 @@ export async function initDefaultAdmin(): Promise<void> {
       "admin"
     );
   }
+}
+
+export async function getStorageMode(): Promise<"redis" | "file"> {
+  return hasRedis() ? "redis" : "file";
 }

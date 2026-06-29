@@ -82,7 +82,7 @@ export default async function ProductDetailPage({
         </div>
 
         <div>
-          {product.screenshots.length > 0 && product.screenshots[0].endsWith(".png") && (
+          {product.screenshots.length > 0 && (
             <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-lg">
               <Image
                 src={product.screenshots[0]}

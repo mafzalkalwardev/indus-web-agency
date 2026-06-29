@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://indus-web-agency.vercel.app"),
   title: "INDUS Web Agency — Automation Tools & Subscriptions",
   description:
     "Subscribe to professional auto dialers, email marketing tools, and web scrapers. Download and use for your subscription period.",
