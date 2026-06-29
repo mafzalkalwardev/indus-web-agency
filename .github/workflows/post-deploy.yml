@@ -1,0 +1,24 @@
+name: Post-Deploy Setup
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/post-deploy.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Initialize admin and verify health
+        run: |
+          curl -sf -X POST https://indus-web-agency.vercel.app/api/init
+          echo ""
+          curl -sf https://indus-web-agency.vercel.app/api/health
+          echo ""
+          curl -sf -o /dev/null -w "Homepage: %{http_code}\n" https://indus-web-agency.vercel.app/
+          curl -sf -o /dev/null -w "GitHub Pages: %{http_code}\n" https://mafzalkalwardev.github.io/indus-web-agency/

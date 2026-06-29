@@ -2,13 +2,27 @@ import { Redis } from "@upstash/redis";
 
 let redis: Redis | null = null;
 
+function redisUrl(): string | undefined {
+  return process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+}
+
+function redisToken(): string | undefined {
+  return process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+}
+
 export function hasRedis(): boolean {
-  return !!(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN);
+  return !!(redisUrl() && redisToken());
 }
 
 function getRedis(): Redis {
   if (!redis) {
-    redis = Redis.fromEnv();
+    const url = redisUrl();
+    const token = redisToken();
+    if (url && token) {
+      redis = new Redis({ url, token });
+    } else {
+      redis = Redis.fromEnv();
+    }
   }
   return redis;
 }
