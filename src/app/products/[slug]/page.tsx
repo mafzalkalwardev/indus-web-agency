@@ -136,7 +136,7 @@ export default async function ProductDetailPage({
                 ))}
               </ul>
               <div className="mt-6">
-                <SubscribeButton productSlug={product.slug} plan={plan} isLoggedIn={false} />
+                <SubscribeButton productSlug={product.slug} plan={plan} />
               </div>
             </div>
           ))}

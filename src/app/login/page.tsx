@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AuthForm } from "@/components/auth/AuthForm";
+import { href } from "@/lib/paths";
 import { ExternalLink } from "lucide-react";
 
 export const metadata = {
@@ -42,12 +43,12 @@ export default function LoginPage() {
       </div>
       <p className="mt-4 text-center text-sm text-slate-600">
         No account?{" "}
-        <Link href="/signup" className="font-medium text-cyan-600 hover:text-cyan-800">
+        <Link href={href("/signup")} className="font-medium text-cyan-600 hover:text-cyan-800">
           Create one
         </Link>
       </p>
       <p className="mt-2 text-center text-xs text-slate-400">
-        <Link href="/admin/login" className="hover:text-slate-600">Admin login</Link>
+        <Link href={href("/admin/login")} className="hover:text-slate-600">Admin login</Link>
       </p>
     </div>
   );

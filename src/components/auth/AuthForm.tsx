@@ -1,15 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { Loader2 } from "lucide-react";
+import { href } from "@/lib/paths";
 
 interface AuthFormProps {
   mode: "login" | "signup" | "admin-login";
 }
 
-export function AuthForm({ mode }: AuthFormProps) {
+function AuthFormInner({ mode }: AuthFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -25,12 +29,13 @@ export function AuthForm({ mode }: AuthFormProps) {
     setLoading(true);
 
     try {
-      const endpoint = isSignup ? "/api/auth/signup" : "/api/auth/login";
+      const endpoint = isSignup ? href("/api/auth/signup") : href("/api/auth/login");
       const body = isSignup ? { email, password, name } : { email, password };
 
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(body),
       });
 
@@ -42,11 +47,17 @@ export function AuthForm({ mode }: AuthFormProps) {
 
       if (isAdmin && data.role !== "admin") {
         setError("Admin access only");
-        await fetch("/api/auth/logout", { method: "POST" });
+        await fetch(href("/api/auth/logout"), { method: "POST", credentials: "include" });
         return;
       }
 
-      router.push(isAdmin || data.role === "admin" ? "/admin" : "/dashboard");
+      if (redirect && !isAdmin && data.role !== "admin") {
+        router.push(decodeURIComponent(redirect));
+      } else {
+        router.push(
+          isAdmin || data.role === "admin" ? href("/admin") : href("/dashboard")
+        );
+      }
       router.refresh();
     } catch {
       setError("Network error. Please try again.");
@@ -118,5 +129,13 @@ export function AuthForm({ mode }: AuthFormProps) {
         {isSignup ? "Create Account" : isAdmin ? "Admin Sign In" : "Sign In"}
       </button>
     </form>
+  );
+}
+
+export function AuthForm(props: AuthFormProps) {
+  return (
+    <Suspense fallback={<div className="py-8 text-center text-sm text-slate-500">Loading...</div>}>
+      <AuthFormInner {...props} />
+    </Suspense>
   );
 }
