@@ -195,16 +195,33 @@ export async function updateSubscriptionStatus(
 }
 
 export async function initDefaultAdmin(): Promise<void> {
+  const adminEmail = envOr("ADMIN_EMAIL", "admin@induswebagency.com").toLowerCase();
+  const adminPassword = envOr("ADMIN_PASSWORD", "Admin@Indus2026!");
   const users = await getUsers();
-  const adminEmail = process.env.ADMIN_EMAIL || "admin@induswebagency.com";
-  if (!users.some((u) => u.role === "admin")) {
-    await createUser(
-      adminEmail,
-      process.env.ADMIN_PASSWORD || "Admin@Indus2026!",
-      "INDUS Admin",
-      "admin"
-    );
+
+  const existingByEmail = users.find((u) => u.email === adminEmail);
+  const existingAdmin = users.find((u) => u.role === "admin");
+
+  if (existingByEmail) {
+    existingByEmail.passwordHash = await bcrypt.hash(adminPassword, 10);
+    existingByEmail.role = "admin";
+    await saveUsers(users);
+    return;
   }
+
+  if (existingAdmin) {
+    existingAdmin.email = adminEmail;
+    existingAdmin.passwordHash = await bcrypt.hash(adminPassword, 10);
+    await saveUsers(users);
+    return;
+  }
+
+  await createUser(adminEmail, adminPassword, "INDUS Admin", "admin");
+}
+
+function envOr(key: string, fallback: string): string {
+  const value = process.env[key]?.trim();
+  return value ? value : fallback;
 }
 
 export async function getStorageMode(): Promise<"redis" | "file"> {
