@@ -6,7 +6,7 @@ import { Check, Loader2, Clock } from "lucide-react";
 import type { ProductPlan } from "@/lib/products";
 import { href } from "@/lib/paths";
 import { useSession } from "@/components/auth/SessionProvider";
-import { BILLING_OPTIONS, calcPrice, type BillingPeriod } from "@/lib/billing";
+import { BILLING_OPTIONS, calcPrice, periodShort, type BillingPeriod } from "@/lib/billing";
 
 interface SubscribeButtonProps {
   productSlug: string;
@@ -105,7 +105,7 @@ export function SubscribeButton({ productSlug, plan }: SubscribeButtonProps) {
         }`}
       >
         {(loading || authLoading) && <Loader2 className="h-4 w-4 animate-spin" />}
-        Subscribe — ${price}/{periodOpt.id === "week" ? "wk" : periodOpt.id === "year" ? "yr" : "mo"}
+        Subscribe — ${price}/{periodShort(billingPeriod)}
       </button>
       <p className="text-center text-xs text-slate-500">
         {periodOpt.durationDays}-day access · Requires admin approval

@@ -8,7 +8,7 @@ import { getProduct } from "@/lib/products";
 import { formatDate, daysRemaining, isExpired } from "@/lib/utils";
 import { useSession } from "@/components/auth/SessionProvider";
 import { href } from "@/lib/paths";
-import { periodLabel, type SubscriptionStatus } from "@/lib/billing";
+import { periodLabel, type BillingPeriod, type SubscriptionStatus } from "@/lib/billing";
 
 interface Subscription {
   id: string;
@@ -22,15 +22,17 @@ interface Subscription {
 }
 
 function StatusBadge({ status }: { status: SubscriptionStatus }) {
-  const styles = {
+  const styles: Record<SubscriptionStatus, string> = {
     pending: "bg-amber-100 text-amber-800 border-amber-200",
     approved: "bg-emerald-100 text-emerald-800 border-emerald-200",
     rejected: "bg-red-100 text-red-800 border-red-200",
+    expired: "bg-slate-100 text-slate-700 border-slate-200",
   };
-  const icons = {
+  const icons: Record<SubscriptionStatus, typeof Hourglass> = {
     pending: Hourglass,
     approved: CheckCircle2,
     rejected: XCircle,
+    expired: Clock,
   };
   const Icon = icons[status];
   return (
@@ -63,6 +65,23 @@ export default function DashboardPage() {
     const res = await fetch(href(`/api/downloads/${productSlug}`), { credentials: "include" });
     const data = await res.json();
     if (res.ok && data.downloadUrl) {
+      if (data.licenseToken) {
+        const license = {
+          product: data.productName,
+          productSlug,
+          expiresAt: data.expiresAt,
+          period: data.period,
+          licenseToken: data.licenseToken,
+          verifyUrl: `${window.location.origin}${href("/api/license/verify")}`,
+        };
+        const blob = new Blob([JSON.stringify(license, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `indus-license-${productSlug}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
       window.open(data.downloadUrl, "_blank");
     } else {
       alert(data.error || "Download not available");
@@ -124,7 +143,7 @@ export default function DashboardPage() {
                         <h3 className="font-bold">{product?.name}</h3>
                         <StatusBadge status="pending" />
                       </div>
-                      <p className="text-sm text-slate-600">{sub.planName} — ${sub.price} ({periodLabel(sub.period as "week" | "month" | "year")})</p>
+                      <p className="text-sm text-slate-600">{sub.planName} — ${sub.price} ({periodLabel(sub.period as BillingPeriod)})</p>
                       <p className="mt-1 text-xs text-amber-700">An admin will review your request. Download unlocks after approval.</p>
                     </div>
                     <button disabled className="cursor-not-allowed rounded-lg bg-slate-200 px-5 py-2.5 text-sm font-medium text-slate-500">
@@ -166,7 +185,8 @@ export default function DashboardPage() {
                       <h3 className="font-bold">{product?.name}</h3>
                       <StatusBadge status="approved" />
                     </div>
-                    <p className="text-sm text-slate-600">{sub.planName} — ${sub.price} ({periodLabel(sub.period as "week" | "month" | "year")})</p>
+                    <p className="text-sm text-slate-600">{sub.planName} — ${sub.price} ({periodLabel(sub.period as BillingPeriod)})</p>
+                    <p className="mt-1 text-xs text-slate-500">Download includes a license file — the app stops working when the period ends.</p>
                     <p className="mt-1 flex items-center gap-1 text-sm text-slate-500">
                       <Clock className="h-4 w-4" /> Expires {formatDate(sub.expiresAt)} · {days} days left
                     </p>

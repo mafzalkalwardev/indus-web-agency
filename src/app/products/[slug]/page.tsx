@@ -42,6 +42,18 @@ export default async function ProductDetailPage({
           <p className="mt-2 text-lg text-slate-600">{product.tagline}</p>
           <p className="mt-4 text-slate-700">{product.description}</p>
 
+          <div className="mt-4 rounded-xl border border-cyan-100 bg-cyan-50/60 p-4 text-sm text-slate-700">
+            <p className="font-semibold text-[#0c2340]">Subscription license included</p>
+            <p className="mt-1">
+              After admin approval, download from your dashboard includes a license file.
+              The app verifies online on startup and stops working when your period ends
+              (7, 15, 30 days, or yearly).
+            </p>
+            <a href="/sdk/README.md" className="mt-2 inline-block text-cyan-700 hover:underline">
+              Developer SDK →
+            </a>
+          </div>
+
           <div className="mt-6 flex flex-wrap gap-2">
             {product.techStack.map((t) => (
               <span key={t} className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
@@ -79,6 +91,28 @@ export default async function ProductDetailPage({
               </li>
             ))}
           </ul>
+
+          <div className="mt-8 rounded-xl border border-cyan-100 bg-cyan-50/60 p-4 text-sm text-slate-700">
+            <p className="font-semibold text-[#0c2340]">Subscription license required</p>
+            <p className="mt-1">
+              After admin approval, download includes a signed <code className="text-xs">indus-license-{product.slug}.json</code> file.
+              The app verifies online on startup and locks when your period ends (7, 15, 30, or 365 days).
+            </p>
+            <a href="/sdk/README.md" className="mt-2 inline-block text-cyan-700 hover:underline">
+              Integration SDK for developers →
+            </a>
+          </div>
+
+          <div className="mt-6 rounded-xl border border-cyan-100 bg-cyan-50 p-4 text-sm text-cyan-950">
+            <p className="font-semibold">Time-limited subscription license</p>
+            <p className="mt-1 text-cyan-900">
+              After admin approval you get a license file with your download. Choose 7, 15, 30, or 365 days.
+              The product verifies online on startup and stops working when the period ends.
+            </p>
+            <a href="/sdk/README.md" className="mt-2 inline-block font-medium text-cyan-700 hover:underline">
+              Developer SDK →
+            </a>
+          </div>
         </div>
 
         <div>

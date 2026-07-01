@@ -3,7 +3,8 @@ import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcryptjs";
 import { hasRedis, redisGet, redisSet, REDIS_KEYS } from "./redis";
-import type { BillingPeriod, SubscriptionStatus } from "./billing";
+import { getBillingOption, type BillingPeriod, type SubscriptionStatus } from "./billing";
+import { isExpired } from "./utils";
 
 const DATA_DIR = process.env.VERCEL
   ? path.join("/tmp", "indus-data")
@@ -184,14 +185,63 @@ export async function updateSubscriptionStatus(
   const idx = subs.findIndex((s) => s.id === subscriptionId);
   if (idx === -1) return null;
 
-  subs[idx] = {
-    ...subs[idx],
-    status,
-    approvedAt: status === "approved" ? new Date().toISOString() : subs[idx].approvedAt,
-    approvedBy: status === "approved" ? adminUserId : subs[idx].approvedBy,
-  };
+  const now = new Date();
+  const current = subs[idx];
+
+  if (status === "approved" && current.status === "pending") {
+    const durationDays = getBillingOption(current.period).durationDays;
+    const expires = new Date(now.getTime() + durationDays * 24 * 60 * 60 * 1000);
+    subs[idx] = {
+      ...current,
+      status,
+      startsAt: now.toISOString(),
+      expiresAt: expires.toISOString(),
+      approvedAt: now.toISOString(),
+      approvedBy: adminUserId,
+    };
+  } else {
+    subs[idx] = {
+      ...current,
+      status,
+      approvedAt: status === "approved" ? now.toISOString() : current.approvedAt,
+      approvedBy: status === "approved" ? adminUserId : current.approvedBy,
+    };
+  }
+
   await saveSubscriptions(subs);
   return subs[idx];
+}
+
+export async function deactivateExpiredSubscriptions(): Promise<number> {
+  const subs = await getSubscriptions();
+  let changed = 0;
+
+  const updated = subs.map((sub) => {
+    if (sub.active && isExpired(sub.expiresAt)) {
+      changed += 1;
+      return { ...sub, active: false, status: "expired" as SubscriptionStatus };
+    }
+    return sub;
+  });
+
+  if (changed > 0) {
+    await saveSubscriptions(updated);
+  }
+  return changed;
+}
+
+export async function findActiveSubscription(
+  userId: string,
+  productSlug: string
+): Promise<Subscription | undefined> {
+  const subs = await getUserSubscriptions(userId);
+  return subs.find(
+    (s) =>
+      s.productSlug === productSlug &&
+      s.active &&
+      !isExpired(s.expiresAt) &&
+      s.status === "approved"
+  );
 }
 
 export async function initDefaultAdmin(): Promise<void> {

@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { getUserSubscriptions } from "@/lib/db";
+import { findActiveSubscription, getUserById, getUserSubscriptions } from "@/lib/db";
 import { getProduct } from "@/lib/products";
+import { createLicenseToken } from "@/lib/license";
 import { isExpired } from "@/lib/utils";
 
 export async function GET(
@@ -20,13 +21,7 @@ export async function GET(
   }
 
   const subs = await getUserSubscriptions(session.userId);
-  const activeSub = subs.find(
-    (s) =>
-      s.productSlug === productId &&
-      s.active &&
-      !isExpired(s.expiresAt) &&
-      s.status === "approved"
-  );
+  const activeSub = await findActiveSubscription(session.userId, productId);
 
   if (!activeSub) {
     const pending = subs.find(
@@ -34,7 +29,22 @@ export async function GET(
     );
     if (pending) {
       return NextResponse.json(
-        { error: "Your subscription is pending admin approval. You will be able to download once approved." },
+        {
+          error:
+            "Your subscription is pending admin approval. You will be able to download once approved.",
+        },
+        { status: 403 }
+      );
+    }
+    const expired = subs.find(
+      (s) => s.productSlug === productId && (isExpired(s.expiresAt) || s.status === "expired")
+    );
+    if (expired) {
+      return NextResponse.json(
+        {
+          error: "Your subscription has expired. Please renew to download again.",
+          expiredAt: expired.expiresAt,
+        },
         { status: 403 }
       );
     }
@@ -44,10 +54,15 @@ export async function GET(
     );
   }
 
+  const user = await getUserById(session.userId);
+  const licenseToken = user ? await createLicenseToken(activeSub, user.email) : null;
+
   return NextResponse.json({
     downloadUrl: product.downloadUrl,
     expiresAt: activeSub.expiresAt,
     productName: product.name,
     period: activeSub.period,
+    licenseToken,
+    licenseVerifyUrl: "/api/license/verify",
   });
 }

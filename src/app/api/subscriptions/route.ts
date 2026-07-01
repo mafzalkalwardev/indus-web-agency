@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { createSubscription, getUserSubscriptions } from "@/lib/db";
+import {
+  createSubscription,
+  deactivateExpiredSubscriptions,
+  getUserSubscriptions,
+} from "@/lib/db";
 import { getProduct } from "@/lib/products";
 import { getBillingOption, calcPrice, type BillingPeriod } from "@/lib/billing";
 
@@ -9,6 +13,7 @@ export async function GET() {
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  await deactivateExpiredSubscriptions();
   const subs = await getUserSubscriptions(session.userId);
   return NextResponse.json({ subscriptions: subs });
 }

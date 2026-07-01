@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Users, CreditCard, PlusCircle, Hourglass, CheckCircle2, XCircle } from "lucide-react";
 import { formatDate, isExpired } from "@/lib/utils";
 import { getProduct, PRODUCTS } from "@/lib/products";
-import { periodLabel, type BillingPeriod } from "@/lib/billing";
+import { periodLabel, BILLING_OPTIONS, type BillingPeriod } from "@/lib/billing";
 import { href } from "@/lib/paths";
 
 interface UserRow {
@@ -36,6 +36,7 @@ export default function AdminPage() {
   const [grantEmail, setGrantEmail] = useState("");
   const [grantProduct, setGrantProduct] = useState(PRODUCTS[0]?.slug || "");
   const [grantPlan, setGrantPlan] = useState(PRODUCTS[0]?.plans[0]?.id || "");
+  const [grantPeriod, setGrantPeriod] = useState<BillingPeriod>("month");
   const [grantMsg, setGrantMsg] = useState("");
 
   function loadData() {
@@ -80,7 +81,12 @@ export default function AdminPage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({ userEmail: grantEmail, productSlug: grantProduct, planId: grantPlan }),
+      body: JSON.stringify({
+        userEmail: grantEmail,
+        productSlug: grantProduct,
+        planId: grantPlan,
+        billingPeriod: grantPeriod,
+      }),
     });
     const data = await res.json();
     if (!res.ok) {
@@ -186,6 +192,14 @@ export default function AdminPage() {
                 {selectedProduct?.plans.map((pl) => <option key={pl.id} value={pl.id}>{pl.name} — ${pl.price}/mo base</option>)}
               </select>
             </div>
+            <div>
+              <label className="block text-sm font-medium">Billing period</label>
+              <select value={grantPeriod} onChange={(e) => setGrantPeriod(e.target.value as BillingPeriod)} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm">
+                {BILLING_OPTIONS.map((opt) => (
+                  <option key={opt.id} value={opt.id}>{opt.label} ({opt.durationDays} days)</option>
+                ))}
+              </select>
+            </div>
             {grantMsg && <p className={`text-sm ${grantMsg.includes("granted") ? "text-emerald-600" : "text-red-600"}`}>{grantMsg}</p>}
             <button type="submit" className="rounded-lg bg-[#0c2340] px-4 py-2 text-sm font-medium text-white">Grant & Approve</button>
           </div>
@@ -218,7 +232,8 @@ export default function AdminPage() {
                     <td className="px-4 py-3">
                       <span className={`rounded-full px-2 py-0.5 text-xs font-medium capitalize ${
                         s.status === "approved" ? "bg-emerald-100 text-emerald-700" :
-                        s.status === "pending" ? "bg-amber-100 text-amber-700" : "bg-red-100 text-red-700"
+                        s.status === "pending" ? "bg-amber-100 text-amber-700" :
+                        s.status === "expired" ? "bg-slate-100 text-slate-600" : "bg-red-100 text-red-700"
                       }`}>{s.status || "approved"}</span>
                     </td>
                     <td className="px-4 py-3 text-right">${s.price}</td>
