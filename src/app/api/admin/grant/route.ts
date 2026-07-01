@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { createSubscription, getUserByEmail } from "@/lib/db";
 import { getProduct } from "@/lib/products";
+import { getBillingOption, calcPrice, type BillingPeriod } from "@/lib/billing";
 
 export async function POST(req: NextRequest) {
   const session = await getSession();
@@ -9,7 +10,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  const { userEmail, productSlug, planId } = await req.json();
+  const { userEmail, productSlug, planId, billingPeriod = "month" } = await req.json();
+  const period = billingPeriod as BillingPeriod;
   const user = await getUserByEmail(userEmail);
   if (!user) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -25,13 +27,18 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Plan not found" }, { status: 404 });
   }
 
+  const billing = getBillingOption(period);
+  const price = calcPrice(plan.price, period);
+
   const sub = await createSubscription(
     user.id,
     productSlug,
     plan.id,
     plan.name,
-    plan.price,
-    plan.durationDays
+    price,
+    billing.durationDays,
+    period,
+    "approved"
   );
 
   return NextResponse.json({ subscription: sub });

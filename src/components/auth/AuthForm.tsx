@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
+import { useSession } from "@/components/auth/SessionProvider";
 import { href } from "@/lib/paths";
 
 interface AuthFormProps {
@@ -12,6 +13,7 @@ interface AuthFormProps {
 
 function AuthFormInner({ mode }: AuthFormProps) {
   const router = useRouter();
+  const { refresh } = useSession();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "";
   const [email, setEmail] = useState("");
@@ -52,8 +54,10 @@ function AuthFormInner({ mode }: AuthFormProps) {
       }
 
       if (redirect && !isAdmin && data.role !== "admin") {
+        await refresh();
         router.push(decodeURIComponent(redirect));
       } else {
+        await refresh();
         router.push(
           isAdmin || data.role === "admin" ? href("/admin") : href("/dashboard")
         );

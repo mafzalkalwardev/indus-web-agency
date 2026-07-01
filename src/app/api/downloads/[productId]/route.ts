@@ -21,12 +21,25 @@ export async function GET(
 
   const subs = await getUserSubscriptions(session.userId);
   const activeSub = subs.find(
-    (s) => s.productSlug === productId && s.active && !isExpired(s.expiresAt)
+    (s) =>
+      s.productSlug === productId &&
+      s.active &&
+      !isExpired(s.expiresAt) &&
+      s.status === "approved"
   );
 
   if (!activeSub) {
+    const pending = subs.find(
+      (s) => s.productSlug === productId && s.status === "pending" && !isExpired(s.expiresAt)
+    );
+    if (pending) {
+      return NextResponse.json(
+        { error: "Your subscription is pending admin approval. You will be able to download once approved." },
+        { status: 403 }
+      );
+    }
     return NextResponse.json(
-      { error: "No active subscription for this product" },
+      { error: "No approved subscription for this product" },
       { status: 403 }
     );
   }
@@ -35,5 +48,6 @@ export async function GET(
     downloadUrl: product.downloadUrl,
     expiresAt: activeSub.expiresAt,
     productName: product.name,
+    period: activeSub.period,
   });
 }

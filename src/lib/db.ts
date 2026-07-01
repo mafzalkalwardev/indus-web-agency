@@ -3,6 +3,7 @@ import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcryptjs";
 import { hasRedis, redisGet, redisSet, REDIS_KEYS } from "./redis";
+import type { BillingPeriod, SubscriptionStatus } from "./billing";
 
 const DATA_DIR = process.env.VERCEL
   ? path.join("/tmp", "indus-data")
@@ -24,10 +25,22 @@ export interface Subscription {
   planId: string;
   planName: string;
   price: number;
+  period: BillingPeriod;
+  status: SubscriptionStatus;
   startsAt: string;
   expiresAt: string;
   active: boolean;
   createdAt: string;
+  approvedAt?: string;
+  approvedBy?: string;
+}
+
+function normalizeSubscription(sub: Subscription): Subscription {
+  return {
+    ...sub,
+    period: sub.period ?? "month",
+    status: sub.status ?? "approved",
+  };
 }
 
 async function ensureDataDir() {
@@ -107,11 +120,12 @@ export async function createUser(
 }
 
 export async function verifyPassword(user: User, password: string): Promise<boolean> {
-  return bcrypt.compare(password, user.passwordHash);
+  return bcrypt.compare(user.passwordHash, password);
 }
 
 export async function getSubscriptions(): Promise<Subscription[]> {
-  return readStore(REDIS_KEYS.subscriptions, "subscriptions.json", []);
+  const subs = await readStore<Subscription[]>(REDIS_KEYS.subscriptions, "subscriptions.json", []);
+  return subs.map(normalizeSubscription);
 }
 
 export async function saveSubscriptions(subs: Subscription[]): Promise<void> {
@@ -123,13 +137,20 @@ export async function getUserSubscriptions(userId: string): Promise<Subscription
   return subs.filter((s) => s.userId === userId);
 }
 
+export async function getSubscriptionById(id: string): Promise<Subscription | undefined> {
+  const subs = await getSubscriptions();
+  return subs.find((s) => s.id === id);
+}
+
 export async function createSubscription(
   userId: string,
   productSlug: string,
   planId: string,
   planName: string,
   price: number,
-  durationDays: number
+  durationDays: number,
+  period: BillingPeriod = "month",
+  status: SubscriptionStatus = "pending"
 ): Promise<Subscription> {
   const subs = await getSubscriptions();
   const now = new Date();
@@ -141,14 +162,36 @@ export async function createSubscription(
     planId,
     planName,
     price,
+    period,
+    status,
     startsAt: now.toISOString(),
     expiresAt: expires.toISOString(),
     active: true,
     createdAt: now.toISOString(),
+    ...(status === "approved" ? { approvedAt: now.toISOString() } : {}),
   };
   subs.push(sub);
   await saveSubscriptions(subs);
   return sub;
+}
+
+export async function updateSubscriptionStatus(
+  subscriptionId: string,
+  status: SubscriptionStatus,
+  adminUserId?: string
+): Promise<Subscription | null> {
+  const subs = await getSubscriptions();
+  const idx = subs.findIndex((s) => s.id === subscriptionId);
+  if (idx === -1) return null;
+
+  subs[idx] = {
+    ...subs[idx],
+    status,
+    approvedAt: status === "approved" ? new Date().toISOString() : subs[idx].approvedAt,
+    approvedBy: status === "approved" ? adminUserId : subs[idx].approvedBy,
+  };
+  await saveSubscriptions(subs);
+  return subs[idx];
 }
 
 export async function initDefaultAdmin(): Promise<void> {

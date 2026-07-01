@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { createSubscription, getUserSubscriptions } from "@/lib/db";
 import { getProduct } from "@/lib/products";
+import { getBillingOption, calcPrice, type BillingPeriod } from "@/lib/billing";
 
 export async function GET() {
   const session = await getSession();
@@ -18,7 +19,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Please sign in first" }, { status: 401 });
   }
 
-  const { productSlug, planId } = await req.json();
+  const { productSlug, planId, billingPeriod = "month" } = await req.json();
+  const period = billingPeriod as BillingPeriod;
   const product = getProduct(productSlug);
   if (!product) {
     return NextResponse.json({ error: "Product not found" }, { status: 404 });
@@ -29,14 +31,36 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Plan not found" }, { status: 404 });
   }
 
+  const billing = getBillingOption(period);
+  const price = calcPrice(plan.price, period);
+
+  const existing = (await getUserSubscriptions(session.userId)).find(
+    (s) =>
+      s.productSlug === productSlug &&
+      s.active &&
+      s.status !== "rejected" &&
+      new Date(s.expiresAt).getTime() > Date.now()
+  );
+  if (existing) {
+    return NextResponse.json(
+      { error: "You already have an active subscription for this product" },
+      { status: 409 }
+    );
+  }
+
   const sub = await createSubscription(
     session.userId,
     productSlug,
     plan.id,
     plan.name,
-    plan.price,
-    plan.durationDays
+    price,
+    billing.durationDays,
+    period,
+    "pending"
   );
 
-  return NextResponse.json({ subscription: sub });
+  return NextResponse.json({
+    subscription: sub,
+    message: "Subscription submitted. An admin will review and approve your access shortly.",
+  });
 }
