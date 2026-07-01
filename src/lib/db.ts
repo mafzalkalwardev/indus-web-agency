@@ -120,7 +120,7 @@ export async function createUser(
 }
 
 export async function verifyPassword(user: User, password: string): Promise<boolean> {
-  return bcrypt.compare(user.passwordHash, password);
+  return bcrypt.compare(password, user.passwordHash);
 }
 
 export async function getSubscriptions(): Promise<Subscription[]> {
@@ -198,25 +198,22 @@ export async function initDefaultAdmin(): Promise<void> {
   const adminEmail = envOr("ADMIN_EMAIL", "admin@induswebagency.com").toLowerCase();
   const adminPassword = envOr("ADMIN_PASSWORD", "Admin@Indus2026!");
   const users = await getUsers();
+  const passwordHash = await bcrypt.hash(adminPassword, 10);
 
-  const existingByEmail = users.find((u) => u.email === adminEmail);
-  const existingAdmin = users.find((u) => u.role === "admin");
+  const withoutAdmin = users.filter(
+    (u) => u.role !== "admin" && u.email !== adminEmail
+  );
 
-  if (existingByEmail) {
-    existingByEmail.passwordHash = await bcrypt.hash(adminPassword, 10);
-    existingByEmail.role = "admin";
-    await saveUsers(users);
-    return;
-  }
+  const adminUser: User = {
+    id: users.find((u) => u.email === adminEmail)?.id ?? uuidv4(),
+    email: adminEmail,
+    passwordHash,
+    name: "INDUS Admin",
+    role: "admin",
+    createdAt: users.find((u) => u.email === adminEmail)?.createdAt ?? new Date().toISOString(),
+  };
 
-  if (existingAdmin) {
-    existingAdmin.email = adminEmail;
-    existingAdmin.passwordHash = await bcrypt.hash(adminPassword, 10);
-    await saveUsers(users);
-    return;
-  }
-
-  await createUser(adminEmail, adminPassword, "INDUS Admin", "admin");
+  await saveUsers([...withoutAdmin, adminUser]);
 }
 
 function envOr(key: string, fallback: string): string {
