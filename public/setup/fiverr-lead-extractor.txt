@@ -1,0 +1,17 @@
+INDUS Web Agency — Setup Guide
+Product: fiverr-lead-extractor
+Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+
+REQUIREMENTS:
+  - Node.js 18+
+  - MongoDB
+
+STEPS:
+  1. Download ZIP
+  2. npm install
+  3. npm run client:start:fast
+  4. Login localhost:3000
+  5. Create jobs and export leads
+
+License: Place indus-license-fiverr-lead-extractor.json in project root after download.
+Approval: Subscribe on indus-web-agency.vercel.app — admin approves within 24h.

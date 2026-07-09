@@ -1,0 +1,18 @@
+INDUS Web Agency — Setup Guide
+Product: auto-email-sender
+Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+
+REQUIREMENTS:
+  - Python 3.10+
+  - SMTP accounts
+  - Excel lists
+
+STEPS:
+  1. Download ZIP
+  2. pip install -r requirements.txt
+  3. python email_launcher.py
+  4. Add SMTP accounts
+  5. Import contacts and send
+
+License: Place indus-license-auto-email-sender.json in project root after download.
+Approval: Subscribe on indus-web-agency.vercel.app — admin approves within 24h.

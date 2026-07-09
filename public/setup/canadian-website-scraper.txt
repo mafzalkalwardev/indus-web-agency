@@ -1,0 +1,17 @@
+INDUS Web Agency — Setup Guide
+Product: canadian-website-scraper
+Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+
+REQUIREMENTS:
+  - Node.js 18+
+  - Playwright
+
+STEPS:
+  1. Download ZIP
+  2. npm install && npx playwright install
+  3. npm start
+  4. Login on localhost:3000
+  5. Start scrape
+
+License: Place indus-license-canadian-website-scraper.json in project root after download.
+Approval: Subscribe on indus-web-agency.vercel.app — admin approves within 24h.

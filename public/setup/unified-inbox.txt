@@ -1,0 +1,18 @@
+INDUS Web Agency — Setup Guide
+Product: unified-inbox
+Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+
+REQUIREMENTS:
+  - Node.js 18+
+  - IMAP accounts
+  - Mailforge
+
+STEPS:
+  1. Download Mailforge
+  2. npm install && npm start
+  3. Open /inbox.html
+  4. Add senders first
+  5. Sync inbox
+
+License: Place indus-license-unified-inbox.json in project root after download.
+Approval: Subscribe on indus-web-agency.vercel.app — admin approves within 24h.

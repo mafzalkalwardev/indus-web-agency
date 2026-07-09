@@ -1,68 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSession } from "@/lib/auth";
-import { findActiveSubscription, getUserById, getUserSubscriptions } from "@/lib/db";
-import { getProduct } from "@/lib/products";
+import { authorizeProductDownload } from "@/lib/download-auth";
+import { getSubscriptionById, getUserById } from "@/lib/db";
 import { createLicenseToken } from "@/lib/license";
-import { isExpired } from "@/lib/utils";
 
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ productId: string }> }
 ) {
-  const session = await getSession();
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   const { productId } = await params;
-  const product = getProduct(productId);
-  if (!product) {
-    return NextResponse.json({ error: "Product not found" }, { status: 404 });
+  const result = await authorizeProductDownload(productId);
+
+  if (!result.ok) {
+    return NextResponse.json({ error: result.error }, { status: result.status });
   }
 
-  const subs = await getUserSubscriptions(session.userId);
-  const activeSub = await findActiveSubscription(session.userId, productId);
+  const { auth } = result;
+  const sub = await getSubscriptionById(auth.subscriptionId);
+  const user = await getUserById(auth.userId);
 
-  if (!activeSub) {
-    const pending = subs.find(
-      (s) => s.productSlug === productId && s.status === "pending" && !isExpired(s.expiresAt)
-    );
-    if (pending) {
-      return NextResponse.json(
-        {
-          error:
-            "Your subscription is pending admin approval. You will be able to download once approved.",
-        },
-        { status: 403 }
-      );
-    }
-    const expired = subs.find(
-      (s) => s.productSlug === productId && (isExpired(s.expiresAt) || s.status === "expired")
-    );
-    if (expired) {
-      return NextResponse.json(
-        {
-          error: "Your subscription has expired. Please renew to download again.",
-          expiredAt: expired.expiresAt,
-        },
-        { status: 403 }
-      );
-    }
-    return NextResponse.json(
-      { error: "No approved subscription for this product" },
-      { status: 403 }
-    );
+  if (!sub || !user) {
+    return NextResponse.json({ error: "Subscription not found" }, { status: 404 });
   }
 
-  const user = await getUserById(session.userId);
-  const licenseToken = user ? await createLicenseToken(activeSub, user.email) : null;
+  const licenseToken = await createLicenseToken(sub, user.email);
 
   return NextResponse.json({
-    downloadUrl: product.downloadUrl,
-    expiresAt: activeSub.expiresAt,
-    productName: product.name,
-    period: activeSub.period,
+    productName: auth.productName,
+    productSlug: auth.productSlug,
+    expiresAt: auth.expiresAt,
+    period: auth.period,
     licenseToken,
-    licenseVerifyUrl: "/api/license/verify",
+    fileName: auth.fileName,
+    downloadPath: `/api/downloads/${auth.productSlug}/file`,
   });
 }

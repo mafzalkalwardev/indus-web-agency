@@ -34,6 +34,8 @@ export interface Subscription {
   createdAt: string;
   approvedAt?: string;
   approvedBy?: string;
+  /** SHA-256 machine fingerprints bound to this subscription (max 2). */
+  activatedMachines?: string[];
 }
 
 function normalizeSubscription(sub: Subscription): Subscription {
@@ -242,6 +244,34 @@ export async function findActiveSubscription(
       !isExpired(s.expiresAt) &&
       s.status === "approved"
   );
+}
+
+export async function bindMachineToSubscription(
+  subscriptionId: string,
+  machineId: string,
+  maxMachines: number
+): Promise<{ ok: true } | { ok: false; reason: "not_found" | "machine_limit" }> {
+  const subs = await getSubscriptions();
+  const idx = subs.findIndex((s) => s.id === subscriptionId);
+  if (idx === -1) return { ok: false, reason: "not_found" };
+
+  const current = subs[idx];
+  const machines = current.activatedMachines ?? [];
+  if (machines.includes(machineId)) return { ok: true };
+  if (machines.length >= maxMachines) return { ok: false, reason: "machine_limit" };
+
+  subs[idx] = { ...current, activatedMachines: [...machines, machineId] };
+  await saveSubscriptions(subs);
+  return { ok: true };
+}
+
+export async function resetSubscriptionMachines(subscriptionId: string): Promise<boolean> {
+  const subs = await getSubscriptions();
+  const idx = subs.findIndex((s) => s.id === subscriptionId);
+  if (idx === -1) return false;
+  subs[idx] = { ...subs[idx], activatedMachines: [] };
+  await saveSubscriptions(subs);
+  return true;
 }
 
 export async function initDefaultAdmin(): Promise<void> {

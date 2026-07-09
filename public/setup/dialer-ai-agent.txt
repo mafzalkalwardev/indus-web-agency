@@ -1,0 +1,18 @@
+INDUS Web Agency — Setup Guide
+Product: dialer-ai-agent
+Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+
+REQUIREMENTS:
+  - Windows
+  - Python 3.10+
+  - Groq API key
+
+STEPS:
+  1. Download ZIP
+  2. Set GROQ_API_KEY in .env
+  3. pip install -r requirements.txt
+  4. python -m src.web_app
+  5. Open http://127.0.0.1:8000/run
+
+License: Place indus-license-dialer-ai-agent.json in project root after download.
+Approval: Subscribe on indus-web-agency.vercel.app — admin approves within 24h.

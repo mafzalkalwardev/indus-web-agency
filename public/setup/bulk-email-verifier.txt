@@ -1,0 +1,18 @@
+INDUS Web Agency — Setup Guide
+Product: bulk-email-verifier
+Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+
+REQUIREMENTS:
+  - Node.js 18+
+  - Docker optional
+  - Go 1.21+
+
+STEPS:
+  1. Download ZIP
+  2. npm install && npm start
+  3. Open http://localhost:5000
+  4. docker compose up -d (optional)
+  5. Copy license to root
+
+License: Place indus-license-bulk-email-verifier.json in project root after download.
+Approval: Subscribe on indus-web-agency.vercel.app — admin approves within 24h.

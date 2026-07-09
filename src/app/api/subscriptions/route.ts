@@ -4,9 +4,11 @@ import {
   createSubscription,
   deactivateExpiredSubscriptions,
   getUserSubscriptions,
+  getUserById,
 } from "@/lib/db";
 import { getProduct } from "@/lib/products";
 import { getBillingOption, calcPrice, type BillingPeriod } from "@/lib/billing";
+import { sendAdminPurchaseAlert } from "@/lib/email";
 
 export async function GET() {
   const session = await getSession();
@@ -63,6 +65,20 @@ export async function POST(req: NextRequest) {
     period,
     "pending"
   );
+
+  const user = await getUserById(session.userId);
+  if (user) {
+    sendAdminPurchaseAlert({
+      customerName: user.name,
+      customerEmail: user.email,
+      productName: product.name,
+      productSlug,
+      planName: plan.name,
+      price,
+      period,
+      subscriptionId: sub.id,
+    }).catch((err) => console.error("[subscriptions] email alert failed:", err));
+  }
 
   return NextResponse.json({
     subscription: sub,

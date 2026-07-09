@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SessionProvider } from "@/components/auth/SessionProvider";
 import "./globals.css";
 
@@ -21,10 +20,14 @@ export const metadata: Metadata = {
   description:
     "Subscribe to professional auto dialers, email marketing tools, and web scrapers. Download and use for your subscription period.",
   keywords: ["auto dialer", "email verifier", "web scraper", "mailforge", "INDUS"],
+  icons: {
+    icon: "/images/favicon-32.png",
+    apple: "/images/apple-icon.png",
+  },
   openGraph: {
     title: "INDUS Web Agency",
     description: "Professional automation tools with subscription access",
-    images: ["/images/logo.jpg"],
+    images: ["/images/logo-trimmed.png"],
   },
 };
 
@@ -37,9 +40,7 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-slate-50 text-[#0c2340]">
         <SessionProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
         </SessionProvider>
       </body>
     </html>

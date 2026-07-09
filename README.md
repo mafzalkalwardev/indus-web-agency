@@ -7,7 +7,26 @@ Professional automation tools marketplace — subscribe to auto dialers, email m
 - **Vercel (full app — auth, subscriptions, downloads):** https://indus-web-agency.vercel.app
 - **GitHub Pages (marketing site):** https://mafzalkalwardev.github.io/indus-web-agency/
 - **GitHub Repository:** https://github.com/mafzalkalwardev/indus-web-agency
-- **Release v1.0.0:** https://github.com/mafzalkalwardev/indus-web-agency/releases/tag/v1.0.0
+
+## Screenshots
+
+### Homepage
+![INDUS Web Agency homepage](docs/screenshots/home.png)
+
+### Products catalog
+![Products catalog](docs/screenshots/products.png)
+
+### Pricing
+![Pricing plans](docs/screenshots/pricing.png)
+
+### Auto dialer comparison
+![Compare auto dialer tiers](docs/screenshots/compare.png)
+
+### Live demos
+![Live product demos](docs/screenshots/demos.png)
+
+### Product detail page
+![Product detail with setup guide](docs/screenshots/product-detail.png)
 
 ## Features
 
@@ -16,7 +35,11 @@ Professional automation tools marketplace — subscribe to auto dialers, email m
 - 13 products across email, dialer, scraper, and bundle categories
 - 4 auto dialer tiers with side-by-side comparison
 - Time-limited subscriptions with download access
-- Screenshots from live Auto Dialer application
+- Real product screenshots and demo videos
+- INDUS Guide — select-only support chat (no typing required)
+- Purchase approval email alerts to admin
+- Per-product setup guides with downloadable `SETUP.txt` files
+- Signed license verification for desktop apps (2-device limit)
 
 ## Products
 
@@ -61,6 +84,16 @@ JWT_SECRET=your-jwt-secret
 NEXT_PUBLIC_SITE_URL=https://indus-web-agency.vercel.app
 ```
 
+### Email notifications (purchase alerts)
+
+```
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=induswebagency@gmail.com
+SMTP_PASS=your-gmail-app-password
+ADMIN_NOTIFICATION_EMAIL=induswebagency@gmail.com
+```
+
 ### Persistent storage (recommended for production)
 
 By default on Vercel, user data is stored in `/tmp` and resets on cold starts. For persistent storage, add a free [Upstash Redis](https://upstash.com) database and set:
@@ -72,11 +105,20 @@ UPSTASH_REDIS_REST_TOKEN=your-token
 
 The admin dashboard shows **Storage: redis** when connected.
 
+## Scripts
+
+```bash
+npm run capture:media      # Sync product screenshots from local repos
+npm run capture:media:live # Capture live product UIs via Playwright
+npm run generate:setup     # Regenerate public/setup/*.txt files
+node scripts/capture-website-screenshots.mjs  # Refresh README screenshots
+```
+
 ## Deploy
 
 ### Vercel
 ```bash
-npx vercel --prod
+npx vercel --prod --yes
 ```
 
 ### GitHub Pages
@@ -91,7 +133,9 @@ npm run build:static
 - TypeScript
 - Tailwind CSS 4
 - JWT auth (jose + bcryptjs)
-- JSON file storage (upgradeable to database)
+- Nodemailer (purchase alerts)
+- Upstash Redis (optional persistence)
+- Playwright (media capture)
 
 ## License
 

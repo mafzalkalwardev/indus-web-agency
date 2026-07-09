@@ -2,17 +2,31 @@
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import os
+import platform
+import socket
+import uuid
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Callable
 
-DEFAULT_VERIFY_URL = "https://indus-web-agency.vercel.app/api/license/verify"
+LICENSE_VERIFY_URL = "https://indus-web-agency.vercel.app/api/license/verify"
+LICENSE_PUBLIC_KEY_PEM = """-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvSs97mdbBj+wgf4mLVqQ
+kyE2DKQuTxhhJ+Ze8YLM162CjOiUllUOft+8l2eAnb8ER+OX/gqBDybwv7ncDtDy
+jStlygwGv1L5EuT4mMrCEaxRgsyHct36JgkcSZ5Fxk+zFSjFbq1+mN02AT/sZ6xo
+NXWqBYto2L9RZp4I66GmLMXePz4Q+1DgraC4eB/YGsFKg32SebRISDoFzMhcayKH
+lBVJz+riN+psvHpehA2dshiAw47JpTpvRohTrXzeGkNiZucnzADGEFQ+T2KzSfau
+djQ6lxfLVF7CgFf/QFSnDUhUfrrwkMFqnztpAOGjwiw0/NceocYsQSUWjzsoq9cR
+LwIDAQAB
+-----END PUBLIC KEY-----"""
 LICENSE_GLOB_PREFIX = "indus-license"
 OFFLINE_GRACE_HOURS = 48
+PERIODIC_CHECK_SECONDS = 4 * 60 * 60
 
 
 @dataclass
@@ -22,7 +36,6 @@ class LicenseRecord:
     expires_at: str
     period: str
     license_token: str
-    verify_url: str
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "LicenseRecord":
@@ -32,7 +45,6 @@ class LicenseRecord:
             expires_at=str(data.get("expiresAt") or data.get("expires_at") or ""),
             period=str(data.get("period") or ""),
             license_token=str(data.get("licenseToken") or data.get("license_token") or ""),
-            verify_url=str(data.get("verifyUrl") or data.get("verify_url") or DEFAULT_VERIFY_URL),
         )
 
 
@@ -48,10 +60,72 @@ class LicenseCheckResult:
     offline: bool = False
 
 
-def skip_license_check() -> bool:
-    return os.environ.get("INDUS_SKIP_LICENSE", "").strip().lower() in {
-        "1", "true", "yes", "on",
-    }
+def get_machine_id() -> str:
+    raw = "|".join(
+        [
+            socket.gethostname(),
+            platform.system(),
+            platform.machine(),
+            str(uuid.getnode()),
+        ]
+    )
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def _b64url_decode(value: str) -> bytes:
+    pad = "=" * (-len(value) % 4)
+    return base64.urlsafe_b64decode(value + pad)
+
+
+def verify_jwt_locally(token: str) -> dict[str, Any] | None:
+    try:
+        from cryptography.hazmat.primitives import hashes, serialization
+        from cryptography.hazmat.primitives.asymmetric import padding
+    except ImportError:
+        return _jwt_exp_payload_only(token)
+
+    parts = token.split(".")
+    if len(parts) != 3:
+        return None
+    header_b64, payload_b64, sig_b64 = parts
+    try:
+        header = json.loads(_b64url_decode(header_b64))
+        if header.get("alg") != "RS256":
+            return None
+        payload = json.loads(_b64url_decode(payload_b64))
+        public_key = serialization.load_pem_public_key(LICENSE_PUBLIC_KEY_PEM.encode("ascii"))
+        signed = f"{header_b64}.{payload_b64}".encode("ascii")
+        signature = _b64url_decode(sig_b64)
+        public_key.verify(signature, signed, padding.PKCS1v15(), hashes.SHA256())
+        exp = payload.get("exp")
+        if not exp or datetime.fromtimestamp(int(exp), tz=timezone.utc) <= datetime.now(timezone.utc):
+            return None
+        return payload
+    except Exception:
+        return None
+
+
+def _jwt_exp_payload_only(token: str) -> dict[str, Any] | None:
+    try:
+        parts = token.split(".")
+        if len(parts) < 2:
+            return None
+        payload = json.loads(_b64url_decode(parts[1]))
+        exp = payload.get("exp")
+        if not exp:
+            return None
+        if datetime.fromtimestamp(int(exp), tz=timezone.utc) <= datetime.now(timezone.utc):
+            return None
+        return payload
+    except (ValueError, json.JSONDecodeError, OSError):
+        return None
+
+
+def dev_skip_allowed(root: str) -> bool:
+    env = os.environ.get("INDUS_LICENSE_DEV", "").strip().lower()
+    if env not in {"1", "true", "yes", "on"}:
+        return False
+    return os.path.isfile(os.path.join(root, ".indus-dev-local"))
 
 
 def license_search_dirs(root: str) -> list[str]:
@@ -135,27 +209,12 @@ def days_remaining(expires_at: str) -> int:
     return max(0, int(delta.total_seconds() // 86400))
 
 
-def _jwt_exp(token: str) -> datetime | None:
-    try:
-        parts = token.split(".")
-        if len(parts) < 2:
-            return None
-        payload = parts[1]
-        payload += "=" * (-len(payload) % 4)
-        data = json.loads(base64.urlsafe_b64decode(payload.encode("ascii")))
-        exp = data.get("exp")
-        if not exp:
-            return None
-        return datetime.fromtimestamp(int(exp), tz=timezone.utc)
-    except (ValueError, json.JSONDecodeError, OSError):
-        return None
-
-
 def verify_online(record: LicenseRecord, timeout_sec: float = 12.0) -> LicenseCheckResult:
-    url = (record.verify_url or DEFAULT_VERIFY_URL).strip()
-    body = json.dumps({"licenseToken": record.license_token}).encode("utf-8")
+    body = json.dumps(
+        {"licenseToken": record.license_token, "machineId": get_machine_id()}
+    ).encode("utf-8")
     req = urllib.request.Request(
-        url,
+        LICENSE_VERIFY_URL,
         data=body,
         headers={"Content-Type": "application/json", "Accept": "application/json"},
         method="POST",
@@ -197,8 +256,8 @@ def verify_online(record: LicenseRecord, timeout_sec: float = 12.0) -> LicenseCh
 
 
 def verify_license(root: str, path: str | None = None) -> LicenseCheckResult:
-    if skip_license_check():
-        return LicenseCheckResult(ok=True, reason="skipped", message="License check disabled")
+    if dev_skip_allowed(root):
+        return LicenseCheckResult(ok=True, reason="skipped", message="License check disabled (dev)")
 
     license_path = path or find_license_file(root)
     if not license_path:
@@ -207,8 +266,7 @@ def verify_license(root: str, path: str | None = None) -> LicenseCheckResult:
             reason="missing",
             message=(
                 "No INDUS license file found. Download your product from "
-                "https://indus-web-agency.vercel.app/dashboard — the license "
-                "file is included with the download."
+                "https://indus-web-agency.vercel.app/dashboard"
             ),
         )
 
@@ -221,16 +279,25 @@ def verify_license(root: str, path: str | None = None) -> LicenseCheckResult:
             message=f"License file could not be read: {exc}",
         )
 
-    if local_expired(record.expires_at):
-        jwt_exp = _jwt_exp(record.license_token)
-        if jwt_exp and datetime.now(timezone.utc) >= jwt_exp:
-            return LicenseCheckResult(
-                ok=False,
-                reason="expired",
-                message="Your subscription has expired. Renew at indus-web-agency.vercel.app",
-                expires_at=record.expires_at,
-                product_slug=record.product_slug,
-            )
+    local_payload = verify_jwt_locally(record.license_token)
+    if not local_payload:
+        return LicenseCheckResult(
+            ok=False,
+            reason="token_invalid",
+            message="License signature invalid or token expired",
+            expires_at=record.expires_at,
+            product_slug=record.product_slug,
+        )
+
+    token_expires = str(local_payload.get("expiresAt") or record.expires_at)
+    if local_expired(token_expires):
+        return LicenseCheckResult(
+            ok=False,
+            reason="expired",
+            message="Your subscription has expired. Renew at indus-web-agency.vercel.app",
+            expires_at=token_expires,
+            product_slug=record.product_slug,
+        )
 
     online = verify_online(record)
     if online.ok:
@@ -265,6 +332,45 @@ def verify_license(root: str, path: str | None = None) -> LicenseCheckResult:
         return online
 
     return online
+
+
+def start_periodic_license_check(
+    root: str,
+    path: str | None = None,
+    interval_seconds: int = PERIODIC_CHECK_SECONDS,
+    on_failure: Callable[[LicenseCheckResult], None] | None = None,
+) -> Callable[[], None]:
+    import threading
+
+    def _fail(result: LicenseCheckResult) -> None:
+        if on_failure:
+            on_failure(result)
+        else:
+            print(f"[INDUS License] {result.message}", flush=True)
+            raise SystemExit(1)
+
+    def _loop() -> None:
+        result = verify_license(root, path)
+        if not result.ok:
+            _fail(result)
+
+    timer: threading.Timer | None = None
+
+    def _schedule() -> None:
+        nonlocal timer
+        _loop()
+        timer = threading.Timer(interval_seconds, _schedule)
+        timer.daemon = True
+        timer.start()
+
+    _schedule()
+
+    def cancel() -> None:
+        nonlocal timer
+        if timer:
+            timer.cancel()
+
+    return cancel
 
 
 def expires_at_display(expires_at: str) -> str:

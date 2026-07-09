@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Mail, Phone, Globe, Package } from "lucide-react";
 import type { Product, ProductCategory } from "@/lib/products";
 import { CATEGORY_LABELS } from "@/lib/products";
@@ -20,37 +21,57 @@ const categoryColors: Record<ProductCategory, string> = {
 
 export function ProductCard({ product }: { product: Product }) {
   const minPrice = Math.min(...product.plans.map((p) => p.price));
+  const thumb = product.screenshots[0];
 
   return (
     <Link
       href={href(`/products/${product.slug}`)}
-      className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-cyan-300 hover:shadow-lg"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-cyan-300 hover:shadow-lg"
     >
-      <div className="flex items-start justify-between">
-        <span
-          className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium ${categoryColors[product.category]}`}
-        >
-          {categoryIcons[product.category]}
-          {CATEGORY_LABELS[product.category]}
-        </span>
-        <span className="text-sm font-semibold text-[#0c2340]">
-          from ${minPrice}/mo
-        </span>
-      </div>
+      {thumb && (
+        <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100 bg-slate-900">
+          <Image
+            src={thumb}
+            alt={`${product.name} preview`}
+            fill
+            className="object-cover object-top transition duration-300 group-hover:scale-[1.02]"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          />
+          {product.demoVideo && (
+            <span className="absolute bottom-2 right-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
+              Video demo
+            </span>
+          )}
+        </div>
+      )}
 
-      <h3 className="mt-4 text-lg font-bold text-[#0c2340] group-hover:text-cyan-700">
-        {product.name}
-      </h3>
-      <p className="mt-2 flex-1 text-sm text-slate-600">{product.tagline}</p>
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-start justify-between">
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium ${categoryColors[product.category]}`}
+          >
+            {categoryIcons[product.category]}
+            {CATEGORY_LABELS[product.category]}
+          </span>
+          <span className="text-sm font-semibold text-[#0c2340]">
+            from ${minPrice}/mo
+          </span>
+        </div>
 
-      <ul className="mt-4 space-y-1">
-        {product.features.slice(0, 3).map((f) => (
-          <li key={f} className="text-xs text-slate-500">• {f}</li>
-        ))}
-      </ul>
+        <h3 className="mt-4 text-lg font-bold text-[#0c2340] group-hover:text-cyan-700">
+          {product.name}
+        </h3>
+        <p className="mt-2 flex-1 text-sm text-slate-600">{product.tagline}</p>
 
-      <div className="mt-4 flex items-center gap-1 text-sm font-medium text-cyan-600 group-hover:gap-2 transition-all">
-        View details <ArrowRight className="h-4 w-4" />
+        <ul className="mt-4 space-y-1">
+          {product.features.slice(0, 3).map((f) => (
+            <li key={f} className="text-xs text-slate-500">• {f}</li>
+          ))}
+        </ul>
+
+        <div className="mt-4 flex items-center gap-1 text-sm font-medium text-cyan-600 transition-all group-hover:gap-2">
+          View details <ArrowRight className="h-4 w-4" />
+        </div>
       </div>
     </Link>
   );

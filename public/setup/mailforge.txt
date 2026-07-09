@@ -1,0 +1,17 @@
+INDUS Web Agency — Setup Guide
+Product: mailforge
+Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+
+REQUIREMENTS:
+  - Node.js 18+
+  - MongoDB
+
+STEPS:
+  1. Download ZIP
+  2. cp .env.example .env
+  3. npm run setup && npm start
+  4. Register at localhost:5000
+  5. Use Dashboard, Campaigns, Inbox
+
+License: Place indus-license-mailforge.json in project root after download.
+Approval: Subscribe on indus-web-agency.vercel.app — admin approves within 24h.

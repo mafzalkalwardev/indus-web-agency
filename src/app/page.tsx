@@ -3,6 +3,8 @@ import Image from "next/image";
 import { ArrowRight, Mail, Phone, Globe, Shield, Download, Clock } from "lucide-react";
 import { ProductCard } from "@/components/products/ProductCard";
 import { PRODUCTS } from "@/lib/products";
+import { MotionSection } from "@/components/ui/MotionSection";
+import { HeroBackground } from "@/components/ui/HeroBackground";
 
 export default function HomePage() {
   const featured = PRODUCTS.filter((p) =>
@@ -11,10 +13,11 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="gradient-hero text-white">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
+      <section className="gradient-hero relative text-white overflow-hidden">
+        <HeroBackground />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
           <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div>
+            <div className="motion-frame motion-in">
               <p className="text-sm font-semibold uppercase tracking-widest text-cyan-300">
                 Professional Automation Suite
               </p>
@@ -28,25 +31,26 @@ export default function HomePage() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   href="/products"
-                  className="inline-flex items-center gap-2 rounded-lg bg-cyan-500 px-6 py-3 font-semibold text-white hover:bg-cyan-400"
+                  className="inline-flex items-center gap-2 rounded-lg bg-cyan-500 px-6 py-3 font-semibold text-white transition hover:bg-cyan-400 hover:scale-[1.02]"
                 >
                   Browse Products <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/signup"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/30 px-6 py-3 font-semibold text-white hover:bg-white/10"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
                 >
                   Create Account
                 </Link>
               </div>
             </div>
-            <div className="flex justify-center">
+            <div className="relative flex justify-center">
+              <div className="absolute inset-0 m-auto h-64 w-64 rounded-full bg-cyan-400/10 blur-3xl" />
               <Image
-                src="/images/logo.jpg"
+                src="/images/logo-trimmed.png"
                 alt="INDUS Web Agency Logo"
-                width={320}
-                height={320}
-                className="rounded-2xl shadow-2xl ring-4 ring-white/20"
+                width={537}
+                height={593}
+                className="animate-float relative z-10 h-auto w-full max-w-[380px] drop-shadow-[0_0_40px_rgba(34,211,238,0.25)]"
                 priority
               />
             </div>
@@ -54,18 +58,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <MotionSection className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { icon: Mail, title: "Email Tools", desc: "Verifier, sender, unified inbox", href: "/products?cat=email" },
             { icon: Phone, title: "Auto Dialers", desc: "4 plans from DOM to AI multi-slot", href: "/products?cat=dialer" },
             { icon: Globe, title: "Web Scrapers", desc: "Playwright, SAFER, lead CRM", href: "/products?cat=scraper" },
             { icon: Shield, title: "Secure Access", desc: "Time-limited subscriptions", href: "/signup" },
-          ].map((item) => (
+          ].map((item, i) => (
             <Link
               key={item.title}
               href={item.href}
-              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-cyan-300 hover:shadow-md"
+              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-cyan-300 hover:shadow-md hover:-translate-y-1"
+              style={{ animationDelay: `${i * 80}ms` }}
             >
               <item.icon className="h-8 w-8 text-cyan-600" />
               <h3 className="mt-3 font-bold">{item.title}</h3>
@@ -73,9 +78,9 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
-      </section>
+      </MotionSection>
 
-      <section className="bg-white py-16">
+      <MotionSection className="bg-white py-16" delay={100}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="text-center">
             <h2 className="text-3xl font-bold">Featured Products</h2>
@@ -92,9 +97,9 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
+      </MotionSection>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <MotionSection className="mx-auto max-w-7xl px-4 py-16 sm:px-6" delay={150}>
         <h2 className="text-center text-3xl font-bold">How It Works</h2>
         <div className="mt-10 grid gap-8 md:grid-cols-3">
           {[
@@ -103,7 +108,7 @@ export default function HomePage() {
             { step: "3", title: "Download & Use", desc: "Download from your dashboard during your subscription period", icon: Download },
           ].map((item) => (
             <div key={item.step} className="text-center">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#0c2340] text-xl font-bold text-white">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#0c2340] text-xl font-bold text-white shadow-lg">
                 {item.step}
               </div>
               <h3 className="mt-4 text-lg font-bold">{item.title}</h3>
@@ -111,7 +116,7 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </section>
+      </MotionSection>
 
       <section className="gradient-hero py-16 text-white">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">

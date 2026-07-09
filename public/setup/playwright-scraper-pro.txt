@@ -1,0 +1,17 @@
+INDUS Web Agency — Setup Guide
+Product: playwright-scraper-pro
+Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+
+REQUIREMENTS:
+  - Node.js 18+
+  - Playwright
+
+STEPS:
+  1. Download ZIP
+  2. npm install && npx playwright install
+  3. npm start
+  4. Open http://localhost:3000
+  5. Enter URL and scrape
+
+License: Place indus-license-playwright-scraper-pro.json in project root after download.
+Approval: Subscribe on indus-web-agency.vercel.app — admin approves within 24h.

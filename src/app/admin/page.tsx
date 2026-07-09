@@ -25,6 +25,7 @@ interface SubRow {
   status: string;
   expiresAt: string;
   active: boolean;
+  activatedMachines?: string[];
 }
 
 export default function AdminPage() {
@@ -71,6 +72,12 @@ export default function AdminPage() {
       credentials: "include",
       body: JSON.stringify({ action }),
     });
+    await loadData();
+  }
+
+  async function handleResetMachines(id: string) {
+    if (!confirm("Reset device bindings for this subscription?")) return;
+    await fetch(href(`/api/admin/reset-machines/${id}`), { method: "POST", credentials: "include" });
     await loadData();
   }
 
@@ -218,11 +225,13 @@ export default function AdminPage() {
                 <th className="px-4 py-3 text-left">Status</th>
                 <th className="px-4 py-3 text-right">Price</th>
                 <th className="px-4 py-3 text-left">Expires</th>
+                <th className="px-4 py-3 text-left">Devices</th>
               </tr>
             </thead>
             <tbody>
               {subs.map((s) => {
                 const product = getProduct(s.productSlug);
+                const deviceCount = s.activatedMachines?.length ?? 0;
                 return (
                   <tr key={s.id} className="border-t border-slate-100">
                     <td className="px-4 py-3">{s.userEmail}</td>
@@ -238,6 +247,14 @@ export default function AdminPage() {
                     </td>
                     <td className="px-4 py-3 text-right">${s.price}</td>
                     <td className="px-4 py-3">{formatDate(s.expiresAt)}</td>
+                    <td className="px-4 py-3">
+                      {deviceCount}/2
+                      {deviceCount > 0 && (
+                        <button type="button" onClick={() => handleResetMachines(s.id)} className="ml-2 text-xs text-cyan-700 hover:underline">
+                          Reset
+                        </button>
+                      )}
+                    </td>
                   </tr>
                 );
               })}

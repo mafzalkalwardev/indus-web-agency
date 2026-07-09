@@ -1,5 +1,6 @@
 import { AuthForm } from "@/components/auth/AuthForm";
 import Link from "next/link";
+import { href } from "@/lib/paths";
 
 export const metadata = {
   title: "Admin Login — INDUS Web Agency",
@@ -16,7 +17,7 @@ export default function AdminLoginPage() {
         <AuthForm mode="admin-login" />
       </div>
       <p className="mt-4 text-center text-sm text-slate-600">
-        <Link href="/login" className="hover:text-cyan-600">Customer login</Link>
+        <Link href={href("/login")} className="hover:text-cyan-600">Customer login</Link>
       </p>
     </div>
   );

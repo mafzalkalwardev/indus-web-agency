@@ -1,0 +1,18 @@
+INDUS Web Agency — Setup Guide
+Product: email-verifier-pro
+Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+
+REQUIREMENTS:
+  - Node.js 18+
+  - MongoDB
+  - Windows/macOS/Linux
+
+STEPS:
+  1. Download ZIP from dashboard
+  2. npm install && npm start
+  3. Open http://localhost:5000
+  4. Place license JSON in root
+  5. Upload CSV/XLSX for bulk verify
+
+License: Place indus-license-email-verifier-pro.json in project root after download.
+Approval: Subscribe on indus-web-agency.vercel.app — admin approves within 24h.

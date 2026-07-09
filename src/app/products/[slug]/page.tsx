@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, Code2, Check } from "lucide-react";
+import { ExternalLink, Check } from "lucide-react";
 import { getProduct, PRODUCTS, CATEGORY_LABELS } from "@/lib/products";
+import { getSetupGuide } from "@/lib/setup-guides";
 import { SubscribeButton } from "@/components/products/SubscribeButton";
-
+import { SetupGuidePanel } from "@/components/products/SetupGuidePanel";
 export async function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
 }
@@ -24,6 +25,7 @@ export default async function ProductDetailPage({
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) notFound();
+  const setupGuide = getSetupGuide(slug);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
@@ -63,14 +65,6 @@ export default async function ProductDetailPage({
           </div>
 
           <div className="mt-6 flex gap-4">
-            <a
-              href={product.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-[#0c2340]"
-            >
-              <Code2 className="h-4 w-4" /> View on GitHub
-            </a>
             {product.homepage && (
               <a
                 href={product.homepage}
@@ -116,6 +110,20 @@ export default async function ProductDetailPage({
         </div>
 
         <div>
+          {product.demoVideo && (
+            <div className="mb-4 overflow-hidden rounded-2xl border border-slate-200 bg-black shadow-lg">
+              <video
+                src={product.demoVideo}
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full"
+                poster={product.screenshots[0]}
+              >
+                Your browser does not support video playback.
+              </video>
+            </div>
+          )}
           {product.screenshots.length > 0 && (
             <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-lg">
               <Image
@@ -123,15 +131,15 @@ export default async function ProductDetailPage({
                 alt={`${product.name} screenshot`}
                 width={800}
                 height={500}
-                className="w-full object-cover"
+                className="w-full object-cover object-top"
               />
             </div>
           )}
           {product.screenshots.length > 1 && (
             <div className="mt-4 grid grid-cols-2 gap-3">
-              {product.screenshots.slice(1, 5).filter((s) => s.endsWith(".png")).map((src) => (
+              {product.screenshots.slice(1, 5).map((src) => (
                 <div key={src} className="overflow-hidden rounded-lg border border-slate-200">
-                  <Image src={src} alt="Screenshot" width={400} height={250} className="w-full object-cover" />
+                  <Image src={src} alt="Screenshot" width={400} height={250} className="w-full object-cover object-top" />
                 </div>
               ))}
             </div>
@@ -176,6 +184,8 @@ export default async function ProductDetailPage({
           ))}
         </div>
       </section>
+
+      {setupGuide && <SetupGuidePanel guide={setupGuide} productName={product.name} />}
 
       {product.comparison && product.comparison.length > 0 && (
         <section className="mt-16 overflow-x-auto">

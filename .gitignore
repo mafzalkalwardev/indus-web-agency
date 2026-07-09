@@ -14,6 +14,9 @@ dist/
 .env.local
 .env.*.local
 
+# License signing keys (never commit private key)
+scripts/license_private.pem
+
 # Data (runtime user data — keep structure, ignore runtime files)
 data/users.json
 data/subscriptions.json

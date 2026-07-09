@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Download, Clock, Package, AlertCircle, CheckCircle2, XCircle, Hourglass } from "lucide-react";
+import { Download, Clock, Package, AlertCircle, CheckCircle2, XCircle, Hourglass, Loader2 } from "lucide-react";
 import { getProduct } from "@/lib/products";
 import { formatDate, daysRemaining, isExpired } from "@/lib/utils";
 import { useSession } from "@/components/auth/SessionProvider";
@@ -42,10 +42,20 @@ function StatusBadge({ status }: { status: SubscriptionStatus }) {
   );
 }
 
+function triggerBlobDownload(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export default function DashboardPage() {
-  const { user, loading: authLoading, logout } = useSession();
+  const { user, loading: authLoading } = useSession();
   const [subs, setSubs] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
+  const [downloading, setDownloading] = useState<string | null>(null);
 
   useEffect(() => {
     if (authLoading) return;
@@ -62,9 +72,15 @@ export default function DashboardPage() {
   }, [user, authLoading]);
 
   async function handleDownload(productSlug: string) {
-    const res = await fetch(href(`/api/downloads/${productSlug}`), { credentials: "include" });
-    const data = await res.json();
-    if (res.ok && data.downloadUrl) {
+    setDownloading(productSlug);
+    try {
+      const metaRes = await fetch(href(`/api/downloads/${productSlug}`), { credentials: "include" });
+      const data = await metaRes.json();
+      if (!metaRes.ok) {
+        alert(data.error || "Download not available");
+        return;
+      }
+
       if (data.licenseToken) {
         const license = {
           product: data.productName,
@@ -72,19 +88,27 @@ export default function DashboardPage() {
           expiresAt: data.expiresAt,
           period: data.period,
           licenseToken: data.licenseToken,
-          verifyUrl: `${window.location.origin}${href("/api/license/verify")}`,
+          licenseVersion: 2,
         };
-        const blob = new Blob([JSON.stringify(license, null, 2)], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `indus-license-${productSlug}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
+        const licenseBlob = new Blob([JSON.stringify(license, null, 2)], { type: "application/json" });
+        triggerBlobDownload(licenseBlob, `indus-license-${productSlug}.json`);
       }
-      window.open(data.downloadUrl, "_blank");
-    } else {
-      alert(data.error || "Download not available");
+
+      const fileRes = await fetch(href(data.downloadPath || `/api/downloads/${productSlug}/file`), {
+        credentials: "include",
+      });
+      if (!fileRes.ok) {
+        const err = await fileRes.json().catch(() => ({}));
+        alert(err.error || "Product download failed");
+        return;
+      }
+
+      const zipBlob = await fileRes.blob();
+      triggerBlobDownload(zipBlob, data.fileName || `indus-${productSlug}.zip`);
+    } catch {
+      alert("Download failed. Please try again.");
+    } finally {
+      setDownloading(null);
     }
   }
 
@@ -173,6 +197,7 @@ export default function DashboardPage() {
               const product = getProduct(sub.productSlug);
               const days = daysRemaining(sub.expiresAt);
               const thumb = product?.screenshots[0];
+              const isDownloading = downloading === sub.productSlug;
               return (
                 <div key={sub.id} className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center">
                   {thumb && (
@@ -186,17 +211,31 @@ export default function DashboardPage() {
                       <StatusBadge status="approved" />
                     </div>
                     <p className="text-sm text-slate-600">{sub.planName} — ${sub.price} ({periodLabel(sub.period as BillingPeriod)})</p>
-                    <p className="mt-1 text-xs text-slate-500">Download includes a license file — the app stops working when the period ends.</p>
+                    <p className="mt-1 text-xs text-slate-500">Secure download includes a signed license file — bound to your device.</p>
                     <p className="mt-1 flex items-center gap-1 text-sm text-slate-500">
                       <Clock className="h-4 w-4" /> Expires {formatDate(sub.expiresAt)} · {days} days left
                     </p>
                   </div>
-                  <button
-                    onClick={() => handleDownload(sub.productSlug)}
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0c2340] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1a3a5c]"
-                  >
-                    <Download className="h-4 w-4" /> Download
-                  </button>
+                  <div className="flex flex-col gap-2 sm:items-end">
+                    <button
+                      onClick={() => handleDownload(sub.productSlug)}
+                      disabled={isDownloading}
+                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0c2340] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#1a3a5c] disabled:opacity-70"
+                    >
+                      {isDownloading ? (
+                        <><Loader2 className="h-4 w-4 animate-spin" /> Preparing…</>
+                      ) : (
+                        <><Download className="h-4 w-4" /> Download</>
+                      )}
+                    </button>
+                    <a
+                      href={href(`/setup/${sub.productSlug}.txt`)}
+                      download
+                      className="text-xs text-cyan-600 hover:underline"
+                    >
+                      Setup guide (.txt)
+                    </a>
+                  </div>
                 </div>
               );
             })}

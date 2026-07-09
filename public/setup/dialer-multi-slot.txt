@@ -1,0 +1,18 @@
+INDUS Web Agency — Setup Guide
+Product: dialer-multi-slot
+Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+
+REQUIREMENTS:
+  - Windows
+  - Python 3.10+
+  - 5 Google Voice slots
+
+STEPS:
+  1. Download ZIP
+  2. pip install -r requirements.txt
+  3. python autodialer_gui.py
+  4. Admin: configure slots
+  5. Agent: load contacts and dial
+
+License: Place indus-license-dialer-multi-slot.json in project root after download.
+Approval: Subscribe on indus-web-agency.vercel.app — admin approves within 24h.

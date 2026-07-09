@@ -1,17 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   deactivateExpiredSubscriptions,
-  findActiveSubscription,
+  bindMachineToSubscription,
   getSubscriptionById,
   getUserById,
+  findActiveSubscription,
 } from "@/lib/db";
-import { createLicenseToken, verifyLicenseToken } from "@/lib/license";
+import {
+  createLicenseToken,
+  verifyLicenseToken,
+  normalizeMachineId,
+  machineActivationAllowed,
+} from "@/lib/license";
+import { MAX_MACHINES_PER_SUBSCRIPTION } from "@/lib/license-public-key";
 import { isExpired } from "@/lib/utils";
 
 export async function POST(req: NextRequest) {
-  const { licenseToken } = await req.json();
+  const body = await req.json();
+  const { licenseToken, machineId: rawMachineId } = body;
   if (!licenseToken || typeof licenseToken !== "string") {
     return NextResponse.json({ valid: false, error: "Missing license token" }, { status: 400 });
+  }
+
+  const machineId = normalizeMachineId(rawMachineId);
+  if (!machineId) {
+    return NextResponse.json(
+      { valid: false, error: "Missing or invalid machine ID", reason: "invalid_machine" },
+      { status: 400 }
+    );
   }
 
   const payload = await verifyLicenseToken(licenseToken);
@@ -38,6 +54,28 @@ export async function POST(req: NextRequest) {
       valid: false,
       error: "Subscription revoked or inactive",
       reason: "revoked",
+    });
+  }
+
+  const activation = machineActivationAllowed(sub.activatedMachines, machineId);
+  if (!activation.allowed) {
+    return NextResponse.json({
+      valid: false,
+      error: `License already active on ${MAX_MACHINES_PER_SUBSCRIPTION} devices. Contact support to reset.`,
+      reason: activation.reason ?? "machine_limit",
+    });
+  }
+
+  const bindResult = await bindMachineToSubscription(
+    sub.id,
+    machineId,
+    MAX_MACHINES_PER_SUBSCRIPTION
+  );
+  if (!bindResult.ok && bindResult.reason === "machine_limit") {
+    return NextResponse.json({
+      valid: false,
+      error: `License already active on ${MAX_MACHINES_PER_SUBSCRIPTION} devices. Contact support to reset.`,
+      reason: "machine_limit",
     });
   }
 
