@@ -3,6 +3,7 @@ import { getSession } from "@/lib/auth";
 import { createSubscription, getUserByEmail } from "@/lib/db";
 import { getProduct } from "@/lib/products";
 import { getBillingOption, calcPrice, type BillingPeriod } from "@/lib/billing";
+import { sendCustomerSubscriptionApproved } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   const session = await getSession();
@@ -40,6 +41,16 @@ export async function POST(req: NextRequest) {
     period,
     "approved"
   );
+
+  sendCustomerSubscriptionApproved({
+    customerEmail: user.email,
+    customerName: user.name,
+    productName: product.name,
+    planName: plan.name,
+    price,
+    period,
+    expiresAt: sub.expiresAt,
+  }).catch((err) => console.error("[grant] customer email failed:", err));
 
   return NextResponse.json({ subscription: sub });
 }

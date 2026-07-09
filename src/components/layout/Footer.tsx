@@ -80,8 +80,15 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-slate-700 py-4 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} INDUS Web Agency. All rights reserved.
+      <div className="border-t border-slate-700 px-4 py-4">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-slate-500">
+          <Link href={href("/faq")} className="hover:text-cyan-400">FAQ</Link>
+          <Link href={href("/terms")} className="hover:text-cyan-400">Terms of Service</Link>
+          <Link href={href("/privacy")} className="hover:text-cyan-400">Privacy Policy</Link>
+        </div>
+        <p className="mt-2 text-center text-xs text-slate-500">
+          © {new Date().getFullYear()} INDUS Web Agency. All rights reserved.
+        </p>
       </div>
     </footer>
   );

@@ -1,9 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createUser, initDefaultAdmin } from "@/lib/db";
 import { setSessionCookie, userToSession } from "@/lib/auth";
+import { rateLimit, clientIp } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   await initDefaultAdmin();
+
+  const ip = clientIp(req);
+  const limited = await rateLimit(`signup:${ip}`, 5, 3600);
+  if (!limited.ok) {
+    return NextResponse.json(
+      { error: `Too many signups from this IP. Try again in ${limited.retryAfterSec}s.` },
+      { status: 429 }
+    );
+  }
+
   const { email, password, name } = await req.json();
 
   if (!email || !password || !name) {

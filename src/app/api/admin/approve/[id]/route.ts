@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
-import { updateSubscriptionStatus, getSubscriptionById } from "@/lib/db";
+import { updateSubscriptionStatus, getSubscriptionById, getUserById } from "@/lib/db";
+import { getProduct } from "@/lib/products";
 import type { SubscriptionStatus } from "@/lib/billing";
+import { sendCustomerSubscriptionApproved, sendCustomerSubscriptionRejected } from "@/lib/email";
 
 export async function POST(
   req: NextRequest,
@@ -22,5 +24,32 @@ export async function POST(
   }
 
   const updated = await updateSubscriptionStatus(id, status, session.userId);
+  if (!updated) {
+    return NextResponse.json({ error: "Update failed" }, { status: 500 });
+  }
+
+  const user = await getUserById(updated.userId);
+  const product = getProduct(updated.productSlug);
+  if (user && product) {
+    if (status === "approved") {
+      sendCustomerSubscriptionApproved({
+        customerEmail: user.email,
+        customerName: user.name,
+        productName: product.name,
+        planName: updated.planName,
+        price: updated.price,
+        period: updated.period,
+        expiresAt: updated.expiresAt,
+      }).catch((err) => console.error("[approve] customer email failed:", err));
+    } else {
+      sendCustomerSubscriptionRejected({
+        customerEmail: user.email,
+        customerName: user.name,
+        productName: product.name,
+        planName: updated.planName,
+      }).catch((err) => console.error("[approve] customer email failed:", err));
+    }
+  }
+
   return NextResponse.json({ subscription: updated });
 }

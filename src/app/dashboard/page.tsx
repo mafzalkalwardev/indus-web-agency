@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Download, Clock, Package, AlertCircle, CheckCircle2, XCircle, Hourglass, Loader2 } from "lucide-react";
+import { Download, Clock, Package, AlertCircle, CheckCircle2, XCircle, Hourglass, Loader2, RefreshCw } from "lucide-react";
 import { getProduct } from "@/lib/products";
 import { formatDate, daysRemaining, isExpired } from "@/lib/utils";
 import { useSession } from "@/components/auth/SessionProvider";
@@ -56,6 +56,8 @@ export default function DashboardPage() {
   const [subs, setSubs] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState<string | null>(null);
+  const [renewing, setRenewing] = useState<string | null>(null);
+  const [renewMsg, setRenewMsg] = useState("");
 
   useEffect(() => {
     if (authLoading) return;
@@ -112,6 +114,32 @@ export default function DashboardPage() {
     }
   }
 
+  async function handleRenew(subscriptionId: string) {
+    setRenewing(subscriptionId);
+    setRenewMsg("");
+    try {
+      const res = await fetch(href("/api/subscriptions/renew"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ subscriptionId }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setRenewMsg(data.error || "Renewal request failed");
+        return;
+      }
+      setRenewMsg("Renewal submitted — awaiting admin approval.");
+      const refresh = await fetch(href("/api/subscriptions"), { credentials: "include", cache: "no-store" });
+      const d = await refresh.json();
+      setSubs(d.subscriptions || []);
+    } catch {
+      setRenewMsg("Renewal request failed. Please try again.");
+    } finally {
+      setRenewing(null);
+    }
+  }
+
   if (authLoading || loading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
@@ -137,6 +165,12 @@ export default function DashboardPage() {
           Browse Products
         </Link>
       </div>
+
+      {renewMsg && (
+        <p className={`mt-4 rounded-lg border px-4 py-3 text-sm ${renewMsg.includes("failed") ? "border-red-200 bg-red-50 text-red-700" : "border-emerald-200 bg-emerald-50 text-emerald-800"}`}>
+          {renewMsg}
+        </p>
+      )}
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         {[
@@ -228,6 +262,20 @@ export default function DashboardPage() {
                         <><Download className="h-4 w-4" /> Download</>
                       )}
                     </button>
+                    {days <= 7 && (
+                      <button
+                        type="button"
+                        onClick={() => handleRenew(sub.id)}
+                        disabled={renewing === sub.id}
+                        className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-cyan-200 bg-cyan-50 px-4 py-2 text-xs font-medium text-cyan-800 hover:bg-cyan-100 disabled:opacity-70"
+                      >
+                        {renewing === sub.id ? (
+                          <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Submitting…</>
+                        ) : (
+                          <><RefreshCw className="h-3.5 w-3.5" /> Request Renewal</>
+                        )}
+                      </button>
+                    )}
                     <a
                       href={href(`/setup/${sub.productSlug}.txt`)}
                       download
@@ -262,6 +310,14 @@ export default function DashboardPage() {
                   <Link href={href(`/products/${sub.productSlug}`)} className="text-sm text-cyan-600 hover:text-cyan-800">
                     Resubscribe →
                   </Link>
+                  <button
+                    type="button"
+                    onClick={() => handleRenew(sub.id)}
+                    disabled={renewing === sub.id}
+                    className="ml-3 text-sm text-cyan-600 hover:text-cyan-800 disabled:opacity-60"
+                  >
+                    {renewing === sub.id ? "Submitting…" : "Request Renewal"}
+                  </button>
                 </div>
               );
             })}

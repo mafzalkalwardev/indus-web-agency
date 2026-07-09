@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcryptjs";
 import { hasRedis, redisGet, redisSet, REDIS_KEYS } from "./redis";
 import { getBillingOption, type BillingPeriod, type SubscriptionStatus } from "./billing";
-import { isExpired } from "./utils";
+import { isExpired, daysRemaining } from "./utils";
+import { passwordFingerprint, getStoredAdminPasswordFp, setStoredAdminPasswordFp } from "./rate-limit";
 
 const DATA_DIR = process.env.VERCEL
   ? path.join("/tmp", "indus-data")
@@ -36,6 +37,9 @@ export interface Subscription {
   approvedBy?: string;
   /** SHA-256 machine fingerprints bound to this subscription (max 2). */
   activatedMachines?: string[];
+  /** ISO timestamps when expiry reminder emails were sent */
+  expiryReminder7dAt?: string;
+  expiryReminder1dAt?: string;
 }
 
 function normalizeSubscription(sub: Subscription): Subscription {
@@ -232,6 +236,100 @@ export async function deactivateExpiredSubscriptions(): Promise<number> {
   return changed;
 }
 
+/** Send 7-day and 1-day expiry reminder flags; returns count of reminders marked */
+export async function markExpiryRemindersSent(
+  updates: { id: string; field: "expiryReminder7dAt" | "expiryReminder1dAt" }[]
+): Promise<void> {
+  if (updates.length === 0) return;
+  const subs = await getSubscriptions();
+  const byId = Object.fromEntries(updates.map((u) => [u.id, u.field]));
+  const now = new Date().toISOString();
+  const updated = subs.map((sub) => {
+    const field = byId[sub.id];
+    if (!field) return sub;
+    return { ...sub, [field]: now };
+  });
+  await saveSubscriptions(updated);
+}
+
+export function getSubscriptionsNeedingExpiryReminders(subs: Subscription[]): {
+  sub: Subscription;
+  daysLeft: number;
+  field: "expiryReminder7dAt" | "expiryReminder1dAt";
+}[] {
+  const out: { sub: Subscription; daysLeft: number; field: "expiryReminder7dAt" | "expiryReminder1dAt" }[] = [];
+  for (const sub of subs) {
+    if (!sub.active || sub.status !== "approved" || isExpired(sub.expiresAt)) continue;
+    const days = daysRemaining(sub.expiresAt);
+    if (days <= 7 && days > 1 && !sub.expiryReminder7dAt) {
+      out.push({ sub, daysLeft: days, field: "expiryReminder7dAt" });
+    } else if (days <= 1 && days >= 0 && !sub.expiryReminder1dAt) {
+      out.push({ sub, daysLeft: Math.max(days, 1), field: "expiryReminder1dAt" });
+    }
+  }
+  return out;
+}
+
+export async function createRenewalSubscription(
+  userId: string,
+  previousSubId: string,
+  productSlug: string,
+  planId: string,
+  planName: string,
+  price: number,
+  durationDays: number,
+  period: BillingPeriod
+): Promise<Subscription | { error: string }> {
+  const subs = await getSubscriptions();
+  const prev = subs.find((s) => s.id === previousSubId && s.userId === userId);
+  if (!prev) return { error: "Subscription not found" };
+
+  const canRenew =
+    prev.status === "rejected" ||
+    prev.status === "expired" ||
+    isExpired(prev.expiresAt) ||
+    daysRemaining(prev.expiresAt) <= 7;
+
+  if (!canRenew) {
+    return { error: "Renewal is only available within 7 days of expiry or after expiration" };
+  }
+
+  const hasPending = subs.some(
+    (s) =>
+      s.userId === userId &&
+      s.productSlug === productSlug &&
+      s.active &&
+      s.status === "pending" &&
+      !isExpired(s.expiresAt)
+  );
+  if (hasPending) return { error: "You already have a pending renewal for this product" };
+
+  const idx = subs.findIndex((s) => s.id === previousSubId);
+  if (idx !== -1 && prev.active && prev.status === "approved" && !isExpired(prev.expiresAt)) {
+    subs[idx] = { ...subs[idx], active: false };
+  }
+
+  const now = new Date();
+  const expires = new Date(now.getTime() + durationDays * 24 * 60 * 60 * 1000);
+  const sub: Subscription = {
+    id: uuidv4(),
+    userId,
+    productSlug,
+    planId,
+    planName,
+    price,
+    period,
+    status: "pending",
+    startsAt: now.toISOString(),
+    expiresAt: expires.toISOString(),
+    active: true,
+    createdAt: now.toISOString(),
+  };
+  subs.push(sub);
+  await saveSubscriptions(subs);
+  return sub;
+}
+
 export async function findActiveSubscription(
   userId: string,
   productSlug: string
@@ -276,24 +374,39 @@ export async function resetSubscriptionMachines(subscriptionId: string): Promise
 
 export async function initDefaultAdmin(): Promise<void> {
   const adminEmail = envOr("ADMIN_EMAIL", "admin@induswebagency.com").toLowerCase();
-  const adminPassword = envOr("ADMIN_PASSWORD", "Admin@Indus2026!");
+  const envPassword = process.env.ADMIN_PASSWORD?.trim();
+  const defaultPassword = "Admin@Indus2026!";
+  const adminPassword = envPassword || defaultPassword;
+
   const users = await getUsers();
-  const passwordHash = await bcrypt.hash(adminPassword, 10);
+  const existingIdx = users.findIndex((u) => u.email === adminEmail);
+  const fp = passwordFingerprint(adminPassword);
+  const storedFp = await getStoredAdminPasswordFp();
 
-  const withoutAdmin = users.filter(
-    (u) => u.role !== "admin" && u.email !== adminEmail
-  );
+  if (existingIdx === -1) {
+    const adminUser: User = {
+      id: uuidv4(),
+      email: adminEmail,
+      passwordHash: await bcrypt.hash(adminPassword, 10),
+      name: "INDUS Admin",
+      role: "admin",
+      createdAt: new Date().toISOString(),
+    };
+    await saveUsers([...users, adminUser]);
+    await setStoredAdminPasswordFp(fp);
+    return;
+  }
 
-  const adminUser: User = {
-    id: users.find((u) => u.email === adminEmail)?.id ?? uuidv4(),
-    email: adminEmail,
-    passwordHash,
-    name: "INDUS Admin",
-    role: "admin",
-    createdAt: users.find((u) => u.email === adminEmail)?.createdAt ?? new Date().toISOString(),
-  };
-
-  await saveUsers([...withoutAdmin, adminUser]);
+  if (envPassword && storedFp !== fp) {
+    const updated = [...users];
+    updated[existingIdx] = {
+      ...updated[existingIdx],
+      passwordHash: await bcrypt.hash(adminPassword, 10),
+      role: "admin",
+    };
+    await saveUsers(updated);
+    await setStoredAdminPasswordFp(fp);
+  }
 }
 
 function envOr(key: string, fallback: string): string {
