@@ -73,8 +73,12 @@ Visit http://localhost:3000
 
 ### Default Admin Credentials
 
+Local development only (set your own in production):
+
 - Email: `admin@induswebagency.com`
-- Password: `Admin@Indus2026!`
+- Password: set `ADMIN_PASSWORD` in `.env.local` (do not use defaults in production)
+
+Production: set `ADMIN_EMAIL` and `ADMIN_PASSWORD` in Vercel environment variables. The admin password syncs from env when `ADMIN_PASSWORD` changes.
 
 Change via environment variables:
 ```
