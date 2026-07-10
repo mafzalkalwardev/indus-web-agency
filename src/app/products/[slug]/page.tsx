@@ -6,6 +6,8 @@ import { getProduct, PRODUCTS, CATEGORY_LABELS } from "@/lib/products";
 import { getSetupGuide } from "@/lib/setup-guides";
 import { SubscribeButton } from "@/components/products/SubscribeButton";
 import { SetupGuidePanel } from "@/components/products/SetupGuidePanel";
+import { SITE_CONTACT, SITE_SEO } from "@/lib/site-config";
+
 export async function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
 }
@@ -14,7 +16,46 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) return { title: "Product Not Found" };
-  return { title: `${product.name} — INDUS Web Agency`, description: product.description };
+
+  const category = CATEGORY_LABELS[product.category].toLowerCase();
+  const description = `${product.description} Available from INDUS Web Agency with secure subscription licensing, setup guidance, and professional support.`;
+
+  return {
+    title: `${product.name} ${category}`,
+    description,
+    keywords: [
+      product.name,
+      product.tagline,
+      ...product.features,
+      ...product.techStack,
+      ...SITE_SEO.keywords,
+    ],
+    alternates: {
+      canonical: `/products/${product.slug}`,
+    },
+    openGraph: {
+      title: `${product.name} | INDUS Web Agency`,
+      description,
+      url: `/products/${product.slug}`,
+      type: "website",
+      images: product.screenshots[0]
+        ? [
+            {
+              url: product.screenshots[0],
+              width: 1200,
+              height: 630,
+              alt: `${product.name} automation software screenshot`,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.name} | INDUS Web Agency`,
+      description,
+      images: product.screenshots[0] ? [product.screenshots[0]] : undefined,
+    },
+  };
 }
 
 export default async function ProductDetailPage({
@@ -26,9 +67,38 @@ export default async function ProductDetailPage({
   const product = getProduct(slug);
   if (!product) notFound();
   const setupGuide = getSetupGuide(slug);
+  const productUrl = `${SITE_CONTACT.siteUrl}/products/${product.slug}`;
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: product.name,
+    applicationCategory: `${CATEGORY_LABELS[product.category]} Software`,
+    operatingSystem: "Windows, Web",
+    url: productUrl,
+    image: product.screenshots[0] ? `${SITE_CONTACT.siteUrl}${product.screenshots[0]}` : undefined,
+    description: product.description,
+    brand: {
+      "@type": "Brand",
+      name: SITE_SEO.name,
+    },
+    offers: product.plans.map((plan) => ({
+      "@type": "Offer",
+      name: plan.name,
+      price: plan.price,
+      priceCurrency: "USD",
+      url: productUrl,
+      availability: "https://schema.org/InStock",
+      category: "subscription",
+    })),
+  };
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+
       <div className="mb-6 text-sm text-slate-500">
         <Link href="/products" className="hover:text-cyan-600">Products</Link>
         {" / "}
@@ -37,24 +107,12 @@ export default async function ProductDetailPage({
 
       <div className="grid gap-12 lg:grid-cols-2">
         <div>
-          <span className="rounded-full bg-cyan-50 px-3 py-1 text-xs font-medium text-cyan-700">
+          <span className="rounded-md bg-cyan-50 px-3 py-1 text-xs font-medium text-cyan-700">
             {CATEGORY_LABELS[product.category]}
           </span>
           <h1 className="mt-4 text-3xl font-bold">{product.name}</h1>
           <p className="mt-2 text-lg text-slate-600">{product.tagline}</p>
           <p className="mt-4 text-slate-700">{product.description}</p>
-
-          <div className="mt-4 rounded-xl border border-cyan-100 bg-cyan-50/60 p-4 text-sm text-slate-700">
-            <p className="font-semibold text-[#0c2340]">Subscription license included</p>
-            <p className="mt-1">
-              After admin approval, download from your dashboard includes a license file.
-              The app verifies online on startup and stops working when your period ends
-              (7, 15, 30 days, or yearly).
-            </p>
-            <a href="/sdk/README.md" className="mt-2 inline-block text-cyan-700 hover:underline">
-              Developer SDK →
-            </a>
-          </div>
 
           <div className="mt-6 flex flex-wrap gap-2">
             {product.techStack.map((t) => (
@@ -86,32 +144,22 @@ export default async function ProductDetailPage({
             ))}
           </ul>
 
-          <div className="mt-8 rounded-xl border border-cyan-100 bg-cyan-50/60 p-4 text-sm text-slate-700">
+          <div className="mt-8 rounded-lg border border-cyan-100 bg-cyan-50/60 p-4 text-sm text-slate-700">
             <p className="font-semibold text-[#0c2340]">Subscription license required</p>
             <p className="mt-1">
-              After admin approval, download includes a signed <code className="text-xs">indus-license-{product.slug}.json</code> file.
-              The app verifies online on startup and locks when your period ends (7, 15, 30, or 365 days).
+              After admin approval, your download includes a signed{" "}
+              <code className="text-xs">indus-license-{product.slug}.json</code> file.
+              The app verifies online on startup and locks when your period ends.
             </p>
             <a href="/sdk/README.md" className="mt-2 inline-block text-cyan-700 hover:underline">
-              Integration SDK for developers →
-            </a>
-          </div>
-
-          <div className="mt-6 rounded-xl border border-cyan-100 bg-cyan-50 p-4 text-sm text-cyan-950">
-            <p className="font-semibold">Time-limited subscription license</p>
-            <p className="mt-1 text-cyan-900">
-              After admin approval you get a license file with your download. Choose 7, 15, 30, or 365 days.
-              The product verifies online on startup and stops working when the period ends.
-            </p>
-            <a href="/sdk/README.md" className="mt-2 inline-block font-medium text-cyan-700 hover:underline">
-              Developer SDK →
+              Integration SDK for developers
             </a>
           </div>
         </div>
 
         <div>
           {product.demoVideo && (
-            <div className="mb-4 overflow-hidden rounded-2xl border border-slate-200 bg-black shadow-lg">
+            <div className="mb-4 overflow-hidden rounded-lg border border-slate-200 bg-black shadow-lg">
               <video
                 src={product.demoVideo}
                 controls
@@ -125,10 +173,10 @@ export default async function ProductDetailPage({
             </div>
           )}
           {product.screenshots.length > 0 && (
-            <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-lg">
+            <div className="overflow-hidden rounded-lg border border-slate-200 shadow-lg">
               <Image
                 src={product.screenshots[0]}
-                alt={`${product.name} screenshot`}
+                alt={`${product.name} automation software screenshot`}
                 width={800}
                 height={500}
                 className="w-full object-cover object-top"
@@ -139,7 +187,7 @@ export default async function ProductDetailPage({
             <div className="mt-4 grid grid-cols-2 gap-3">
               {product.screenshots.slice(1, 5).map((src) => (
                 <div key={src} className="overflow-hidden rounded-lg border border-slate-200">
-                  <Image src={src} alt="Screenshot" width={400} height={250} className="w-full object-cover object-top" />
+                  <Image src={src} alt={`${product.name} feature screenshot`} width={400} height={250} className="w-full object-cover object-top" />
                 </div>
               ))}
             </div>
@@ -153,14 +201,14 @@ export default async function ProductDetailPage({
           {product.plans.map((plan) => (
             <div
               key={plan.id}
-              className={`relative flex flex-col rounded-2xl border p-6 ${
+              className={`relative flex flex-col rounded-lg border p-6 ${
                 plan.highlighted
                   ? "border-cyan-400 bg-cyan-50/50 shadow-lg ring-2 ring-cyan-400"
                   : "border-slate-200 bg-white"
               }`}
             >
               {plan.badge && (
-                <span className="absolute -top-3 right-4 rounded-full bg-cyan-600 px-3 py-0.5 text-xs font-bold text-white">
+                <span className="absolute -top-3 right-4 rounded-md bg-cyan-600 px-3 py-0.5 text-xs font-bold text-white">
                   {plan.badge}
                 </span>
               )}
@@ -210,7 +258,7 @@ export default async function ProductDetailPage({
                       const val = key ? row[key] : undefined;
                       return (
                         <td key={p.id} className="py-3 text-center">
-                          {val === true ? "✓" : val === false ? "—" : val ?? "—"}
+                          {val === true ? "Yes" : val === false ? "-" : val ?? "-"}
                         </td>
                       );
                     })}

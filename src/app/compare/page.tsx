@@ -1,9 +1,15 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { DIALER_COMPARISON } from "@/lib/products";
 import { Check, X } from "lucide-react";
 
-export const metadata = {
-  title: "Compare Auto Dialer Plans — INDUS Web Agency",
+export const metadata: Metadata = {
+  title: "Compare AI Auto Dialer Software Plans",
+  description:
+    "Compare INDUS Web Agency auto dialer software plans, including DOM automation, Google Voice multi-slot dialing, AI agent calling, AMD, CRM, and admin dashboards.",
+  alternates: {
+    canonical: "/compare",
+  },
 };
 
 const columns = [
@@ -22,9 +28,11 @@ function CellValue({ value }: { value: boolean | string }) {
 export default function ComparePage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
-      <h1 className="text-3xl font-bold">Auto Dialer Plan Comparison</h1>
-      <p className="mt-2 text-slate-600">
-        Four tiers from basic DOM automation to enterprise multi-slot AI dialing.
+      <p className="text-sm font-semibold uppercase tracking-wide text-cyan-700">Google Voice dialer comparison</p>
+      <h1 className="mt-2 text-3xl font-bold">Compare AI Auto Dialer Software Plans</h1>
+      <p className="mt-3 max-w-3xl text-slate-600">
+        Compare Google Voice auto dialer software from basic DOM automation to enterprise
+        multi-slot AI dialing with voicemail detection, CRM tools, and admin dashboards.
       </p>
 
       <div className="mt-10 overflow-x-auto">
@@ -40,7 +48,7 @@ export default function ComparePage() {
                     href={`/products/${col.slug}`}
                     className="mt-2 inline-block text-xs text-slate-500 hover:text-cyan-600"
                   >
-                    View details →
+                    View details
                   </Link>
                 </th>
               ))}
@@ -63,12 +71,12 @@ export default function ComparePage() {
 
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {columns.map((col) => (
-          <div key={col.key} className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+          <div key={col.key} className="rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm">
             <h3 className="font-bold">{col.name}</h3>
             <p className="mt-1 text-2xl font-bold text-cyan-600">{col.price}</p>
             <Link
               href={`/products/${col.slug}`}
-              className="mt-4 inline-block rounded-lg bg-[#0c2340] px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a5c]"
+              className="mt-4 inline-block rounded-md bg-[#0c2340] px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a5c]"
             >
               Subscribe
             </Link>

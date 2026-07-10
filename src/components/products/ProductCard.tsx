@@ -26,7 +26,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={href(`/products/${product.slug}`)}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:border-cyan-300 hover:shadow-lg"
+      className="group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:border-cyan-300 hover:shadow-lg"
     >
       {thumb && (
         <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100 bg-slate-900">
@@ -48,7 +48,7 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-start justify-between">
           <span
-            className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium ${categoryColors[product.category]}`}
+            className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-0.5 text-xs font-medium ${categoryColors[product.category]}`}
           >
             {categoryIcons[product.category]}
             {CATEGORY_LABELS[product.category]}
@@ -65,7 +65,7 @@ export function ProductCard({ product }: { product: Product }) {
 
         <ul className="mt-4 space-y-1">
           {product.features.slice(0, 3).map((f) => (
-            <li key={f} className="text-xs text-slate-500">• {f}</li>
+            <li key={f} className="text-xs text-slate-500">- {f}</li>
           ))}
         </ul>
 
