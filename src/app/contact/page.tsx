@@ -20,7 +20,7 @@ export default function ContactPage() {
             <span className="h-px w-8 bg-accent" />
             <p className="eyebrow text-accent">Contact</p>
           </div>
-          <h1 className="mt-6 font-display text-4xl font-medium tracking-tight sm:text-5xl">Let&apos;s talk</h1>
+          <h1 className="mt-6 font-bold text-4xl font-medium tracking-tight sm:text-5xl">Let&apos;s talk</h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
             Custom projects, product support, or a quick question — send a message and we&apos;ll route it to the right person.
           </p>
@@ -33,7 +33,7 @@ export default function ContactPage() {
 
           <FadeIn delay={0.2} className="space-y-5">
             <div className="rounded-2xl border border-line bg-paper-raised p-7">
-              <h2 className="font-display text-lg font-medium text-ink">Direct contact</h2>
+              <h2 className="font-bold text-lg font-medium text-ink">Direct contact</h2>
               <ul className="mt-5 space-y-4 text-sm">
                 <li className="flex items-start gap-3">
                   <Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
@@ -71,7 +71,7 @@ export default function ContactPage() {
             </div>
 
             <div className="rounded-2xl border border-accent/25 bg-accent-tint/40 p-7">
-              <h2 className="font-display text-lg font-medium text-ink">Starting a project?</h2>
+              <h2 className="font-bold text-lg font-medium text-ink">Starting a project?</h2>
               <p className="mt-2 text-sm text-muted">
                 For custom software or websites, our project brief form captures scope, budget, and timeline — so we can quote faster.
               </p>

@@ -18,7 +18,7 @@ export default function StartProjectPage() {
               <span className="h-px w-8 bg-accent" />
               <p className="eyebrow text-accent">Start a project</p>
             </div>
-            <h1 className="mt-6 font-display text-4xl font-medium tracking-tight sm:text-5xl">Tell us what to build</h1>
+            <h1 className="mt-6 font-bold text-4xl font-medium tracking-tight sm:text-5xl">Tell us what to build</h1>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">
               Custom software, a website, or automation — share the brief and we respond within 24 hours
               with next steps and a rough scope.
@@ -31,7 +31,7 @@ export default function StartProjectPage() {
 
         <FadeIn delay={0.2} className="space-y-6">
           <div className="rounded-2xl border border-line bg-paper-raised p-7">
-            <h2 className="font-display text-lg font-medium text-ink">What happens next?</h2>
+            <h2 className="font-bold text-lg font-medium text-ink">What happens next?</h2>
             <ol className="mt-5 space-y-4 text-sm text-muted">
               {["We review your brief", "Discovery call (optional)", "Proposal with timeline & quote", "Build, iterate, launch"].map((s, i) => (
                 <li key={s} className="flex items-center gap-3">
@@ -42,7 +42,7 @@ export default function StartProjectPage() {
             </ol>
           </div>
           <div className="rounded-2xl border border-accent/25 bg-accent-tint/40 p-7">
-            <h2 className="font-display text-lg font-medium text-ink">Prefer direct contact?</h2>
+            <h2 className="font-bold text-lg font-medium text-ink">Prefer direct contact?</h2>
             <ul className="mt-5 space-y-3.5 text-sm">
               <li className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 text-accent" />

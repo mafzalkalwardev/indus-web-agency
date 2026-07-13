@@ -31,7 +31,7 @@ export function WorkPageContent() {
             </div>
             <div className="p-7">
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent">{project.client}</p>
-              <h2 className="mt-2 font-display text-2xl font-medium tracking-tight">{project.title}</h2>
+              <h2 className="mt-2 font-bold text-2xl font-medium tracking-tight">{project.title}</h2>
               <p className="mt-2.5 text-sm leading-relaxed text-muted">{project.summary}</p>
               <ul className="mt-5 space-y-1.5 text-sm text-ink">
                 {project.results.map((r) => (
@@ -50,11 +50,11 @@ export function WorkPageContent() {
         ))}
       </StaggerChildren>
 
-      <FadeIn className="grain-dark relative mt-20 overflow-hidden rounded-3xl bg-ink p-12 text-center text-paper sm:p-16">
-        <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-accent/20 blur-[100px]" />
+      <FadeIn className="relative mt-20 overflow-hidden rounded-3xl bg-[#0c2340] p-12 text-center text-white sm:p-16">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-cyan-500/20 blur-[100px]" />
         <div className="relative z-10">
-          <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">Have a project in mind?</h2>
-          <p className="mt-3 text-paper/60">We&apos;d love to add your product to this wall.</p>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Have a project in mind?</h2>
+          <p className="mt-3 text-slate-300">We&apos;d love to add your product to this wall.</p>
           <Button asChild className="mt-8" size="lg">
             <Link href={href("/start-project")}>
               Start your project <ArrowRight className="h-4 w-4" />

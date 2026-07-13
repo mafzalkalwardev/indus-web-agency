@@ -18,7 +18,7 @@ function ProductsContent() {
         <span className="h-px w-8 bg-accent" />
         <p className="eyebrow text-accent">Software shelf</p>
       </div>
-      <h1 className="mt-6 max-w-3xl font-display text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
+      <h1 className="mt-6 max-w-3xl font-bold text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
         Automation products for sales, dispatch &amp; email
       </h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted">

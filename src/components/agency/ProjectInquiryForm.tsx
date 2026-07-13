@@ -54,7 +54,7 @@ export function ProjectInquiryForm() {
           <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-tint text-accent-strong">
             <CheckCircle2 className="h-7 w-7" />
           </span>
-          <h3 className="mt-5 font-display text-2xl font-medium text-ink">Inquiry received</h3>
+          <h3 className="mt-5 font-bold text-2xl font-medium text-ink">Inquiry received</h3>
           <p className="mt-2 max-w-sm text-sm text-muted">
             We&apos;ll review your project details and respond within 24 hours on business days.
           </p>

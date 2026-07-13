@@ -14,7 +14,7 @@ export default function DemosPage() {
     <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
       <div className="text-center">
         <span className="inline-flex items-center rounded-full border border-accent/25 bg-accent-tint/60 px-3 py-1 font-mono text-[0.68rem] font-medium uppercase tracking-[0.16em] text-accent-strong">Live Previews</span>
-        <h1 className="mt-6 font-display text-4xl font-medium tracking-tight sm:text-5xl">See our products in action</h1>
+        <h1 className="mt-6 font-bold text-4xl font-medium tracking-tight sm:text-5xl">See our products in action</h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted">
           Real screenshots and demo videos captured from each product. Licensed downloads are available from your dashboard after admin approval.
         </p>
@@ -27,7 +27,7 @@ export default function DemosPage() {
               <span className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.16em] text-accent">
                 {CATEGORY_LABELS[product.category]}
               </span>
-              <h2 className="mt-3 font-display text-2xl font-medium tracking-tight">{product.name}</h2>
+              <h2 className="mt-3 font-bold text-2xl font-medium tracking-tight">{product.name}</h2>
               <p className="mt-3 leading-relaxed text-muted">{product.description}</p>
               <ul className="mt-5 space-y-1.5">
                 {product.features.slice(0, 4).map((f) => (
@@ -39,7 +39,7 @@ export default function DemosPage() {
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
                   href={href(`/products/${product.slug}`)}
-                  className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:-translate-y-0.5 hover:bg-ink-soft"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#0c2340] px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1a3a5c]"
                 >
                   <Play className="h-4 w-4" /> View Product
                 </Link>
@@ -82,12 +82,12 @@ export default function DemosPage() {
         ))}
       </div>
 
-      <div className="grain-dark relative mt-20 overflow-hidden rounded-3xl bg-ink p-12 text-center text-paper sm:p-16">
-        <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-accent/20 blur-[110px]" />
+      <div className="relative mt-20 overflow-hidden rounded-3xl bg-[#0c2340] p-12 text-center text-white sm:p-16">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-cyan-500/20 blur-[110px]" />
         <div className="relative z-10">
-          <h2 className="font-display text-3xl font-medium tracking-tight sm:text-4xl">Ready to get started?</h2>
-          <p className="mt-3 text-paper/60">Choose weekly, monthly, or yearly billing. Admin approves within 24 hours.</p>
-          <Link href={href("/products")} className="mt-8 inline-block rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-accent-strong">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Ready to get started?</h2>
+          <p className="mt-3 text-slate-300">Choose weekly, monthly, or yearly billing. Admin approves within 24 hours.</p>
+          <Link href={href("/products")} className="mt-8 inline-block rounded-lg bg-cyan-600 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-cyan-500">
             View All Products
           </Link>
         </div>

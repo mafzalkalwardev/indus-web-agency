@@ -24,7 +24,7 @@ export function ServiceCardsGrid() {
               </span>
               <span className="font-mono text-xs text-muted">{String(i + 1).padStart(2, "0")}</span>
             </div>
-            <h3 className="mt-6 font-display text-xl font-medium text-ink">{s.title}</h3>
+            <h3 className="mt-6 font-bold text-xl font-medium text-ink">{s.title}</h3>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
               {s.description.slice(0, 110)}…
             </p>
@@ -59,7 +59,7 @@ export function PortfolioPreviewGrid() {
             <div className="flex items-start justify-between gap-4 p-6">
               <div>
                 <p className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent">{p.category}</p>
-                <h3 className="mt-2 font-display text-xl font-medium text-paper">{p.title}</h3>
+                <h3 className="mt-2 text-xl font-bold text-white">{p.title}</h3>
                 <p className="mt-1.5 text-sm text-paper/50">{p.summary.slice(0, 92)}…</p>
               </div>
               <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-paper/40 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />

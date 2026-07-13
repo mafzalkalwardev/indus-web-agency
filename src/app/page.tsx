@@ -43,7 +43,7 @@ export default function HomePage() {
         <FadeIn className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <p className="eyebrow text-accent">01 — What we do</p>
-            <h2 className="mt-5 font-display text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
+            <h2 className="mt-5 font-bold text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
               Custom software &amp; websites, built to last
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-muted">
@@ -64,21 +64,21 @@ export default function HomePage() {
       </section>
 
       {/* Selected work — dark section */}
-      <section className="grain-dark relative overflow-hidden bg-ink py-24 text-paper">
+      <section className="relative overflow-hidden bg-[#0c2340] py-24 text-white">
         <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8">
           <FadeIn className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <div>
-              <p className="eyebrow text-accent">02 — Selected work</p>
-              <h2 className="mt-5 font-display text-4xl font-medium tracking-tight sm:text-5xl">
+              <p className="eyebrow text-cyan-400">02 — Selected work</p>
+              <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
                 Production systems, shipped
               </h2>
-              <p className="mt-4 max-w-lg text-paper/60">
+              <p className="mt-4 max-w-lg text-slate-300">
                 Real products we&apos;ve designed, built, and put in front of users.
               </p>
             </div>
-            <Link href={href("/work")} className="group inline-flex items-center gap-1.5 text-sm font-medium text-paper">
+            <Link href={href("/work")} className="group inline-flex items-center gap-1.5 text-sm font-medium text-white">
               <span className="link-underline">View portfolio</span>
-              <ArrowUpRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="h-4 w-4 text-cyan-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </FadeIn>
           <PortfolioPreviewGrid />
@@ -89,7 +89,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
         <FadeIn className="max-w-2xl">
           <p className="eyebrow text-accent">03 — Off the shelf</p>
-          <h2 className="mt-5 font-display text-4xl font-medium tracking-tight sm:text-5xl">
+          <h2 className="mt-5 font-bold text-4xl font-medium tracking-tight sm:text-5xl">
             Ready-made automation products
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted">
@@ -113,14 +113,14 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <FadeIn>
             <p className="eyebrow text-accent">04 — How we work</p>
-            <h2 className="mt-5 font-display text-4xl font-medium tracking-tight sm:text-5xl">
+            <h2 className="mt-5 font-bold text-4xl font-medium tracking-tight sm:text-5xl">
               Two ways to work with us
             </h2>
           </FadeIn>
           <div className="mt-14 grid gap-6 md:grid-cols-2">
             <FadeIn delay={0.1} className="flex flex-col rounded-2xl border border-line bg-paper-raised p-8">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">Custom project</span>
-              <h3 className="mt-3 font-display text-2xl font-medium">Built for you, end to end</h3>
+              <h3 className="mt-3 font-bold text-2xl font-medium">Built for you, end to end</h3>
               <p className="mt-2 text-sm text-muted">Website, app, or automation designed and shipped by our team.</p>
               <ol className="mt-8 space-y-4 text-sm">
                 {["Submit your brief", "Discovery & proposal", "Design, build & launch", "Ongoing support"].map((s, i) => (
@@ -136,7 +136,7 @@ export default function HomePage() {
             </FadeIn>
             <FadeIn delay={0.2} className="flex flex-col rounded-2xl border border-line bg-paper-raised p-8">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">Software subscription</span>
-              <h3 className="mt-3 font-display text-2xl font-medium">License our existing tools</h3>
+              <h3 className="mt-3 font-bold text-2xl font-medium">License our existing tools</h3>
               <p className="mt-2 text-sm text-muted">Use battle-tested products with secure, licensed downloads.</p>
               <ol className="mt-8 space-y-4 text-sm">
                 {["Create your account", "Subscribe to a product", "Admin approves access", "Download & operate"].map((s, i) => (
@@ -155,13 +155,13 @@ export default function HomePage() {
       </section>
 
       {/* Closing CTA */}
-      <section className="grain-dark relative overflow-hidden bg-ink py-28 text-paper">
-        <div className="pointer-events-none absolute left-1/2 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-accent/20 blur-[120px]" />
+      <section className="relative overflow-hidden bg-[#0c2340] py-28 text-white">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-500/20 blur-[120px]" />
         <FadeIn className="relative z-10 mx-auto max-w-3xl px-5 text-center sm:px-8">
-          <h2 className="font-display text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
+          <h2 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
             Ready to build something worth keeping?
           </h2>
-          <p className="mt-5 text-lg text-paper/60">
+          <p className="mt-5 text-lg text-slate-300">
             Custom project or off-the-shelf software — let&apos;s help you move faster.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-3">

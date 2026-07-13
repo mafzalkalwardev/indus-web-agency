@@ -46,7 +46,7 @@ export function ServicesPageContent() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <FadeIn>
             <p className="eyebrow text-accent">Toolkit</p>
-            <h2 className="mt-4 font-display text-3xl font-medium tracking-tight sm:text-4xl">Our design &amp; motion stack</h2>
+            <h2 className="mt-4 font-bold text-3xl font-medium tracking-tight sm:text-4xl">Our design &amp; motion stack</h2>
             <p className="mt-3 max-w-2xl text-muted">
               Industry-leading tools for polished, performant experiences.
             </p>

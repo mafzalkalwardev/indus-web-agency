@@ -32,7 +32,7 @@ export default function ComparePage() {
         <span className="h-px w-8 bg-accent" />
         <p className="eyebrow text-accent">Dialer comparison</p>
       </div>
-      <h1 className="mt-6 font-display text-4xl font-medium tracking-tight sm:text-5xl">Compare auto dialer plans</h1>
+      <h1 className="mt-6 font-bold text-4xl font-medium tracking-tight sm:text-5xl">Compare auto dialer plans</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
         Compare Google Voice auto dialer software from basic DOM automation to enterprise
         multi-slot AI dialing with voicemail detection, CRM tools, and admin dashboards.
@@ -45,7 +45,7 @@ export default function ComparePage() {
               <th className="border-b border-line px-5 py-5 text-left font-mono text-[0.7rem] font-medium uppercase tracking-[0.14em] text-muted">Feature</th>
               {columns.map((col) => (
                 <th key={col.key} className="border-b border-line px-5 py-5 text-center">
-                  <div className="font-display text-base font-medium text-ink">{col.name}</div>
+                  <div className="font-bold text-base font-medium text-ink">{col.name}</div>
                   <div className="mt-1 font-mono text-sm text-accent">{col.price}</div>
                   <Link
                     href={`/products/${col.slug}`}
@@ -75,11 +75,11 @@ export default function ComparePage() {
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {columns.map((col) => (
           <div key={col.key} className="rounded-2xl border border-line bg-paper-raised p-6 text-center">
-            <h3 className="font-display text-lg font-medium text-ink">{col.name}</h3>
-            <p className="mt-1 font-display text-2xl font-medium text-accent">{col.price}</p>
+            <h3 className="font-bold text-lg font-medium text-ink">{col.name}</h3>
+            <p className="mt-1 font-bold text-2xl font-medium text-accent">{col.price}</p>
             <Link
               href={`/products/${col.slug}`}
-              className="mt-5 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:-translate-y-0.5 hover:bg-ink-soft"
+              className="mt-5 inline-block rounded-lg bg-[#0c2340] px-5 py-2.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1a3a5c]"
             >
               Subscribe
             </Link>

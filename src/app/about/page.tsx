@@ -14,18 +14,18 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="bg-paper">
-      <section className="grain-dark relative overflow-hidden border-b border-line bg-ink py-24 text-paper sm:py-28">
-        <div className="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-accent/15 blur-[120px]" />
+      <section className="relative overflow-hidden border-b border-line bg-[#0c2340] py-24 text-white sm:py-28">
+        <div className="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-cyan-500/15 blur-[120px]" />
         <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8">
           <FadeIn>
             <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-accent" />
-              <p className="eyebrow text-paper/60">About INDUS</p>
+              <span className="h-px w-8 bg-cyan-400" />
+              <p className="eyebrow text-slate-300">About INDUS</p>
             </div>
-            <h1 className="mt-6 max-w-3xl font-display text-5xl font-medium leading-[1.02] tracking-tight sm:text-6xl">
+            <h1 className="mt-6 max-w-3xl text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl">
               Built by Muhammad Afzal Kalwar
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-paper/60">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
               Full-Stack Developer &amp; Python Automation Engineer — founder of INDUS. CRM, dispatch dialers,
               email platforms, scrapers, and the licensed products on this site.
             </p>

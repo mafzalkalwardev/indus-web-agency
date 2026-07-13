@@ -260,7 +260,7 @@ export async function sendAdminContactAlert(details: {
   const subject = `📩 New contact message — ${details.topic}`;
   const html = `
     <div style="font-family:sans-serif;max-width:560px">
-      <h2 style="color:#17150f">New Contact Inquiry</h2>
+      <h2 style="color:#0c2340">New Contact Inquiry</h2>
       <table style="width:100%;border-collapse:collapse;margin:16px 0">
         <tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Name</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.name}</td></tr>
         <tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Email</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.email}</td></tr>
@@ -269,7 +269,7 @@ export async function sendAdminContactAlert(details: {
         ${details.subject ? `<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Subject</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.subject}</td></tr>` : ""}
         <tr><td style="padding:8px;vertical-align:top"><strong>Message</strong></td><td style="padding:8px">${details.message.replace(/\n/g, "<br>")}</td></tr>
       </table>
-      <p><a href="${adminUrl}" style="display:inline-block;background:#dd4b25;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">Open Admin → Contacts</a></p>
+      <p><a href="${adminUrl}" style="display:inline-block;background:#0891b2;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">Open Admin → Contacts</a></p>
     </div>
   `;
   const text = `Contact: ${details.name} (${details.email}) — ${details.topic}\n${details.message}\nAdmin: ${adminUrl}`;
@@ -284,7 +284,7 @@ export async function sendClientContactConfirmation(details: {
   const subject = "We received your message — INDUS Web Agency";
   const html = `
     <div style="font-family:sans-serif;max-width:560px">
-      <h2 style="color:#17150f">Thanks, ${details.name}!</h2>
+      <h2 style="color:#0c2340">Thanks, ${details.name}!</h2>
       <p>We received your <strong>${details.topic}</strong> message. Our team typically responds within 24 hours on business days.</p>
       <p>For urgent product support, you can also reach us on <a href="${SITE_CONTACT.whatsappUrl}">WhatsApp</a>.</p>
       <p style="color:#64748b;font-size:12px">INDUS Web Agency · ${SITE_CONTACT.email}</p>

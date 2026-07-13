@@ -48,11 +48,10 @@ export function AgencyHero() {
   return (
     <section
       ref={sectionRef}
-      className="grain-dark relative overflow-hidden bg-ink text-paper"
+      className="relative min-h-[92vh] overflow-hidden gradient-hero text-white"
     >
-      {/* Ambient accent glow */}
-      <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-accent/20 blur-[130px]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-paper" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(8,145,178,0.35),transparent)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-slate-50" />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-8 px-5 pb-28 pt-16 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6 lg:pb-36 lg:pt-24">
         <div>
@@ -62,18 +61,18 @@ export function AgencyHero() {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-3"
           >
-            <span className="h-px w-8 bg-accent" />
-            <span className="eyebrow text-paper/60">Software studio &amp; product shelf</span>
+            <span className="h-px w-8 bg-cyan-400" />
+            <span className="eyebrow text-cyan-200">Software studio &amp; product shelf</span>
           </motion.div>
 
           <h1
             ref={headlineRef}
-            className="mt-7 font-display text-[2.6rem] font-medium leading-[0.98] tracking-[-0.02em] sm:text-6xl lg:text-[4.6rem]"
+            className="mt-7 text-4xl font-bold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl"
           >
             {words.map((w, i) => (
               <span key={i} className="mr-[0.22em] inline-block overflow-hidden py-[0.05em] align-bottom">
                 <span
-                  className={`hero-word inline-block ${w.em ? "italic text-accent" : ""}`}
+                  className={`hero-word inline-block ${w.em ? "text-cyan-300" : ""}`}
                 >
                   {w.t}
                 </span>
@@ -82,7 +81,7 @@ export function AgencyHero() {
           </h1>
 
           <motion.p
-            className="mt-7 max-w-md text-lg leading-relaxed text-paper/60"
+            className="mt-7 max-w-md text-lg leading-relaxed text-slate-300"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.55, duration: 0.6 }}
@@ -119,8 +118,8 @@ export function AgencyHero() {
               ["24h", "Response time"],
             ].map(([v, l]) => (
               <div key={l}>
-                <p className="font-display text-3xl font-medium text-paper">{v}</p>
-                <p className="mt-1.5 text-xs leading-tight text-paper/45">{l}</p>
+                <p className="text-2xl font-bold text-cyan-300">{v}</p>
+                <p className="mt-1.5 text-xs leading-tight text-slate-400">{l}</p>
               </div>
             ))}
           </motion.div>

@@ -25,7 +25,7 @@ export function AboutPageContent() {
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {COMPANY_STORY.stats.map((s) => (
             <div key={s.label} className="rounded-2xl border border-line bg-paper-raised p-6 text-center">
-              <p className="font-display text-3xl font-medium text-ink">{s.value}</p>
+              <p className="font-bold text-3xl font-medium text-ink">{s.value}</p>
               <p className="mt-1.5 text-sm text-muted">{s.label}</p>
             </div>
           ))}
@@ -37,7 +37,7 @@ export function AboutPageContent() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <FadeIn>
             <p className="eyebrow text-accent">Founder &amp; team</p>
-            <h2 className="mt-4 font-display text-3xl font-medium tracking-tight sm:text-4xl">
+            <h2 className="mt-4 font-bold text-3xl font-medium tracking-tight sm:text-4xl">
               The engineer behind INDUS
             </h2>
             <p className="mt-4 max-w-2xl text-muted">
@@ -97,7 +97,7 @@ export function AboutPageContent() {
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
         <FadeIn>
           <p className="eyebrow text-accent">What we build</p>
-          <h2 className="mt-4 font-display text-3xl font-medium tracking-tight sm:text-4xl">Studio capabilities</h2>
+          <h2 className="mt-4 font-bold text-3xl font-medium tracking-tight sm:text-4xl">Studio capabilities</h2>
           <p className="mt-4 max-w-2xl text-muted">
             End-to-end development across web, desktop, and automation — the same stack behind our licensed products.
           </p>
@@ -111,7 +111,7 @@ export function AboutPageContent() {
               className="rounded-2xl border border-line bg-paper-raised p-7"
             >
               <span className="font-mono text-xs text-muted">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-2 font-display text-xl font-medium text-ink">{cap.title}</h3>
+              <h3 className="mt-2 font-bold text-xl font-medium text-ink">{cap.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{cap.description}</p>
             </motion.div>
           ))}
@@ -123,12 +123,12 @@ export function AboutPageContent() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <FadeIn>
             <p className="eyebrow text-accent">How we work</p>
-            <h2 className="mt-4 font-display text-3xl font-medium tracking-tight sm:text-4xl">What we stand for</h2>
+            <h2 className="mt-4 font-bold text-3xl font-medium tracking-tight sm:text-4xl">What we stand for</h2>
           </FadeIn>
           <StaggerChildren className="mt-12 grid gap-5 md:grid-cols-2">
             {COMPANY_STORY.values.map((v) => (
               <motion.div key={v.title} variants={staggerItem} className="rounded-2xl border border-line bg-paper-raised p-7">
-                <h3 className="font-display text-xl font-medium text-ink">{v.title}</h3>
+                <h3 className="font-bold text-xl font-medium text-ink">{v.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{v.description}</p>
               </motion.div>
             ))}

@@ -58,7 +58,7 @@ export function ProductCard({ product }: { product: Product }) {
           </span>
         </div>
 
-        <h3 className="mt-4 font-display text-lg font-medium text-ink">
+        <h3 className="mt-4 font-bold text-lg font-medium text-ink">
           {product.name}
         </h3>
         <p className="mt-2 flex-1 text-sm text-muted">{product.tagline}</p>

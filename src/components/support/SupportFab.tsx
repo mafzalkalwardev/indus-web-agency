@@ -96,9 +96,9 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
 
   return (
     <div className="fixed bottom-24 right-4 z-[60] flex w-[min(100vw-2rem,400px)] flex-col overflow-hidden rounded-2xl border border-line bg-paper-raised shadow-2xl shadow-ink/10 sm:right-6">
-      <div className="flex items-center justify-between border-b border-line bg-ink px-4 py-3 text-paper">
+      <div className="flex items-center justify-between border-b border-line bg-[#0c2340] px-4 py-3 text-white">
         <div className="flex items-center gap-2">
-          <Bot className="h-5 w-5 text-accent" />
+          <Bot className="h-5 w-5 text-cyan-400" />
           <span className="font-medium">INDUS Assistant</span>
         </div>
         <div className="flex items-center gap-1">
@@ -106,14 +106,14 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
             <button
               type="button"
               onClick={() => setMode("ai")}
-              className={`rounded-full px-2 py-0.5 ${mode === "ai" ? "bg-accent text-white" : "text-paper/60"}`}
+              className={`rounded-full px-2 py-0.5 ${mode === "ai" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
             >
               AI
             </button>
             <button
               type="button"
               onClick={() => setMode("guide")}
-              className={`rounded-full px-2 py-0.5 ${mode === "guide" ? "bg-accent text-white" : "text-paper/60"}`}
+              className={`rounded-full px-2 py-0.5 ${mode === "guide" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
             >
               Guide
             </button>
@@ -138,7 +138,7 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
                 <div
                   className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
                     m.role === "user"
-                      ? "bg-ink text-paper"
+                      ? "bg-[#0c2340] text-white"
                       : "border border-line bg-paper text-ink"
                   }`}
                 >
@@ -188,7 +188,7 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
             <button
               type="submit"
               disabled={loading || !input.trim()}
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-white transition hover:bg-accent-strong disabled:opacity-50"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-600 text-white transition hover:bg-cyan-500 disabled:opacity-50"
               aria-label="Send message"
             >
               <Send className="h-4 w-4" />
@@ -196,7 +196,7 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
           </form>
 
           <p className="border-t border-line px-3 py-2 text-center text-[10px] text-muted">
-            Need a human? <Link href={href("/contact")} onClick={onClose} className="text-accent hover:underline">Contact us</Link>
+            Need a human? <Link href={href("/contact")} onClick={onClose} className="text-cyan-600 hover:underline">Contact us</Link>
           </p>
         </>
       ) : (
@@ -252,7 +252,7 @@ export function SupportFab() {
           type="button"
           onClick={() => setChatOpen((v) => !v)}
           className={`flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition hover:scale-105 hover:shadow-xl ${
-            chatOpen ? "bg-ink text-paper" : "bg-accent text-white"
+            chatOpen ? "bg-[#0c2340] text-white" : "bg-cyan-600 text-white"
           }`}
           aria-label="Open INDUS Assistant"
           title="INDUS Assistant — AI help & guided support"

@@ -16,7 +16,7 @@ export default function WorkPage() {
               <span className="h-px w-8 bg-accent" />
               <p className="eyebrow text-accent">Selected work</p>
             </div>
-            <h1 className="mt-6 max-w-3xl font-display text-5xl font-medium leading-[1.02] tracking-tight sm:text-6xl">
+            <h1 className="mt-6 max-w-3xl font-bold text-5xl font-medium leading-[1.02] tracking-tight sm:text-6xl">
               Work that ships
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
