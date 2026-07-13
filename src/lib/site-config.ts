@@ -14,9 +14,9 @@ export const SITE_SEO = {
   name: "INDUS Web Agency",
   legalName: "INDUS Web Agency",
   url: SITE_CONTACT.siteUrl,
-  title: "INDUS Web Agency | Business Automation Software, AI Dialers & Web Scraping Tools",
+  title: "INDUS Web Agency | Custom Software, Web Design & Automation Products",
   description:
-    "INDUS Web Agency builds professional business automation software: AI auto dialers, email marketing automation, bulk email verification, lead generation tools, and web scraping systems.",
+    "INDUS Web Agency — custom software development, premium websites, and subscription-ready automation tools: AI dialers, email marketing, and web scraping.",
   keywords: [
     "INDUS Web Agency",
     "web design agency",

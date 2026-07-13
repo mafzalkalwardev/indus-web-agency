@@ -417,3 +417,101 @@ function envOr(key: string, fallback: string): string {
 export async function getStorageMode(): Promise<"redis" | "file"> {
   return hasRedis() ? "redis" : "file";
 }
+
+export type ProjectInquiryStatus = "new" | "reviewed" | "contacted" | "closed";
+
+export interface ProjectInquiry {
+  id: string;
+  name: string;
+  email: string;
+  company?: string;
+  phone?: string;
+  projectType: string;
+  budget?: string;
+  timeline?: string;
+  description: string;
+  status: ProjectInquiryStatus;
+  createdAt: string;
+}
+
+export async function getProjectInquiries(): Promise<ProjectInquiry[]> {
+  return readStore(REDIS_KEYS.projectInquiries, "project_inquiries.json", []);
+}
+
+export async function saveProjectInquiries(inquiries: ProjectInquiry[]): Promise<void> {
+  await writeStore(REDIS_KEYS.projectInquiries, "project_inquiries.json", inquiries);
+}
+
+export async function createProjectInquiry(data: Omit<ProjectInquiry, "id" | "status" | "createdAt">): Promise<ProjectInquiry> {
+  const inquiries = await getProjectInquiries();
+  const inquiry: ProjectInquiry = {
+    id: uuidv4(),
+    ...data,
+    status: "new",
+    createdAt: new Date().toISOString(),
+  };
+  inquiries.unshift(inquiry);
+  await saveProjectInquiries(inquiries);
+  return inquiry;
+}
+
+export async function updateProjectInquiryStatus(
+  id: string,
+  status: ProjectInquiryStatus
+): Promise<ProjectInquiry | null> {
+  const inquiries = await getProjectInquiries();
+  const idx = inquiries.findIndex((i) => i.id === id);
+  if (idx === -1) return null;
+  inquiries[idx] = { ...inquiries[idx], status };
+  await saveProjectInquiries(inquiries);
+  return inquiries[idx];
+}
+
+export type ContactInquiryStatus = "new" | "reviewed" | "replied" | "closed";
+
+export interface ContactInquiry {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  topic: string;
+  subject?: string;
+  message: string;
+  status: ContactInquiryStatus;
+  createdAt: string;
+}
+
+export async function getContactInquiries(): Promise<ContactInquiry[]> {
+  return readStore(REDIS_KEYS.contactInquiries, "contact_inquiries.json", []);
+}
+
+export async function saveContactInquiries(inquiries: ContactInquiry[]): Promise<void> {
+  await writeStore(REDIS_KEYS.contactInquiries, "contact_inquiries.json", inquiries);
+}
+
+export async function createContactInquiry(
+  data: Omit<ContactInquiry, "id" | "status" | "createdAt">
+): Promise<ContactInquiry> {
+  const inquiries = await getContactInquiries();
+  const inquiry: ContactInquiry = {
+    id: uuidv4(),
+    ...data,
+    status: "new",
+    createdAt: new Date().toISOString(),
+  };
+  inquiries.unshift(inquiry);
+  await saveContactInquiries(inquiries);
+  return inquiry;
+}
+
+export async function updateContactInquiryStatus(
+  id: string,
+  status: ContactInquiryStatus
+): Promise<ContactInquiry | null> {
+  const inquiries = await getContactInquiries();
+  const idx = inquiries.findIndex((i) => i.id === id);
+  if (idx === -1) return null;
+  inquiries[idx] = { ...inquiries[idx], status };
+  await saveContactInquiries(inquiries);
+  return inquiries[idx];
+}

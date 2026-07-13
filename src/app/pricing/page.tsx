@@ -13,30 +13,30 @@ export const metadata: Metadata = {
 
 function PricingSection({ title, products }: { title: string; products: typeof PRODUCTS }) {
   return (
-    <section className="mt-12">
-      <h2 className="text-2xl font-bold">{title}</h2>
-      <div className="mt-6 overflow-x-auto">
+    <section className="mt-14">
+      <h2 className="font-display text-2xl font-medium tracking-tight">{title}</h2>
+      <div className="mt-6 overflow-x-auto rounded-2xl border border-line bg-paper-raised">
         <table className="w-full min-w-[600px] border-collapse text-sm">
           <thead>
-            <tr className="border-b-2 border-slate-200 bg-slate-50">
-              <th className="px-4 py-3 text-left">Product</th>
-              <th className="px-4 py-3 text-left">Plans</th>
-              <th className="px-4 py-3 text-right">Starting at</th>
-              <th className="px-4 py-3 text-right">Action</th>
+            <tr className="border-b border-line bg-paper-sunk/50 text-left">
+              <th className="px-5 py-3.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.14em] text-muted">Product</th>
+              <th className="px-5 py-3.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.14em] text-muted">Plans</th>
+              <th className="px-5 py-3.5 text-right font-mono text-[0.7rem] font-medium uppercase tracking-[0.14em] text-muted">Starting at</th>
+              <th className="px-5 py-3.5 text-right font-mono text-[0.7rem] font-medium uppercase tracking-[0.14em] text-muted">Action</th>
             </tr>
           </thead>
           <tbody>
             {products.map((p) => (
-              <tr key={p.slug} className="border-b border-slate-100 hover:bg-slate-50">
-                <td className="px-4 py-3 font-medium">{p.name}</td>
-                <td className="px-4 py-3 text-slate-600">
+              <tr key={p.slug} className="border-b border-line last:border-0 transition-colors hover:bg-paper-sunk/40">
+                <td className="px-5 py-3.5 font-medium text-ink">{p.name}</td>
+                <td className="px-5 py-3.5 text-muted">
                   {p.plans.map((pl) => pl.name).join(", ")}
                 </td>
-                <td className="px-4 py-3 text-right font-semibold">
+                <td className="px-5 py-3.5 text-right font-semibold text-ink">
                   ${Math.min(...p.plans.map((pl) => pl.price))}/mo
                 </td>
-                <td className="px-4 py-3 text-right">
-                  <Link href={`/products/${p.slug}`} className="text-cyan-600 hover:text-cyan-800">
+                <td className="px-5 py-3.5 text-right">
+                  <Link href={`/products/${p.slug}`} className="font-medium text-accent hover:text-accent-strong">
                     View
                   </Link>
                 </td>
@@ -56,10 +56,13 @@ export default function PricingPage() {
   const bundles = getProductsByCategory("bundle");
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
-      <p className="text-sm font-semibold uppercase tracking-wide text-cyan-700">Subscription pricing</p>
-      <h1 className="mt-2 text-3xl font-bold">Automation Software Pricing Overview</h1>
-      <p className="mt-3 max-w-3xl text-slate-600">
+    <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+      <div className="flex items-center gap-3">
+        <span className="h-px w-8 bg-accent" />
+        <p className="eyebrow text-accent">Subscription pricing</p>
+      </div>
+      <h1 className="mt-6 font-display text-4xl font-medium tracking-tight sm:text-5xl">Software pricing overview</h1>
+      <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
         Compare subscription pricing for AI auto dialer software, email marketing automation,
         bulk email verification, web scraping tools, and Mailforge. Subscribe individually,
         with Mailforge available as the full email operations bundle.
@@ -70,12 +73,15 @@ export default function PricingPage() {
       <PricingSection title="Web Scrapers" products={scrapers} />
       <PricingSection title="Bundles" products={bundles} />
 
-      <div className="mt-12 rounded-lg bg-[#0c2340] p-8 text-center text-white">
-        <h3 className="text-xl font-bold">Not sure which dialer plan fits?</h3>
-        <p className="mt-2 text-slate-300">Compare all four auto dialer tiers side by side.</p>
-        <Link href="/compare" className="mt-4 inline-block rounded-md bg-cyan-500 px-6 py-2 font-semibold hover:bg-cyan-400">
-          Compare Dialer Plans
-        </Link>
+      <div className="grain-dark relative mt-16 overflow-hidden rounded-3xl bg-ink p-10 text-center text-paper sm:p-12">
+        <div className="pointer-events-none absolute left-1/2 top-0 h-56 w-56 -translate-x-1/2 rounded-full bg-accent/20 blur-[100px]" />
+        <div className="relative z-10">
+          <h3 className="font-display text-2xl font-medium tracking-tight">Not sure which dialer plan fits?</h3>
+          <p className="mt-2 text-paper/60">Compare all four auto dialer tiers side by side.</p>
+          <Link href="/compare" className="mt-6 inline-block rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-accent-strong">
+            Compare Dialer Plans
+          </Link>
+        </div>
       </div>
     </div>
   );

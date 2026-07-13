@@ -13,10 +13,10 @@ const categoryIcons: Record<ProductCategory, React.ReactNode> = {
 };
 
 const categoryColors: Record<ProductCategory, string> = {
-  email: "bg-blue-50 text-blue-700 border-blue-200",
-  dialer: "bg-emerald-50 text-emerald-700 border-emerald-200",
-  scraper: "bg-purple-50 text-purple-700 border-purple-200",
-  bundle: "bg-amber-50 text-amber-700 border-amber-200",
+  email: "border-line bg-paper text-ink",
+  dialer: "border-line bg-paper text-ink",
+  scraper: "border-line bg-paper text-ink",
+  bundle: "border-accent/25 bg-accent-tint/50 text-accent-strong",
 };
 
 export function ProductCard({ product }: { product: Product }) {
@@ -26,15 +26,15 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={href(`/products/${product.slug}`)}
-      className="group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:border-cyan-300 hover:shadow-lg"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-paper-raised transition-all duration-300 hover:-translate-y-1 hover:border-ink"
     >
       {thumb && (
-        <div className="relative aspect-[16/10] overflow-hidden border-b border-slate-100 bg-slate-900">
+        <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-ink">
           <Image
             src={thumb}
             alt={`${product.name} preview`}
             fill
-            className="object-cover object-top transition duration-300 group-hover:scale-[1.02]"
+            className="object-cover object-top opacity-90 transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           />
           {product.demoVideo && (
@@ -46,31 +46,33 @@ export function ProductCard({ product }: { product: Product }) {
       )}
 
       <div className="flex flex-1 flex-col p-6">
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between gap-3">
           <span
-            className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-0.5 text-xs font-medium ${categoryColors[product.category]}`}
+            className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.7rem] font-medium ${categoryColors[product.category]}`}
           >
             {categoryIcons[product.category]}
             {CATEGORY_LABELS[product.category]}
           </span>
-          <span className="text-sm font-semibold text-[#0c2340]">
+          <span className="whitespace-nowrap font-mono text-xs text-muted">
             from ${minPrice}/mo
           </span>
         </div>
 
-        <h3 className="mt-4 text-lg font-bold text-[#0c2340] group-hover:text-cyan-700">
+        <h3 className="mt-4 font-display text-lg font-medium text-ink">
           {product.name}
         </h3>
-        <p className="mt-2 flex-1 text-sm text-slate-600">{product.tagline}</p>
+        <p className="mt-2 flex-1 text-sm text-muted">{product.tagline}</p>
 
-        <ul className="mt-4 space-y-1">
+        <ul className="mt-4 space-y-1.5 border-t border-line pt-4">
           {product.features.slice(0, 3).map((f) => (
-            <li key={f} className="text-xs text-slate-500">- {f}</li>
+            <li key={f} className="flex items-center gap-2 text-xs text-muted">
+              <span className="h-1 w-1 rounded-full bg-accent" /> {f}
+            </li>
           ))}
         </ul>
 
-        <div className="mt-4 flex items-center gap-1 text-sm font-medium text-cyan-600 transition-all group-hover:gap-2">
-          View details <ArrowRight className="h-4 w-4" />
+        <div className="mt-5 flex items-center gap-1.5 text-sm font-medium text-ink transition-all group-hover:gap-2.5">
+          View details <ArrowRight className="h-4 w-4 text-accent" />
         </div>
       </div>
     </Link>

@@ -45,4 +45,6 @@ export async function redisSet<T>(key: string, value: T): Promise<void> {
 export const REDIS_KEYS = {
   users: "indus:users",
   subscriptions: "indus:subscriptions",
+  projectInquiries: "indus:project_inquiries",
+  contactInquiries: "indus:contact_inquiries",
 } as const;

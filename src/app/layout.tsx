@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Fraunces, Geist_Mono } from "next/font/google";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SessionProvider } from "@/components/auth/SessionProvider";
 import { SITE_CONTACT, SITE_SEO } from "@/lib/site-config";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  display: "swap",
+  axes: ["opsz", "SOFT", "WONK"],
 });
 
 const geistMono = Geist_Mono({
@@ -105,8 +113,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-slate-50 text-[#0c2340]">
+    <html
+      lang="en"
+      className={`${inter.variable} ${fraunces.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-paper text-ink font-sans">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationJsonLd, websiteJsonLd]) }}

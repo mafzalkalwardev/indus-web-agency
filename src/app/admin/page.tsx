@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Users, CreditCard, PlusCircle, Hourglass, CheckCircle2, XCircle, DollarSign, Search } from "lucide-react";
+import { Users, CreditCard, PlusCircle, Hourglass, CheckCircle2, XCircle, DollarSign, Search, Briefcase, Mail } from "lucide-react";
+import { PROJECT_TYPES } from "@/lib/agency-services";
+import { CONTACT_TOPICS } from "@/lib/about";
 import { formatDate, isExpired } from "@/lib/utils";
 import { getProduct, PRODUCTS } from "@/lib/products";
 import { periodLabel, BILLING_OPTIONS, type BillingPeriod } from "@/lib/billing";
@@ -30,11 +32,38 @@ interface SubRow {
   approvedAt?: string;
 }
 
+interface ProjectRow {
+  id: string;
+  name: string;
+  email: string;
+  company?: string;
+  projectType: string;
+  budget?: string;
+  timeline?: string;
+  description: string;
+  status: string;
+  createdAt: string;
+}
+
+interface ContactRow {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  topic: string;
+  subject?: string;
+  message: string;
+  status: string;
+  createdAt: string;
+}
+
 export default function AdminPage() {
   const [users, setUsers] = useState<UserRow[]>([]);
   const [subs, setSubs] = useState<SubRow[]>([]);
+  const [projects, setProjects] = useState<ProjectRow[]>([]);
+  const [contacts, setContacts] = useState<ContactRow[]>([]);
   const [loading, setLoading] = useState(true);
-  const [tab, setTab] = useState<"pending" | "subscriptions" | "users" | "grant">("pending");
+  const [tab, setTab] = useState<"pending" | "subscriptions" | "users" | "grant" | "projects" | "contacts">("pending");
   const [storage, setStorage] = useState("");
   const [grantEmail, setGrantEmail] = useState("");
   const [grantProduct, setGrantProduct] = useState(PRODUCTS[0]?.slug || "");
@@ -50,10 +79,14 @@ export default function AdminPage() {
     return Promise.all([
       fetch(href("/api/admin/users"), { credentials: "include" }).then((r) => r.json()),
       fetch(href("/api/admin/subscriptions"), { credentials: "include" }).then((r) => r.json()),
+      fetch(href("/api/admin/projects"), { credentials: "include" }).then((r) => r.json()),
+      fetch(href("/api/admin/contacts"), { credentials: "include" }).then((r) => r.json()),
       fetch(href("/api/health")).then((r) => r.json()),
-    ]).then(([userData, subData, health]) => {
+    ]).then(([userData, subData, projectData, contactData, health]) => {
       setUsers(userData.users || []);
       setSubs(subData.subscriptions || []);
+      setProjects(projectData.inquiries || []);
+      setContacts(contactData.inquiries || []);
       setStorage(health.storage || "file");
       setLoading(false);
     });
@@ -112,6 +145,26 @@ export default function AdminPage() {
     setTab("subscriptions");
   }
 
+  async function handleProjectStatus(id: string, status: string) {
+    await fetch(href(`/api/admin/projects/${id}`), {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ status }),
+    });
+    await loadData();
+  }
+
+  async function handleContactStatus(id: string, status: string) {
+    await fetch(href(`/api/admin/contacts/${id}`), {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ status }),
+    });
+    await loadData();
+  }
+
   const pendingSubs = subs.filter((s) => s.status === "pending" && !isExpired(s.expiresAt));
   const approvedSubs = subs.filter((s) => s.status === "approved" && s.active && !isExpired(s.expiresAt));
   const selectedProduct = getProduct(grantProduct);
@@ -166,7 +219,7 @@ export default function AdminPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-            <p className="text-sm text-slate-600">Approve subscriptions and manage users</p>
+            <p className="text-sm text-slate-600">Subscriptions, project leads, and users</p>
           </div>
           <span className={`rounded-full px-3 py-1 text-xs font-medium ${storage === "redis" ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"}`}>
             Storage: {storage}
@@ -193,6 +246,8 @@ export default function AdminPage() {
         <div className="mt-6 flex flex-wrap gap-2">
           {[
             { id: "pending" as const, label: `Pending (${pendingSubs.length})`, icon: Hourglass },
+            { id: "projects" as const, label: `Projects (${projects.filter((p) => p.status === "new").length})`, icon: Briefcase },
+            { id: "contacts" as const, label: `Contacts (${contacts.filter((c) => c.status === "new").length})`, icon: Mail },
             { id: "subscriptions" as const, label: `All (${subs.length})`, icon: CreditCard },
             { id: "users" as const, label: `Users (${users.length})`, icon: Users },
             { id: "grant" as const, label: "Grant", icon: PlusCircle },
@@ -350,6 +405,93 @@ export default function AdminPage() {
                 </tbody>
               </table>
             </div>
+          </div>
+        )}
+
+        {tab === "projects" && (
+          <div className="mt-6 space-y-4">
+            {projects.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
+                No project inquiries yet.
+              </div>
+            ) : (
+              projects.map((p) => {
+                const typeLabel = PROJECT_TYPES.find((t) => t.value === p.projectType)?.label || p.projectType;
+                return (
+                  <div key={p.id} className={`rounded-2xl border p-5 ${p.status === "new" ? "border-cyan-200 bg-cyan-50/30" : "border-slate-200 bg-white"}`}>
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="font-bold">{p.name}</p>
+                          <span className={`rounded-full px-2 py-0.5 text-xs font-medium capitalize ${p.status === "new" ? "bg-cyan-100 text-cyan-800" : "bg-slate-100 text-slate-600"}`}>{p.status}</span>
+                        </div>
+                        <p className="text-sm text-slate-600">{p.email}{p.company ? ` · ${p.company}` : ""}</p>
+                        <p className="mt-1 text-sm font-medium">{typeLabel}{p.budget ? ` · ${p.budget}` : ""}{p.timeline ? ` · ${p.timeline}` : ""}</p>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-700">{p.description}</p>
+                        <p className="mt-2 text-xs text-slate-400">{formatDate(p.createdAt)}</p>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {(["reviewed", "contacted", "closed"] as const).map((s) => (
+                          <button
+                            key={s}
+                            type="button"
+                            onClick={() => handleProjectStatus(p.id, s)}
+                            className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium capitalize hover:bg-slate-50"
+                          >
+                            Mark {s}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        )}
+
+        {tab === "contacts" && (
+          <div className="mt-6 space-y-4">
+            {contacts.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
+                No contact messages yet.
+              </div>
+            ) : (
+              contacts.map((c) => {
+                const topicLabel = CONTACT_TOPICS.find((t) => t.value === c.topic)?.label || c.topic;
+                return (
+                  <div key={c.id} className={`rounded-2xl border p-5 ${c.status === "new" ? "border-amber-200 bg-amber-50/30" : "border-slate-200 bg-white"}`}>
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="font-bold">{c.name}</p>
+                          <span className={`rounded-full px-2 py-0.5 text-xs font-medium capitalize ${c.status === "new" ? "bg-amber-100 text-amber-800" : "bg-slate-100 text-slate-600"}`}>{c.status}</span>
+                        </div>
+                        <p className="text-sm text-slate-600">
+                          <a href={`mailto:${c.email}`} className="hover:text-cyan-700">{c.email}</a>
+                          {c.phone ? ` · ${c.phone}` : ""}
+                        </p>
+                        <p className="mt-1 text-sm font-medium">{topicLabel}{c.subject ? ` — ${c.subject}` : ""}</p>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-700">{c.message}</p>
+                        <p className="mt-2 text-xs text-slate-400">{formatDate(c.createdAt)}</p>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {(["reviewed", "replied", "closed"] as const).map((s) => (
+                          <button
+                            key={s}
+                            type="button"
+                            onClick={() => handleContactStatus(c.id, s)}
+                            className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium capitalize hover:bg-slate-50"
+                          >
+                            Mark {s}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            )}
           </div>
         )}
 

@@ -20,33 +20,36 @@ const columns = [
 ] as const;
 
 function CellValue({ value }: { value: boolean | string }) {
-  if (value === true) return <Check className="mx-auto h-5 w-5 text-emerald-600" />;
-  if (value === false) return <X className="mx-auto h-5 w-5 text-slate-300" />;
-  return <span className="text-sm font-medium">{value}</span>;
+  if (value === true) return <Check className="mx-auto h-5 w-5 text-accent" />;
+  if (value === false) return <X className="mx-auto h-5 w-5 text-line-strong" />;
+  return <span className="text-sm font-medium text-ink">{value}</span>;
 }
 
 export default function ComparePage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
-      <p className="text-sm font-semibold uppercase tracking-wide text-cyan-700">Google Voice dialer comparison</p>
-      <h1 className="mt-2 text-3xl font-bold">Compare AI Auto Dialer Software Plans</h1>
-      <p className="mt-3 max-w-3xl text-slate-600">
+    <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+      <div className="flex items-center gap-3">
+        <span className="h-px w-8 bg-accent" />
+        <p className="eyebrow text-accent">Dialer comparison</p>
+      </div>
+      <h1 className="mt-6 font-display text-4xl font-medium tracking-tight sm:text-5xl">Compare auto dialer plans</h1>
+      <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
         Compare Google Voice auto dialer software from basic DOM automation to enterprise
         multi-slot AI dialing with voicemail detection, CRM tools, and admin dashboards.
       </p>
 
-      <div className="mt-10 overflow-x-auto">
+      <div className="mt-12 overflow-x-auto rounded-2xl border border-line bg-paper-raised">
         <table className="w-full min-w-[800px] border-collapse">
           <thead>
             <tr>
-              <th className="border-b-2 border-slate-200 px-4 py-4 text-left">Feature</th>
+              <th className="border-b border-line px-5 py-5 text-left font-mono text-[0.7rem] font-medium uppercase tracking-[0.14em] text-muted">Feature</th>
               {columns.map((col) => (
-                <th key={col.key} className="border-b-2 border-slate-200 px-4 py-4 text-center">
-                  <div className="font-bold">{col.name}</div>
-                  <div className="mt-1 text-sm font-normal text-cyan-600">{col.price}</div>
+                <th key={col.key} className="border-b border-line px-5 py-5 text-center">
+                  <div className="font-display text-base font-medium text-ink">{col.name}</div>
+                  <div className="mt-1 font-mono text-sm text-accent">{col.price}</div>
                   <Link
                     href={`/products/${col.slug}`}
-                    className="mt-2 inline-block text-xs text-slate-500 hover:text-cyan-600"
+                    className="mt-2 inline-block text-xs text-muted hover:text-accent"
                   >
                     View details
                   </Link>
@@ -56,10 +59,10 @@ export default function ComparePage() {
           </thead>
           <tbody>
             {DIALER_COMPARISON.map((row) => (
-              <tr key={row.feature} className="border-b border-slate-100 hover:bg-slate-50">
-                <td className="px-4 py-3 font-medium">{row.feature}</td>
+              <tr key={row.feature} className="border-b border-line last:border-0 transition-colors hover:bg-paper-sunk/40">
+                <td className="px-5 py-3.5 font-medium text-ink">{row.feature}</td>
                 {columns.map((col) => (
-                  <td key={col.key} className="px-4 py-3 text-center">
+                  <td key={col.key} className="px-5 py-3.5 text-center">
                     <CellValue value={row[col.key as keyof typeof row] as boolean | string} />
                   </td>
                 ))}
@@ -69,14 +72,14 @@ export default function ComparePage() {
         </table>
       </div>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {columns.map((col) => (
-          <div key={col.key} className="rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm">
-            <h3 className="font-bold">{col.name}</h3>
-            <p className="mt-1 text-2xl font-bold text-cyan-600">{col.price}</p>
+          <div key={col.key} className="rounded-2xl border border-line bg-paper-raised p-6 text-center">
+            <h3 className="font-display text-lg font-medium text-ink">{col.name}</h3>
+            <p className="mt-1 font-display text-2xl font-medium text-accent">{col.price}</p>
             <Link
               href={`/products/${col.slug}`}
-              className="mt-4 inline-block rounded-md bg-[#0c2340] px-4 py-2 text-sm font-medium text-white hover:bg-[#1a3a5c]"
+              className="mt-5 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition hover:-translate-y-0.5 hover:bg-ink-soft"
             >
               Subscribe
             </Link>

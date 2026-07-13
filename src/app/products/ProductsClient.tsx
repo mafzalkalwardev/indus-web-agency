@@ -13,20 +13,25 @@ function ProductsContent() {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
-      <p className="text-sm font-semibold uppercase tracking-wide text-cyan-700">Business automation software</p>
-      <h1 className="mt-2 text-3xl font-bold">Automation Products for Sales, Dispatch, Email, and Lead Generation</h1>
-      <p className="mt-3 max-w-3xl text-slate-600">
+    <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+      <div className="flex items-center gap-3">
+        <span className="h-px w-8 bg-accent" />
+        <p className="eyebrow text-accent">Software shelf</p>
+      </div>
+      <h1 className="mt-6 max-w-3xl font-display text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
+        Automation products for sales, dispatch &amp; email
+      </h1>
+      <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
         Subscribe to professional AI auto dialers, email marketing automation, bulk email verification,
         web scraping tools, and lead generation software. Every product includes secure dashboard
         downloads, subscription licensing, and setup guidance.
       </p>
 
-      <div className="mt-6 flex flex-wrap gap-2">
+      <div className="mt-8 flex flex-wrap gap-2">
         <a
           href={`${basePath}/products`}
-          className={`rounded-md px-4 py-1.5 text-sm font-medium ${
-            !cat ? "bg-[#0c2340] text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+          className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+            !cat ? "border-ink bg-ink text-paper" : "border-line-strong bg-paper-raised text-muted hover:border-ink hover:text-ink"
           }`}
         >
           All
@@ -35,8 +40,8 @@ function ProductsContent() {
           <a
             key={key}
             href={`${basePath}/products?cat=${key}`}
-            className={`rounded-md px-4 py-1.5 text-sm font-medium ${
-              cat === key ? "bg-[#0c2340] text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+            className={`rounded-full border px-4 py-1.5 text-sm font-medium transition ${
+              cat === key ? "border-ink bg-ink text-paper" : "border-line-strong bg-paper-raised text-muted hover:border-ink hover:text-ink"
             }`}
           >
             {label}
@@ -44,7 +49,7 @@ function ProductsContent() {
         ))}
       </div>
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((p) => (
           <ProductCard key={p.slug} product={p} />
         ))}
@@ -55,7 +60,7 @@ function ProductsContent() {
 
 export function ProductsClient() {
   return (
-    <Suspense fallback={<div className="p-12 text-center">Loading products...</div>}>
+    <Suspense fallback={<div className="p-12 text-center text-muted">Loading products...</div>}>
       <ProductsContent />
     </Suspense>
   );

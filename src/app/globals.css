@@ -1,38 +1,140 @@
 @import "tailwindcss";
 
+/*
+  INDUS — studio design system
+  Warm paper + ink base, single ember accent, editorial serif display.
+*/
 :root {
-  --background: #f8fafc;
-  --foreground: #0c2340;
-  --indus-navy: #0c2340;
-  --indus-cyan: #0891b2;
+  --ink: #17150f;
+  --ink-soft: #35322a;
+  --paper: #f0ece2;
+  --paper-raised: #faf8f2;
+  --paper-sunk: #e7e2d5;
+  --accent: #dd4b25;
+  --accent-strong: #c23c1a;
+  --accent-tint: #f6ddd2;
+  --muted: #6d685c;
+  --line: #ddd7c8;
+  --line-strong: #cbc4b2;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-paper-sunk: var(--paper-sunk);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-tint: var(--accent-tint);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+* {
+  border-color: var(--line);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-.gradient-hero {
-  background: linear-gradient(135deg, #0c2340 0%, #1a3a5c 40%, #0891b2 100%);
+::selection {
+  background: var(--ink);
+  color: var(--paper);
 }
 
-/* Motion frames — fade-up on scroll */
+/* ---- Typography helpers ---- */
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+.display-xl {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  padding-bottom: 1px;
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* ---- Texture: subtle paper grain overlay ---- */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+}
+
+/* Dark section grain (screen blend on ink) */
+.grain-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Hairline divider row of tickmarks (editorial) */
+.rule-ticks {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--line-strong) 0,
+    var(--line-strong) 1px,
+    transparent 1px,
+    transparent 12px
+  );
+}
+
+/* ---- Motion frames — fade-up on scroll (used by HomeMotionBlocks) ---- */
 .motion-frame {
   opacity: 0;
   transform: translateY(24px);
 }
-
 .motion-frame.motion-in {
-  animation: motionFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: motionFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-
 @keyframes motionFadeUp {
   to {
     opacity: 1;
@@ -40,68 +142,29 @@ body {
   }
 }
 
-@keyframes float {
+@keyframes floaty {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
-
 .animate-float {
-  animation: float 4s ease-in-out infinite;
+  animation: floaty 6s ease-in-out infinite;
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+/* Marquee for logo/skills strip */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 32s linear infinite;
 }
 
-.nav-link-active {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-
-/* Hero background animations */
-@keyframes heroOrb {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
-  50% { transform: translate(20px, -15px) scale(1.08); opacity: 1; }
-}
-
-@keyframes heroParticle {
-  0%, 100% { transform: translateY(0); opacity: 0.3; }
-  50% { transform: translateY(-12px); opacity: 0.8; }
-}
-
-.hero-orb-1 { animation: heroOrb 8s ease-in-out infinite; }
-.hero-orb-2 { animation: heroOrb 10s ease-in-out infinite 1s; }
-.hero-orb-3 { animation: heroOrb 12s ease-in-out infinite 2s; }
-.hero-particle { animation: heroParticle 4s ease-in-out infinite; }
-
-/* Hacker hero effects */
-@keyframes matrixFall {
-  0% { transform: translateY(-100%); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
-}
-
-@keyframes glitchBar {
-  0%, 100% { opacity: 0.3; transform: scaleX(0.6) translateX(-10%); }
-  50% { opacity: 0.8; transform: scaleX(1) translateX(0); }
-}
-
-.hero-matrix-col {
-  animation: matrixFall linear infinite;
-  text-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
-}
-
-.hero-glitch-bar {
-  animation: glitchBar 4s ease-in-out infinite;
-}
-
-.hero-scanlines {
-  animation: scanlineFlicker 8s steps(2) infinite;
-}
-
-@keyframes scanlineFlicker {
-  0%, 100% { opacity: 0.04; }
-  50% { opacity: 0.06; }
+@media (prefers-reduced-motion: reduce) {
+  .motion-frame,
+  .animate-float,
+  .animate-marquee {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

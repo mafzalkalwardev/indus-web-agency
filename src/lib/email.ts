@@ -197,3 +197,99 @@ export async function sendAdminRenewalAlert(details: {
   const text = `Renewal pending: ${details.customerEmail} — ${details.productName}. Review at ${adminUrl}`;
   return sendMail({ to: SITE_CONTACT.adminNotificationEmail, subject, text, html });
 }
+
+export async function sendAdminProjectInquiryAlert(details: {
+  name: string;
+  email: string;
+  company?: string;
+  projectType: string;
+  budget?: string;
+  timeline?: string;
+  description: string;
+  inquiryId: string;
+}) {
+  const adminUrl = `${SITE_CONTACT.siteUrl}/admin`;
+  const subject = `📋 New project inquiry — ${details.projectType}`;
+  const html = `
+    <div style="font-family:sans-serif;max-width:560px">
+      <h2 style="color:#0c2340">New Client Project Inquiry</h2>
+      <table style="width:100%;border-collapse:collapse;margin:16px 0">
+        <tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Name</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.name}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Email</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.email}</td></tr>
+        ${details.company ? `<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Company</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.company}</td></tr>` : ""}
+        <tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Project</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.projectType}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Budget</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.budget || "Not specified"}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Timeline</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.timeline || "Not specified"}</td></tr>
+        <tr><td style="padding:8px;vertical-align:top"><strong>Details</strong></td><td style="padding:8px">${details.description.replace(/\n/g, "<br>")}</td></tr>
+      </table>
+      <p><a href="${adminUrl}" style="display:inline-block;background:#0891b2;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">Open Admin → Projects</a></p>
+    </div>
+  `;
+  const text = `New project: ${details.name} (${details.email}) — ${details.projectType}\n${details.description}\nAdmin: ${adminUrl}`;
+  return sendMail({ to: SITE_CONTACT.adminNotificationEmail, subject, text, html });
+}
+
+export async function sendClientProjectConfirmation(details: {
+  name: string;
+  email: string;
+  projectType: string;
+}) {
+  const subject = "We received your project inquiry — INDUS Web Agency";
+  const html = `
+    <div style="font-family:sans-serif;max-width:560px">
+      <h2 style="color:#0c2340">Thanks, ${details.name}!</h2>
+      <p>We received your inquiry for <strong>${details.projectType}</strong>. Our team typically responds within 24 hours on business days.</p>
+      <p>In the meantime, browse our <a href="${SITE_CONTACT.siteUrl}/work">portfolio</a> or explore ready-made <a href="${SITE_CONTACT.siteUrl}/products">software products</a>.</p>
+      <p style="color:#64748b;font-size:12px">INDUS Web Agency · ${SITE_CONTACT.email}</p>
+    </div>
+  `;
+  const text = `Thanks ${details.name}! We received your ${details.projectType} inquiry and will respond within 24 hours.`;
+  return sendMail({ to: details.email, subject, text, html });
+}
+
+export async function sendAdminContactAlert(details: {
+  name: string;
+  email: string;
+  phone?: string;
+  topic: string;
+  subject?: string;
+  message: string;
+  inquiryId: string;
+}) {
+  const adminUrl = `${SITE_CONTACT.siteUrl}/admin`;
+  const subject = `📩 New contact message — ${details.topic}`;
+  const html = `
+    <div style="font-family:sans-serif;max-width:560px">
+      <h2 style="color:#17150f">New Contact Inquiry</h2>
+      <table style="width:100%;border-collapse:collapse;margin:16px 0">
+        <tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Name</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.name}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Email</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.email}</td></tr>
+        ${details.phone ? `<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Phone</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.phone}</td></tr>` : ""}
+        <tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Topic</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.topic}</td></tr>
+        ${details.subject ? `<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0"><strong>Subject</strong></td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${details.subject}</td></tr>` : ""}
+        <tr><td style="padding:8px;vertical-align:top"><strong>Message</strong></td><td style="padding:8px">${details.message.replace(/\n/g, "<br>")}</td></tr>
+      </table>
+      <p><a href="${adminUrl}" style="display:inline-block;background:#dd4b25;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">Open Admin → Contacts</a></p>
+    </div>
+  `;
+  const text = `Contact: ${details.name} (${details.email}) — ${details.topic}\n${details.message}\nAdmin: ${adminUrl}`;
+  return sendMail({ to: SITE_CONTACT.adminNotificationEmail, subject, text, html });
+}
+
+export async function sendClientContactConfirmation(details: {
+  name: string;
+  email: string;
+  topic: string;
+}) {
+  const subject = "We received your message — INDUS Web Agency";
+  const html = `
+    <div style="font-family:sans-serif;max-width:560px">
+      <h2 style="color:#17150f">Thanks, ${details.name}!</h2>
+      <p>We received your <strong>${details.topic}</strong> message. Our team typically responds within 24 hours on business days.</p>
+      <p>For urgent product support, you can also reach us on <a href="${SITE_CONTACT.whatsappUrl}">WhatsApp</a>.</p>
+      <p style="color:#64748b;font-size:12px">INDUS Web Agency · ${SITE_CONTACT.email}</p>
+    </div>
+  `;
+  const text = `Thanks ${details.name}! We received your ${details.topic} message and will respond within 24 hours.`;
+  return sendMail({ to: details.email, subject, text, html });
+}

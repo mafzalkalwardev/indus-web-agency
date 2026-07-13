@@ -4,6 +4,11 @@ import { SITE_CONTACT } from "@/lib/site-config";
 
 const staticRoutes = [
   { path: "", priority: 1, changeFrequency: "weekly" },
+  { path: "/services", priority: 0.95, changeFrequency: "weekly" },
+  { path: "/work", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/about", priority: 0.85, changeFrequency: "monthly" },
+  { path: "/contact", priority: 0.85, changeFrequency: "monthly" },
+  { path: "/start-project", priority: 0.9, changeFrequency: "monthly" },
   { path: "/products", priority: 0.95, changeFrequency: "weekly" },
   { path: "/pricing", priority: 0.85, changeFrequency: "weekly" },
   { path: "/compare", priority: 0.8, changeFrequency: "monthly" },

@@ -9,14 +9,36 @@ export interface ChatNode {
 export const CHAT_NODES: Record<string, ChatNode> = {
   welcome: {
     id: "welcome",
-    message: "Hi! I'm the INDUS Guide. Pick a topic below and I'll help you choose the right product or next step.",
+    message: "Hi! I'm the INDUS Guide. Pick a topic — agency services, products, subscriptions, or contact.",
     options: [
+      { label: "Custom project / agency work", nextId: "agency" },
       { label: "Which product is best for me?", nextId: "choose-goal" },
       { label: "How do I subscribe?", nextId: "how-subscribe" },
-      { label: "How does admin approval work?", nextId: "approval" },
-      { label: "How do I download & install?", nextId: "download" },
-      { label: "Compare auto dialer plans", nextId: "dialer-compare" },
+      { label: "About our team", nextId: "about-team" },
       { label: "Contact human support", nextId: "contact" },
+      { label: "Compare auto dialer plans", nextId: "dialer-compare" },
+    ],
+  },
+  agency: {
+    id: "agency",
+    message:
+      "INDUS is a software studio — we build custom software, websites, and automation for clients.\n\nServices: custom apps, web design, dialers, email tools, mobile apps, and consulting.\n\nTypical flow: submit brief → discovery → proposal → build & launch.",
+    options: [
+      { label: "Start a project brief", nextId: "link-start-project" },
+      { label: "View our services", nextId: "link-services" },
+      { label: "See portfolio / work", nextId: "link-work" },
+      { label: "← Back to main menu", nextId: "welcome" },
+    ],
+  },
+  "about-team": {
+    id: "about-team",
+    message:
+      "INDUS is founded by Muhammad Afzal Kalwar — Full-Stack Developer & Python Automation Engineer based in Islamabad, Pakistan.\n\nHe builds CRM, dispatch dialers, email tools, scrapers, and AI workflows. Portfolio: mafzalkalwardev.github.io",
+    options: [
+      { label: "About & founder page", nextId: "link-about" },
+      { label: "View portfolio", nextId: "link-portfolio" },
+      { label: "Contact Afzal", nextId: "link-contact" },
+      { label: "← Back", nextId: "welcome" },
     ],
   },
   "choose-goal": {
@@ -112,8 +134,10 @@ export const CHAT_NODES: Record<string, ChatNode> = {
   contact: {
     id: "contact",
     message:
-      "Reach our team anytime:\n📧 induswebagency@gmail.com\n💬 WhatsApp: +92 307 967 0503\n\nWe typically respond within a few hours.",
+      "Reach our team anytime:\n📧 induswebagency@gmail.com\n💬 WhatsApp: +92 307 967 0503\n📝 Contact form on our website\n\nWe typically respond within 24 hours on business days.",
     options: [
+      { label: "Open contact form", nextId: "link-contact" },
+      { label: "Start a project", nextId: "link-start-project" },
       { label: "← Back to main menu", nextId: "welcome" },
     ],
   },
@@ -128,7 +152,21 @@ export const CHAT_NODES: Record<string, ChatNode> = {
   "link-products": { id: "link-products", message: "Opening products…", options: [{ label: "← Back", nextId: "welcome" }] },
   "link-dashboard": { id: "link-dashboard", message: "Opening dashboard…", options: [{ label: "← Back", nextId: "welcome" }] },
   "link-demos": { id: "link-demos", message: "Opening demos…", options: [{ label: "← Back", nextId: "welcome" }] },
+  "link-about": { id: "link-about", message: "Opening about page…", options: [{ label: "← Back", nextId: "welcome" }] },
+  "link-contact": { id: "link-contact", message: "Opening contact form…", options: [{ label: "← Back", nextId: "welcome" }] },
+  "link-services": { id: "link-services", message: "Opening services…", options: [{ label: "← Back", nextId: "welcome" }] },
+  "link-work": { id: "link-work", message: "Opening portfolio…", options: [{ label: "← Back", nextId: "welcome" }] },
+  "link-start-project": { id: "link-start-project", message: "Opening project form…", options: [{ label: "← Back", nextId: "welcome" }] },
+  "link-portfolio": { id: "link-portfolio", message: "Opening portfolio…", options: [{ label: "← Back", nextId: "welcome" }] },
 };
+
+export const QUICK_PROMPTS = [
+  "Custom project pricing?",
+  "Best dialer for my team?",
+  "How do subscriptions work?",
+  "Tell me about your team",
+  "Contact support",
+];
 
 export const LINK_REDIRECTS: Record<string, string> = {
   "link-evp": "/products/email-verifier-pro",
@@ -141,4 +179,10 @@ export const LINK_REDIRECTS: Record<string, string> = {
   "link-products": "/products",
   "link-dashboard": "/dashboard",
   "link-demos": "/demos",
+  "link-about": "/about",
+  "link-contact": "/contact",
+  "link-services": "/services",
+  "link-work": "/work",
+  "link-start-project": "/start-project",
+  "link-portfolio": "https://mafzalkalwardev.github.io",
 };
