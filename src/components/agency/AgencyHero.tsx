@@ -48,10 +48,21 @@ export function AgencyHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[92vh] overflow-hidden gradient-hero text-white"
+      className="relative min-h-[92vh] overflow-hidden bg-[#0c2340] text-white"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(8,145,178,0.35),transparent)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-slate-50" />
+      {/* INDUS brand gradient — explicit utilities (custom .gradient-hero was not applying in prod) */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#0c2340] via-[#1a3a5c] to-[#0891b2]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_75%_15%,rgba(34,211,238,0.18),transparent)]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-slate-50"
+        aria-hidden
+      />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-8 px-5 pb-28 pt-16 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6 lg:pb-36 lg:pt-24">
         <div>
@@ -72,7 +83,7 @@ export function AgencyHero() {
             {words.map((w, i) => (
               <span key={i} className="mr-[0.22em] inline-block overflow-hidden py-[0.05em] align-bottom">
                 <span
-                  className={`hero-word inline-block ${w.em ? "text-cyan-300" : ""}`}
+                  className={`hero-word inline-block ${w.em ? "text-cyan-300" : "text-white"}`}
                 >
                   {w.t}
                 </span>
@@ -81,7 +92,7 @@ export function AgencyHero() {
           </h1>
 
           <motion.p
-            className="mt-7 max-w-md text-lg leading-relaxed text-slate-300"
+            className="mt-7 max-w-md text-lg leading-relaxed text-slate-200"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.55, duration: 0.6 }}
@@ -119,7 +130,7 @@ export function AgencyHero() {
             ].map(([v, l]) => (
               <div key={l}>
                 <p className="text-2xl font-bold text-cyan-300">{v}</p>
-                <p className="mt-1.5 text-xs leading-tight text-slate-400">{l}</p>
+                <p className="mt-1.5 text-xs leading-tight text-slate-300">{l}</p>
               </div>
             ))}
           </motion.div>
