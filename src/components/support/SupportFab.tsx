@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { MessageCircle, X, Bot, RotateCcw, Send, Loader2 } from "lucide-react";
 import { CHAT_NODES, LINK_REDIRECTS, QUICK_PROMPTS } from "@/lib/support-chat";
 import { href } from "@/lib/paths";
+import { formatChatText } from "@/lib/chat-format";
 import Link from "next/link";
 
 interface ChatMessage {
@@ -27,6 +28,11 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
   const [guideNodeId, setGuideNodeId] = useState("welcome");
   const [guideHistory, setGuideHistory] = useState<string[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const messagesRef = useRef<ChatMessage[]>(messages);
+
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
 
   const guideNode = CHAT_NODES[guideNodeId];
 
@@ -39,8 +45,8 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
     if (!trimmed || loading) return;
 
     const userMsg: ChatMessage = { role: "user", content: trimmed };
-    const nextMessages = [...messages, userMsg];
-    setMessages(nextMessages);
+    const history = [...messagesRef.current, userMsg];
+    setMessages(history);
     setInput("");
     setLoading(true);
 
@@ -48,7 +54,7 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
       const res = await fetch(href("/api/support/chat"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: nextMessages }),
+        body: JSON.stringify({ messages: history }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -67,7 +73,7 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
     } finally {
       setLoading(false);
     }
-  }, [messages, loading]);
+  }, [loading]);
 
   const selectGuideOption = (nextId: string) => {
     const redirect = LINK_REDIRECTS[nextId];
@@ -142,7 +148,11 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
                       : "border border-line bg-paper text-ink"
                   }`}
                 >
-                  {m.content}
+                  {m.role === "assistant" ? (
+                    <span dangerouslySetInnerHTML={{ __html: formatChatText(m.content) }} />
+                  ) : (
+                    m.content
+                  )}
                 </div>
               </div>
             ))}

@@ -10,14 +10,8 @@ interface ChatMessage {
 function fallbackReply(message: string): string {
   const q = message.toLowerCase();
 
-  if (q.includes("team") || q.includes("about") || q.includes("who are you") || q.includes("afzal")) {
-    return "INDUS Web Agency is founded by Muhammad Afzal Kalwar — Full-Stack Developer & Python Automation Engineer based in Islamabad, Pakistan. Learn more at /about or his portfolio at mafzalkalwardev.github.io.";
-  }
-  if (q.includes("custom") || q.includes("website") || q.includes("build") || q.includes("project")) {
-    return "For custom software or websites, submit a brief at /start-project or use /contact. We typically respond within 24 hours with next steps and a rough scope.";
-  }
-  if (q.includes("dialer") || q.includes("call")) {
-    return "We offer four auto dialer tiers from $29/mo (DOM Starter) to $199/mo (Enterprise AI Multi-Slot). Compare plans at /compare or browse /products?cat=dialer.";
+  if (q.includes("dialer") || q.includes("call") || q.includes("dispatch")) {
+    return "We offer four auto dialer tiers from $29/mo (DOM Starter) to $199/mo (Enterprise AI Multi-Slot). For small teams, Multi-Slot Agent ($79/mo) supports 5 parallel lines. Compare plans at /compare or browse /products?cat=dialer.";
   }
   if (q.includes("email") || q.includes("mailforge")) {
     return "Email tools include Email Verifier Pro, Bulk Email Verifier, Auto Email Sender, and the Mailforge bundle. See /products?cat=email or /pricing.";
@@ -28,16 +22,24 @@ function fallbackReply(message: string): string {
   if (q.includes("price") || q.includes("pricing") || q.includes("cost")) {
     return "Product pricing starts from $29/mo depending on the tool. See the full overview at /pricing or each product page for plan details.";
   }
-  if (q.includes("contact") || q.includes("whatsapp") || q.includes("email us")) {
+  if (q.includes("custom") || q.includes("website") || q.includes("build") || q.includes("project")) {
+    return "For custom software or websites, submit a brief at /start-project or use /contact. We typically respond within 24 hours with next steps and a rough scope.";
+  }
+  if (q.includes("team") || q.includes("about") || q.includes("who are you") || q.includes("afzal") || q.includes("founder")) {
+    return "INDUS Web Agency is founded by Muhammad Afzal Kalwar — Full-Stack Developer & Python Automation Engineer based in Islamabad, Pakistan. Learn more at /about or his portfolio at mafzalkalwardev.github.io.";
+  }
+  if (q.includes("contact") || q.includes("whatsapp") || q.includes("email us") || q.includes("support")) {
     return "Reach us at induswebagency@gmail.com, WhatsApp +92 307 967 0503, or the contact form at /contact.";
   }
 
   return "I'm the INDUS Assistant. I can help with custom projects, our software products, subscriptions, and support. Try asking about dialers, email tools, pricing, or how to start a project — or visit /contact to talk to the team.";
 }
 
-async function callOpenAI(messages: ChatMessage[]): Promise<string | null> {
+async function callOpenAI(messages: ChatMessage[]): Promise<{ content: string | null; error?: string }> {
   const apiKey = process.env.OPENAI_API_KEY?.trim();
-  if (!apiKey) return null;
+  if (!apiKey) {
+    return { content: null, error: "OPENAI_API_KEY not configured" };
+  }
 
   const model = process.env.OPENAI_MODEL?.trim() || "gpt-4o-mini";
   const system = buildAgencyKnowledgeBase();
@@ -50,20 +52,21 @@ async function callOpenAI(messages: ChatMessage[]): Promise<string | null> {
     },
     body: JSON.stringify({
       model,
-      temperature: 0.4,
-      max_tokens: 600,
+      temperature: 0.35,
+      max_tokens: 800,
       messages: [{ role: "system", content: system }, ...messages],
     }),
   });
 
   if (!res.ok) {
-    console.error("[chat] OpenAI error:", res.status, await res.text());
-    return null;
+    const detail = await res.text();
+    console.error("[chat] OpenAI error:", res.status, detail.slice(0, 500));
+    return { content: null, error: `OpenAI ${res.status}` };
   }
 
   const data = await res.json();
   const content = data.choices?.[0]?.message?.content?.trim();
-  return content || null;
+  return { content: content || null, error: content ? undefined : "empty response" };
 }
 
 export async function POST(req: NextRequest) {
@@ -77,7 +80,19 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const messages: ChatMessage[] = Array.isArray(body.messages) ? body.messages : [];
+  const rawMessages: unknown[] = Array.isArray(body.messages) ? body.messages : [];
+  const messages: ChatMessage[] = rawMessages
+    .filter(
+      (m): m is ChatMessage =>
+        !!m &&
+        typeof m === "object" &&
+        "role" in m &&
+        "content" in m &&
+        (m.role === "user" || m.role === "assistant") &&
+        typeof m.content === "string"
+    )
+    .map((m) => ({ role: m.role, content: m.content.trim() }))
+    .filter((m) => m.content.length > 0);
   const lastUser = [...messages].reverse().find((m) => m.role === "user");
 
   if (!lastUser?.content?.trim()) {
@@ -97,11 +112,12 @@ export async function POST(req: NextRequest) {
   let mode: "llm" | "fallback" = "fallback";
 
   try {
-    const llmReply = await callOpenAI(trimmed);
+    const { content: llmReply, error: llmError } = await callOpenAI(trimmed);
     if (llmReply) {
       reply = llmReply;
       mode = "llm";
     } else {
+      if (llmError) console.warn("[chat] LLM unavailable:", llmError);
       reply = fallbackReply(lastUser.content);
     }
   } catch (err) {

@@ -73,7 +73,7 @@ ${faq}
 
 ## Response rules for the assistant
 - Be concise, professional, and helpful (2-4 short paragraphs max unless listing products).
-- Prefer linking to site pages when relevant.
+- Use markdown links with full URLs (e.g. [Compare dialers](${SITE_CONTACT.siteUrl}/compare)) when pointing to site pages.
 - For custom builds, encourage /start-project or /contact.
 - For product issues, mention dashboard, setup guides on product pages, or email/WhatsApp.
 - Do not invent pricing beyond what's listed. Do not promise instant approval.
