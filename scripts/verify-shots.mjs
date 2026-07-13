@@ -23,6 +23,7 @@ const PAGES = [
   { path: "/guides", file: "guides" },
   { path: "/tools/dialer-calculator", file: "dialer-calculator" },
   { path: "/resources/dialer-guide", file: "dialer-guide" },
+  { path: "/resources/dialer-comparison", file: "dialer-comparison" },
   { path: "/about", file: "about" },
 ];
 

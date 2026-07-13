@@ -10,7 +10,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-auto overflow-hidden bg-[#0c2340] text-slate-300">
+    <footer className="relative mt-auto overflow-hidden bg-[#0c2340] text-slate-300 print:hidden">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(34,211,238,0.12),transparent)]"
         aria-hidden
@@ -144,6 +144,7 @@ export function Footer() {
               <li><Link href={href("/guides")} className="text-sm text-slate-300 transition hover:text-white">Guides & articles</Link></li>
               <li><Link href={href("/tools/dialer-calculator")} className="text-sm text-slate-300 transition hover:text-white">Dialer calculator</Link></li>
               <li><Link href={href("/resources/dialer-guide")} className="text-sm text-slate-300 transition hover:text-white">Free comparison guide</Link></li>
+              <li><Link href={href("/resources/dialer-comparison")} className="text-sm text-slate-300 transition hover:text-white">Printable comparison chart</Link></li>
             </ul>
           </div>
 

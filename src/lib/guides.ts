@@ -78,6 +78,75 @@ export const GUIDES: GuideArticle[] = [
       },
     ],
   },
+  {
+    slug: "google-voice-auto-dialer-guide",
+    title: "Google Voice Auto Dialer: Setup & Best Practices",
+    description:
+      "How DOM/BOM automation works with Google Voice, what to expect from parallel slots, and when to upgrade to AI dispatch.",
+    readMinutes: 7,
+    publishedAt: "2026-03-12",
+    category: "dialers",
+    sections: [
+      {
+        heading: "Why Google Voice for outbound",
+        body: "Many small teams already use Google Voice for a dedicated business line. INDUS dialers automate the click-to-dial workflow in Chrome — no PBX migration required for the starter tier.",
+      },
+      {
+        heading: "DOM/BOM vs multi-slot",
+        body: "DOM/BOM Starter controls one browser tab — ideal for solo reps. Multi-Slot Agent opens up to five parallel lines; the agent only sees the call that connects, which is the standard dispatch pattern for busy sales floors.",
+      },
+      {
+        heading: "When AI makes sense",
+        body: "If your reps spend time on voicemails and no-answers, AI Agent Solo or Enterprise AI Multi-Slot can handle AMD, leave messages, or qualify leads before a human picks up.",
+      },
+    ],
+  },
+  {
+    slug: "mailforge-setup-overview",
+    title: "Mailforge: Unified Inbox & Outreach Overview",
+    description:
+      "How Mailforge bundles sending, inbox sync, and campaign tracking — and how it pairs with email verification.",
+    readMinutes: 5,
+    publishedAt: "2026-03-14",
+    category: "email",
+    sections: [
+      {
+        heading: "What Mailforge covers",
+        body: "Mailforge is INDUS's email operations bundle: connect SMTP accounts, send sequences, and manage replies from one dashboard instead of juggling multiple inboxes.",
+      },
+      {
+        heading: "Verify before you send",
+        body: "Always run lists through Email Verifier Pro or Bulk Email Verifier first. Clean data improves deliverability and keeps your domains off blocklists.",
+      },
+      {
+        heading: "Scale with automation",
+        body: "Pair Mailforge with Auto Email Sender for high-volume outreach, or use our web scraper products to build targeted lists before campaigns.",
+      },
+    ],
+  },
+  {
+    slug: "web-scraper-lead-generation",
+    title: "Web Scraping for B2B Lead Generation",
+    description:
+      "Ethical scraping workflows, list hygiene, and how INDUS scraper tools fit into outbound sales pipelines.",
+    readMinutes: 6,
+    publishedAt: "2026-03-16",
+    category: "automation",
+    sections: [
+      {
+        heading: "Start with a clear ICP",
+        body: "Define industry, geography, and role before scraping. Narrow targets produce smaller but higher-converting lists than broad crawls.",
+      },
+      {
+        heading: "Respect robots and rate limits",
+        body: "INDUS scrapers include configurable delays and domain rules. Aggressive crawling hurts your IP reputation and can violate site terms — throttle responsibly.",
+      },
+      {
+        heading: "Close the loop",
+        body: "Export to CSV, verify emails, then push into Mailforge or your dialer queue. Scraping is only step one; verification and outreach complete the pipeline.",
+      },
+    ],
+  },
 ];
 
 export function getGuide(slug: string): GuideArticle | undefined {

@@ -341,7 +341,8 @@ export async function sendLeadMagnetEmail(details: {
         <tr><td style="padding:10px;border:1px solid #e2e8f0"><strong>Enterprise AI Multi-Slot</strong></td><td style="padding:10px;border:1px solid #e2e8f0">$199/mo — dispatch + AI on picked call</td></tr>
       </table>
       <p><a href="${calc}" style="display:inline-block;background:#0891b2;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">Try the Dialer Calculator →</a></p>
-      <p style="margin-top:12px"><a href="${compare}" style="color:#0891b2">View full comparison table</a> · <a href="${SITE_CONTACT.siteUrl}/products?cat=dialer" style="color:#0891b2">Browse dialer products</a></p>
+      <p style="margin-top:12px"><a href="${compare}" style="display:inline-block;border:1px solid #0891b2;color:#0891b2;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600">Print / save comparison chart (PDF)</a></p>
+      <p style="margin-top:12px"><a href="${SITE_CONTACT.siteUrl}/compare" style="color:#0891b2">Interactive comparison table</a> · <a href="${SITE_CONTACT.siteUrl}/products?cat=dialer" style="color:#0891b2">Browse dialer products</a></p>
       <p style="color:#64748b;font-size:12px">INDUS Web Agency · ${SITE_CONTACT.email}</p>
     </div>
   `;

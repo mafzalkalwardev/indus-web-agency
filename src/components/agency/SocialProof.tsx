@@ -1,8 +1,11 @@
 import { FadeIn } from "@/components/agency/FadeIn";
+import { ClientLogos } from "@/components/agency/ClientLogos";
 import { TRUST_STATS, TESTIMONIALS, CLIENT_SEGMENTS } from "@/lib/social-proof";
 
 export function SocialProof() {
   return (
+    <>
+      <ClientLogos />
     <section className="border-y border-line bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <FadeIn className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
@@ -60,5 +63,6 @@ export function SocialProof() {
         </div>
       </div>
     </section>
+    </>
   );
 }

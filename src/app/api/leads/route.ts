@@ -6,7 +6,7 @@ const RESOURCES: Record<string, { title: string; calculatorUrl: string; compareU
   "dialer-comparison-guide": {
     title: "Auto Dialer Comparison Guide",
     calculatorUrl: "/tools/dialer-calculator",
-    compareUrl: "/compare",
+    compareUrl: "/resources/dialer-comparison",
   },
 };
 

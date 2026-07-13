@@ -16,6 +16,7 @@ const included = [
   "Team size and use-case decision matrix",
   "Pricing overview from $29–$199/mo",
   "Link to our interactive plan calculator",
+  "Printable comparison chart (save as PDF)",
 ];
 
 export default function DialerGuidePage() {
@@ -43,8 +44,8 @@ export default function DialerGuidePage() {
               dialer calculator
             </Link>{" "}
             or{" "}
-            <Link href={href("/compare")} className="font-medium text-cyan-600 hover:underline">
-              full comparison table
+            <Link href={href("/resources/dialer-comparison")} className="font-medium text-cyan-600 hover:underline">
+              printable comparison chart
             </Link>
             .
           </p>

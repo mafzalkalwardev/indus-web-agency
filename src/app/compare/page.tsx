@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { DIALER_COMPARISON } from "@/lib/products";
+import { href } from "@/lib/paths";
 import { Check, X } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -35,7 +36,10 @@ export default function ComparePage() {
       <h1 className="mt-6 font-bold text-4xl font-medium tracking-tight sm:text-5xl">Compare auto dialer plans</h1>
       <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted">
         Compare Google Voice auto dialer software from basic DOM automation to enterprise
-        multi-slot AI dialing with voicemail detection, CRM tools, and admin dashboards.
+        multi-slot AI dialing with voicemail detection, CRM tools, and admin dashboards.{" "}
+        <Link href={href("/resources/dialer-comparison")} className="font-medium text-cyan-600 hover:underline">
+          Print or save as PDF →
+        </Link>
       </p>
 
       <div className="mt-12 overflow-x-auto rounded-2xl border border-line bg-paper-raised">

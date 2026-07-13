@@ -18,6 +18,7 @@ const staticRoutes = [
   { path: "/guides", priority: 0.75, changeFrequency: "weekly" },
   { path: "/tools/dialer-calculator", priority: 0.8, changeFrequency: "monthly" },
   { path: "/resources/dialer-guide", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/resources/dialer-comparison", priority: 0.65, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.65, changeFrequency: "monthly" },
   { path: "/privacy", priority: 0.35, changeFrequency: "yearly" },
   { path: "/terms", priority: 0.35, changeFrequency: "yearly" },

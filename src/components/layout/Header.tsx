@@ -152,7 +152,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0c2340]/95 shadow-lg shadow-[#0c2340]/20 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0c2340]/95 shadow-lg shadow-[#0c2340]/20 backdrop-blur-md print:hidden">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:px-6 lg:py-2.5">
         <Link href={href("/")} className="group flex min-w-0 shrink-0 items-center gap-2.5">
           <Image
