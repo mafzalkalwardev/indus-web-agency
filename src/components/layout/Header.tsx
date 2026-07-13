@@ -5,13 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSession } from "@/components/auth/SessionProvider";
 import { href, basePath } from "@/lib/paths";
-import {
-  STUDIO_NAV,
-  PRODUCT_NAV,
-  COMPANY_NAV,
-  PRODUCT_CATEGORIES,
-  RESOURCE_NAV,
-} from "@/lib/site-nav";
+import { STUDIO_NAV, PRODUCT_NAV, COMPANY_NAV, RESOURCE_NAV } from "@/lib/site-nav";
 import {
   LayoutDashboard,
   ChevronDown,
@@ -22,137 +16,48 @@ import {
   X,
   ArrowRight,
 } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
-type NavItem = { href: string; label: string; hint?: string };
-
-function useClickOutside(ref: React.RefObject<HTMLElement | null>, onClose: () => void) {
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) onClose();
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [ref, onClose]);
-}
-
-function NavDropdown({
+function NavLink({
+  path,
   label,
-  items,
   isActive,
-  wide,
-  children,
+  className = "",
 }: {
+  path: string;
   label: string;
-  items?: readonly NavItem[];
-  isActive: boolean;
-  wide?: boolean;
-  children?: React.ReactNode;
+  isActive: (path: string) => boolean;
+  className?: string;
 }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useClickOutside(ref, () => setOpen(false));
-
+  const active = isActive(path);
   return (
-    <div ref={ref} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className={`flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition ${
-          isActive
-            ? "bg-white/10 text-white"
-            : "text-slate-300 hover:bg-white/10 hover:text-white"
-        }`}
-        aria-expanded={open}
-      >
-        {label}
-        <ChevronDown className={`h-3.5 w-3.5 opacity-70 transition ${open ? "rotate-180" : ""}`} />
-      </button>
-
-      {open && (
-        <div
-          className={`absolute left-0 top-full z-50 mt-2 rounded-xl border border-slate-200 bg-white shadow-2xl ${
-            wide ? "w-[min(100vw-2rem,400px)]" : "w-52"
-          }`}
-        >
-          {children ?? (
-            <div className="py-1.5">
-              {items?.map((item) => (
-                <Link
-                  key={item.href}
-                  href={href(item.href)}
-                  onClick={() => setOpen(false)}
-                  className="block px-4 py-2.5 transition hover:bg-slate-50"
-                >
-                  <span className="text-sm font-medium text-[#0c2340]">{item.label}</span>
-                  {item.hint && <span className="mt-0.5 block text-xs text-slate-500">{item.hint}</span>}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
+    <Link
+      href={href(path)}
+      className={`relative whitespace-nowrap px-1 py-1 text-sm font-medium transition ${
+        active ? "text-white" : "text-slate-300 hover:text-white"
+      } ${className}`}
+    >
+      {label}
+      {active && (
+        <span className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-cyan-400" aria-hidden />
       )}
-    </div>
+    </Link>
   );
 }
 
-function ProductsMenu({ isActive }: { isActive: (path: string) => boolean }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useClickOutside(ref, () => setOpen(false));
-
-  const productsActive =
-    isActive("/products") ||
-    isActive("/demos") ||
-    isActive("/pricing") ||
-    isActive("/compare");
-
+function NavSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <div ref={ref} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className={`flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition ${
-          productsActive
-            ? "bg-white/10 text-white"
-            : "text-slate-300 hover:bg-white/10 hover:text-white"
-        }`}
-        aria-expanded={open}
-      >
-        Products
-        <ChevronDown className={`h-3.5 w-3.5 opacity-70 transition ${open ? "rotate-180" : ""}`} />
-      </button>
-
-      {open && (
-        <div className="absolute left-0 top-full z-50 mt-2 w-[min(100vw-2rem,380px)] rounded-xl border border-slate-200 bg-white p-4 shadow-2xl">
-          <div className="grid gap-1 sm:grid-cols-2">
-            {PRODUCT_CATEGORIES.map((cat) => (
-              <Link
-                key={cat.href}
-                href={href(cat.href)}
-                onClick={() => setOpen(false)}
-                className="rounded-lg p-3 transition hover:bg-slate-50"
-              >
-                <p className="text-sm font-semibold text-[#0c2340]">{cat.label}</p>
-                <p className="text-xs text-slate-500">{cat.hint}</p>
-              </Link>
-            ))}
-          </div>
-          <div className="mt-3 space-y-0.5 border-t border-slate-100 pt-3">
-            {PRODUCT_NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={href(item.href)}
-                onClick={() => setOpen(false)}
-                className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-[#0c2340] transition hover:bg-slate-50"
-              >
-                <span className="font-medium">{item.label}</span>
-                {item.hint && <span className="text-xs text-slate-400">{item.hint}</span>}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+    <div className="flex items-center gap-3 xl:gap-4">
+      <span className="hidden font-mono text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-cyan-400/90 sm:inline">
+        {title}
+      </span>
+      <div className="flex items-center gap-3 xl:gap-4">{children}</div>
     </div>
   );
 }
@@ -170,13 +75,10 @@ export function Header() {
     return pathname.startsWith(p);
   };
 
-  const studioActive = STUDIO_NAV.some((i) => isActive(i.href));
-  const resourcesActive = RESOURCE_NAV.some((i) => isActive(i.href));
-  const companyActive = COMPANY_NAV.some((i) => isActive(i.href));
-
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0c2340]/95 shadow-lg shadow-[#0c2340]/20 backdrop-blur-md print:hidden">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      {/* Top bar — brand + actions */}
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
         <Link href={href("/")} className="group flex min-w-0 shrink-0 items-center gap-2.5">
           <Image
             src={`${bp}/images/logo-icon.png`}
@@ -188,28 +90,11 @@ export function Header() {
           />
           <div className="min-w-0 leading-tight">
             <span className="block text-base font-bold tracking-wide text-white sm:text-lg">INDUS</span>
-            <span className="hidden truncate text-[10px] font-medium text-cyan-400 sm:block sm:text-[11px]">
+            <span className="hidden text-[10px] font-medium text-cyan-400 sm:block sm:text-[11px]">
               Build custom · License software
             </span>
           </div>
         </Link>
-
-        <nav className="hidden items-center gap-1 lg:flex">
-          <NavDropdown label="Studio" items={STUDIO_NAV} isActive={studioActive} />
-          <ProductsMenu isActive={isActive} />
-          <NavDropdown label="Resources" items={RESOURCE_NAV} isActive={resourcesActive} />
-          <NavDropdown label="Company" items={COMPANY_NAV} isActive={companyActive} />
-          {user && (
-            <Link
-              href={href("/dashboard")}
-              className={`rounded-lg px-3 py-2 text-sm font-medium transition ${
-                isActive("/dashboard") ? "bg-cyan-500/20 text-cyan-200" : "text-cyan-300 hover:bg-cyan-500/15"
-              }`}
-            >
-              Dashboard
-            </Link>
-          )}
-        </nav>
 
         <div className="flex items-center gap-2">
           <button
@@ -299,12 +184,52 @@ export function Header() {
         </div>
       </div>
 
+      {/* Desktop nav strip — all links visible, grouped */}
+      <nav
+        className="hidden border-t border-white/10 bg-[#0a1d33]/60 lg:block"
+        aria-label="Main"
+      >
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-5 gap-y-2 px-4 py-2.5 sm:px-6 xl:gap-x-8">
+          <NavSection title="Studio">
+            {STUDIO_NAV.map((item) => (
+              <NavLink key={item.href} path={item.href} label={item.label} isActive={isActive} />
+            ))}
+          </NavSection>
+
+          <span className="hidden h-4 w-px bg-white/15 xl:block" aria-hidden />
+
+          <NavSection title="Products">
+            <NavLink path="/products" label="Products" isActive={isActive} />
+            <NavLink path="/pricing" label="Pricing" isActive={isActive} />
+            <NavLink path="/compare" label="Compare" isActive={isActive} className="hidden xl:inline" />
+            <NavLink path="/demos" label="Demos" isActive={isActive} className="hidden xl:inline" />
+          </NavSection>
+
+          <span className="hidden h-4 w-px bg-white/15 xl:block" aria-hidden />
+
+          <div className="flex items-center gap-3 xl:gap-4">
+            {COMPANY_NAV.filter((i) => i.href !== "/faq").map((item) => (
+              <NavLink key={item.href} path={item.href} label={item.label} isActive={isActive} />
+            ))}
+            <NavLink path="/guides" label="Guides" isActive={isActive} className="hidden xl:inline" />
+          </div>
+
+          {user && (
+            <>
+              <span className="hidden h-4 w-px bg-white/15 xl:block" aria-hidden />
+              <NavLink path="/dashboard" label="Dashboard" isActive={isActive} />
+            </>
+          )}
+        </div>
+      </nav>
+
+      {/* Mobile drawer */}
       {mobileNav && (
         <nav className="border-t border-white/10 bg-[#0a1d33] px-4 py-4 lg:hidden">
           <div className="space-y-5">
             <div>
               <p className="mb-2 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
-                Custom builds
+                Studio
               </p>
               <div className="flex flex-col gap-0.5">
                 {STUDIO_NAV.map((item) => (
@@ -324,7 +249,7 @@ export function Header() {
 
             <div>
               <p className="mb-2 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
-                Software shelf
+                Products
               </p>
               <div className="flex flex-col gap-0.5">
                 {PRODUCT_NAV.map((item) => (
