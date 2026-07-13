@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 40" fill="none">
+  <rect width="40" height="40" rx="8" fill="#0369a1"/>
+  <rect x="11" y="13" width="18" height="4" rx="2" fill="#7dd3fc"/>
+  <rect x="11" y="20" width="14" height="4" rx="2" fill="white"/>
+  <rect x="11" y="27" width="10" height="4" rx="2" fill="#bae6fd"/>
+  <text x="48" y="17" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#0c2340">SAAS</text>
+  <text x="48" y="30" font-family="system-ui,sans-serif" font-size="9" font-weight="500" fill="#64748b">OPERATOR</text>
+</svg>

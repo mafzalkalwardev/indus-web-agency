@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="none">
+  <rect width="40" height="40" rx="8" fill="#7c3aed"/>
+  <path d="M14 28V12h4l8 10V12h4v16h-4l-8-10v10h-4z" fill="white"/>
+  <text x="48" y="17" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#0c2340">LEADLAB</text>
+  <text x="48" y="30" font-family="system-ui,sans-serif" font-size="9" font-weight="500" fill="#64748b">STUDIO</text>
+</svg>

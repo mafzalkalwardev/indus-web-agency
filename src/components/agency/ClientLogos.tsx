@@ -1,43 +1,38 @@
 import Image from "next/image";
 import { CLIENT_LOGOS } from "@/lib/client-logos";
 import { FadeIn } from "@/components/agency/FadeIn";
+import { basePath } from "@/lib/paths";
 
 export function ClientLogos() {
+  const bp = basePath();
   const items = [...CLIENT_LOGOS, ...CLIENT_LOGOS];
 
   return (
-    <section className="border-b border-line bg-slate-50 py-10">
+    <section className="border-b border-line bg-slate-50 py-10 sm:py-12">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <FadeIn>
           <p className="text-center font-mono text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-muted">
             Trusted by operators in dispatch, sales &amp; email
           </p>
         </FadeIn>
-        <div className="relative mt-6 overflow-hidden">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-slate-50 to-transparent sm:w-20" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-slate-50 to-transparent sm:w-20" />
-          <div className="animate-marquee flex w-max items-center gap-8 pr-8">
+        <div className="relative mt-8 overflow-hidden">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-slate-50 to-transparent sm:w-24" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-slate-50 to-transparent sm:w-24" />
+          <div className="animate-marquee flex w-max items-center gap-10 pr-10 sm:gap-14">
             {items.map((client, i) => (
               <div
                 key={`${client.id}-${i}`}
-                className="flex shrink-0 items-center gap-3 rounded-xl border border-line bg-white px-4 py-3 shadow-sm"
+                className="group flex shrink-0 flex-col items-center gap-2"
+                title={`${client.name} — ${client.industry}`}
               >
-                {client.image ? (
+                <div className="flex h-12 items-center rounded-lg border border-line/80 bg-white px-5 py-2 shadow-sm transition hover:border-cyan-200 hover:shadow-md sm:h-14 sm:px-6">
                   <Image
-                    src={client.image}
-                    alt=""
-                    width={40}
+                    src={`${bp}${client.image}`}
+                    alt={client.name}
+                    width={130}
                     height={40}
-                    className="h-10 w-10 object-contain"
+                    className="h-8 w-auto object-contain opacity-80 transition group-hover:opacity-100 sm:h-9"
                   />
-                ) : (
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0c2340] text-xs font-bold text-cyan-300">
-                    {client.initials}
-                  </span>
-                )}
-                <div className="min-w-0">
-                  <p className="whitespace-nowrap text-sm font-semibold text-[#0c2340]">{client.name}</p>
-                  <p className="whitespace-nowrap text-xs text-muted">{client.industry}</p>
                 </div>
               </div>
             ))}
