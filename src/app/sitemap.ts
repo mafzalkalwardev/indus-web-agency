@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 import { PRODUCTS } from "@/lib/products";
+import { PORTFOLIO } from "@/lib/portfolio";
+import { GUIDES } from "@/lib/guides";
 import { SITE_CONTACT } from "@/lib/site-config";
 
 const staticRoutes = [
@@ -13,6 +15,9 @@ const staticRoutes = [
   { path: "/pricing", priority: 0.85, changeFrequency: "weekly" },
   { path: "/compare", priority: 0.8, changeFrequency: "monthly" },
   { path: "/demos", priority: 0.75, changeFrequency: "monthly" },
+  { path: "/guides", priority: 0.75, changeFrequency: "weekly" },
+  { path: "/tools/dialer-calculator", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/resources/dialer-guide", priority: 0.7, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.65, changeFrequency: "monthly" },
   { path: "/privacy", priority: 0.35, changeFrequency: "yearly" },
   { path: "/terms", priority: 0.35, changeFrequency: "yearly" },
@@ -27,6 +32,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
+    })),
+    ...PORTFOLIO.map((project) => ({
+      url: `${SITE_CONTACT.siteUrl}/work/${project.slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })),
+    ...GUIDES.map((guide) => ({
+      url: `${SITE_CONTACT.siteUrl}/guides/${guide.slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
     ...PRODUCTS.map((product) => ({
       url: `${SITE_CONTACT.siteUrl}/products/${product.slug}`,

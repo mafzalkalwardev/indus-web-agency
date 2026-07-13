@@ -45,7 +45,7 @@ export function PortfolioPreviewGrid() {
       {PORTFOLIO.filter((p) => p.featured).slice(0, 2).map((p) => (
         <motion.div key={p.slug} variants={staggerItem}>
           <Link
-            href={href("/work")}
+            href={href(`/work/${p.slug}`)}
             className="group block overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-colors hover:border-white/25"
           >
             <div className="relative aspect-[16/9] overflow-hidden bg-black/30">

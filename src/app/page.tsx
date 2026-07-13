@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { AgencyHero } from "@/components/agency/AgencyHero";
+import { ChooseYourPath } from "@/components/agency/ChooseYourPath";
+import { SocialProof } from "@/components/agency/SocialProof";
 import { FadeIn } from "@/components/agency/FadeIn";
 import { ProductCard } from "@/components/products/ProductCard";
 import { PRODUCTS } from "@/lib/products";
@@ -21,6 +23,10 @@ export default function HomePage() {
   return (
     <>
       <AgencyHero />
+
+      <ChooseYourPath />
+
+      <SocialProof />
 
       {/* Capabilities marquee */}
       <section className="border-y border-line bg-paper py-6">

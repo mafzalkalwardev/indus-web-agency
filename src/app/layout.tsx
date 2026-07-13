@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SessionProvider } from "@/components/auth/SessionProvider";
+import { Analytics } from "@/components/analytics/Analytics";
 import { SITE_CONTACT, SITE_SEO } from "@/lib/site-config";
 import "./globals.css";
 
@@ -114,6 +115,7 @@ export default function RootLayout({
         <SessionProvider>
           <SiteChrome>{children}</SiteChrome>
         </SessionProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -293,3 +293,74 @@ export async function sendClientContactConfirmation(details: {
   const text = `Thanks ${details.name}! We received your ${details.topic} message and will respond within 24 hours.`;
   return sendMail({ to: details.email, subject, text, html });
 }
+
+export async function sendWelcomeSignupEmail(details: {
+  name: string;
+  email: string;
+}) {
+  const dashboardUrl = `${SITE_CONTACT.siteUrl}/dashboard`;
+  const productsUrl = `${SITE_CONTACT.siteUrl}/products`;
+  const subject = "Welcome to INDUS Web Agency";
+  const html = `
+    <div style="font-family:sans-serif;max-width:560px">
+      <h2 style="color:#0c2340">Welcome, ${details.name}!</h2>
+      <p>Your INDUS account is ready. Here's what you can do next:</p>
+      <ul style="line-height:1.8;color:#334155">
+        <li><strong>Browse products</strong> — dialers, email tools, scrapers from $19/mo</li>
+        <li><strong>Subscribe</strong> — pick a plan; admin approves within 24 hours</li>
+        <li><strong>Download</strong> — get your software + license from the dashboard</li>
+      </ul>
+      <p><a href="${productsUrl}" style="display:inline-block;background:#0891b2;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;margin-right:8px">Browse Products</a>
+      <a href="${dashboardUrl}" style="display:inline-block;border:1px solid #0891b2;color:#0891b2;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">My Dashboard</a></p>
+      <p style="margin-top:20px;color:#64748b;font-size:13px">Need something custom built? <a href="${SITE_CONTACT.siteUrl}/start-project">Start a project</a> — we also run a software studio.</p>
+      <p style="color:#64748b;font-size:12px">INDUS Web Agency · ${SITE_CONTACT.email}</p>
+    </div>
+  `;
+  const text = `Welcome ${details.name}! Browse products at ${productsUrl} or open your dashboard at ${dashboardUrl}`;
+  return sendMail({ to: details.email, subject, text, html });
+}
+
+export async function sendLeadMagnetEmail(details: {
+  name: string;
+  email: string;
+  resourceTitle: string;
+  calculatorUrl: string;
+  compareUrl: string;
+}) {
+  const calc = `${SITE_CONTACT.siteUrl}${details.calculatorUrl}`;
+  const compare = `${SITE_CONTACT.siteUrl}${details.compareUrl}`;
+  const subject = `Your ${details.resourceTitle} — INDUS Web Agency`;
+  const html = `
+    <div style="font-family:sans-serif;max-width:560px">
+      <h2 style="color:#0c2340">Hi ${details.name},</h2>
+      <p>Thanks for downloading the <strong>${details.resourceTitle}</strong>. Here's a quick summary:</p>
+      <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+        <tr style="background:#f8fafc"><td style="padding:10px;border:1px solid #e2e8f0"><strong>DOM/BOM Starter</strong></td><td style="padding:10px;border:1px solid #e2e8f0">$29/mo — solo agent, single line</td></tr>
+        <tr><td style="padding:10px;border:1px solid #e2e8f0"><strong>Multi-Slot Agent</strong></td><td style="padding:10px;border:1px solid #e2e8f0">$79/mo — 5 parallel lines, team dispatch</td></tr>
+        <tr style="background:#f8fafc"><td style="padding:10px;border:1px solid #e2e8f0"><strong>AI Agent Solo</strong></td><td style="padding:10px;border:1px solid #e2e8f0">$99/mo — AI on every call</td></tr>
+        <tr><td style="padding:10px;border:1px solid #e2e8f0"><strong>Enterprise AI Multi-Slot</strong></td><td style="padding:10px;border:1px solid #e2e8f0">$199/mo — dispatch + AI on picked call</td></tr>
+      </table>
+      <p><a href="${calc}" style="display:inline-block;background:#0891b2;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">Try the Dialer Calculator →</a></p>
+      <p style="margin-top:12px"><a href="${compare}" style="color:#0891b2">View full comparison table</a> · <a href="${SITE_CONTACT.siteUrl}/products?cat=dialer" style="color:#0891b2">Browse dialer products</a></p>
+      <p style="color:#64748b;font-size:12px">INDUS Web Agency · ${SITE_CONTACT.email}</p>
+    </div>
+  `;
+  const text = `Hi ${details.name}, here's your dialer guide. Calculator: ${calc} | Compare: ${compare}`;
+  return sendMail({ to: details.email, subject, text, html });
+}
+
+export async function sendAdminLeadAlert(details: {
+  name: string;
+  email: string;
+  resource: string;
+}) {
+  const subject = `📥 New lead — ${details.resource}`;
+  const html = `
+    <div style="font-family:sans-serif;max-width:560px">
+      <h2 style="color:#0c2340">New resource download</h2>
+      <p><strong>${details.name}</strong> (${details.email}) requested <strong>${details.resource}</strong>.</p>
+    </div>
+  `;
+  const text = `Lead: ${details.name} (${details.email}) — ${details.resource}`;
+  return sendMail({ to: SITE_CONTACT.adminNotificationEmail, subject, text, html });
+}

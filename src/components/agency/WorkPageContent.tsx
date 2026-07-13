@@ -20,31 +20,41 @@ export function WorkPageContent() {
             variants={staggerItem}
             className="group overflow-hidden rounded-2xl border border-line bg-paper-raised transition-all duration-300 hover:-translate-y-1 hover:border-ink"
           >
-            <div className="relative aspect-[16/10] overflow-hidden bg-ink">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover opacity-90 transition duration-700 group-hover:scale-105 group-hover:opacity-100"
-              />
-              <Badge className="absolute left-4 top-4 border-none bg-paper/90 capitalize text-ink backdrop-blur">{project.category}</Badge>
-            </div>
-            <div className="p-7">
-              <p className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent">{project.client}</p>
-              <h2 className="mt-2 font-bold text-2xl font-medium tracking-tight">{project.title}</h2>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted">{project.summary}</p>
-              <ul className="mt-5 space-y-1.5 text-sm text-ink">
-                {project.results.map((r) => (
-                  <li key={r} className="flex items-start gap-2.5">
+            <Link href={href(`/work/${project.slug}`)} className="block">
+              <div className="relative aspect-[16/10] overflow-hidden bg-ink">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover opacity-90 transition duration-700 group-hover:scale-105 group-hover:opacity-100"
+                />
+                <Badge className="absolute left-4 top-4 border-none bg-paper/90 capitalize text-ink backdrop-blur">{project.category}</Badge>
+              </div>
+              <div className="p-7">
+                <p className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent">{project.client}</p>
+                <h2 className="mt-2 text-2xl font-bold tracking-tight">{project.title}</h2>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted">{project.summary}</p>
+              </div>
+            </Link>
+            <div className="border-t border-line px-7 pb-7">
+              <ul className="space-y-1.5 text-sm text-ink">
+                {project.results.slice(0, 2).map((r) => (
+                  <li key={r} className="flex items-start gap-2.5 text-muted">
                     <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" /> {r}
                   </li>
                 ))}
               </ul>
               <div className="mt-5 flex flex-wrap gap-1.5">
-                {project.technologies.map((t) => (
+                {project.technologies.slice(0, 4).map((t) => (
                   <Badge key={t} variant="secondary">{t}</Badge>
                 ))}
               </div>
+              <Link
+                href={href(`/work/${project.slug}`)}
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-600 hover:text-cyan-700"
+              >
+                Read case study <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </motion.article>
         ))}

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createUser, initDefaultAdmin } from "@/lib/db";
 import { setSessionCookie, userToSession } from "@/lib/auth";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
+import { sendWelcomeSignupEmail } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   await initDefaultAdmin();
@@ -28,6 +29,9 @@ export async function POST(req: NextRequest) {
   try {
     const user = await createUser(email, password, name, "customer");
     await setSessionCookie(userToSession(user));
+    sendWelcomeSignupEmail({ name: user.name, email: user.email }).catch((err) =>
+      console.error("[signup] welcome email failed:", err)
+    );
     return NextResponse.json({ ok: true, role: user.role, name: user.name });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Signup failed";

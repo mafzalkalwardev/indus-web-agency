@@ -6,7 +6,10 @@ import { getProduct, PRODUCTS, CATEGORY_LABELS } from "@/lib/products";
 import { getSetupGuide } from "@/lib/setup-guides";
 import { SubscribeButton } from "@/components/products/SubscribeButton";
 import { SetupGuidePanel } from "@/components/products/SetupGuidePanel";
+import { ProductWhatsAppCta } from "@/components/products/ProductWhatsAppCta";
+import { PageHero } from "@/components/agency/PageHero";
 import { SITE_CONTACT, SITE_SEO } from "@/lib/site-config";
+import { href } from "@/lib/paths";
 
 export async function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
@@ -93,52 +96,51 @@ export default async function ProductDetailPage({
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+    <div className="bg-paper">
+      <ProductWhatsAppCta productName={product.name} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
 
+      <PageHero
+        eyebrow={CATEGORY_LABELS[product.category]}
+        title={product.name}
+        description={product.tagline}
+      >
+        <p className="mt-4 max-w-2xl text-base text-slate-300">{product.description}</p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          {product.techStack.map((t) => (
+            <span key={t} className="rounded-md border border-white/20 bg-white/10 px-2.5 py-1 text-xs font-medium text-slate-200">
+              {t}
+            </span>
+          ))}
+        </div>
+        {product.homepage && (
+          <a
+            href={product.homepage}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-cyan-300 hover:text-cyan-200"
+          >
+            <ExternalLink className="h-4 w-4" /> Live demo
+          </a>
+        )}
+      </PageHero>
+
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
       <div className="mb-6 text-sm text-slate-500">
-        <Link href="/products" className="hover:text-cyan-600">Products</Link>
+        <Link href={href("/products")} className="hover:text-cyan-600">Products</Link>
         {" / "}
         <span>{product.name}</span>
       </div>
 
       <div className="grid gap-12 lg:grid-cols-2">
         <div>
-          <span className="rounded-md bg-cyan-50 px-3 py-1 text-xs font-medium text-cyan-700">
-            {CATEGORY_LABELS[product.category]}
-          </span>
-          <h1 className="mt-4 text-3xl font-bold">{product.name}</h1>
-          <p className="mt-2 text-lg text-slate-600">{product.tagline}</p>
-          <p className="mt-4 text-slate-700">{product.description}</p>
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            {product.techStack.map((t) => (
-              <span key={t} className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
-                {t}
-              </span>
-            ))}
-          </div>
-
-          <div className="mt-6 flex gap-4">
-            {product.homepage && (
-              <a
-                href={product.homepage}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-[#0c2340]"
-              >
-                <ExternalLink className="h-4 w-4" /> Live Demo
-              </a>
-            )}
-          </div>
-
-          <ul className="mt-8 space-y-2">
+          <ul className="space-y-2">
             {product.features.map((f) => (
               <li key={f} className="flex items-start gap-2 text-sm">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan-600" />
                 {f}
               </li>
             ))}
@@ -269,6 +271,7 @@ export default async function ProductDetailPage({
           </table>
         </section>
       )}
+      </div>
     </div>
   );
 }

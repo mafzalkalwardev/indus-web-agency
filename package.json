@@ -11,6 +11,7 @@
     "capture:media": "node scripts/capture-product-media.mjs",
     "capture:media:live": "node scripts/capture-product-media.mjs --live",
     "capture:screenshots": "node scripts/capture-website-screenshots.mjs",
+    "verify:shots": "node scripts/verify-shots.mjs",
     "generate:setup": "node scripts/generate-setup-files.mjs"
   },
   "dependencies": {
