@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import { COMPANY_STORY, STUDIO_CAPABILITIES, FOUNDER } from "@/lib/about";
+import { COMPANY_STORY, STUDIO_CAPABILITIES, FOUNDER, TEAM } from "@/lib/about";
 import { TEAM_MARQUEE_ITEMS } from "@/lib/team-marquee";
 import { StaggerChildren, staggerItem, FadeIn } from "@/components/agency/FadeIn";
 
@@ -18,7 +19,8 @@ export function AboutPageContent() {
           <p className="text-lg leading-relaxed text-muted">{COMPANY_STORY.mission}</p>
           <p className="mt-5 text-muted">
             Based in {FOUNDER.location} and working remote worldwide, {FOUNDER.shortName} leads INDUS as a
-            founder-led studio — combining agency craft with a product shelf clients can license today.
+            founder-led studio, working alongside full-stack developer Muhammad Ahmed — combining agency craft
+            with a product shelf clients can license today.
           </p>
         </FadeIn>
 
@@ -38,10 +40,10 @@ export function AboutPageContent() {
           <FadeIn>
             <p className="eyebrow text-accent">Founder &amp; team</p>
             <h2 className="mt-4 font-bold text-3xl font-medium tracking-tight sm:text-4xl">
-              The engineer behind INDUS
+              The team behind INDUS
             </h2>
             <p className="mt-4 max-w-2xl text-muted">
-              {FOUNDER.name} — {FOUNDER.title}. Direct access to the person who designs, builds, and ships every system.
+              Direct access to the people who design, build, and ship every system — no account-manager layers.
             </p>
           </FadeIn>
         </div>
@@ -63,34 +65,66 @@ export function AboutPageContent() {
           </div>
         </div>
 
-        <FadeIn className="mx-auto mt-10 max-w-7xl px-5 sm:px-8">
-          <div className="flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-xl text-sm leading-relaxed text-muted">
-              {FOUNDER.tagline} Portfolio, CV, and project demos at{" "}
-              <span className="text-ink">{FOUNDER.portfolio.replace("https://", "")}</span>
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href={FOUNDER.portfolio}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink"
-              >
-                <span className="link-underline">Portfolio &amp; CV</span>
-                <ArrowUpRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
-              <Link
-                href={FOUNDER.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink"
-              >
-                <span className="link-underline">GitHub</span>
-                <ArrowUpRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
-            </div>
-          </div>
-        </FadeIn>
+        <StaggerChildren className="mx-auto mt-10 grid max-w-7xl gap-5 border-t border-line px-5 pt-10 sm:px-8 md:grid-cols-2">
+          {TEAM.map((member) => (
+            <motion.div
+              key={member.id}
+              variants={staggerItem}
+              className="rounded-2xl border border-line bg-paper-raised p-7"
+            >
+              <div className="flex items-center gap-4">
+                {member.avatar && (
+                  <Image
+                    src={member.avatar}
+                    alt={member.name}
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 shrink-0 rounded-full border border-line object-cover"
+                  />
+                )}
+                <div>
+                  <h3 className="font-bold text-lg text-ink">{member.name}</h3>
+                  <p className="text-sm text-muted">{member.role}</p>
+                </div>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-muted">{member.bio}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {member.focus.map((f) => (
+                  <span
+                    key={f}
+                    className="rounded-full border border-line px-3 py-1 text-xs text-ink-soft"
+                  >
+                    {f}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-5 flex flex-wrap gap-4 border-t border-line pt-4">
+                {member.portfolio && (
+                  <Link
+                    href={member.portfolio}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink"
+                  >
+                    <span className="link-underline">Portfolio</span>
+                    <ArrowUpRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                )}
+                {member.github && (
+                  <Link
+                    href={member.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink"
+                  >
+                    <span className="link-underline">GitHub</span>
+                    <ArrowUpRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </StaggerChildren>
       </section>
 
       {/* Capabilities */}

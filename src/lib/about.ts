@@ -96,6 +96,18 @@ export const TEAM: TeamMember[] = [
     avatar: FOUNDER.avatar,
     featured: true,
   },
+  {
+    id: "ahmed",
+    name: "Muhammad Ahmed",
+    role: "Full-Stack Developer",
+    bio: "Full-stack developer at INDUS Web Agency, building and shipping web applications alongside Muhammad Afzal. Works across the stack with a growing focus on AI and machine learning — from React interfaces to backend APIs and automation systems.",
+    focus: ["Next.js & React", "Backend APIs", "Machine learning & AI", "Automation systems", "UI engineering"],
+    location: "Islamabad, Pakistan",
+    github: "https://github.com/MrAhmed31",
+    portfolio: "https://ahmed-portfolio-wheat.vercel.app/",
+    avatar: "https://github.com/MrAhmed31.png",
+    featured: true,
+  },
 ];
 
 export const CONTACT_TOPICS = [

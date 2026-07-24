@@ -23,11 +23,11 @@ export default function AboutPage() {
               <p className="eyebrow text-slate-300">About INDUS</p>
             </div>
             <h1 className="mt-6 max-w-3xl text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl">
-              Built by Muhammad Afzal Kalwar
+              Built by Muhammad Afzal &amp; Muhammad Ahmed
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-              Full-Stack Developer &amp; Python Automation Engineer — founder of INDUS. CRM, dispatch dialers,
-              email platforms, scrapers, and the licensed products on this site.
+              A two-person engineering team — founder &amp; principal engineer, and full-stack developer. CRM,
+              dispatch dialers, email platforms, scrapers, and the licensed products on this site.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button asChild size="lg">
