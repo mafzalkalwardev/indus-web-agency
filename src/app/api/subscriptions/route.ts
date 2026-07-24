@@ -5,6 +5,7 @@ import {
   deactivateExpiredSubscriptions,
   getUserSubscriptions,
   getUserById,
+  hasUsedTrial,
 } from "@/lib/db";
 import { getProduct } from "@/lib/products";
 import { getBillingOption, calcPrice, type BillingPeriod } from "@/lib/billing";
@@ -36,6 +37,13 @@ export async function POST(req: NextRequest) {
   const plan = product.plans.find((p) => p.id === planId);
   if (!plan) {
     return NextResponse.json({ error: "Plan not found" }, { status: 404 });
+  }
+
+  if (period === "trial" && (await hasUsedTrial(session.userId, productSlug))) {
+    return NextResponse.json(
+      { error: "You've already used your free trial for this product." },
+      { status: 409 }
+    );
   }
 
   const billing = getBillingOption(period);

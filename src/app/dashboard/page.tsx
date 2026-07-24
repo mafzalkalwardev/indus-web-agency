@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Download, Clock, Package, AlertCircle, CheckCircle2, XCircle, Hourglass, Loader2, RefreshCw } from "lucide-react";
 import { getProduct } from "@/lib/products";
-import { formatDate, daysRemaining, isExpired } from "@/lib/utils";
+import { formatDate, daysRemaining, minutesRemaining, isExpired } from "@/lib/utils";
 import { useSession } from "@/components/auth/SessionProvider";
 import { href } from "@/lib/paths";
 import { periodLabel, type BillingPeriod, type SubscriptionStatus } from "@/lib/billing";
@@ -229,6 +229,7 @@ export default function DashboardPage() {
           <div className="mt-4 space-y-4">
             {approvedSubs.map((sub) => {
               const product = getProduct(sub.productSlug);
+              const isTrial = sub.period === "trial";
               const days = daysRemaining(sub.expiresAt);
               const thumb = product?.screenshots[0];
               const isDownloading = downloading === sub.productSlug;
@@ -247,7 +248,10 @@ export default function DashboardPage() {
                     <p className="text-sm text-slate-600">{sub.planName} — ${sub.price} ({periodLabel(sub.period as BillingPeriod)})</p>
                     <p className="mt-1 text-xs text-slate-500">Secure download includes a signed license file — bound to your device.</p>
                     <p className="mt-1 flex items-center gap-1 text-sm text-slate-500">
-                      <Clock className="h-4 w-4" /> Expires {formatDate(sub.expiresAt)} · {days} days left
+                      <Clock className="h-4 w-4" />
+                      {isTrial
+                        ? `${minutesRemaining(sub.expiresAt)} minutes left`
+                        : `Expires ${formatDate(sub.expiresAt)} · ${days} days left`}
                     </p>
                   </div>
                   <div className="flex flex-col gap-2 sm:items-end">
@@ -262,7 +266,7 @@ export default function DashboardPage() {
                         <><Download className="h-4 w-4" /> Download</>
                       )}
                     </button>
-                    {days <= 7 && (
+                    {days <= 7 && !isTrial && (
                       <button
                         type="button"
                         onClick={() => handleRenew(sub.id)}
@@ -310,14 +314,16 @@ export default function DashboardPage() {
                   <Link href={href(`/products/${sub.productSlug}`)} className="text-sm text-cyan-600 hover:text-cyan-800">
                     Resubscribe →
                   </Link>
-                  <button
-                    type="button"
-                    onClick={() => handleRenew(sub.id)}
-                    disabled={renewing === sub.id}
-                    className="ml-3 text-sm text-cyan-600 hover:text-cyan-800 disabled:opacity-60"
-                  >
-                    {renewing === sub.id ? "Submitting…" : "Request Renewal"}
-                  </button>
+                  {sub.period !== "trial" && (
+                    <button
+                      type="button"
+                      onClick={() => handleRenew(sub.id)}
+                      disabled={renewing === sub.id}
+                      className="ml-3 text-sm text-cyan-600 hover:text-cyan-800 disabled:opacity-60"
+                    >
+                      {renewing === sub.id ? "Submitting…" : "Request Renewal"}
+                    </button>
+                  )}
                 </div>
               );
             })}

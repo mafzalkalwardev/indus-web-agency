@@ -284,6 +284,10 @@ export async function createRenewalSubscription(
   const prev = subs.find((s) => s.id === previousSubId && s.userId === userId);
   if (!prev) return { error: "Subscription not found" };
 
+  if (prev.period === "trial") {
+    return { error: "Free trials can't be renewed — subscribe to a paid plan to continue." };
+  }
+
   const canRenew =
     prev.status === "rejected" ||
     prev.status === "expired" ||
@@ -328,6 +332,12 @@ export async function createRenewalSubscription(
   subs.push(sub);
   await saveSubscriptions(subs);
   return sub;
+}
+
+/** True if this user has ever requested a free trial (any status) for this product. */
+export async function hasUsedTrial(userId: string, productSlug: string): Promise<boolean> {
+  const subs = await getUserSubscriptions(userId);
+  return subs.some((s) => s.productSlug === productSlug && s.period === "trial");
 }
 
 export async function findActiveSubscription(

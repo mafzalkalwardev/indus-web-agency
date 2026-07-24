@@ -18,6 +18,11 @@ export function daysRemaining(expiresAt: string) {
   return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
 }
 
+export function minutesRemaining(expiresAt: string) {
+  const diff = new Date(expiresAt).getTime() - Date.now();
+  return Math.max(0, Math.ceil(diff / (1000 * 60)));
+}
+
 export function isExpired(expiresAt: string) {
   return new Date(expiresAt).getTime() < Date.now();
 }
