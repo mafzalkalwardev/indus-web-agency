@@ -1,11 +1,15 @@
+import type { FaqItem } from "@/lib/schema";
+
 export interface GuideArticle {
   slug: string;
   title: string;
   description: string;
   readMinutes: number;
   publishedAt: string;
-  category: "dialers" | "email" | "automation" | "agency";
+  modifiedAt?: string;
+  category: "dialers" | "email" | "automation" | "agency" | "telecom";
   sections: { heading: string; body: string }[];
+  faqs?: FaqItem[];
 }
 
 export const GUIDES: GuideArticle[] = [
@@ -144,6 +148,303 @@ export const GUIDES: GuideArticle[] = [
       {
         heading: "Close the loop",
         body: "Export to CSV, verify emails, then push into Mailforge or your dialer queue. Scraping is only step one; verification and outreach complete the pipeline.",
+      },
+    ],
+  },
+  {
+    slug: "outbound-dialer-crm-explained",
+    title: "What Is an Outbound Dialer CRM?",
+    description:
+      "Definition of outbound dialer CRM software, how it differs from a standalone dialer, and how INDUS Multi-Slot and AI dialers include CRM modules.",
+    readMinutes: 7,
+    publishedAt: "2026-04-01",
+    category: "telecom",
+    faqs: [
+      {
+        q: "What is an outbound dialer CRM?",
+        a: "Software that places outbound calls automatically and stores dispositions, notes, and lead status in CRM-style records for sales or dispatch teams.",
+      },
+      {
+        q: "Do I need a separate CRM if I buy an INDUS dialer?",
+        a: "Often no for basic outbound. Multi-Slot and Enterprise AI plans include CRM modules. Integrate HubSpot or Salesforce via a custom project if you need a system of record elsewhere.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Direct answer",
+        body: "An outbound dialer CRM combines automatic calling with contact records, campaign lists, call dispositions, and history so every dial updates a pipeline—not a spreadsheet. INDUS Web Agency licenses dialers with built-in CRM modules and builds custom CRMs when your fields are unique.",
+      },
+      {
+        heading: "Dialer alone vs dialer CRM",
+        body: "A dialer places the call. A dialer CRM also answers who was called, what happened, and what to do next. Without CRM logging, high-volume floors lose coaching data and follow-ups.",
+      },
+      {
+        heading: "INDUS product path",
+        body: "Start with Multi-Slot Agent or Enterprise AI Multi-Slot for dialer + CRM. Use the telecom CRM taxonomy for other types (dispatch, AI voice, compliance). Custom sync projects cover Salesforce and HubSpot.",
+      },
+    ],
+  },
+  {
+    slug: "predictive-vs-power-dialer",
+    title: "Predictive Dialer vs Power Dialer: What’s the Difference?",
+    description:
+      "Clear comparison of predictive and power dialing, how multi-slot Google Voice dialers fit, and which INDUS plan to choose.",
+    readMinutes: 6,
+    publishedAt: "2026-04-02",
+    category: "telecom",
+    faqs: [
+      {
+        q: "What is a predictive dialer?",
+        a: "A system that dials multiple numbers ahead of agent availability and connects live answers to free agents, maximizing talk time.",
+      },
+      {
+        q: "Is INDUS Multi-Slot predictive?",
+        a: "Multi-Slot runs parallel Google Voice lines and shows agents only the picked call—matching the core pattern outbound floors expect from power/predictive workflows.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Direct answer",
+        body: "Power dialers typically dial one line per agent with rapid progression; predictive systems pace multiple lines to keep agents on live conversations. INDUS Multi-Slot Agent runs up to five parallel Google Voice slots and surfaces only the connected call—ideal for team outbound and dispatch.",
+      },
+      {
+        heading: "When to choose multi-slot",
+        body: "Choose Multi-Slot when agents waste time on unanswered rings. Choose AI Multi-Slot when you also want conversational AI on the picked call. Solo agents can stay on DOM Starter or AI Solo.",
+      },
+      {
+        heading: "CRM and AMD",
+        body: "Higher INDUS tiers add CRM dispositions and AMD voicemail detection so pacing gains do not create messy data or wasted voicemail talk time.",
+      },
+    ],
+  },
+  {
+    slug: "google-voice-us-outbound-overview",
+    title: "Google Voice Outbound Calling in the US: Practical Overview",
+    description:
+      "How US teams use Google Voice with auto dialers, educational notes on TCPA/DNC (not legal advice), and INDUS product options.",
+    readMinutes: 8,
+    publishedAt: "2026-04-03",
+    category: "telecom",
+    faqs: [
+      {
+        q: "Is Google Voice auto dialing legal in the US?",
+        a: "It depends on consent, list source, industry, and state/federal rules. INDUS does not provide legal advice—consult qualified counsel. We provide tools, logs, and optional compliance CRM features.",
+      },
+      {
+        q: "What INDUS products fit US Google Voice teams?",
+        a: "DOM Starter, Multi-Slot, AI Solo, and Enterprise AI Multi-Slot—all designed around Google Voice outbound automation.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Direct answer",
+        body: "Many US outbound sales and dispatch teams run Google Voice as a business line and use INDUS auto dialers to automate dialing, multi-slot pacing, and AI conversations—with CRM call logs for follow-up. Legal compliance (TCPA/DNC) remains the operator’s responsibility.",
+      },
+      {
+        heading: "Why Google Voice remains popular",
+        body: "Low setup cost, familiar Chrome workflow, and no immediate PBX migration. INDUS dialers automate that path for SMBs and mid-market floors.",
+      },
+      {
+        heading: "Compliance education",
+        body: "Track consent sources, scrub DNC lists, and respect calling windows when required. See /telecom/usa and the compliance CRM guide for tooling options—not legal guarantees.",
+      },
+    ],
+  },
+  {
+    slug: "telecom-crm-types-overview",
+    title: "14 Types of Telecommunications CRMs Explained",
+    description:
+      "Overview of outbound dialer CRM, predictive, AI voice, dispatch, lead management, contact center, omnichannel, TCPA compliance, and more.",
+    readMinutes: 9,
+    publishedAt: "2026-04-04",
+    category: "telecom",
+    faqs: [
+      {
+        q: "How many telecom CRM types are there?",
+        a: "INDUS documents 14 practical categories covering outbound dialer CRM through vertical and compliance CRMs—see /telecom/crm-types for the full index.",
+      },
+      {
+        q: "Which CRM type should I start with?",
+        a: "Most outbound buyers start with outbound dialer CRM or predictive dialer CRM, then add AI voice, dispatch, or compliance as needed.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Direct answer",
+        body: "Telecommunications CRMs range from dialer-native outbound CRMs to contact-center, omnichannel, BPO, vertical, and TCPA compliance systems. INDUS maps all 14 types so buyers searching by problem—not brand—find the right product or custom path.",
+      },
+      {
+        heading: "Sell-now categories",
+        body: "Outbound dialer CRM, predictive/power dialer CRM, AI voice CRM, dispatch calling CRM, lead management CRM, and analytics/workforce CRM map closely to INDUS dialers, scrapers, and dashboards.",
+      },
+      {
+        heading: "Educate and custom",
+        body: "Full contact-center, SIP softphone, helpdesk, BPO multi-tenant, and vertical CRMs are documented for SEO/AEO and delivered primarily as studio projects.",
+      },
+    ],
+  },
+  {
+    slug: "tcpa-dnc-basics-for-outbound",
+    title: "TCPA & DNC Basics for Outbound Teams (Education)",
+    description:
+      "Educational overview of why consent, DNC scrubbing, and call logging matter for US outbound—not legal advice.",
+    readMinutes: 7,
+    publishedAt: "2026-04-10",
+    category: "telecom",
+    faqs: [
+      {
+        q: "Does INDUS guarantee TCPA compliance?",
+        a: "No. We provide educational content and optional compliance CRM features. Legal compliance is your responsibility—hire qualified counsel.",
+      },
+      {
+        q: "How do call logs help?",
+        a: "Timestamped dispositions and list sources create an audit trail for internal review. They are not a substitute for legal advice.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Direct answer",
+        body: "US outbound operators often need documented consent, Do-Not-Call handling, and responsible calling windows. INDUS dialers store call logs; custom compliance CRM features can track consent and suppressions. This guide is educational only.",
+      },
+      {
+        heading: "Practical ops checklist",
+        body: "Know your list source, scrub DNC where required, train agents on scripts, and keep dispositions consistent. Pair with /telecom/crm/compliance-tcpa-crm for tooling options.",
+      },
+      {
+        heading: "When to customize",
+        body: "If you need automated DNC blocking, consent fields, or counsel-ready exports, start a custom project with INDUS studio.",
+      },
+    ],
+  },
+  {
+    slug: "amd-voicemail-detection-explained",
+    title: "AMD Voicemail Detection on Auto Dialers Explained",
+    description:
+      "What answering machine detection (AMD) does on outbound dialers and which INDUS plans include it.",
+    readMinutes: 5,
+    publishedAt: "2026-04-11",
+    category: "telecom",
+    faqs: [
+      {
+        q: "What is AMD on a dialer?",
+        a: "Answering Machine Detection tries to distinguish human pickup from voicemail so agents (or AI) spend less time on machines.",
+      },
+      {
+        q: "Which INDUS dialers include AMD?",
+        a: "Multi-Slot, AI Solo, and Enterprise AI Multi-Slot tiers include AMD capabilities; see the comparison table for details.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Direct answer",
+        body: "AMD (answering machine detection) helps outbound dialers detect voicemail vs live answer so agents focus on conversations. INDUS includes AMD on Multi-Slot and AI dialer tiers.",
+      },
+      {
+        heading: "Why it matters",
+        body: "Without AMD, agents burn talk time leaving accidental messages or waiting on machines—hurting connect efficiency on multi-slot floors.",
+      },
+      {
+        heading: "Pair with AI",
+        body: "AI Agent tiers can handle voicemail or opener scripts after detection, logging outcomes into CRM modules.",
+      },
+    ],
+  },
+  {
+    slug: "multi-slot-vs-ai-dialer",
+    title: "Multi-Slot Dialer vs AI Dialer: Which Should You Buy?",
+    description:
+      "Compare INDUS Multi-Slot Agent, AI Agent Solo, and Enterprise AI Multi-Slot for outbound telecom teams.",
+    readMinutes: 6,
+    publishedAt: "2026-04-12",
+    category: "telecom",
+    faqs: [
+      {
+        q: "Do I need AI if I already have multi-slot?",
+        a: "Not always. Multi-Slot maximizes connects for human agents. Add AI when you want automated conversation on the picked call or full AI solo campaigns.",
+      },
+      {
+        q: "What is Enterprise AI Multi-Slot?",
+        a: "Parallel Google Voice slots plus AI on whichever call connects—dispatch-style volume with AI openers and CRM analytics.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Direct answer",
+        body: "Choose Multi-Slot Agent for human-led parallel dialing. Choose AI Agent Solo for single-line AI conversations. Choose Enterprise AI Multi-Slot when you need both parallel lines and AI on the connected call.",
+      },
+      {
+        heading: "Budget framing",
+        body: "Multi-Slot starts lower than enterprise AI. Use the dialer calculator and /compare table before subscribing.",
+      },
+      {
+        heading: "CRM impact",
+        body: "All higher tiers log outcomes; AI tiers add conversational context that matters for coaching and follow-up.",
+      },
+    ],
+  },
+  {
+    slug: "bpo-call-center-crm-guide",
+    title: "BPO Call Center CRM: Multi-Client Outbound Guide",
+    description:
+      "How BPOs and appointment-setting agencies structure multi-client CRMs with dialer seats and admin controls.",
+    readMinutes: 6,
+    publishedAt: "2026-04-13",
+    category: "telecom",
+    faqs: [
+      {
+        q: "What is a BPO CRM?",
+        a: "A multi-tenant CRM that separates clients, campaigns, and agents so an outsourcing call center can run many brands securely.",
+      },
+      {
+        q: "Can INDUS dialers support multiple agents?",
+        a: "Yes—Multi-Slot and Enterprise plans include multiple seats. Full multi-client tenancy UI is typically a custom studio build.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Direct answer",
+        body: "BPO CRMs isolate clients and campaigns while sharing dialer capacity. INDUS licenses multi-seat dialers today and builds multi-client admin CRMs as custom projects for agencies that resell outbound.",
+      },
+      {
+        heading: "Start with seats, then tenancy",
+        body: "Validate calling volume on Multi-Slot or AI Multi-Slot first. Add custom tenancy, billing visibility, and client portals when you productize the service.",
+      },
+      {
+        heading: "Related reading",
+        body: "See /telecom/crm/bpo-agency-crm and analytics workforce CRM for KPI dashboards supervisors need.",
+      },
+    ],
+  },
+  {
+    slug: "omnichannel-outbound-stack",
+    title: "Building an Omnichannel Outbound Stack: Dialer + Email",
+    description:
+      "How to combine INDUS dialers with Mailforge and email tools so phone and email share one lead journey.",
+    readMinutes: 6,
+    publishedAt: "2026-04-14",
+    category: "telecom",
+    faqs: [
+      {
+        q: "What is an omnichannel outbound stack?",
+        a: "A combination of dialer, email, and optionally SMS/WhatsApp that shares lead identity and history across channels.",
+      },
+      {
+        q: "Can I use INDUS dialers with Mailforge?",
+        a: "Yes. Export or share lead lists across dialer campaigns and Mailforge sequences; custom CRM unifies timelines when you need one UI.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Direct answer",
+        body: "A practical omnichannel outbound stack pairs INDUS Google Voice dialers for phone with Mailforge or Auto Email Sender for email—then optionally a custom CRM timeline. You do not need a giant CCaaS on day one.",
+      },
+      {
+        heading: "Recommended sequence",
+        body: "Scrape or import leads → verify emails → dial hot segments → email nurtures → recycle dispositions. See lead management and omnichannel CRM guides for taxonomy.",
+      },
+      {
+        heading: "When to customize",
+        body: "Build a unified omnichannel CRM when agents juggle too many tabs or you need WhatsApp/SMS in the same record.",
       },
     ],
   },

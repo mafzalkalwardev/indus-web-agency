@@ -86,6 +86,12 @@ export function ChooseYourPath() {
                 >
                   Find my dialer plan
                 </Link>
+                <Link
+                  href={href("/telecom")}
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/25 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-white/10"
+                >
+                  Telecom dialers &amp; CRMs
+                </Link>
               </div>
             </div>
           </FadeIn>

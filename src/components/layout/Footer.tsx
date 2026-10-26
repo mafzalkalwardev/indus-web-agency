@@ -141,6 +141,8 @@ export function Footer() {
               Resources
             </h4>
             <ul className="mt-4 space-y-2.5">
+              <li><Link href={href("/telecom")} className="text-sm text-slate-300 transition hover:text-white">Telecom hub</Link></li>
+              <li><Link href={href("/telecom/crm-types")} className="text-sm text-slate-300 transition hover:text-white">Telecom CRM types</Link></li>
               <li><Link href={href("/guides")} className="text-sm text-slate-300 transition hover:text-white">Guides & articles</Link></li>
               <li><Link href={href("/tools/dialer-calculator")} className="text-sm text-slate-300 transition hover:text-white">Dialer calculator</Link></li>
               <li><Link href={href("/resources/dialer-guide")} className="text-sm text-slate-300 transition hover:text-white">Free comparison guide</Link></li>

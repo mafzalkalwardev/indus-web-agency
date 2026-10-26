@@ -200,9 +200,9 @@ export function Header() {
 
           <NavSection title="Products">
             <NavLink path="/products" label="Products" isActive={isActive} />
+            <NavLink path="/telecom" label="Telecom" isActive={isActive} />
             <NavLink path="/pricing" label="Pricing" isActive={isActive} />
             <NavLink path="/compare" label="Compare" isActive={isActive} className="hidden xl:inline" />
-            <NavLink path="/demos" label="Demos" isActive={isActive} className="hidden xl:inline" />
           </NavSection>
 
           <span className="hidden h-4 w-px bg-white/15 xl:block" aria-hidden />
@@ -249,7 +249,7 @@ export function Header() {
 
             <div>
               <p className="mb-2 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
-                Products
+                Products &amp; telecom
               </p>
               <div className="flex flex-col gap-0.5">
                 {PRODUCT_NAV.map((item) => (
@@ -264,6 +264,20 @@ export function Header() {
                     {item.label}
                   </Link>
                 ))}
+                <Link
+                  href={href("/telecom/crm-types")}
+                  onClick={() => setMobileNav(false)}
+                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300"
+                >
+                  CRM types
+                </Link>
+                <Link
+                  href={href("/telecom/usa")}
+                  onClick={() => setMobileNav(false)}
+                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300"
+                >
+                  USA hub
+                </Link>
               </div>
             </div>
 

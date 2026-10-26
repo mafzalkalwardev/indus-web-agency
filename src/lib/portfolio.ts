@@ -13,6 +13,8 @@ export interface PortfolioProject {
   outcome?: string;
   body?: string[];
   productSlug?: string;
+  /** SEO / niche tags for telecom and other clusters */
+  tags?: string[];
 }
 
 export const PORTFOLIO: PortfolioProject[] = [
@@ -28,6 +30,7 @@ export const PORTFOLIO: PortfolioProject[] = [
     image: "/images/products/dialer-ai-multi-slot/hero.png",
     featured: true,
     productSlug: "dialer-ai-multi-slot",
+    tags: ["telecom", "auto-dialer", "AI voice CRM", "dispatch", "Google Voice", "call center"],
     challenge:
       "A dispatch team needed to place far more outbound calls per hour without agents juggling ringing lines or missing hot leads.",
     solution:
@@ -76,6 +79,7 @@ export const PORTFOLIO: PortfolioProject[] = [
     image: "/images/products/fiverr-lead-extractor/hero.png",
     featured: true,
     productSlug: "fiverr-lead-extractor",
+    tags: ["telecom", "lead management CRM", "outbound", "scraper"],
     challenge:
       "A freelance sales team spent hours manually copying leads from marketplaces into spreadsheets with no pipeline tracking.",
     solution:

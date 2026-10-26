@@ -96,6 +96,27 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               </div>
             </div>
 
+            {project.tags?.length ? (
+              <div className="rounded-2xl border border-line bg-white p-6">
+                <h3 className="font-bold text-[#0c2340]">Topics</h3>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {project.tags.map((t) => (
+                    <Badge key={t} variant="outline">
+                      {t}
+                    </Badge>
+                  ))}
+                </div>
+                {project.tags.includes("telecom") && (
+                  <Link
+                    href={href("/telecom")}
+                    className="mt-4 inline-flex text-sm font-semibold text-cyan-600 hover:underline"
+                  >
+                    Explore telecom dialers &amp; CRMs →
+                  </Link>
+                )}
+              </div>
+            ) : null}
+
             {project.productSlug && (
               <div className="rounded-2xl border border-[#0c2340]/15 bg-[#0c2340] p-6 text-white">
                 <h3 className="font-bold">Available as a product</h3>

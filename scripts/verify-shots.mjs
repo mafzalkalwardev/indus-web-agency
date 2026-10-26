@@ -24,6 +24,12 @@ const PAGES = [
   { path: "/tools/dialer-calculator", file: "dialer-calculator" },
   { path: "/resources/dialer-guide", file: "dialer-guide" },
   { path: "/resources/dialer-comparison", file: "dialer-comparison" },
+  { path: "/telecom", file: "telecom" },
+  { path: "/telecom/auto-dialers", file: "telecom-dialers" },
+  { path: "/telecom/crm-types", file: "telecom-crm-types" },
+  { path: "/telecom/crm/outbound-dialer-crm", file: "telecom-crm-outbound" },
+  { path: "/telecom/usa", file: "telecom-usa" },
+  { path: "/telecom/canada", file: "telecom-canada" },
   { path: "/about", file: "about" },
 ];
 

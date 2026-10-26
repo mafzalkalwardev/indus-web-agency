@@ -1,0 +1,29 @@
+# INDUS Web Agency
+
+> Outbound telecommunications software: Google Voice auto dialers, dialer CRMs, AI calling, plus custom software studio.
+
+## Primary niche
+- Outbound telecom for sales, dispatch, and call centers
+- Google Voice auto dialers (DOM starter, multi-slot, AI solo, enterprise AI multi-slot)
+- Telecom CRM taxonomy (14 types) and custom CRM builds
+- US and Canada geo hubs
+
+## Key URLs
+- https://www.induswebagency.com/telecom
+- https://www.induswebagency.com/telecom/auto-dialers
+- https://www.induswebagency.com/telecom/crm-types
+- https://www.induswebagency.com/telecom/usa
+- https://www.induswebagency.com/telecom/canada
+- https://www.induswebagency.com/compare
+- https://www.induswebagency.com/tools/dialer-calculator
+- https://www.induswebagency.com/guides
+- https://www.induswebagency.com/products
+
+## Products
+- Auto dialers with CRM modules on higher tiers
+- Email verification, sending, Mailforge bundle
+- Web scrapers including FMCSA and Canadian tools
+
+## Contact
+- https://www.induswebagency.com/contact
+- induswebagency@gmail.com

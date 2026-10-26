@@ -89,6 +89,10 @@ const organizationJsonLd = {
     },
   ],
   knowsAbout: SITE_SEO.keywords,
+  areaServed: [
+    { "@type": "Country", name: "United States" },
+    { "@type": "Country", name: "Canada" },
+  ],
 };
 
 const websiteJsonLd = {

@@ -8,6 +8,7 @@ export const STUDIO_NAV = [
 
 export const PRODUCT_NAV = [
   { href: "/products", label: "Products", hint: "13 licensed tools" },
+  { href: "/telecom", label: "Telecom", hint: "Dialers & CRMs" },
   { href: "/demos", label: "Live demos", hint: "See products in action" },
   { href: "/pricing", label: "Pricing", hint: "Plans from $19/mo" },
   { href: "/compare", label: "Compare", hint: "Dialer tiers" },
@@ -42,6 +43,15 @@ export const PRODUCT_CATEGORIES = [
 
 export const RESOURCE_NAV = [
   { href: "/guides", label: "Guides", hint: "SEO articles" },
+  { href: "/telecom/crm-types", label: "CRM types", hint: "Telecom taxonomy" },
   { href: "/tools/dialer-calculator", label: "Dialer calculator", hint: "Free tool" },
   { href: "/resources/dialer-guide", label: "Comparison guide", hint: "Free download" },
+] as const;
+
+export const TELECOM_NAV = [
+  { href: "/telecom", label: "Telecom hub", hint: "Outbound stack" },
+  { href: "/telecom/auto-dialers", label: "Auto dialers", hint: "Google Voice plans" },
+  { href: "/telecom/crm-types", label: "CRM types", hint: "14 categories" },
+  { href: "/telecom/usa", label: "USA", hint: "US geo hub" },
+  { href: "/telecom/canada", label: "Canada", hint: "CA geo hub" },
 ] as const;

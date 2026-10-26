@@ -5,8 +5,9 @@ import { href } from "@/lib/paths";
 import { ArrowRight, Clock } from "lucide-react";
 
 export const metadata = {
-  title: "Guides — Dialers, Email & Automation",
-  description: "Practical guides from INDUS Web Agency on auto dialers, email verification, and choosing custom vs off-the-shelf software.",
+  title: "Guides — Telecom Dialers, CRMs, Email & Automation",
+  description:
+    "Practical INDUS guides on Google Voice auto dialers, telecom CRMs, TCPA education, email verification, and custom vs off-the-shelf software.",
   alternates: { canonical: "/guides" },
 };
 
@@ -15,6 +16,7 @@ const categoryLabel = {
   email: "Email tools",
   automation: "Automation",
   agency: "Agency",
+  telecom: "Telecom",
 } as const;
 
 export default function GuidesPage() {
@@ -22,8 +24,8 @@ export default function GuidesPage() {
     <div className="bg-paper">
       <PageHero
         eyebrow="Guides"
-        title="Practical automation & agency guides"
-        description="Short, actionable reads on dialers, email ops, and when to build custom software vs license our products."
+        title="Practical telecom, dialer & agency guides"
+        description="Answer-ready reads on outbound dialers, telecom CRM types, US/Canada outbound, email ops, and when to build custom software."
       />
       <section className="mx-auto max-w-4xl px-5 py-16 sm:px-8">
         <div className="space-y-6">

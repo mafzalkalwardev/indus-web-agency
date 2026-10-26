@@ -157,6 +157,26 @@ export default async function ProductDetailPage({
               Integration SDK for developers
             </a>
           </div>
+
+          {product.category === "dialer" && (
+            <div className="mt-6 rounded-lg border border-line bg-white p-4 text-sm text-slate-700">
+              <p className="font-semibold text-[#0c2340]">Part of the INDUS telecom stack</p>
+              <p className="mt-1 text-muted">
+                Learn how this dialer fits outbound CRMs, US/Canada markets, and plan comparisons.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-3">
+                <Link href={href("/telecom/auto-dialers")} className="font-medium text-cyan-600 hover:underline">
+                  Auto dialers hub
+                </Link>
+                <Link href={href("/telecom/crm-types")} className="font-medium text-cyan-600 hover:underline">
+                  CRM types
+                </Link>
+                <Link href={href("/compare")} className="font-medium text-cyan-600 hover:underline">
+                  Compare plans
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
 
         <div>
