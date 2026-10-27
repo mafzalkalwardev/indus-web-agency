@@ -131,6 +131,32 @@ export default function IslamabadAgencyPage() {
         </section>
 
         <section className="mt-12">
+          <h2 className="text-2xl font-bold text-[#0c2340]">Proof & comparisons</h2>
+          <ul className="mt-4 space-y-2 text-sm">
+            <li>
+              <Link href={href("/compare/web-agency-islamabad")} className="font-semibold text-cyan-600 hover:underline">
+                INDUS vs typical Islamabad agencies →
+              </Link>
+            </li>
+            <li>
+              <Link href={href("/work/ai-custom-dialer-crm")} className="font-semibold text-cyan-600 hover:underline">
+                AI dialer + custom CRM metrics →
+              </Link>
+            </li>
+            <li>
+              <Link href={href("/work/custom-outbound-crm")} className="font-semibold text-cyan-600 hover:underline">
+                Custom outbound CRM case study →
+              </Link>
+            </li>
+            <li>
+              <Link href={href("/compare/custom-crm-vs-off-the-shelf")} className="font-semibold text-cyan-600 hover:underline">
+                Custom CRM vs off-the-shelf →
+              </Link>
+            </li>
+          </ul>
+        </section>
+
+        <section className="mt-12">
           <h2 className="text-2xl font-bold text-[#0c2340]">Local search phrases we cover</h2>
           <ul className="mt-4 flex flex-wrap gap-2">
             {[...ISLAMABAD_AGENCY.primaryKeywords, ...ISLAMABAD_AGENCY.secondaryKeywords.slice(0, 8)].map((kw) => (

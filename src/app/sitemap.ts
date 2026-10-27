@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { PRODUCTS } from "@/lib/products";
 import { PORTFOLIO } from "@/lib/portfolio";
 import { GUIDES } from "@/lib/guides";
+import { COMPARISONS } from "@/lib/comparisons";
 import { TELECOM_CRM_TYPES } from "@/lib/telecom-crm";
 import { TELECOM_USE_CASES } from "@/lib/telecom-usecases";
 import { TELECOM_MARKETS } from "@/lib/telecom-markets";
@@ -65,6 +66,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.75,
+    })),
+    ...COMPARISONS.map((c) => ({
+      url: `${SITE_CONTACT.siteUrl}/compare/${c.slug}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.88,
     })),
     ...PORTFOLIO.map((project) => ({
       url: `${SITE_CONTACT.siteUrl}/work/${project.slug}`,

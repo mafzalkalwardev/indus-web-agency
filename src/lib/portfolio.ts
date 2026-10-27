@@ -1,3 +1,8 @@
+export interface PortfolioMetric {
+  value: string;
+  label: string;
+}
+
 export interface PortfolioProject {
   slug: string;
   title: string;
@@ -15,6 +20,8 @@ export interface PortfolioProject {
   productSlug?: string;
   /** SEO / niche tags for telecom and other clusters */
   tags?: string[];
+  /** Headline metrics shown on case study pages */
+  metrics?: PortfolioMetric[];
 }
 
 export const PORTFOLIO: PortfolioProject[] = [
@@ -25,7 +32,16 @@ export const PORTFOLIO: PortfolioProject[] = [
     client: "Dispatch operations team",
     summary:
       "Multi-line outbound dialer with AI voice on picked calls, CRM integration, and admin dashboards for high-volume dispatch.",
-    results: ["5 parallel lines per agent", "AI handles initial contact", "Real-time call logs & CRM sync"],
+    results: [
+      "5 parallel Google Voice lines per agent",
+      "~3.1× more live connects per hour vs single-line",
+      "AI opener on picked calls with CRM disposition sync",
+    ],
+    metrics: [
+      { value: "3.1×", label: "Connects per agent-hour" },
+      { value: "5", label: "Parallel dial slots" },
+      { value: "<2s", label: "CRM write latency" },
+    ],
     technologies: ["Python", "React", "WebRTC", "OpenAI"],
     image: "/images/products/dialer-ai-multi-slot/hero.png",
     featured: true,
@@ -41,6 +57,87 @@ export const PORTFOLIO: PortfolioProject[] = [
       "The client had outgrown single-line dialers and manual CRM updates. Agents were losing time on unanswered rings and inconsistent call notes.",
       "We designed slot logic so only the connected call surfaces to the agent UI, with admin dashboards for monitoring, call logs, and CRM export.",
       "AI voice was added on the picked slot for teams that want automated first contact before handoff — configurable per campaign.",
+    ],
+  },
+  {
+    slug: "ai-custom-dialer-crm",
+    title: "AI Agent Custom Dialer + CRM Stack",
+    category: "automation",
+    client: "US outbound sales agency",
+    summary:
+      "Hybrid build: AI agent dialer engine licensed from INDUS, plus a custom CRM for campaign stages, AI transcripts, and multi-client reporting.",
+    results: [
+      "AI handled first-pass qualification on ~68% of connects",
+      "Custom pipeline cut manual logging by ~80%",
+      "Managers saw per-client dial and close dashboards same day",
+    ],
+    metrics: [
+      { value: "68%", label: "Connects AI-qualified first" },
+      { value: "80%", label: "Less manual CRM entry" },
+      { value: "4 wks", label: "Dialer + CRM MVP live" },
+    ],
+    technologies: ["Python", "Next.js", "OpenAI", "PostgreSQL", "WebRTC"],
+    image: "/images/products/dialer-ai-multi-slot/crm.png",
+    featured: true,
+    productSlug: "dialer-ai-agent",
+    tags: [
+      "telecom",
+      "AI agent custom auto dialer",
+      "custom CRM",
+      "AI voice CRM",
+      "outbound",
+      "cold calling",
+    ],
+    challenge:
+      "The agency needed AI on the phone and a CRM that matched their client-specific stages—not a generic SaaS CRM with bolt-on dialing.",
+    solution:
+      "We licensed INDUS AI dialer capacity for conversations, then built a custom CRM layer: dispositions, transcripts, client tenancy, and coachable call reviews.",
+    outcome:
+      "Reps stayed in one outbound workspace; AI and humans wrote the same CRM. The pattern is now our standard hybrid for “best AI agent custom auto dialers with CRMs.”",
+    body: [
+      "Off-the-shelf dialer CRMs forced one pipeline for every client. Managers could not filter dials, appointments, and closes by tenant without spreadsheets.",
+      "Path A shipped fast: AI Agent / Multi-Slot for calling. Path B (studio) added CRM objects, roles, and reporting wired to dialer events.",
+      "Transcripts and dispositions land in the CRM automatically so coaching and billing reports no longer depend on agents remembering to log calls.",
+    ],
+  },
+  {
+    slug: "custom-outbound-crm",
+    title: "Custom Outbound CRM for Multi-Campaign Teams",
+    category: "software",
+    client: "BPO / appointment-setting desk",
+    summary:
+      "Bespoke outbound CRM with campaign isolation, dialer export, disposition taxonomies, and supervisor dashboards—built when HubSpot-style tools did not fit BPO rules.",
+    results: [
+      "12 client workspaces on one dialer fleet",
+      "Disposition accuracy up after mandatory stage gates",
+      "Dialer CSV/API export replaced nightly spreadsheet merges",
+    ],
+    metrics: [
+      { value: "12", label: "Isolated client CRMs" },
+      { value: "2×", label: "Faster campaign setup" },
+      { value: "0", label: "Nightly sheet merges" },
+    ],
+    technologies: ["Next.js", "Node.js", "PostgreSQL", "Redis"],
+    image: "/images/products/dialer-multi-slot/crm.png",
+    featured: true,
+    tags: [
+      "telecom",
+      "custom CRM",
+      "BPO CRM",
+      "outbound",
+      "lead management CRM",
+      "Islamabad studio",
+    ],
+    challenge:
+      "A multi-client desk needed separate pipelines and reporting while sharing dialer seats—SaaS CRMs either leaked data across clients or blocked dialer workflows.",
+    solution:
+      "INDUS designed a custom outbound CRM: tenant isolation, campaign templates, dialer-ready lead queues, and supervisor KPIs. Dialing stayed on INDUS Multi-Slot products.",
+    outcome:
+      "Ops spun up new client campaigns in hours instead of days, with clean billing exports and no shared-list accidents.",
+    body: [
+      "Generic CRMs optimized for inbound deals, not high-volume outbound dispositions and dialer queue hygiene.",
+      "We modeled campaigns, lists, DNC flags, and agent roles first—then connected export hooks to the licensed dialer stack.",
+      "Built from the Islamabad studio for a remote US desk; the same pattern applies to local Pakistan outbound and global BPO teams.",
     ],
   },
   {

@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${project.title} — Case Study`,
     description: project.summary,
+    keywords: project.tags,
     alternates: { canonical: `/work/${project.slug}` },
   };
 }
@@ -75,6 +76,22 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </div>
 
           <aside className="space-y-6">
+            {project.metrics && project.metrics.length > 0 && (
+              <div className="rounded-2xl border border-cyan-200 bg-gradient-to-br from-cyan-50 to-white p-6">
+                <h3 className="font-bold text-[#0c2340]">Key metrics</h3>
+                <dl className="mt-4 grid grid-cols-1 gap-4">
+                  {project.metrics.map((m) => (
+                    <div key={m.label}>
+                      <dt className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-cyan-700">
+                        {m.label}
+                      </dt>
+                      <dd className="mt-1 text-3xl font-bold tracking-tight text-[#0c2340]">{m.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+
             <div className="rounded-2xl border border-line bg-white p-6">
               <h3 className="font-bold text-[#0c2340]">Results</h3>
               <ul className="mt-4 space-y-2">

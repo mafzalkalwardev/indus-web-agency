@@ -1,13 +1,14 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ArrowRight, Check, X } from "lucide-react";
 import { DIALER_COMPARISON } from "@/lib/products";
+import { COMPARISONS } from "@/lib/comparisons";
 import { href } from "@/lib/paths";
-import { Check, X } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Compare AI Auto Dialer Software Plans",
   description:
-    "Compare INDUS Web Agency auto dialer software plans, including DOM automation, Google Voice multi-slot dialing, AI agent calling, AMD, CRM, and admin dashboards.",
+    "Compare INDUS Web Agency auto dialer software plans, including DOM automation, Google Voice multi-slot dialing, AI agent calling, AMD, CRM, and admin dashboards. Plus AI dialer vs SaaS, custom CRM vs off-the-shelf, and Islamabad agency comparisons.",
   alternates: {
     canonical: "/compare",
   },
@@ -41,6 +42,23 @@ export default function ComparePage() {
           Print or save as PDF →
         </Link>
       </p>
+
+      <section className="mt-10 grid gap-4 sm:grid-cols-3">
+        {COMPARISONS.map((c) => (
+          <Link
+            key={c.slug}
+            href={href(`/compare/${c.slug}`)}
+            className="group rounded-2xl border border-line bg-paper-raised p-5 transition hover:border-cyan-300 hover:shadow-sm"
+          >
+            <p className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-accent">{c.eyebrow}</p>
+            <h2 className="mt-2 text-base font-bold text-ink group-hover:text-cyan-800">{c.title}</h2>
+            <p className="mt-2 line-clamp-3 text-sm text-muted">{c.answer}</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-cyan-600">
+              Read comparison <ArrowRight className="h-3.5 w-3.5" />
+            </span>
+          </Link>
+        ))}
+      </section>
 
       <div className="mt-12 overflow-x-auto rounded-2xl border border-line bg-paper-raised">
         <table className="w-full min-w-[800px] border-collapse">

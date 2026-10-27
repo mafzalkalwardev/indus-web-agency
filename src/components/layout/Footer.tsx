@@ -142,8 +142,12 @@ export function Footer() {
             </h4>
             <ul className="mt-4 space-y-2.5">
               <li><Link href={href("/agency/islamabad")} className="text-sm text-slate-300 transition hover:text-white">Web agencies Islamabad</Link></li>
+              <li><Link href={href("/compare/web-agency-islamabad")} className="text-sm text-slate-300 transition hover:text-white">Islamabad agency comparison</Link></li>
               <li><Link href={href("/telecom")} className="text-sm text-slate-300 transition hover:text-white">Telecom hub</Link></li>
               <li><Link href={href("/telecom/best-auto-dialers")} className="text-sm text-slate-300 transition hover:text-white">Best auto dialers</Link></li>
+              <li><Link href={href("/compare/ai-dialer-crm-vs-saas")} className="text-sm text-slate-300 transition hover:text-white">AI dialer CRM vs SaaS</Link></li>
+              <li><Link href={href("/compare/custom-crm-vs-off-the-shelf")} className="text-sm text-slate-300 transition hover:text-white">Custom CRM vs off-the-shelf</Link></li>
+              <li><Link href={href("/work/ai-custom-dialer-crm")} className="text-sm text-slate-300 transition hover:text-white">AI dialer + CRM case study</Link></li>
               <li><Link href={href("/telecom/use-cases")} className="text-sm text-slate-300 transition hover:text-white">Dialer use cases</Link></li>
               <li><Link href={href("/telecom/markets")} className="text-sm text-slate-300 transition hover:text-white">Global markets</Link></li>
               <li><Link href={href("/telecom/crm-types")} className="text-sm text-slate-300 transition hover:text-white">Telecom CRM types</Link></li>

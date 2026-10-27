@@ -524,6 +524,9 @@ export const TELECOM_USE_CASES: TelecomUseCase[] = [
     recommendedProducts: [
       { href: "/products/dialer-ai-agent", label: "AI Agent Solo" },
       { href: "/products/dialer-ai-multi-slot", label: "Enterprise AI Multi-Slot" },
+      { href: "/work/ai-custom-dialer-crm", label: "Metric case study" },
+      { href: "/compare/ai-dialer-crm-vs-saas", label: "vs SaaS dialers" },
+      { href: "/compare/custom-crm-vs-off-the-shelf", label: "Custom CRM vs COTS" },
       { href: "/start-project", label: "Custom dialer + CRM project" },
       { href: "/telecom/crm-types", label: "All CRM types" },
     ],
@@ -539,7 +542,7 @@ export const TELECOM_USE_CASES: TelecomUseCase[] = [
       },
       {
         q: "Can INDUS customize CRM around an AI dialer?",
-        a: "Yes. Studio projects add pipelines, roles, reporting, and sync around AI Agent or Multi-Slot dialers.",
+        a: "Yes. Studio projects add pipelines, roles, reporting, and sync around AI Agent or Multi-Slot dialers. See the AI custom dialer + CRM case study for measured outcomes.",
       },
     ],
   },

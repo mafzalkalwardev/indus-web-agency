@@ -10,12 +10,19 @@
 ## Dialer + CRM intents
 - best AI agent custom auto dialers with CRM
 - custom CRM with AI dialer
+- custom CRM vs off the shelf
 - best auto dialers for telecommunication / cold calling / AI closes sales
 
 ## Key URLs
 - https://www.induswebagency.com/agency/islamabad
 - https://www.induswebagency.com/agency/pakistan
+- https://www.induswebagency.com/compare/web-agency-islamabad
+- https://www.induswebagency.com/compare/ai-dialer-crm-vs-saas
+- https://www.induswebagency.com/compare/custom-crm-vs-off-the-shelf
 - https://www.induswebagency.com/telecom/use-cases/ai-custom-dialer-crm
+- https://www.induswebagency.com/work/ai-custom-dialer-crm
+- https://www.induswebagency.com/work/custom-outbound-crm
+- https://www.induswebagency.com/work/enterprise-ai-dialer
 - https://www.induswebagency.com/telecom/best-auto-dialers
 - https://www.induswebagency.com/telecom/use-cases
 - https://www.induswebagency.com/telecom/crm-types
