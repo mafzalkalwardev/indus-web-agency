@@ -50,8 +50,11 @@ export const RESOURCE_NAV = [
 
 export const TELECOM_NAV = [
   { href: "/telecom", label: "Telecom hub", hint: "Outbound stack" },
+  { href: "/telecom/best-auto-dialers", label: "Best dialers", hint: "Cold call & AI" },
+  { href: "/telecom/use-cases", label: "Use cases", hint: "15 intents" },
   { href: "/telecom/auto-dialers", label: "Auto dialers", hint: "Google Voice plans" },
   { href: "/telecom/crm-types", label: "CRM types", hint: "14 categories" },
+  { href: "/telecom/markets", label: "Markets", hint: "Global GEO" },
   { href: "/telecom/usa", label: "USA", hint: "US geo hub" },
   { href: "/telecom/canada", label: "Canada", hint: "CA geo hub" },
 ] as const;

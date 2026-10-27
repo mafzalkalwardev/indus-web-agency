@@ -45,6 +45,18 @@ export default function TelecomPillarPage() {
           </p>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <HubCard
+              href="/telecom/best-auto-dialers"
+              icon={<Phone className="h-5 w-5 text-cyan-600" />}
+              title="Best auto dialers"
+              body="Cold calling, telecom & AI sales — shortlist for top searches."
+            />
+            <HubCard
+              href="/telecom/use-cases"
+              icon={<Database className="h-5 w-5 text-cyan-600" />}
+              title="Use cases"
+              body="15 intents: SDR, insurance, solar, dispatch, BPO, and more."
+            />
+            <HubCard
               href="/telecom/auto-dialers"
               icon={<Phone className="h-5 w-5 text-cyan-600" />}
               title="Auto dialers"
@@ -54,25 +66,13 @@ export default function TelecomPillarPage() {
               href="/telecom/crm-types"
               icon={<Database className="h-5 w-5 text-cyan-600" />}
               title="Telecom CRM types"
-              body="14 CRM categories for outbound, dispatch, AI voice, compliance, and more."
+              body="14 CRM categories for outbound, dispatch, AI voice, compliance."
             />
             <HubCard
-              href="/telecom/usa"
+              href="/telecom/markets"
               icon={<MapPin className="h-5 w-5 text-cyan-600" />}
-              title="United States"
-              body="US Google Voice outbound hub with TCPA/DNC education."
-            />
-            <HubCard
-              href="/telecom/canada"
-              icon={<MapPin className="h-5 w-5 text-cyan-600" />}
-              title="Canada"
-              body="Dispatch and outbound software for Canadian operators."
-            />
-            <HubCard
-              href="/compare"
-              icon={<Phone className="h-5 w-5 text-cyan-600" />}
-              title="Compare plans"
-              body="Side-by-side dialer feature matrix and pricing."
+              title="Global markets"
+              body="Worldwide + UK, AU, UAE, India — plus USA & Canada hubs."
             />
             <HubCard
               href="/tools/dialer-calculator"

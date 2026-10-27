@@ -1,5 +1,7 @@
 /** Public site contact & support configuration */
 
+import { ALL_TELECOM_KEYWORDS, PRIMARY_FOCUS_KEYWORDS } from "@/lib/telecom-keywords";
+
 export const CANONICAL_SITE_URL = "https://www.induswebagency.com";
 
 export const SITE_CONTACT = {
@@ -14,25 +16,16 @@ export const SITE_SEO = {
   name: "INDUS Web Agency",
   legalName: "INDUS Web Agency",
   url: SITE_CONTACT.siteUrl,
-  title: "INDUS Web Agency | Outbound Telecom Dialers, CRMs & Custom Software",
+  title: "INDUS Web Agency | Best Auto Dialers for Cold Calling, Telecom & AI Sales",
   description:
-    "INDUS Web Agency — Google Voice auto dialers, telecom CRMs for outbound sales & dispatch, AI calling software, plus custom software and websites.",
+    "Best Google Voice auto dialers for telecommunication, cold calling, and AI agents that qualify or close sales—plus telecom CRMs and custom software. Global outbound teams from $29/mo.",
   keywords: [
     "INDUS Web Agency",
-    "Google Voice auto dialer",
-    "outbound dialer CRM",
-    "AI auto dialer",
-    "multi slot dialer",
-    "call center CRM",
-    "dispatch dialer software",
-    "predictive dialer software",
-    "telecommunications CRM",
-    "auto dialer software",
+    ...PRIMARY_FOCUS_KEYWORDS,
+    ...ALL_TELECOM_KEYWORDS.slice(0, 80),
     "custom software development agency",
-    "email marketing automation",
-    "bulk email verifier",
-    "web scraping tools",
-    "lead generation software",
     "Mailforge",
+    "email marketing automation",
+    "web scraping tools",
   ],
 } as const;

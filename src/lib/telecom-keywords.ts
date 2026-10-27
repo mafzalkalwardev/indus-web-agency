@@ -1,0 +1,122 @@
+/**
+ * Outbound dialer keyword map for SEO / AEO / GEO.
+ * Used in meta keywords, pillar copy, and internal linking — not stuffed into visible body text.
+ */
+
+export const KEYWORD_CLUSTERS = {
+  bestOf: [
+    "best auto dialers for telecommunication",
+    "best auto dialers for cold calling",
+    "best auto dialer for cold calling 2026",
+    "best auto dialers for cold calling AI agent",
+    "best AI auto dialer that closes sales",
+    "best Google Voice auto dialer",
+    "best multi slot dialer",
+    "best parallel dialer for sales",
+    "best predictive dialer software",
+    "best power dialer for SDR",
+    "best outbound dialer software",
+    "best sales dialer software",
+    "best call center dialer",
+    "best autodialer for small business",
+    "best autodialer with CRM",
+    "best AI voice dialer",
+    "best dialer for appointment setting",
+    "best dialer for BPO",
+  ],
+  coldCalling: [
+    "auto dialer for cold calling",
+    "cold calling dialer software",
+    "cold call auto dialer",
+    "power dialer for cold calling",
+    "parallel dialer cold calling",
+    "SDR auto dialer",
+    "B2B cold calling dialer",
+    "outbound sales dialer",
+    "high volume cold calling software",
+    "cold calling CRM dialer",
+  ],
+  aiSales: [
+    "AI auto dialer that closes sales",
+    "AI sales agent dialer",
+    "AI voice agent outbound",
+    "AI cold calling software",
+    "conversational AI dialer",
+    "AI that closes sales on phone",
+    "AI appointment setter dialer",
+    "autonomous sales dialer",
+    "AI SDR dialer",
+    "Groq AI dialer",
+  ],
+  telecom: [
+    "auto dialer for telecommunication",
+    "telecommunications auto dialer",
+    "telecom outbound dialer",
+    "telecom call center dialer",
+    "telephony CRM dialer",
+    "VoIP auto dialer software",
+    "Google Voice dialer for business",
+    "business phone auto dialer",
+  ],
+  dialerTypes: [
+    "power dialer vs predictive dialer",
+    "parallel dialer vs power dialer",
+    "multi slot dialer meaning",
+    "AMD voicemail detection dialer",
+    "predictive dialer software",
+    "progressive dialer",
+    "click to call dialer",
+    "preview dialer",
+  ],
+  industries: [
+    "insurance cold calling dialer",
+    "real estate auto dialer",
+    "solar lead dialer",
+    "dispatch dialer software",
+    "freight broker dialer",
+    "debt collection dialer",
+    "mortgage sales dialer",
+    "recruiting auto dialer",
+    "healthcare appointment dialer",
+    "home services lead dialer",
+  ],
+  buyerIntent: [
+    "auto dialer pricing",
+    "cheap auto dialer software",
+    "auto dialer subscription",
+    "Google Voice autodialer download",
+    "auto dialer with CRM",
+    "multi line dialer Windows",
+    "auto dialer for small teams",
+    "auto dialer free trial",
+  ],
+  geoGlobal: [
+    "auto dialer software worldwide",
+    "international outbound dialer",
+    "global cold calling software",
+    "auto dialer USA",
+    "auto dialer Canada",
+    "auto dialer UK",
+    "auto dialer Australia",
+    "auto dialer UAE",
+    "auto dialer India",
+    "outbound dialer for remote teams",
+  ],
+} as const;
+
+/** Flattened unique keyword list for site-wide meta / Organization knowsAbout */
+export const ALL_TELECOM_KEYWORDS: string[] = Array.from(
+  new Set(Object.values(KEYWORD_CLUSTERS).flatMap((c) => [...c]))
+);
+
+export const PRIMARY_FOCUS_KEYWORDS = [
+  "best auto dialers for telecommunication",
+  "best auto dialers for cold calling",
+  "best auto dialers for cold calling AI agent closes the sales",
+  "Google Voice auto dialer",
+  "AI auto dialer",
+  "multi slot dialer",
+  "outbound dialer CRM",
+  "cold calling dialer software",
+  "AI sales agent dialer",
+] as const;
