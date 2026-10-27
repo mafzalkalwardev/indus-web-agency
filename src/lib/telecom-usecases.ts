@@ -113,7 +113,7 @@ export const TELECOM_USE_CASES: TelecomUseCase[] = [
       { href: "/products/dialer-ai-multi-slot", label: "Enterprise AI Multi-Slot" },
       { href: "/work/enterprise-ai-dialer", label: "AI dialer case study" },
     ],
-    relatedSlugs: ["cold-calling", "appointment-setting", "sdr-outbound"],
+    relatedSlugs: ["cold-calling", "appointment-setting", "sdr-outbound", "ai-custom-dialer-crm"],
     faqs: [
       {
         q: "Can an AI dialer actually close sales?",
@@ -491,11 +491,55 @@ export const TELECOM_USE_CASES: TelecomUseCase[] = [
       { href: "/guides/google-voice-auto-dialer-guide", label: "Setup guide" },
       { href: "/compare", label: "Compare tiers" },
     ],
-    relatedSlugs: ["cold-calling", "small-business", "telecommunication"],
+    relatedSlugs: ["cold-calling", "small-business", "telecommunication", "ai-custom-dialer-crm"],
     faqs: [
       {
         q: "What is the best Google Voice auto dialer?",
         a: "For teams: INDUS Multi-Slot. For AI conversations: AI Agent Solo or Enterprise AI Multi-Slot. For solo manual-style automation: DOM Starter.",
+      },
+    ],
+  },
+  {
+    slug: "ai-custom-dialer-crm",
+    name: "AI Agent + Custom Dialer CRM",
+    primaryKeyword: "best AI agent custom auto dialers with CRM",
+    secondaryKeywords: [
+      "AI agent custom auto dialer with CRM",
+      "custom CRM with AI dialer",
+      "best custom CRM for auto dialers",
+      "custom auto dialer software with CRM",
+      "AI voice agent dialer custom CRM",
+      "build custom dialer CRM",
+      "bespoke outbound dialer and CRM",
+      "AI SDR dialer with custom CRM",
+    ],
+    title: "Best AI Agent Custom Auto Dialers with CRMs & Custom CRMs",
+    description:
+      "Best AI agent custom auto dialers with CRM modules—and fully custom CRMs built around your outbound workflow. INDUS licenses AI dialers and engineers bespoke dialer+CRM systems.",
+    answer:
+      "The best AI agent custom auto dialers with CRMs combine conversational AI on calls with disposition logging—and, when off-the-shelf fields are not enough, a custom CRM designed for your pipeline. INDUS offers AI Agent Solo and Enterprise AI Multi-Slot with built-in CRM modules, plus a studio that builds custom CRMs, dialer integrations, and admin dashboards for telecom, sales, and dispatch teams worldwide.",
+    who: "Operators who need AI on the phone and a CRM that matches their exact stages, industries, or multi-client BPO rules—not a generic sales CRM alone.",
+    howIndusHelps:
+      "Path A: License AI dialers with native CRM. Path B: Start a custom project to build or extend a CRM that syncs dispositions, AI transcripts, and campaigns. Hybrid is common—license the dialer engine, customize the CRM layer.",
+    recommendedProducts: [
+      { href: "/products/dialer-ai-agent", label: "AI Agent Solo" },
+      { href: "/products/dialer-ai-multi-slot", label: "Enterprise AI Multi-Slot" },
+      { href: "/start-project", label: "Custom dialer + CRM project" },
+      { href: "/telecom/crm-types", label: "All CRM types" },
+    ],
+    relatedSlugs: ["ai-sales-closing", "telecommunication", "bpo-agency", "cold-calling"],
+    faqs: [
+      {
+        q: "What is an AI agent custom auto dialer with CRM?",
+        a: "Software where an AI talks on outbound calls and writes outcomes into a CRM—either a built-in dialer CRM or a fully custom CRM tailored to your business.",
+      },
+      {
+        q: "Should I buy a dialer CRM or build a custom CRM?",
+        a: "Buy when standard dispositions and campaigns fit. Build custom when you need industry fields, multi-client tenancy, or deep integrations. INDUS does both.",
+      },
+      {
+        q: "Can INDUS customize CRM around an AI dialer?",
+        a: "Yes. Studio projects add pipelines, roles, reporting, and sync around AI Agent or Multi-Slot dialers.",
       },
     ],
   },

@@ -211,6 +211,7 @@ export function Header() {
             {COMPANY_NAV.filter((i) => i.href !== "/faq").map((item) => (
               <NavLink key={item.href} path={item.href} label={item.label} isActive={isActive} />
             ))}
+            <NavLink path="/agency/islamabad" label="Islamabad" isActive={isActive} className="hidden xl:inline" />
             <NavLink path="/guides" label="Guides" isActive={isActive} className="hidden xl:inline" />
           </div>
 

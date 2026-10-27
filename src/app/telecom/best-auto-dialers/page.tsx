@@ -99,6 +99,16 @@ export default function BestAutoDialersPage() {
                 .
               </p>
             </li>
+            <li className="rounded-xl border border-line bg-white p-5">
+              <h3 className="font-bold text-[#0c2340]">Best AI agent custom auto dialers with CRMs &amp; custom CRMs</h3>
+              <p className="mt-2 text-sm text-muted">
+                License AI dialers with CRM modules, or commission a bespoke CRM —{" "}
+                <Link href={href("/telecom/use-cases/ai-custom-dialer-crm")} className="text-cyan-600 hover:underline">
+                  AI custom dialer + CRM guide
+                </Link>
+                .
+              </p>
+            </li>
           </ul>
         </section>
 

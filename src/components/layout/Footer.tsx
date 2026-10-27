@@ -141,6 +141,7 @@ export function Footer() {
               Resources
             </h4>
             <ul className="mt-4 space-y-2.5">
+              <li><Link href={href("/agency/islamabad")} className="text-sm text-slate-300 transition hover:text-white">Web agencies Islamabad</Link></li>
               <li><Link href={href("/telecom")} className="text-sm text-slate-300 transition hover:text-white">Telecom hub</Link></li>
               <li><Link href={href("/telecom/best-auto-dialers")} className="text-sm text-slate-300 transition hover:text-white">Best auto dialers</Link></li>
               <li><Link href={href("/telecom/use-cases")} className="text-sm text-slate-300 transition hover:text-white">Dialer use cases</Link></li>
