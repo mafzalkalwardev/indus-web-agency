@@ -239,6 +239,78 @@ export const COMPARISONS: ComparisonPage[] = [
     ],
     publishedAt: "2026-04-26",
   },
+  {
+    slug: "indus-vs-cloud-dialers",
+    title: "INDUS vs Cloud Power Dialers (Orum / Mojo-style)",
+    metaTitle: "INDUS vs Orum Mojo-Style Cloud Dialers",
+    description:
+      "Honest comparison: INDUS Google Voice multi-slot and AI agent dialers with CRM options vs typical browser/cloud power dialers like Orum- or Mojo-style platforms.",
+    primaryKeyword: "INDUS vs Orum Mojo dialer",
+    secondaryKeywords: [
+      "Orum alternative Google Voice",
+      "Mojo dialer alternative",
+      "cloud power dialer vs multi-slot",
+      "AI agent dialer vs power dialer",
+      "best alternative to cloud dialers",
+    ],
+    eyebrow: "Competitor-style comparison",
+    leftLabel: "INDUS Web Agency",
+    rightLabel: "Typical cloud power dialer",
+    answer:
+      "Cloud power dialers excel at parallel dialing inside a hosted browser stack. INDUS competes as licensed Google Voice multi-slot and AI agent dialers you run with optional custom CRM—better when you want AI conversations, product ownership, or a bespoke outbound CRM instead of another seat in a closed SaaS.",
+    who: "Teams evaluating Orum-, Mojo-, or similar cloud dialers who also need AI agents, Google Voice workflows, or custom CRM depth.",
+    verdict:
+      "Stay on a cloud power dialer if your whole team already lives there and you only need faster connects. Choose INDUS when AI-on-call, Google Voice multi-slot licensing, self-hosted downloads, or a custom CRM around dialing matters more than a pure SaaS seat.",
+    rows: [
+      {
+        feature: "Dialing model",
+        left: "Multi-slot Google Voice + AI agent tiers",
+        right: "Cloud parallel / power dial in browser",
+      },
+      {
+        feature: "AI conversations",
+        left: "First-class AI Agent Solo / Multi-Slot AI",
+        right: "Varies; often human-first with light assist",
+      },
+      {
+        feature: "CRM",
+        left: "Built-in modules + custom CRM studio",
+        right: "Native light CRM or Salesforce/HubSpot sync",
+      },
+      {
+        feature: "Ownership",
+        left: "Licensed download + optional custom build",
+        right: "Vendor-hosted subscription only",
+      },
+      {
+        feature: "Pricing shape",
+        left: "From $29–$199/mo product plans + projects",
+        right: "Per-seat cloud pricing (often higher at scale)",
+      },
+      {
+        feature: "Best fit",
+        left: "AI + custom CRM + Google Voice operators",
+        right: "Sales teams standardized on one cloud dialer",
+      },
+    ],
+    relatedLinks: [
+      { href: "/compare/ai-dialer-crm-vs-saas", label: "AI dialer CRM vs SaaS" },
+      { href: "/telecom/best-auto-dialers", label: "Best auto dialers" },
+      { href: "/work/ai-custom-dialer-crm", label: "AI dialer + CRM case study" },
+      { href: "/products?cat=dialer", label: "Browse INDUS dialers" },
+    ],
+    faqs: [
+      {
+        q: "Is INDUS an Orum or Mojo replacement?",
+        a: "For many Google Voice and AI-agent use cases, yes as an alternative stack. Feature parity is not identical—cloud dialers may win on polish for pure parallel dialing; INDUS wins on AI + custom CRM + licensed tools.",
+      },
+      {
+        q: "Can I migrate lists from a cloud dialer?",
+        a: "Yes. Export CSV/API leads into INDUS dialer CRM or a custom CRM we build, then map dispositions.",
+      },
+    ],
+    publishedAt: "2026-04-26",
+  },
 ];
 
 export function getComparison(slug: string): ComparisonPage | undefined {

@@ -143,8 +143,12 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5">
               <li><Link href={href("/agency/islamabad")} className="text-sm text-slate-300 transition hover:text-white">Web agencies Islamabad</Link></li>
               <li><Link href={href("/compare/web-agency-islamabad")} className="text-sm text-slate-300 transition hover:text-white">Islamabad agency comparison</Link></li>
+              <li><Link href={href("/process/custom-dialer-crm")} className="text-sm text-slate-300 transition hover:text-white">How we build dialer + CRM</Link></li>
+              <li><Link href={href("/resources/dialer-crm-checklist")} className="text-sm text-slate-300 transition hover:text-white">Dialer + CRM checklist</Link></li>
               <li><Link href={href("/telecom")} className="text-sm text-slate-300 transition hover:text-white">Telecom hub</Link></li>
               <li><Link href={href("/telecom/best-auto-dialers")} className="text-sm text-slate-300 transition hover:text-white">Best auto dialers</Link></li>
+              <li><Link href={href("/telecom/verticals/insurance")} className="text-sm text-slate-300 transition hover:text-white">Insurance dialer + CRM</Link></li>
+              <li><Link href={href("/compare/indus-vs-cloud-dialers")} className="text-sm text-slate-300 transition hover:text-white">vs Orum/Mojo-style dialers</Link></li>
               <li><Link href={href("/compare/ai-dialer-crm-vs-saas")} className="text-sm text-slate-300 transition hover:text-white">AI dialer CRM vs SaaS</Link></li>
               <li><Link href={href("/compare/custom-crm-vs-off-the-shelf")} className="text-sm text-slate-300 transition hover:text-white">Custom CRM vs off-the-shelf</Link></li>
               <li><Link href={href("/work/ai-custom-dialer-crm")} className="text-sm text-slate-300 transition hover:text-white">AI dialer + CRM case study</Link></li>

@@ -5,8 +5,10 @@ import { PageHero } from "@/components/agency/PageHero";
 import { FaqSection } from "@/components/seo/FaqSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TelecomCta } from "@/components/telecom/TelecomCta";
+import { LeadMagnetForm } from "@/components/resources/LeadMagnetForm";
 import { TELECOM_USE_CASES, getTelecomUseCase, getRelatedUseCases } from "@/lib/telecom-usecases";
 import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
+import { pageSocialMeta } from "@/lib/seo-meta";
 import { href } from "@/lib/paths";
 
 export function generateStaticParams() {
@@ -26,6 +28,12 @@ export async function generateMetadata({
     description: uc.description,
     keywords: [uc.primaryKeyword, ...uc.secondaryKeywords, "INDUS Web Agency", "auto dialer"],
     alternates: { canonical: `/telecom/use-cases/${uc.slug}` },
+    ...pageSocialMeta({
+      title: uc.title,
+      description: uc.description,
+      path: `/telecom/use-cases/${uc.slug}`,
+      keywords: [uc.primaryKeyword, ...uc.secondaryKeywords],
+    }),
   };
 }
 
@@ -89,6 +97,10 @@ export default async function TelecomUseCasePage({ params }: { params: Promise<{
               </li>
             ))}
           </ul>
+        </section>
+
+        <section className="mt-12">
+          <LeadMagnetForm resource="dialer-crm-stack-checklist" compact />
         </section>
 
         <FaqSection faqs={uc.faqs} />

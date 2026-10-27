@@ -43,9 +43,11 @@ export const PRODUCT_CATEGORIES = [
 
 export const RESOURCE_NAV = [
   { href: "/guides", label: "Guides", hint: "SEO articles" },
+  { href: "/process/custom-dialer-crm", label: "Dialer+CRM process", hint: "How we build" },
+  { href: "/resources/dialer-crm-checklist", label: "Stack checklist", hint: "Free lead magnet" },
+  { href: "/telecom/verticals/insurance", label: "Insurance vertical", hint: "Dialer + CRM" },
   { href: "/telecom/crm-types", label: "CRM types", hint: "Telecom taxonomy" },
-  { href: "/compare/ai-dialer-crm-vs-saas", label: "Dialer vs SaaS", hint: "AI + CRM compare" },
-  { href: "/compare/custom-crm-vs-off-the-shelf", label: "Custom CRM vs COTS", hint: "Build vs buy" },
+  { href: "/compare/indus-vs-cloud-dialers", label: "vs cloud dialers", hint: "Orum/Mojo-style" },
   { href: "/tools/dialer-calculator", label: "Dialer calculator", hint: "Free tool" },
   { href: "/resources/dialer-guide", label: "Comparison guide", hint: "Free download" },
 ] as const;

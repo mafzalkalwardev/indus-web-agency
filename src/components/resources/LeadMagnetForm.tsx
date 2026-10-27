@@ -4,7 +4,38 @@ import { useState } from "react";
 import { Download, Loader2, CheckCircle2 } from "lucide-react";
 import { href } from "@/lib/paths";
 
-export function LeadMagnetForm() {
+export type LeadResourceId = "dialer-comparison-guide" | "dialer-crm-stack-checklist";
+
+const RESOURCE_COPY: Record<
+  LeadResourceId,
+  { title: string; subtitle: string; success: string; cta: string; nextHref: string; nextLabel: string }
+> = {
+  "dialer-comparison-guide": {
+    title: "Free dialer comparison guide",
+    subtitle: "PDF-style breakdown emailed to you",
+    success: "We sent the dialer comparison guide and a link to our plan calculator.",
+    cta: "Send me the guide",
+    nextHref: "/tools/dialer-calculator",
+    nextLabel: "Try the dialer calculator now →",
+  },
+  "dialer-crm-stack-checklist": {
+    title: "Dialer + CRM stack checklist",
+    subtitle: "Buy vs build, AI agent fit, and CRM fields — emailed free",
+    success: "Checklist is on the way. Meanwhile, skim the build process and comparisons.",
+    cta: "Send me the checklist",
+    nextHref: "/process/custom-dialer-crm",
+    nextLabel: "See how we build dialer + CRM →",
+  },
+};
+
+export function LeadMagnetForm({
+  resource = "dialer-comparison-guide",
+  compact = false,
+}: {
+  resource?: LeadResourceId;
+  compact?: boolean;
+}) {
+  const copy = RESOURCE_COPY[resource];
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +50,7 @@ export function LeadMagnetForm() {
       const res = await fetch(href("/api/leads"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, name, resource: "dialer-comparison-guide" }),
+        body: JSON.stringify({ email, name, resource }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to submit");
@@ -33,34 +64,34 @@ export function LeadMagnetForm() {
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-8 text-center">
-        <CheckCircle2 className="mx-auto h-10 w-10 text-emerald-600" />
-        <h3 className="mt-4 text-xl font-bold text-[#0c2340]">Check your inbox</h3>
-        <p className="mt-2 text-sm text-muted">
-          We sent the dialer comparison guide and a link to our plan calculator.
-        </p>
-        <a
-          href={href("/tools/dialer-calculator")}
-          className="mt-6 inline-block text-sm font-semibold text-cyan-600 hover:underline"
-        >
-          Try the dialer calculator now →
+      <div
+        className={`rounded-2xl border border-emerald-200 bg-emerald-50 text-center ${compact ? "p-5" : "p-8"}`}
+      >
+        <CheckCircle2 className={`mx-auto text-emerald-600 ${compact ? "h-8 w-8" : "h-10 w-10"}`} />
+        <h3 className={`mt-3 font-bold text-[#0c2340] ${compact ? "text-lg" : "text-xl"}`}>Check your inbox</h3>
+        <p className="mt-2 text-sm text-muted">{copy.success}</p>
+        <a href={href(copy.nextHref)} className="mt-4 inline-block text-sm font-semibold text-cyan-600 hover:underline">
+          {copy.nextLabel}
         </a>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl border border-line bg-white p-8 shadow-sm">
+    <form
+      onSubmit={handleSubmit}
+      className={`rounded-2xl border border-line bg-white shadow-sm ${compact ? "p-5" : "p-8"}`}
+    >
       <div className="flex items-center gap-3">
-        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
-          <Download className="h-6 w-6" />
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
+          <Download className="h-5 w-5" />
         </span>
         <div>
-          <h3 className="font-bold text-[#0c2340]">Free dialer comparison guide</h3>
-          <p className="text-sm text-muted">PDF-style breakdown emailed to you</p>
+          <h3 className="font-bold text-[#0c2340]">{copy.title}</h3>
+          <p className="text-sm text-muted">{copy.subtitle}</p>
         </div>
       </div>
-      <div className="mt-6 space-y-4">
+      <div className={`mt-5 space-y-3 ${compact ? "" : "space-y-4"}`}>
         <div>
           <label className="text-sm font-medium text-[#0c2340]">Name</label>
           <input
@@ -87,10 +118,10 @@ export function LeadMagnetForm() {
       <button
         type="submit"
         disabled={loading}
-        className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-600 py-3 text-sm font-semibold text-white transition hover:bg-cyan-500 disabled:opacity-50"
+        className="mt-5 flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-600 py-3 text-sm font-semibold text-white transition hover:bg-cyan-500 disabled:opacity-50"
       >
         {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
-        Send me the guide
+        {copy.cta}
       </button>
       <p className="mt-3 text-center text-xs text-muted">No spam. Unsubscribe anytime via reply.</p>
     </form>

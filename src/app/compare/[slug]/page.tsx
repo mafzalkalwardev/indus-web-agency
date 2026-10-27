@@ -5,8 +5,10 @@ import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/agency/PageHero";
 import { FaqSection } from "@/components/seo/FaqSection";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { LeadMagnetForm } from "@/components/resources/LeadMagnetForm";
 import { COMPARISONS, getComparison } from "@/lib/comparisons";
 import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
+import { pageSocialMeta } from "@/lib/seo-meta";
 import { href } from "@/lib/paths";
 
 export function generateStaticParams() {
@@ -26,6 +28,12 @@ export async function generateMetadata({
     description: page.description,
     keywords: [page.primaryKeyword, ...page.secondaryKeywords, "INDUS Web Agency"],
     alternates: { canonical: `/compare/${page.slug}` },
+    ...pageSocialMeta({
+      title: page.metaTitle,
+      description: page.description,
+      path: `/compare/${page.slug}`,
+      keywords: [page.primaryKeyword, ...page.secondaryKeywords],
+    }),
   };
 }
 
@@ -112,6 +120,10 @@ export default async function ComparisonSlugPage({
               </li>
             ))}
           </ul>
+        </section>
+
+        <section className="mt-12">
+          <LeadMagnetForm resource="dialer-crm-stack-checklist" compact />
         </section>
 
         <FaqSection faqs={page.faqs} />

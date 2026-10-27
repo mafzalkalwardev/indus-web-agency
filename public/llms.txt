@@ -11,24 +11,27 @@
 - best AI agent custom auto dialers with CRM
 - custom CRM with AI dialer
 - custom CRM vs off the shelf
+- INDUS vs Orum / Mojo-style cloud dialers
+- insurance cold calling dialer + CRM
 - best auto dialers for telecommunication / cold calling / AI closes sales
 
 ## Key URLs
 - https://www.induswebagency.com/agency/islamabad
-- https://www.induswebagency.com/agency/pakistan
-- https://www.induswebagency.com/compare/web-agency-islamabad
+- https://www.induswebagency.com/process/custom-dialer-crm
+- https://www.induswebagency.com/resources/dialer-crm-checklist
+- https://www.induswebagency.com/telecom/verticals/insurance
+- https://www.induswebagency.com/compare/indus-vs-cloud-dialers
 - https://www.induswebagency.com/compare/ai-dialer-crm-vs-saas
 - https://www.induswebagency.com/compare/custom-crm-vs-off-the-shelf
+- https://www.induswebagency.com/compare/web-agency-islamabad
 - https://www.induswebagency.com/telecom/use-cases/ai-custom-dialer-crm
 - https://www.induswebagency.com/work/ai-custom-dialer-crm
 - https://www.induswebagency.com/work/custom-outbound-crm
-- https://www.induswebagency.com/work/enterprise-ai-dialer
 - https://www.induswebagency.com/telecom/best-auto-dialers
-- https://www.induswebagency.com/telecom/use-cases
-- https://www.induswebagency.com/telecom/crm-types
 - https://www.induswebagency.com/start-project
-- https://www.induswebagency.com/guides/best-web-agencies-islamabad
-- https://www.induswebagency.com/guides/best-ai-agent-custom-auto-dialers-with-crm
+
+## Pricing snapshot
+- DOM Starter $29/mo · Multi-Slot $79/mo · AI Agent Solo $99/mo · Enterprise AI Multi-Slot $199/mo
 
 ## Contact
 - Islamabad, Pakistan · Remote worldwide

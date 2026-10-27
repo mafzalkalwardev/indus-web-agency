@@ -329,24 +329,28 @@ export async function sendLeadMagnetEmail(details: {
 }) {
   const calc = `${SITE_CONTACT.siteUrl}${details.calculatorUrl}`;
   const compare = `${SITE_CONTACT.siteUrl}${details.compareUrl}`;
+  const secondaryLabel = details.compareUrl.includes("process")
+    ? "How we build custom dialer + CRM →"
+    : "Open your resource / comparison →";
   const subject = `Your ${details.resourceTitle} — INDUS Web Agency`;
   const html = `
     <div style="font-family:sans-serif;max-width:560px">
       <h2 style="color:#0c2340">Hi ${details.name},</h2>
-      <p>Thanks for downloading the <strong>${details.resourceTitle}</strong>. Here's a quick summary:</p>
+      <p>Thanks for requesting the <strong>${details.resourceTitle}</strong>. Here's a quick stack summary:</p>
       <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
         <tr style="background:#f8fafc"><td style="padding:10px;border:1px solid #e2e8f0"><strong>DOM/BOM Starter</strong></td><td style="padding:10px;border:1px solid #e2e8f0">$29/mo — solo agent, single line</td></tr>
         <tr><td style="padding:10px;border:1px solid #e2e8f0"><strong>Multi-Slot Agent</strong></td><td style="padding:10px;border:1px solid #e2e8f0">$79/mo — 5 parallel lines, team dispatch</td></tr>
         <tr style="background:#f8fafc"><td style="padding:10px;border:1px solid #e2e8f0"><strong>AI Agent Solo</strong></td><td style="padding:10px;border:1px solid #e2e8f0">$99/mo — AI on every call</td></tr>
         <tr><td style="padding:10px;border:1px solid #e2e8f0"><strong>Enterprise AI Multi-Slot</strong></td><td style="padding:10px;border:1px solid #e2e8f0">$199/mo — dispatch + AI on picked call</td></tr>
       </table>
+      <p><strong>Checklist snapshot:</strong> License dialer → decide built-in vs custom CRM → map dispositions → AI handoff rules → compliance logging → go-live.</p>
       <p><a href="${calc}" style="display:inline-block;background:#0891b2;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">Try the Dialer Calculator →</a></p>
-      <p style="margin-top:12px"><a href="${compare}" style="display:inline-block;border:1px solid #0891b2;color:#0891b2;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600">Print / save comparison chart (PDF)</a></p>
-      <p style="margin-top:12px"><a href="${SITE_CONTACT.siteUrl}/compare" style="color:#0891b2">Interactive comparison table</a> · <a href="${SITE_CONTACT.siteUrl}/products?cat=dialer" style="color:#0891b2">Browse dialer products</a></p>
+      <p style="margin-top:12px"><a href="${compare}" style="display:inline-block;border:1px solid #0891b2;color:#0891b2;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600">${secondaryLabel}</a></p>
+      <p style="margin-top:12px"><a href="${SITE_CONTACT.siteUrl}/compare" style="color:#0891b2">Comparisons</a> · <a href="${SITE_CONTACT.siteUrl}/products?cat=dialer" style="color:#0891b2">Dialer products</a> · <a href="${SITE_CONTACT.siteUrl}/resources/dialer-crm-checklist" style="color:#0891b2">Checklist page</a></p>
       <p style="color:#64748b;font-size:12px">INDUS Web Agency · ${SITE_CONTACT.email}</p>
     </div>
   `;
-  const text = `Hi ${details.name}, here's your dialer guide. Calculator: ${calc} | Compare: ${compare}`;
+  const text = `Hi ${details.name}, here's your ${details.resourceTitle}. Calculator: ${calc} | Next: ${compare}`;
   return sendMail({ to: details.email, subject, text, html });
 }
 

@@ -300,15 +300,17 @@ export const TELECOM_USE_CASES: TelecomUseCase[] = [
     howIndusHelps:
       "Dialers for calling volume; studio builds for insurance-specific CRM fields and compliance logging.",
     recommendedProducts: [
+      { href: "/telecom/verticals/insurance", label: "Insurance vertical hub" },
       { href: "/products/dialer-multi-slot", label: "Multi-Slot Agent" },
       { href: "/telecom/crm/vertical-crm", label: "Vertical CRM" },
       { href: "/telecom/crm/compliance-tcpa-crm", label: "Compliance CRM" },
+      { href: "/process/custom-dialer-crm", label: "Build process" },
     ],
     relatedSlugs: ["appointment-setting", "cold-calling", "ai-sales-closing"],
     faqs: [
       {
         q: "Do you have an insurance-specific dialer?",
-        a: "Calling runs on INDUS dialer products; insurance objects (policies, products) are added via custom vertical CRM projects.",
+        a: "Calling runs on INDUS dialer products; insurance objects (policies, products) are added via custom vertical CRM projects. See /telecom/verticals/insurance for the full stack.",
       },
     ],
   },

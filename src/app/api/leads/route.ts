@@ -8,6 +8,11 @@ const RESOURCES: Record<string, { title: string; calculatorUrl: string; compareU
     calculatorUrl: "/tools/dialer-calculator",
     compareUrl: "/resources/dialer-comparison",
   },
+  "dialer-crm-stack-checklist": {
+    title: "Dialer + CRM Stack Checklist",
+    calculatorUrl: "/tools/dialer-calculator",
+    compareUrl: "/process/custom-dialer-crm",
+  },
 };
 
 export async function POST(req: NextRequest) {
