@@ -1,32 +1,70 @@
+<div align="center">
+
 # INDUS Web Agency
 
-Professional automation tools marketplace — subscribe to auto dialers, email marketing tools, and web scrapers individually.
+<img src="https://readme-typing-svg.demolab.com?font=Inter&weight=700&size=28&duration=2800&pause=700&color=2563EB&center=true&vCenter=true&width=900&lines=Automation+Tools+Marketplace;Subscriptions+%2B+Product+Catalog;Dialers%2C+Scrapers%2C+Email+Tools;Modern+TypeScript+storefront" alt="Typing SVG" />
 
-## Live URLs
+<p>
+  <img src="https://komarev.com/ghpvc/?username=mafzalkalwardev&label=Project%20Views&color=2563eb&style=for-the-badge" alt="Project views" />
+  <img src="https://img.shields.io/github/stars/mafzalkalwardev/indus-web-agency?style=for-the-badge&color=22c55e" alt="GitHub stars" />
+  <img src="https://img.shields.io/github/forks/mafzalkalwardev/indus-web-agency?style=for-the-badge&color=f59e0b" alt="GitHub forks" />
+  <img src="https://img.shields.io/github/license/mafzalkalwardev/indus-web-agency?style=for-the-badge&color=64748b" alt="License" />
+</p>
 
-- **Vercel (full app — auth, subscriptions, downloads):** https://indus-web-agency.vercel.app
-- **GitHub Pages (marketing site):** https://mafzalkalwardev.github.io/indus-web-agency/
-- **GitHub Repository:** https://github.com/mafzalkalwardev/indus-web-agency
+<p>
+  <img src="https://skillicons.dev/icons?i=ts,react,nodejs,nextjs" alt="Skill icons" />
+</p>
 
-## Screenshots
+<p>
+  <strong>INDUS Web Agency automation tools marketplace with subscriptions, product catalog, and modern TypeScript storefront.</strong>
+</p>
 
-### Homepage
-![INDUS Web Agency homepage](docs/screenshots/home.png)
+</div>
 
-### Products catalog
-![Products catalog](docs/screenshots/products.png)
+---
 
-### Pricing
-![Pricing plans](docs/screenshots/pricing.png)
+## Trophy Cards
 
-### Auto dialer comparison
-![Compare auto dialer tiers](docs/screenshots/compare.png)
+<div align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=mafzalkalwardev&theme=algolia&no-frame=true&no-bg=true&margin-w=12&margin-h=12&column=4" alt="GitHub trophy cards" />
+</div>
 
-### Live demos
-![Live product demos](docs/screenshots/demos.png)
+---
 
-### Product detail page
-![Product detail with setup guide](docs/screenshots/product-detail.png)
+## Stats Cards
+
+<div align="center">
+  <img height="165" src="https://github-readme-stats-sigma-five.vercel.app/api?username=mafzalkalwardev&show_icons=true&theme=tokyonight&hide_border=true&rank_icon=github" alt="GitHub stats" />
+  <img height="165" src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=mafzalkalwardev&layout=compact&theme=tokyonight&hide_border=true" alt="Top languages" />
+</div>
+
+---
+
+## Activity Graph
+
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=mafzalkalwardev&theme=react-dark&hide_border=true&area=true" alt="GitHub activity graph" />
+</div>
+
+---
+
+## Contribution Snake
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/mafzalkalwardev/google-voice-dispatch-agent/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/mafzalkalwardev/google-voice-dispatch-agent/output/github-contribution-grid-snake.svg">
+    <img alt="Contribution snake" src="https://raw.githubusercontent.com/mafzalkalwardev/google-voice-dispatch-agent/output/github-contribution-grid-snake.svg">
+  </picture>
+</div>
+
+---
+
+## SEO Keywords
+
+`automation marketplace` `Indus Web Agency` `subscriptions` `SaaS storefront`
+
+---
 
 ## Features
 
