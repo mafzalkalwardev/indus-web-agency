@@ -83,7 +83,7 @@ export default async function TelecomMarketPage({ params }: { params: Promise<{ 
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-muted">
             <li>
               <Link href={href("/telecom/best-auto-dialers")} className="text-cyan-600 hover:underline">
-                Best auto dialers hub
+                Auto dialers hub
               </Link>
             </li>
             <li>

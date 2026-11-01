@@ -612,10 +612,6 @@ export const TELECOM_CRM_TYPES: TelecomCrmType[] = [
         a: "Software that records consent, DNC status, and call timing so outbound teams can demonstrate responsible dialing practices.",
       },
       {
-        q: "Does INDUS guarantee TCPA compliance?",
-        a: "No. We provide tools and educational content. Compliance is your responsibility—consult qualified counsel for your use case.",
-      },
-      {
         q: "Can you add DNC scrubbing to a dialer?",
         a: "Yes as a custom feature—hooking your DNC lists into campaign loading and blocking dials to suppressed numbers.",
       },

@@ -18,7 +18,7 @@ export const SITE_SEO = {
   url: SITE_CONTACT.siteUrl,
   title: "INDUS Web Agency | AI Dialers with CRM, Custom CRMs & Islamabad Web Agency",
   description:
-    "Best AI agent custom auto dialers with CRMs, custom CRM development, and Google Voice cold-calling dialers—plus one of the strongest web & software agencies in Islamabad, serving clients worldwide.",
+    "AI agent custom auto dialers with CRMs, custom CRM development, and Google Voice cold-calling dialers—plus a web & software agency in Islamabad, serving clients worldwide.",
   keywords: [
     "INDUS Web Agency",
     ...PRIMARY_FOCUS_KEYWORDS,

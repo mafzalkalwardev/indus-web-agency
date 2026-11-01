@@ -70,7 +70,7 @@ export const GUIDES: GuideArticle[] = [
     sections: [
       {
         heading: "Buy when the workflow matches",
-        body: "If you need standard outbound dialing, email verification, or lead scraping — our licensed products are battle-tested and faster to deploy than a custom build.",
+        body: "If you need standard outbound dialing, email verification, or lead scraping — our licensed products are developed in-house and faster to deploy than a custom build.",
       },
       {
         heading: "Build when you're unique",
@@ -84,7 +84,7 @@ export const GUIDES: GuideArticle[] = [
   },
   {
     slug: "google-voice-auto-dialer-guide",
-    title: "Google Voice Auto Dialer: Setup & Best Practices",
+    title: "Google Voice Auto Dialer: Setup and Practices",
     description:
       "How DOM/BOM automation works with Google Voice, what to expect from parallel slots, and when to upgrade to AI dispatch.",
     readMinutes: 7,
@@ -246,7 +246,7 @@ export const GUIDES: GuideArticle[] = [
       },
       {
         heading: "Compliance education",
-        body: "Track consent sources, scrub DNC lists, and respect calling windows when required. See /telecom/usa and the compliance CRM guide for tooling options—not legal guarantees.",
+        body: "Track consent sources, scrub DNC lists, and respect calling windows when required. See /telecom/usa and the compliance CRM guide for tooling options. This is not legal advice.",
       },
     ],
   },
@@ -292,10 +292,6 @@ export const GUIDES: GuideArticle[] = [
     publishedAt: "2026-04-10",
     category: "telecom",
     faqs: [
-      {
-        q: "Does INDUS guarantee TCPA compliance?",
-        a: "No. We provide educational content and optional compliance CRM features. Legal compliance is your responsibility—hire qualified counsel.",
-      },
       {
         q: "How do call logs help?",
         a: "Timestamped dispositions and list sources create an audit trail for internal review. They are not a substitute for legal advice.",
@@ -452,7 +448,7 @@ export const GUIDES: GuideArticle[] = [
     slug: "best-auto-dialers-cold-calling-2026",
     title: "Best Auto Dialers for Cold Calling (2026)",
     description:
-      "What makes the best auto dialers for cold calling—power vs multi-slot/parallel, CRM logging, and when to add an AI agent. INDUS shortlist for SDR teams worldwide.",
+      "What to look for in auto dialers for cold calling—power vs multi-slot/parallel, CRM logging, and when to add an AI agent. INDUS shortlist for SDR teams worldwide.",
     readMinutes: 8,
     publishedAt: "2026-04-20",
     category: "telecom",
@@ -469,7 +465,7 @@ export const GUIDES: GuideArticle[] = [
     sections: [
       {
         heading: "Direct answer",
-        body: "The best auto dialers for cold calling reduce manual dialing, connect more live conversations, and log outcomes. INDUS Multi-Slot runs up to five Google Voice lines with picked-call-only agent UI; AI Solo/Multi-Slot add conversational AI for qualification or scripted closes.",
+        body: "Auto dialers for cold calling reduce manual dialing, connect more live conversations, and log outcomes. INDUS Multi-Slot runs up to five Google Voice lines with picked-call-only agent UI; AI Solo/Multi-Slot add conversational AI for qualification or scripted closes.",
       },
       {
         heading: "How to choose",
@@ -485,7 +481,7 @@ export const GUIDES: GuideArticle[] = [
     slug: "best-auto-dialers-telecommunication-2026",
     title: "Best Auto Dialers for Telecommunication (2026)",
     description:
-      "Best auto dialers for telecommunication outbound—telecom sales, telephony CRM, multi-slot dialing, and AI voice from INDUS Web Agency.",
+      "Auto dialers for telecommunication outbound—telecom sales, telephony CRM, multi-slot dialing, and AI voice from INDUS Web Agency.",
     readMinutes: 7,
     publishedAt: "2026-04-20",
     category: "telecom",
@@ -498,7 +494,7 @@ export const GUIDES: GuideArticle[] = [
     sections: [
       {
         heading: "Direct answer",
-        body: "Best auto dialers for telecommunication combine reliable outbound calling with call logging and CRM. INDUS focuses on Google Voice multi-slot and AI dialers rather than full carrier-grade CCaaS—ideal for sales and dispatch-style telecom outbound.",
+        body: "Auto dialers for telecommunication combine reliable outbound calling with call logging and CRM. INDUS focuses on Google Voice multi-slot and AI dialers rather than full carrier-grade CCaaS—ideal for sales and dispatch-style telecom outbound.",
       },
       {
         heading: "Dialer + CRM",
@@ -514,7 +510,7 @@ export const GUIDES: GuideArticle[] = [
     slug: "best-ai-auto-dialer-closes-sales-2026",
     title: "Best AI Auto Dialers That Help Close Sales (2026)",
     description:
-      "Best auto dialers for cold calling when an AI agent qualifies or closes—INDUS AI Agent Solo and Enterprise AI Multi-Slot explained.",
+      "Auto dialers for cold calling when an AI agent qualifies or closes—INDUS AI Agent Solo and Enterprise AI Multi-Slot explained.",
     readMinutes: 7,
     publishedAt: "2026-04-21",
     category: "telecom",
@@ -531,7 +527,7 @@ export const GUIDES: GuideArticle[] = [
     sections: [
       {
         heading: "Direct answer",
-        body: "Searchers looking for best auto dialers for cold calling where an AI agent closes (or heavily qualifies) sales need conversational AI on connect plus disposition CRM. INDUS AI Agent Solo and Enterprise AI Multi-Slot are built for that workflow on Google Voice.",
+        body: "Searchers looking for auto dialers for cold calling where an AI agent closes (or heavily qualifies) sales need conversational AI on connect plus disposition CRM. INDUS AI Agent Solo and Enterprise AI Multi-Slot are built for that workflow on Google Voice.",
       },
       {
         heading: "Hybrid closing",
@@ -564,7 +560,7 @@ export const GUIDES: GuideArticle[] = [
     sections: [
       {
         heading: "Direct answer",
-        body: "Best AI agent custom auto dialers with CRMs combine conversational AI calling and CRM logging. INDUS ships AI dialers with built-in CRM and builds custom CRMs when your pipeline is unique—hybrid projects are common.",
+        body: "AI agent custom auto dialers with CRMs combine conversational AI calling and CRM logging. INDUS ships AI dialers with built-in CRM and builds custom CRMs when your pipeline is unique—hybrid projects are common.",
       },
       {
         heading: "Product path vs studio path",
@@ -597,7 +593,7 @@ export const GUIDES: GuideArticle[] = [
     sections: [
       {
         heading: "Direct answer",
-        body: "Best web agencies in Islamabad should show real shipped work, clear communication, and a specialty. INDUS specializes in custom software and websites plus AI auto dialers with CRMs—based in Islamabad, serving Pakistan and worldwide.",
+        body: "Web agencies in Islamabad should show real shipped work, clear communication, and a specialty. INDUS specializes in custom software and websites plus AI auto dialers with CRMs—based in Islamabad, serving Pakistan and worldwide.",
       },
       {
         heading: "What to ask any Islamabad agency",

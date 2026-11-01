@@ -48,7 +48,7 @@ export function ServicesPageContent() {
             <p className="eyebrow text-accent">Toolkit</p>
             <h2 className="mt-4 font-bold text-3xl font-medium tracking-tight sm:text-4xl">Our design &amp; motion stack</h2>
             <p className="mt-3 max-w-2xl text-muted">
-              Industry-leading tools for polished, performant experiences.
+              Established tools for polished, performant experiences.
             </p>
           </FadeIn>
           <FadeIn delay={0.15} className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

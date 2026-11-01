@@ -50,7 +50,7 @@ export default function UseCasesIndexPage() {
         <p className="mt-10 text-center text-sm text-muted">
           Also see{" "}
           <Link href={href("/telecom/best-auto-dialers")} className="text-cyan-600 hover:underline">
-            best auto dialers hub
+            the auto dialers hub
           </Link>{" "}
           and{" "}
           <Link href={href("/telecom/markets")} className="text-cyan-600 hover:underline">

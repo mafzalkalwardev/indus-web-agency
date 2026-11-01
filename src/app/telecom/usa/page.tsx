@@ -48,8 +48,7 @@ export default function TelecomUsaPage() {
           <p className="mt-3 leading-relaxed text-muted">
             US outbound calling may be subject to TCPA, state rules, and Do-Not-Call requirements depending on your
             use case, consent model, and industry. INDUS provides dialers, call logs, and optional custom compliance
-            CRM features. We do <strong className="font-semibold text-[#0c2340]">not</strong> guarantee legal
-            compliance—consult qualified counsel for your campaigns. See our{" "}
+            CRM features. See our{" "}
             <Link href={href("/telecom/crm/compliance-tcpa-crm")} className="text-cyan-600 hover:underline">
               compliance CRM guide
             </Link>{" "}

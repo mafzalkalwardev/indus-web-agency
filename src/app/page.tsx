@@ -143,7 +143,7 @@ export default function HomePage() {
             <FadeIn delay={0.2} className="flex flex-col rounded-2xl border border-line bg-paper-raised p-8">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">Software subscription</span>
               <h3 className="mt-3 font-bold text-2xl font-medium">License our existing tools</h3>
-              <p className="mt-2 text-sm text-muted">Use battle-tested products with secure, licensed downloads.</p>
+              <p className="mt-2 text-sm text-muted">Use in-house products with secure, licensed downloads.</p>
               <ol className="mt-8 space-y-4 text-sm">
                 {["Create your account", "Subscribe to a product", "Admin approves access", "Download & operate"].map((s, i) => (
                   <li key={s} className="flex items-center gap-3.5">

@@ -126,7 +126,7 @@ export default async function TelecomUseCasePage({ params }: { params: Promise<{
           </Link>
           {" · "}
           <Link href={href("/telecom/best-auto-dialers")} className="hover:text-[#0c2340]">
-            Best auto dialers
+            Auto dialers
           </Link>
         </p>
       </article>

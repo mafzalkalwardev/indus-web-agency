@@ -33,7 +33,7 @@ export default function DialerCrmChecklistPage() {
       <PageHero
         eyebrow="Free resource"
         title="Dialer + CRM stack checklist"
-        description="For teams evaluating best AI agent custom auto dialers with CRMs—get the buy-vs-build checklist emailed instantly."
+        description="For teams evaluating AI agent custom auto dialers with CRMs—get the buy-vs-build checklist emailed instantly."
       />
       <section className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 lg:grid-cols-2">
         <div>

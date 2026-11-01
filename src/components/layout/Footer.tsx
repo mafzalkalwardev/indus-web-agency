@@ -91,7 +91,7 @@ export function Footer() {
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
               A software studio and product company — we build custom solutions for clients and ship the
-              same battle-tested automation tools as subscriptions.
+              same in-house automation tools as subscriptions.
             </p>
             <div className="mt-5 flex flex-wrap gap-2 text-xs">
               <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-slate-300">50+ projects shipped</span>
@@ -146,7 +146,7 @@ export function Footer() {
               <li><Link href={href("/process/custom-dialer-crm")} className="text-sm text-slate-300 transition hover:text-white">How we build dialer + CRM</Link></li>
               <li><Link href={href("/resources/dialer-crm-checklist")} className="text-sm text-slate-300 transition hover:text-white">Dialer + CRM checklist</Link></li>
               <li><Link href={href("/telecom")} className="text-sm text-slate-300 transition hover:text-white">Telecom hub</Link></li>
-              <li><Link href={href("/telecom/best-auto-dialers")} className="text-sm text-slate-300 transition hover:text-white">Best auto dialers</Link></li>
+              <li><Link href={href("/telecom/best-auto-dialers")} className="text-sm text-slate-300 transition hover:text-white">Auto dialers</Link></li>
               <li><Link href={href("/telecom/verticals/insurance")} className="text-sm text-slate-300 transition hover:text-white">Insurance dialer + CRM</Link></li>
               <li><Link href={href("/compare/indus-vs-cloud-dialers")} className="text-sm text-slate-300 transition hover:text-white">vs Orum/Mojo-style dialers</Link></li>
               <li><Link href={href("/compare/ai-dialer-crm-vs-saas")} className="text-sm text-slate-300 transition hover:text-white">AI dialer CRM vs SaaS</Link></li>

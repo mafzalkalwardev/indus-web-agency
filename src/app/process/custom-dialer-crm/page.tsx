@@ -92,7 +92,7 @@ export default function CustomDialerCrmProcessPage() {
 
       <article className="mx-auto max-w-5xl px-5 py-14 sm:px-8">
         <p className="text-lg leading-relaxed text-[#0c2340]">
-          Teams searching for the best AI agent custom auto dialers with CRMs usually need more than a feature list—they
+          Teams searching for AI agent custom auto dialers with CRMs usually need more than a feature list—they
           need a delivery sequence that does not stall on CRM politics. This is how INDUS runs it from Islamabad for
           local and global clients.
         </p>

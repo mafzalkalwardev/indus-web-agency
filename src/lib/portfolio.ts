@@ -93,7 +93,7 @@ export const PORTFOLIO: PortfolioProject[] = [
     solution:
       "We licensed INDUS AI dialer capacity for conversations, then built a custom CRM layer: dispositions, transcripts, client tenancy, and coachable call reviews.",
     outcome:
-      "Reps stayed in one outbound workspace; AI and humans wrote the same CRM. The pattern is now our standard hybrid for “best AI agent custom auto dialers with CRMs.”",
+      "Reps stayed in one outbound workspace; AI and humans wrote the same CRM. The pattern is now our standard hybrid for AI agent custom auto dialers with CRMs.",
     body: [
       "Off-the-shelf dialer CRMs forced one pipeline for every client. Managers could not filter dials, appointments, and closes by tenant without spreadsheets.",
       "Path A shipped fast: AI Agent / Multi-Slot for calling. Path B (studio) added CRM objects, roles, and reporting wired to dialer events.",
