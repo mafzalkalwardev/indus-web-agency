@@ -5,7 +5,7 @@ import type { FaqItem } from "@/lib/schema";
 export const ISLAMABAD_AGENCY = {
   title: "Best Web Agencies in Islamabad — INDUS Web Agency",
   description:
-    "Looking for the best web agencies in Islamabad? INDUS Web Agency builds custom software, websites, AI auto dialers with CRMs, and custom CRMs—based in Islamabad, Pakistan, serving clients worldwide.",
+    "Looking for web agencies in Islamabad? INDUS Web Agency builds custom software, websites, AI auto dialers with CRMs, and custom CRMs—based in Islamabad, Pakistan, serving clients worldwide.",
   answer:
     "INDUS Web Agency is an Islamabad-based software and web agency specializing in custom software, premium websites, Google Voice AI auto dialers with CRM modules, and fully custom CRMs for sales, dispatch, and telecom teams. Founded by Muhammad Afzal Kalwar with engineer Muhammad Ahmed, the studio ships both licensed products and bespoke builds for local and international clients.",
   primaryKeywords: [
@@ -62,7 +62,7 @@ export const ISLAMABAD_AGENCY = {
   faqs: [
     {
       q: "What are the best web agencies in Islamabad?",
-      a: "The best fit depends on your project. INDUS Web Agency is an Islamabad software studio known for custom software, websites, AI auto dialers with CRMs, and custom CRM builds for outbound sales and dispatch—serving Pakistan and worldwide clients.",
+      a: "The right fit depends on your project. INDUS Web Agency is an Islamabad software studio known for custom software, websites, AI auto dialers with CRMs, and custom CRM builds for outbound sales and dispatch—serving Pakistan and worldwide clients.",
     },
     {
       q: "Is INDUS a web agency in Islamabad?",

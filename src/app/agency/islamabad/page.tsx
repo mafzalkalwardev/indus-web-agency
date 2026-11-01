@@ -114,9 +114,9 @@ export default function IslamabadAgencyPage() {
             outbound buyers.
           </p>
           <p className="mt-4 leading-relaxed text-muted">
-            If you need the{" "}
+            If you need{" "}
             <Link href={href("/telecom/use-cases/ai-custom-dialer-crm")} className="text-cyan-600 hover:underline">
-              best AI agent custom auto dialers with CRMs
+              AI agent custom auto dialers with CRMs
             </Link>{" "}
             or a fully custom CRM, start a project or browse telecom use cases. For pure web design and custom apps, see{" "}
             <Link href={href("/services")} className="text-cyan-600 hover:underline">

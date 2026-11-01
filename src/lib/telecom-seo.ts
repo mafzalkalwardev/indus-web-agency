@@ -21,7 +21,7 @@ export const TELECOM_PILLAR = {
     },
     {
       q: "Is INDUS a full contact-center platform like Five9?",
-      a: "No. We specialize in outbound dialers with CRM modules and custom CRM builds—not SIP trunk reselling or full CCaaS. That focus is how we stay excellent for sales and dispatch outbound teams.",
+      a: "No. We specialize in outbound dialers with CRM modules and custom CRM builds—not SIP trunk reselling or full CCaaS. That focus keeps the product aimed at sales and dispatch outbound teams.",
     },
     {
       q: "Who is this for?",
@@ -66,10 +66,6 @@ export const TELECOM_USA = {
     {
       q: "Why Google Voice dialers for US teams?",
       a: "Many US SMBs already use Google Voice as a business line. INDUS dialers automate that workflow without forcing a PBX migration for starter and mid-market teams.",
-    },
-    {
-      q: "Does INDUS guarantee TCPA compliance?",
-      a: "No. Compliance depends on your consent, lists, and calling practices. Consult qualified counsel. We can help build consent/DNC features into custom CRM workflows.",
     },
     {
       q: "What products fit US outbound sales?",

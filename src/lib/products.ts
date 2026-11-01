@@ -122,7 +122,7 @@ export const PRODUCTS: Product[] = [
     techStack: ["Node.js", "Python", "Docker"],
     plans: [
       { id: "mf-starter", name: "Starter Bundle", price: 79, period: "month", durationDays: 30, features: ["All email tools", "Self-hosted", "Community support"] },
-      { id: "mf-pro", name: "Pro Bundle", price: 149, period: "month", durationDays: 30, features: ["All email tools", "Managed hosting option", "Priority support"], highlighted: true, badge: "Best Value" },
+      { id: "mf-pro", name: "Pro Bundle", price: 149, period: "month", durationDays: 30, features: ["All email tools", "Managed hosting option", "Priority support"], highlighted: true },
       { id: "mf-enterprise", name: "Enterprise", price: 299, period: "month", durationDays: 30, features: ["All email tools", "Dedicated instance", "SLA & onboarding"] },
     ],
     comparison: [
@@ -214,7 +214,7 @@ export const PRODUCTS: Product[] = [
     name: "Auto Dialer — Enterprise AI Multi-Slot",
     tagline: "Multi-slot dialing with AI on the picked call",
     description:
-      "The ultimate dialer: up to 5 parallel Google Voice slots with AI agent handling the conversation on whichever call is picked. Combines multi-slot predictive dialing with Groq-powered AI voice automation.",
+      "Up to 5 parallel Google Voice slots, with an AI agent handling the conversation on whichever call is picked. Combines multi-slot predictive dialing with Groq-powered AI voice automation.",
     category: "dialer",
     screenshots: productGallery("dialer-ai-multi-slot", ["hero.png", "administration.png", "crm.png", "ai-console.png"]),
     demoVideo: productMedia("dialer-ai-multi-slot", "demo.webm"),

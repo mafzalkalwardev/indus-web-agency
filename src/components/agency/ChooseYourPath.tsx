@@ -63,7 +63,7 @@ export function ChooseYourPath() {
               </span>
               <h3 className="mt-5 text-2xl font-bold">I want ready-made tools</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                License battle-tested dialers, email tools, and scrapers with secure downloads.
+                License in-house dialers, email tools, and scrapers with secure downloads.
               </p>
               <ul className="mt-6 flex-1 space-y-2.5">
                 {productPoints.map((p) => (

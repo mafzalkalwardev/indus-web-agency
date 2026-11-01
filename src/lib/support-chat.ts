@@ -12,7 +12,7 @@ export const CHAT_NODES: Record<string, ChatNode> = {
     message: "Hi! I'm the INDUS Guide. Pick a topic — agency services, products, subscriptions, or contact.",
     options: [
       { label: "Custom project / agency work", nextId: "agency" },
-      { label: "Which product is best for me?", nextId: "choose-goal" },
+      { label: "Which product fits me?", nextId: "choose-goal" },
       { label: "How do I subscribe?", nextId: "how-subscribe" },
       { label: "About our team", nextId: "about-team" },
       { label: "Contact human support", nextId: "contact" },
@@ -85,7 +85,7 @@ export const CHAT_NODES: Record<string, ChatNode> = {
   "rec-mailforge": {
     id: "rec-mailforge",
     message:
-      "**Mailforge** includes Email Verifier, Auto Email Sender, and Unified Inbox in one self-hosted bundle. Best value if you need verify + send + reply management together. Plans from $79/mo.",
+      "**Mailforge** includes Email Verifier, Auto Email Sender, and Unified Inbox in one self-hosted bundle. It covers verify, send, and reply management together. Plans from $79/mo.",
     options: [
       { label: "View Mailforge", nextId: "link-mailforge" },
       { label: "← Back", nextId: "choose-goal" },
@@ -124,7 +124,7 @@ export const CHAT_NODES: Record<string, ChatNode> = {
   "dialer-compare": {
     id: "dialer-compare",
     message:
-      "| Plan | Best for | From |\n| DOM Starter | Solo agent, DOM automation | $29/mo |\n| Multi-Slot | Teams, 5 parallel lines | $79/mo |\n| AI Solo | Hands-free AI calls | $99/mo |\n| AI Multi-Slot | Enterprise dispatch + AI | $199/mo |",
+      "| Plan | Suited to | From |\n| DOM Starter | Solo agent, DOM automation | $29/mo |\n| Multi-Slot | Teams, 5 parallel lines | $79/mo |\n| AI Solo | Hands-free AI calls | $99/mo |\n| AI Multi-Slot | Enterprise dispatch + AI | $199/mo |",
     options: [
       { label: "Open full comparison page", nextId: "link-compare" },
       { label: "View Live Demos", nextId: "link-demos" },
@@ -162,7 +162,7 @@ export const CHAT_NODES: Record<string, ChatNode> = {
 
 export const QUICK_PROMPTS = [
   "Custom project pricing?",
-  "Best dialer for my team?",
+  "Which dialer fits my team?",
   "How do subscriptions work?",
   "Tell me about your team",
   "Contact support",

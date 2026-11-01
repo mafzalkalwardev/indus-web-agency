@@ -29,7 +29,7 @@ export function recommendDialer(team: TeamSize, useCase: UseCase): DialerRecomme
       slug: "dialer-starter-dom",
       name: "DOM/BOM Starter",
       price: 29,
-      reason: "Best for a single agent running DOM-based outbound with a simple, affordable stack.",
+      reason: "Fits a single agent running DOM-based outbound with a simple, affordable stack.",
       highlights: ["Single-line PyAutoGUI dialer", "DOM/BOM automation", "Lowest entry price"],
     };
   }

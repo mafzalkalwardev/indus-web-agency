@@ -27,7 +27,7 @@ const links = [
   {
     href: "/telecom/use-cases/ai-custom-dialer-crm",
     title: "AI agent custom dialers + CRMs",
-    body: "Best AI agent custom auto dialers with CRMs and fully custom CRM projects.",
+    body: "AI agent custom auto dialers with CRMs and fully custom CRM projects.",
   },
   {
     href: "/start-project",

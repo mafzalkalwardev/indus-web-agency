@@ -47,7 +47,7 @@ export default function TelecomPillarPage() {
             <HubCard
               href="/telecom/best-auto-dialers"
               icon={<Phone className="h-5 w-5 text-cyan-600" />}
-              title="Best auto dialers"
+              title="Auto dialers"
               body="Cold calling, telecom & AI sales — shortlist for top searches."
             />
             <HubCard
