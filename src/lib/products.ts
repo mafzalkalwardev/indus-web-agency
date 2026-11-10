@@ -34,6 +34,23 @@ export interface Product {
   techStack: string[];
 }
 
+/** A product with its own public site. Copy follows that site's title and meta description. */
+export interface LiveProduct {
+  id: string;
+  name: string;
+  /** One-line description. */
+  summary: string;
+  /** What the product does. */
+  does: string;
+  url: string;
+  /** Document title from the live site, when the page returned one. */
+  siteTitle?: string;
+  /** Meta description from the live site, when the page returned one. */
+  siteDescription?: string;
+  operatingSystem?: string;
+  comingSoon?: boolean;
+}
+
 export const PRODUCTS: Product[] = [
   {
     slug: "email-verifier-pro",
@@ -111,6 +128,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Self-hosted email operations platform for list verification, multi-sender outreach campaigns, reply management, and private email workflow automation. Includes all email product subscriptions.",
     category: "bundle",
+    homepage: "https://mailforge.induswebagency.com",
     screenshots: productGallery("mailforge", ["hero.png", "inbox.png", "templates.png", "bulk-import.png", "senders.png"]),
     features: [
       "Email Verifier included",
@@ -330,3 +348,123 @@ export const DIALER_COMPARISON = [
   { feature: "Admin dashboard", dom: false, multiSlot: true, aiSolo: false, aiMulti: true },
   { feature: "Starting price", dom: "$29/mo", multiSlot: "$79/mo", aiSolo: "$99/mo", aiMulti: "$199/mo" },
 ];
+
+export const LIVE_PRODUCTS: LiveProduct[] = [
+  {
+    id: "mailforge",
+    name: "MailForge",
+    summary: "Self-hosted email verification, cold email campaigns, and a unified inbox.",
+    does: "Checks a CSV over SMTP, sends from your own accounts, and reads every reply.",
+    url: "https://mailforge.induswebagency.com",
+    siteTitle: "MailForge — Email verification, campaigns, and inbox",
+    siteDescription:
+      "Self-hosted email verification, cold email campaigns, and a unified inbox. Check a CSV over SMTP, send from your accounts, and read every reply.",
+  },
+  {
+    id: "routelix",
+    name: "Routelix",
+    summary: "Self-hosted AI auto dialer and carrier CRM for outbound Google Voice campaigns.",
+    does: "Voicemail detection, call recording, leads, and local or Groq speech.",
+    url: "https://routelix.induswebagency.com",
+    siteTitle: "Routelix — self-hosted AI auto dialer and carrier CRM",
+    siteDescription:
+      "Routelix is a self-hosted AI auto dialer and carrier CRM for outbound Google Voice campaigns, with voicemail detection, call recording, leads, and local or Groq speech.",
+    operatingSystem: "Linux, Windows",
+  },
+  {
+    id: "laneora",
+    name: "Laneora",
+    summary: "Windows desktop client (v2.3) for US freight dispatchers.",
+    does: "Gives dispatchers shared load-board access with one Laneora sign-in.",
+    url: "https://laneora.induswebagency.com",
+    siteTitle: "Laneora v2.3 Download – Freight Board Client for Windows",
+    siteDescription:
+      "Download Laneora v2.3 for Windows, the desktop client that gives US freight dispatchers shared load-board access with one Laneora sign-in. Install guide and FAQ.",
+    operatingSystem: "Windows",
+  },
+  {
+    id: "article-pulse",
+    name: "Article Pulse",
+    summary: "Turns public GitHub evidence into reviewable Markdown drafts.",
+    does: "Publishes approved articles to Hashnode and dev.to.",
+    url: "https://articlepulse.induswebagency.com",
+    siteTitle: "Article Pulse | Reviewable drafts for Hashnode and dev.to",
+    siteDescription:
+      "Article Pulse turns public GitHub evidence into reviewable Markdown drafts and publishes approved articles to Hashnode and dev.to. Made by INDUS Web Agency.",
+  },
+  {
+    id: "bulk-phone-number-verifier",
+    name: "Bulk Phone Number Verifier",
+    summary: "Open-source bulk phone verification.",
+    does: "libphonenumber format checks, US/UK/DE regulator block assignment, CSV cleanup exports, and a Live HLR slot.",
+    url: "https://phoneverifier.induswebagency.com",
+    siteTitle: "Bulk Phone Number Verifier — list cleanup for SMS",
+    siteDescription:
+      "Open-source bulk phone number verification: libphonenumber format checks, US/UK/DE regulator block assignment, CSV cleanup exports, and a Live HLR slot.",
+    operatingSystem: "Web",
+  },
+  {
+    id: "carriersource",
+    name: "CarrierSource Free Data Collector",
+    summary: "A local Chrome extension that collects freely visible carrier cards.",
+    does: "Saves MC, USDOT, equipment, and authority into IndexedDB and exports CSV or Excel.",
+    url: "https://carriersource.induswebagency.com",
+    siteTitle: "CarrierSource Free Data Collector — local Chrome extension",
+    siteDescription:
+      "Chrome extension that collects freely visible CarrierSource carrier cards (MC, USDOT, equipment, authority) into local IndexedDB and exports CSV or Excel.",
+    operatingSystem: "Chrome",
+  },
+  {
+    id: "tapvio",
+    name: "Tapvio",
+    summary: "A free, open-source Linktree alternative with 9 themes.",
+    does: "Publishes fast, indexable pages. No ads, no tracking, no sign-up.",
+    url: "https://tapvio.induswebagency.com",
+    siteTitle: "Tapvio: free link-in-bio pages that Google can find",
+    siteDescription:
+      "Tapvio is a free, open-source alternative to Linktree. Pick one of 9 themes, add your links and publish a fast page that search engines index. No ads, no tracking, no sign-up.",
+    operatingSystem: "Web",
+  },
+  {
+    id: "inkcadence",
+    name: "Inkcadence",
+    summary: "Learns your handwriting from full written assignments and writes new pages in it.",
+    does: "Ten built-in hands, lined or blank A4, PNG/PDF export. Runs in the browser.",
+    url: "https://inkcadence.induswebagency.com",
+    siteTitle: "Inkcadence — learn your handwriting, then write new pages in it",
+    siteDescription:
+      "Train Inkcadence on full written assignments — no alphabet sheet required. Ten built-in hands, lined or blank A4, harvest letter crops, export PNG/PDF. Runs in the browser.",
+    operatingSystem: "Web",
+  },
+  {
+    id: "pakoption",
+    name: "PakOption",
+    summary: "Coming soon.",
+    does: "This is a design preview. The live page did not return a title or description.",
+    url: "https://pakoption.induswebagency.com",
+    comingSoon: true,
+  },
+];
+
+export const PRODUCT_FAQS = [
+  {
+    q: "Which products does this page list?",
+    a: "MailForge, Routelix, Laneora, Article Pulse, Bulk Phone Number Verifier, CarrierSource Free Data Collector, Tapvio, Inkcadence, and PakOption. Each card links to that product's site. PakOption is marked Coming soon because its page did not return a title or description.",
+  },
+  {
+    q: "Where do the descriptions come from?",
+    a: "From each product site's title and meta description. This page does not add customer counts, prices, ratings, or results.",
+  },
+  {
+    q: "Are MailForge and Routelix self-hosted?",
+    a: "Yes. MailForge's site describes a self-hosted email desk for verification, campaigns, and a unified inbox. Routelix's site describes a self-hosted AI auto dialer and carrier CRM for outbound Google Voice campaigns.",
+  },
+  {
+    q: "What are the licensed downloads further down the page?",
+    a: "Dialer, email, and scraper tools you can subscribe to and download from INDUS. They are separate from the product sites above, and each of those tools has its own plans.",
+  },
+] as const;
+
+export function getLiveProduct(id: string): LiveProduct | undefined {
+  return LIVE_PRODUCTS.find((product) => product.id === id);
+}

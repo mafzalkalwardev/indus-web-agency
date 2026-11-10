@@ -7,7 +7,7 @@ export const STUDIO_NAV = [
 ] as const;
 
 export const PRODUCT_NAV = [
-  { href: "/products", label: "Products", hint: "13 licensed tools" },
+  { href: "/products", label: "Products", hint: "MailForge, Routelix, and more" },
   { href: "/telecom", label: "Telecom", hint: "Dialers & CRMs" },
   { href: "/demos", label: "Live demos", hint: "See products in action" },
   { href: "/pricing", label: "Pricing", hint: "Plans from $19/mo" },
@@ -21,10 +21,9 @@ export const COMPANY_NAV = [
 ] as const;
 
 export const FOOTER_PRODUCT_LINKS = [
-  { href: "/products?cat=dialer", label: "Auto Dialers", hint: "From $29/mo" },
-  { href: "/products?cat=email", label: "Email Tools", hint: "Verify & send" },
-  { href: "/products?cat=scraper", label: "Web Scrapers", hint: "Lead extraction" },
-  { href: "/products/mailforge", label: "Mailforge Bundle", hint: "All-in-one email" },
+  { href: "/products", label: "All products", hint: "Sites we publish" },
+  { href: "/products#licensed-downloads", label: "Licensed downloads", hint: "Dialers, email, scrapers" },
+  { href: "/pricing", label: "Pricing", hint: "Licensed plans" },
 ] as const;
 
 export const FOOTER_STUDIO_LINKS = [

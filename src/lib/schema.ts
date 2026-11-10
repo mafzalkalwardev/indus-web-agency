@@ -1,4 +1,5 @@
 import { SITE_CONTACT, SITE_SEO } from "@/lib/site-config";
+import { absoluteCanonical } from "@/lib/seo-meta";
 
 export type FaqItem = { q: string; a: string };
 
@@ -58,6 +59,77 @@ export function articleJsonLd(opts: {
       },
     },
     mainEntityOfPage: `${SITE_CONTACT.siteUrl}${opts.path}`,
+  };
+}
+
+export function softwareItemListJsonLd(opts: {
+  name: string;
+  path: string;
+  items: {
+    name: string;
+    description: string;
+    url: string;
+    anchorId: string;
+    operatingSystem?: string;
+  }[];
+}) {
+  const pageUrl = absoluteCanonical(opts.path);
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: opts.name,
+    url: pageUrl,
+    numberOfItems: opts.items.length,
+    itemListElement: opts.items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      url: `${pageUrl}#${item.anchorId}`,
+      item: {
+        "@type": "SoftwareApplication",
+        name: item.name,
+        description: item.description,
+        url: item.url,
+        ...(item.operatingSystem ? { operatingSystem: item.operatingSystem } : {}),
+        provider: {
+          "@type": "Organization",
+          name: SITE_SEO.name,
+          url: SITE_CONTACT.siteUrl,
+        },
+      },
+    })),
+  };
+}
+
+export function serviceOfferCatalogJsonLd(opts: {
+  name: string;
+  description: string;
+  path: string;
+  services: { name: string; description: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: opts.name,
+    description: opts.description,
+    url: absoluteCanonical(opts.path),
+    provider: {
+      "@type": "Organization",
+      name: SITE_SEO.name,
+      url: SITE_CONTACT.siteUrl,
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: opts.name,
+      itemListElement: opts.services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+          description: service.description,
+        },
+      })),
+    },
   };
 }
 

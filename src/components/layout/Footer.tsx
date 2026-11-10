@@ -4,6 +4,7 @@ import { Mail, Phone, ArrowRight, Hammer, Boxes, MapPin } from "lucide-react";
 import { SITE_CONTACT } from "@/lib/site-config";
 import { href, basePath } from "@/lib/paths";
 import { FOOTER_STUDIO_LINKS, FOOTER_PRODUCT_LINKS } from "@/lib/site-nav";
+import { LIVE_PRODUCTS } from "@/lib/products";
 
 export function Footer() {
   const bp = basePath();
@@ -49,11 +50,11 @@ export function Footer() {
                 <Boxes className="h-3 w-3" /> Software shelf
               </span>
               <h2 className="mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl">
-                Ready-made tools you can license today
+                Products we publish, plus licensed downloads
               </h2>
               <p className="mt-3 max-w-md text-sm leading-relaxed text-slate-300">
-                13 production dialers, email tools, and scrapers. Subscribe, get approved, download with a
-                signed license — from $19/mo.
+                MailForge, Routelix, Laneora, and the rest of the product line. Licensed dialer, email,
+                and scraper downloads start at $19/mo.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
@@ -117,22 +118,24 @@ export function Footer() {
 
           <div>
             <h4 className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
-              Product shelf
+              Products
             </h4>
-            <ul className="mt-4 space-y-3">
-              {FOOTER_PRODUCT_LINKS.map((item) => (
-                <li key={item.href}>
-                  <Link href={href(item.href)} className="group block text-sm transition">
-                    <span className="text-slate-300 group-hover:text-white">{item.label}</span>
-                    <span className="mt-0.5 block text-xs text-slate-500 group-hover:text-slate-400">{item.hint}</span>
+            <ul className="mt-4 space-y-2.5">
+              {LIVE_PRODUCTS.map((product) => (
+                <li key={product.id}>
+                  <Link href={href(`/products#${product.id}`)} className="text-sm text-slate-300 transition hover:text-white">
+                    {product.name}
+                    {product.comingSoon ? <span className="text-slate-500"> — Coming soon</span> : null}
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href={href("/pricing")} className="text-sm font-medium text-cyan-400 transition hover:text-cyan-300">
-                  View all pricing →
-                </Link>
-              </li>
+              {FOOTER_PRODUCT_LINKS.map((item) => (
+                <li key={item.href}>
+                  <Link href={href(item.href)} className="text-sm font-medium text-cyan-400 transition hover:text-cyan-300">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -183,7 +186,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
-                <a href={SITE_CONTACT.whatsappUrl} className="text-slate-300 transition hover:text-white">
+                <a href={SITE_CONTACT.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-slate-300 transition hover:text-white">
                   {SITE_CONTACT.whatsapp}
                 </a>
               </li>

@@ -5,6 +5,18 @@ import {
   Bot,
   Palette,
   LineChart,
+  AppWindow,
+  MessageSquare,
+  Brain,
+  Server,
+  Workflow,
+  PhoneCall,
+  ListChecks,
+  Building2,
+  Mail,
+  Database,
+  Truck,
+  Search,
   type LucideIcon,
 } from "lucide-react";
 
@@ -16,6 +28,8 @@ export interface AgencyService {
   deliverables: string[];
   icon: LucideIcon;
   technologies: string[];
+  /** Ids from LIVE_PRODUCTS. */
+  relatedProductIds?: string[];
 }
 
 export const AGENCY_SERVICES: AgencyService[] = [
@@ -48,6 +62,7 @@ export const AGENCY_SERVICES: AgencyService[] = [
     deliverables: ["Workflow audit", "Custom automation", "Integrations", "Training & docs"],
     icon: Bot,
     technologies: ["AI voice", "SMTP", "Playwright", "APIs", "CRM hooks"],
+    relatedProductIds: ["mailforge", "routelix", "carriersource"],
   },
   {
     id: "mobile",
@@ -79,7 +94,153 @@ export const AGENCY_SERVICES: AgencyService[] = [
     icon: LineChart,
     technologies: ["Architecture", "DevOps", "Security", "Licensing"],
   },
+  {
+    id: "custom-web",
+    title: "Custom web development",
+    tagline: "Sites and web apps, built to spec",
+    description:
+      "Custom web development for websites and web applications shaped around your workflow, from the layout through launch.",
+    deliverables: ["Information architecture", "Interface build", "Launch"],
+    icon: AppWindow,
+    technologies: ["Next.js", "React", "TypeScript"],
+  },
+  {
+    id: "ai-chatbots",
+    title: "AI chatbots for support",
+    tagline: "Multilingual, on the channels you already use",
+    description:
+      "Support chatbots that reply in more than one language on Slack, Telegram, and WhatsApp.",
+    deliverables: ["Multilingual replies", "Slack", "Telegram", "WhatsApp"],
+    icon: MessageSquare,
+    technologies: ["Slack", "Telegram", "WhatsApp"],
+  },
+  {
+    id: "rag-assistants",
+    title: "RAG knowledge assistants",
+    tagline: "Documents, agents, and local models",
+    description:
+      "RAG knowledge assistants over your own material, plus multi-agent systems and setups that run on a local LLM.",
+    deliverables: ["Document retrieval", "Multi-agent workflows", "Local LLM option"],
+    icon: Brain,
+    technologies: ["RAG", "Multi-agent", "Local LLM"],
+  },
+  {
+    id: "ai-ops-hubs",
+    title: "Self-hosted AI ops hubs",
+    tagline: "The hub stays on your machines",
+    description:
+      "Self-hosted AI ops hubs for the workflows your team runs, on infrastructure you control.",
+    deliverables: ["Hub you host", "Ops workflows", "Your own infrastructure"],
+    icon: Server,
+    technologies: ["Self-hosted"],
+    relatedProductIds: ["mailforge", "routelix"],
+  },
+  {
+    id: "workflow-automation",
+    title: "Workflow automation",
+    tagline: "n8n, Make, and Zapier, with a person in the loop",
+    description:
+      "Workflow automation on n8n, Make, and Zapier, with a human approval gate before a sensitive step goes out.",
+    deliverables: ["n8n", "Make", "Zapier", "Human approval gates"],
+    icon: Workflow,
+    technologies: ["n8n", "Make", "Zapier"],
+  },
+  {
+    id: "ai-calling",
+    title: "AI calling and auto dialers",
+    tagline: "Outbound calls, with or without an agent on the line",
+    description:
+      "AI calling and auto dialers for outbound campaigns, including voicemail detection and call recording.",
+    deliverables: ["Auto dialer", "AI calling", "Voicemail detection", "Call recording"],
+    icon: PhoneCall,
+    technologies: ["Google Voice", "Local speech", "Groq"],
+    relatedProductIds: ["routelix"],
+  },
+  {
+    id: "crm-development",
+    title: "CRM development",
+    tagline: "Including carrier and dispatch desks",
+    description:
+      "CRM development for the way a team sells or dispatches, including carrier and dispatch CRMs.",
+    deliverables: ["Pipeline and records", "Carrier CRM", "Dispatch CRM"],
+    icon: Building2,
+    technologies: ["CRM"],
+    relatedProductIds: ["routelix"],
+  },
+  {
+    id: "email-infrastructure",
+    title: "Email verification and cold-email infrastructure",
+    tagline: "Check the list, send, then read the replies",
+    description:
+      "Email verification and cold-email infrastructure: check a CSV over SMTP, send from your own accounts, and read every reply in one inbox.",
+    deliverables: ["SMTP verification", "Campaign sending", "Unified inbox"],
+    icon: Mail,
+    technologies: ["SMTP", "IMAP"],
+    relatedProductIds: ["mailforge"],
+  },
+  {
+    id: "phone-verification",
+    title: "Phone number verification",
+    tagline: "Clean a list before you text or call",
+    description:
+      "Bulk phone number verification with libphonenumber format checks, US/UK/DE regulator block assignment, CSV cleanup exports, and a Live HLR slot.",
+    deliverables: ["Format checks", "Regulator block assignment", "CSV exports", "Live HLR slot"],
+    icon: ListChecks,
+    technologies: ["libphonenumber", "HLR"],
+    relatedProductIds: ["bulk-phone-number-verifier"],
+  },
+  {
+    id: "data-collection",
+    title: "Web data collection and lead generation",
+    tagline: "What is already on the page",
+    description:
+      "Web data collection and lead generation from information that is already visible on the page, saved for research and outreach.",
+    deliverables: ["Visible-page collection", "Local storage", "CSV or Excel export"],
+    icon: Database,
+    technologies: ["Chrome extension", "CSV", "Excel"],
+    relatedProductIds: ["carriersource"],
+  },
+  {
+    id: "freight-dispatch",
+    title: "Freight and dispatch software",
+    tagline: "Shared boards for US dispatchers",
+    description:
+      "Freight and dispatch software, including a Windows desktop client that gives US freight dispatchers shared load-board access with one sign-in.",
+    deliverables: ["Dispatch workflows", "Shared load-board access", "Windows desktop client"],
+    icon: Truck,
+    technologies: ["Windows", "Load board"],
+    relatedProductIds: ["laneora"],
+  },
+  {
+    id: "seo-aeo-geo",
+    title: "SEO, AEO, and GEO",
+    tagline: "Search, answer engines, and place",
+    description:
+      "SEO, AEO, and GEO for the pages we ship: structure, metadata, and copy for classic search, answer engines, and geographic queries.",
+    deliverables: ["Search structure", "Answer-engine copy", "Geographic pages"],
+    icon: Search,
+    technologies: ["SEO", "AEO", "GEO"],
+  },
 ];
+
+export const SERVICE_FAQS = [
+  {
+    q: "Do you build custom websites?",
+    a: "Yes. Custom web development covers sites and web apps built around a workflow, and the studio also ships marketing sites, landing pages, and client portals.",
+  },
+  {
+    q: "Where can a support chatbot run?",
+    a: "On Slack, Telegram, and WhatsApp, with replies in more than one language.",
+  },
+  {
+    q: "Which services line up with a product you already publish?",
+    a: "AI calling and carrier CRM work lines up with Routelix. Email verification and cold email lines up with MailForge. Phone number verification lines up with Bulk Phone Number Verifier. Carrier-card collection lines up with CarrierSource Free Data Collector. Freight dispatch software lines up with Laneora. MailForge and Routelix are also the self-hosted products behind the ops-hub work.",
+  },
+  {
+    q: "What do SEO, AEO, and GEO mean here?",
+    a: "SEO is classic search visibility, AEO is visibility in answer engines, and GEO is geographic relevance. The work is page structure, metadata, and copy. This page does not quote rankings or traffic.",
+  },
+] as const;
 
 export const PROJECT_TYPES = [
   { value: "custom-software", label: "Custom Software" },
