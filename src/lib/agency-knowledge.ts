@@ -1,6 +1,6 @@
 import { AGENCY_SERVICES, PROJECT_TYPES, BUDGET_RANGES, TIMELINE_OPTIONS } from "@/lib/agency-services";
 import { COMPANY_STORY, TEAM } from "@/lib/about";
-import { PRODUCTS, CATEGORY_LABELS } from "@/lib/products";
+import { PRODUCTS, CATEGORY_LABELS, LIVE_PRODUCTS } from "@/lib/products";
 import { PORTFOLIO } from "@/lib/portfolio";
 import { FAQ_ITEMS } from "@/lib/faq-content";
 import { SITE_CONTACT, SITE_SEO } from "@/lib/site-config";
@@ -13,6 +13,12 @@ export function buildAgencyKnowledgeBase(): string {
 
   const products = PRODUCTS.map(
     (p) => `- ${p.name} (${CATEGORY_LABELS[p.category]}): ${p.tagline}. From $${Math.min(...p.plans.map((pl) => pl.price))}/mo`
+  ).join("\n");
+
+  const liveProducts = LIVE_PRODUCTS.map((product) =>
+    product.comingSoon
+      ? `- ${product.name}: Coming soon. ${product.url}`
+      : `- ${product.name}: ${product.summary} ${product.does} ${product.url}`
   ).join("\n");
 
   const portfolio = PORTFOLIO.slice(0, 4).map((p) => `- ${p.title} (${p.client}): ${p.summary}`).join("\n");
@@ -50,7 +56,12 @@ Services: ${SITE_CONTACT.siteUrl}/services
 About & team: ${SITE_CONTACT.siteUrl}/about
 Contact form: ${SITE_CONTACT.siteUrl}/contact
 
-## Software products (Subscriptions)
+## Published products (public sites)
+${liveProducts}
+
+Do not invent prices, ratings, customer counts, or results for these public products. PakOption is Coming soon.
+
+## Licensed downloads
 ${products}
 
 Browse all: ${SITE_CONTACT.siteUrl}/products
@@ -76,7 +87,7 @@ ${faq}
 - Use markdown links with full URLs (e.g. [Compare dialers](${SITE_CONTACT.siteUrl}/compare)) when pointing to site pages.
 - For custom builds, encourage /start-project or /contact.
 - For product issues, mention dashboard, setup guides on product pages, or email/WhatsApp.
-- Do not invent pricing beyond what's listed. Do not promise instant approval.
+- Do not invent pricing beyond the licensed plans listed above. Public product sites are not given prices here. Do not promise instant approval.
 - If unsure, suggest contacting ${SITE_CONTACT.email} or WhatsApp ${SITE_CONTACT.whatsapp}.
 `.trim();
 }

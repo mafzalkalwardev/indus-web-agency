@@ -1,17 +1,29 @@
 "use client";
 
 import { motion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 import { AGENCY_SERVICES, TECH_STACK_SUGGESTIONS } from "@/lib/agency-services";
+import { LIVE_PRODUCTS } from "@/lib/products";
 import { StaggerChildren, staggerItem, FadeIn } from "@/components/agency/FadeIn";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+
+function relatedProducts(ids?: readonly string[]) {
+  if (!ids?.length) return [];
+  return ids.flatMap((id) => {
+    const product = LIVE_PRODUCTS.find((item) => item.id === id);
+    return product ? [product] : [];
+  });
+}
 
 export function ServicesPageContent() {
   return (
     <>
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
         <StaggerChildren className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {AGENCY_SERVICES.map((service) => (
+          {AGENCY_SERVICES.map((service) => {
+            const related = relatedProducts(service.relatedProductIds);
+            return (
             <motion.div key={service.id} variants={staggerItem}>
               <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-ink">
                 <CardHeader>
@@ -35,10 +47,34 @@ export function ServicesPageContent() {
                       <Badge key={t} variant="secondary">{t}</Badge>
                     ))}
                   </div>
+                  {related.length > 0 && (
+                    <div className="mt-5 border-t border-line pt-4">
+                      <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                        Related {related.length === 1 ? "product" : "products"}
+                      </p>
+                      <ul className="mt-2 space-y-1.5">
+                        {related.map((product) => (
+                          <li key={product.id}>
+                            <a
+                              href={product.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-sm font-medium text-ink hover:underline"
+                            >
+                              {product.name}
+                              <ArrowUpRight className="h-3.5 w-3.5 text-accent" aria-hidden />
+                              <span className="sr-only"> (opens in a new tab)</span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
-          ))}
+            );
+          })}
         </StaggerChildren>
       </section>
 
