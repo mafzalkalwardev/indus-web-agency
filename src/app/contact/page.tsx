@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 
 export const metadata = {
-  title: "Contact Us — INDUS Web Agency",
+  title: "Contact Us",
   description:
     "Get in touch with INDUS Web Agency for custom projects, product support, partnerships, or general inquiries.",
   ...selfReferencingMeta("/contact"),

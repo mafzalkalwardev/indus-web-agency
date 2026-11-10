@@ -5,7 +5,7 @@ import { Mail, MessageCircle } from "lucide-react";
 import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
-  title: "Start a Project — INDUS Web Agency",
+  title: "Start a Project",
   description: "Request custom software, a website, or automation project from INDUS Web Agency.",
   ...selfReferencingMeta("/start-project"),
 };

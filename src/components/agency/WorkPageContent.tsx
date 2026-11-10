@@ -11,7 +11,7 @@ export function WorkPageContent() {
   return (
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
       <div className="grid gap-8 md:grid-cols-2">
-        {PORTFOLIO.map((project) => (
+        {PORTFOLIO.map((project, index) => (
           <article
             key={project.slug}
             className="group overflow-hidden rounded-2xl border border-line bg-paper-raised transition-all duration-300 hover:-translate-y-1 hover:border-ink"
@@ -22,6 +22,8 @@ export function WorkPageContent() {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 45vw, 560px"
+                  priority={index === 0}
                   className="object-cover opacity-90 transition duration-700 group-hover:scale-105 group-hover:opacity-100"
                 />
                 <Badge className="absolute left-4 top-4 border-none bg-paper/90 capitalize text-ink backdrop-blur">{project.category}</Badge>

@@ -3,7 +3,7 @@ import { AuthForm } from "@/components/auth/AuthForm";
 import { ExternalLink } from "lucide-react";
 
 export const metadata = {
-  title: "Sign Up — INDUS Web Agency",
+  title: "Sign Up",
 };
 
 const FULL_APP = "https://indus-web-agency.vercel.app";

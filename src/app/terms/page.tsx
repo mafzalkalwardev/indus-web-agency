@@ -4,7 +4,7 @@ import { SITE_CONTACT } from "@/lib/site-config";
 import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
-  title: "Terms of Service — INDUS Web Agency",
+  title: "Terms of Service",
   ...selfReferencingMeta("/terms"),
 };
 

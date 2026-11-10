@@ -20,7 +20,7 @@ const faqs = [
 ];
 
 export const metadata: Metadata = {
-  title: "Software & Web Agency in Pakistan | INDUS Web Agency",
+  title: "Software & Web Agency in Pakistan",
   description:
     "INDUS Web Agency — Pakistan software house for custom websites, AI auto dialers with CRMs, custom CRM development, and automation products. Islamabad-based, worldwide delivery.",
   keywords: [

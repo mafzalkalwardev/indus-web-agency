@@ -11,7 +11,7 @@ import { Check, ArrowRight } from "lucide-react";
 import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
-  title: "Best Web Agencies in Islamabad | INDUS Web Agency",
+  title: "Best Web Agencies in Islamabad",
   description: ISLAMABAD_AGENCY.description,
   keywords: [...ISLAMABAD_AGENCY.primaryKeywords, ...ISLAMABAD_AGENCY.secondaryKeywords],
   ...selfReferencingMeta("/agency/islamabad"),

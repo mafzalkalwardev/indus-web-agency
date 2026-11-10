@@ -4,7 +4,7 @@ import { href } from "@/lib/paths";
 import { ExternalLink } from "lucide-react";
 
 export const metadata = {
-  title: "Sign In — INDUS Web Agency",
+  title: "Sign In",
 };
 
 const FULL_APP = "https://indus-web-agency.vercel.app";

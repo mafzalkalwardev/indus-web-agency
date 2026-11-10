@@ -13,6 +13,8 @@ import { pageSocialMeta } from "@/lib/seo-meta";
 
 const title = "Custom software, AI, and automation services";
 const description =
+  "Custom web development, AI chatbots (Slack, Telegram, WhatsApp), RAG, workflow automation, dialers, CRMs, email and phone verification, freight, SEO, AEO, GEO.";
+const catalogDescription =
   "Custom web development, AI chatbots on Slack, Telegram, and WhatsApp, RAG and local-LLM systems, workflow automation, dialers, CRMs, email and phone verification, data collection, freight software, and SEO, AEO, and GEO.";
 
 export const metadata: Metadata = {
@@ -46,7 +48,7 @@ export default function ServicesPage() {
     ]),
     serviceOfferCatalogJsonLd({
       name: "INDUS Web Agency services",
-      description,
+      description: catalogDescription,
       path: "/services",
       services: AGENCY_SERVICES.map((service) => ({
         name: service.title,

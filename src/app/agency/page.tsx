@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
-  title: "Web & Software Agency — Islamabad & Worldwide | INDUS",
+  title: "Web & Software Agency — Islamabad & Worldwide",
   description:
     "INDUS Web Agency — Islamabad software studio for custom websites, AI auto dialers with CRMs, custom CRM development, and automation products. Local presence, global delivery.",
   ...selfReferencingMeta("/agency"),
