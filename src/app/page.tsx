@@ -4,15 +4,17 @@ import { AgencyHero } from "@/components/agency/AgencyHero";
 import { ChooseYourPath } from "@/components/agency/ChooseYourPath";
 import { SocialProof } from "@/components/agency/SocialProof";
 import { FadeIn } from "@/components/agency/FadeIn";
-import { ProductCard } from "@/components/products/ProductCard";
-import { PRODUCTS } from "@/lib/products";
+import { LiveProductCard } from "@/components/products/LiveProductCard";
+import { LIVE_PRODUCTS } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import { href } from "@/lib/paths";
 import { ServiceCardsGrid, PortfolioPreviewGrid } from "@/components/agency/HomeMotionBlocks";
+import type { Metadata } from "next";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
-const featured = PRODUCTS.filter((p) =>
-  ["mailforge", "dialer-multi-slot", "dialer-ai-multi-slot", "email-verifier-pro"].includes(p.slug)
-);
+export const metadata: Metadata = {
+  ...selfReferencingMeta("/"),
+};
 
 const marquee = [
   "Next.js", "React", "TypeScript", "Three.js", "GSAP", "Framer Motion",
@@ -93,23 +95,33 @@ export default function HomePage() {
 
       {/* Software products */}
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-        <FadeIn className="max-w-2xl">
-          <p className="eyebrow text-accent">03 — Off the shelf</p>
-          <h2 className="mt-5 font-bold text-4xl font-medium tracking-tight sm:text-5xl">
-            Ready-made automation products
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-muted">
-            Subscribe to dialers, email tools, and scrapers — download instantly after approval.
-          </p>
+        <FadeIn className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <p className="eyebrow text-accent">03 — Products</p>
+            <h2 className="mt-5 font-bold text-4xl font-medium tracking-tight sm:text-5xl">
+              Products we publish
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-muted">
+              Email, dialing, freight, publishing, and data tools. Each one links to its own site.
+              Licensed dialer, email, and scraper downloads are on the same page.
+            </p>
+          </div>
+          <Link
+            href={href("/products")}
+            className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink"
+          >
+            <span className="link-underline">All products</span>
+            <ArrowUpRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </FadeIn>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {featured.map((p) => (
-            <ProductCard key={p.slug} product={p} />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {LIVE_PRODUCTS.map((product) => (
+            <LiveProductCard key={product.id} product={product} heading="h3" />
           ))}
         </div>
         <div className="mt-10">
           <Button asChild variant="secondary">
-            <Link href={href("/products")}>All {PRODUCTS.length} products <ArrowRight className="h-4 w-4" /></Link>
+            <Link href={href("/products")}>See the product list <ArrowRight className="h-4 w-4" /></Link>
           </Button>
         </div>
       </section>

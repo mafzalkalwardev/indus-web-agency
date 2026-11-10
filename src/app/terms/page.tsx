@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { href } from "@/lib/paths";
 import { SITE_CONTACT } from "@/lib/site-config";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
   title: "Terms of Service — INDUS Web Agency",
+  ...selfReferencingMeta("/terms"),
 };
 
 export default function TermsPage() {

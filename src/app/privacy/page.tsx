@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { href } from "@/lib/paths";
 import { SITE_CONTACT } from "@/lib/site-config";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
   title: "Privacy Policy — INDUS Web Agency",
+  ...selfReferencingMeta("/privacy"),
 };
 
 export default function PrivacyPage() {

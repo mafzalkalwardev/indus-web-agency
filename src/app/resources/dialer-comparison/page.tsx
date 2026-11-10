@@ -3,12 +3,13 @@ import { DIALER_COMPARISON } from "@/lib/products";
 import { PrintButton } from "@/components/resources/PrintButton";
 import { SITE_CONTACT } from "@/lib/site-config";
 import { href } from "@/lib/paths";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
   title: "Auto Dialer Comparison Chart — Print & PDF",
   description:
     "Full INDUS auto dialer comparison chart. Print or save as PDF — DOM starter, multi-slot, AI solo, and enterprise AI dispatch plans.",
-  alternates: { canonical: "/resources/dialer-comparison" },
+  ...selfReferencingMeta("/resources/dialer-comparison"),
 };
 
 const columns = [

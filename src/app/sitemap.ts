@@ -6,6 +6,7 @@ import { COMPARISONS } from "@/lib/comparisons";
 import { TELECOM_CRM_TYPES } from "@/lib/telecom-crm";
 import { TELECOM_USE_CASES } from "@/lib/telecom-usecases";
 import { TELECOM_MARKETS } from "@/lib/telecom-markets";
+import { absoluteCanonical } from "@/lib/seo-meta";
 import { SITE_CONTACT } from "@/lib/site-config";
 
 const staticRoutes = [
@@ -47,49 +48,49 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes.map((route) => ({
-      url: `${SITE_CONTACT.siteUrl}${route.path}`,
+      url: absoluteCanonical(route.path),
       lastModified,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     })),
     ...TELECOM_USE_CASES.map((uc) => ({
-      url: `${SITE_CONTACT.siteUrl}/telecom/use-cases/${uc.slug}`,
+      url: absoluteCanonical(`/telecom/use-cases/${uc.slug}`),
       lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.85,
     })),
     ...TELECOM_MARKETS.map((m) => ({
-      url: `${SITE_CONTACT.siteUrl}/telecom/markets/${m.slug}`,
+      url: absoluteCanonical(`/telecom/markets/${m.slug}`),
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
     ...TELECOM_CRM_TYPES.map((crm) => ({
-      url: `${SITE_CONTACT.siteUrl}/telecom/crm/${crm.slug}`,
+      url: absoluteCanonical(`/telecom/crm/${crm.slug}`),
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.75,
     })),
     ...COMPARISONS.map((c) => ({
-      url: `${SITE_CONTACT.siteUrl}/compare/${c.slug}`,
+      url: absoluteCanonical(`/compare/${c.slug}`),
       lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.88,
     })),
     ...PORTFOLIO.map((project) => ({
-      url: `${SITE_CONTACT.siteUrl}/work/${project.slug}`,
+      url: absoluteCanonical(`/work/${project.slug}`),
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.75,
     })),
     ...GUIDES.map((guide) => ({
-      url: `${SITE_CONTACT.siteUrl}/guides/${guide.slug}`,
+      url: absoluteCanonical(`/guides/${guide.slug}`),
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.75,
     })),
     ...PRODUCTS.map((product) => ({
-      url: `${SITE_CONTACT.siteUrl}/products/${product.slug}`,
+      url: absoluteCanonical(`/products/${product.slug}`),
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.8,

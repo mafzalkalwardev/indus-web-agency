@@ -6,12 +6,13 @@ import { TELECOM_MARKETS } from "@/lib/telecom-markets";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
 import { ArrowRight } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Auto Dialer Software by Market — Global, UK, AU, UAE, India",
   description:
     "INDUS auto dialers for global outbound teams plus focused hubs for UK, Australia, UAE, and India—alongside USA and Canada telecom pages.",
-  alternates: { canonical: "/telecom/markets" },
+  ...selfReferencingMeta("/telecom/markets"),
 };
 
 export default function MarketsIndexPage() {

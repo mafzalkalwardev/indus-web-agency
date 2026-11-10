@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { articleJsonLd, breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
 import { ArrowLeft } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export async function generateStaticParams() {
   return GUIDES.map((g) => ({ slug: g.slug }));
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: guide.title,
     description: guide.description,
-    alternates: { canonical: `/guides/${guide.slug}` },
+    ...selfReferencingMeta(`/guides/${guide.slug}`),
   };
 }
 

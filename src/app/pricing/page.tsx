@@ -1,14 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { PRODUCTS, getProductsByCategory } from "@/lib/products";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Automation Software Pricing",
   description:
     "Compare INDUS Web Agency pricing for AI auto dialers, email marketing automation, bulk email verifier software, web scraping tools, and Mailforge subscriptions.",
-  alternates: {
-    canonical: "/pricing",
-  },
+  ...selfReferencingMeta("/pricing"),
 };
 
 function PricingSection({ title, products }: { title: string; products: typeof PRODUCTS }) {

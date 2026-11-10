@@ -3,10 +3,12 @@ import Link from "next/link";
 import { Play } from "lucide-react";
 import { PRODUCTS, CATEGORY_LABELS } from "@/lib/products";
 import { href } from "@/lib/paths";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
   title: "Live Demos — INDUS Web Agency",
   description: "Preview screenshots and demos of our automation tools before you subscribe.",
+  ...selfReferencingMeta("/demos"),
 };
 
 export default function DemosPage() {

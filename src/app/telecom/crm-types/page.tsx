@@ -6,12 +6,13 @@ import { TELECOM_CRM_TYPES } from "@/lib/telecom-crm";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
 import { ArrowRight } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Types of Telecom & Call Center CRMs — Complete Guide",
   description:
     "All major telecommunications CRM types for outbound: dialer CRM, predictive, AI voice, dispatch, lead management, contact center, TCPA compliance, and more—with INDUS product and custom options.",
-  alternates: { canonical: "/telecom/crm-types" },
+  ...selfReferencingMeta("/telecom/crm-types"),
 };
 
 const roleLabel: Record<string, string> = {

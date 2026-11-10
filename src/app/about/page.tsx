@@ -3,12 +3,14 @@ import { AboutPageContent } from "@/components/agency/AboutPageContent";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 import { href } from "@/lib/paths";
 
 export const metadata = {
   title: "About Us & Team — INDUS Web Agency",
   description:
     "Meet the INDUS Web Agency team — a software studio building custom products, websites, and automation tools for operators worldwide.",
+  ...selfReferencingMeta("/about"),
 };
 
 export default function AboutPage() {

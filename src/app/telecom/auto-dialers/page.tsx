@@ -7,11 +7,12 @@ import { TelecomCta } from "@/components/telecom/TelecomCta";
 import { TELECOM_DIALERS_HUB, DIALER_PRODUCT_CARDS } from "@/lib/telecom-seo";
 import { breadcrumbJsonLd, faqPageJsonLd, howToJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Google Voice Auto Dialers — Plans, CRM & AI",
   description: TELECOM_DIALERS_HUB.description,
-  alternates: { canonical: "/telecom/auto-dialers" },
+  ...selfReferencingMeta("/telecom/auto-dialers"),
 };
 
 export default function TelecomDialersPage() {

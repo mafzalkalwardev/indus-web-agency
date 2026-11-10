@@ -8,12 +8,13 @@ import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
 import { SITE_CONTACT } from "@/lib/site-config";
 import { href } from "@/lib/paths";
 import { Check, ArrowRight } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Best Web Agencies in Islamabad | INDUS Web Agency",
   description: ISLAMABAD_AGENCY.description,
   keywords: [...ISLAMABAD_AGENCY.primaryKeywords, ...ISLAMABAD_AGENCY.secondaryKeywords],
-  alternates: { canonical: "/agency/islamabad" },
+  ...selfReferencingMeta("/agency/islamabad"),
 };
 
 export default function IslamabadAgencyPage() {

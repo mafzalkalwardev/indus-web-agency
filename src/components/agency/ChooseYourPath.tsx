@@ -11,9 +11,9 @@ const studioPoints = [
 ];
 
 const productPoints = [
-  "13 dialers, email tools & scrapers",
-  "Subscribe → approve → download",
-  "Plans from $19/mo",
+  "MailForge, Routelix, Laneora, and the rest",
+  "Each product links to its own site",
+  "Licensed downloads from $19/mo",
 ];
 
 export function ChooseYourPath() {
@@ -63,7 +63,7 @@ export function ChooseYourPath() {
               </span>
               <h3 className="mt-5 text-2xl font-bold">I want ready-made tools</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                License in-house dialers, email tools, and scrapers with secure downloads.
+                Open the products we publish, or license a dialer, email tool, or scraper.
               </p>
               <ul className="mt-6 flex-1 space-y-2.5">
                 {productPoints.map((p) => (
