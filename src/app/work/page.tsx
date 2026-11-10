@@ -1,9 +1,11 @@
 import { PageHero } from "@/components/agency/PageHero";
 import { WorkPageContent } from "@/components/agency/WorkPageContent";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
   title: "Our Work — Portfolio | INDUS Web Agency",
   description: "Case studies in custom software, websites, and business automation from INDUS Web Agency.",
+  ...selfReferencingMeta("/work"),
 };
 
 export default function WorkPage() {

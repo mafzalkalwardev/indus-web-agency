@@ -3,12 +3,13 @@ import { GUIDES } from "@/lib/guides";
 import { PageHero } from "@/components/agency/PageHero";
 import { href } from "@/lib/paths";
 import { ArrowRight, Clock } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
   title: "Guides — Telecom Dialers, CRMs, Email & Automation",
   description:
     "Practical INDUS guides on Google Voice auto dialers, telecom CRMs, TCPA education, email verification, and custom vs off-the-shelf software.",
-  alternates: { canonical: "/guides" },
+  ...selfReferencingMeta("/guides"),
 };
 
 const categoryLabel = {

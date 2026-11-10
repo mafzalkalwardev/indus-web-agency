@@ -9,6 +9,12 @@ import { PRODUCTS } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import { href } from "@/lib/paths";
 import { ServiceCardsGrid, PortfolioPreviewGrid } from "@/components/agency/HomeMotionBlocks";
+import type { Metadata } from "next";
+import { selfReferencingMeta } from "@/lib/seo-meta";
+
+export const metadata: Metadata = {
+  ...selfReferencingMeta("/"),
+};
 
 const featured = PRODUCTS.filter((p) =>
   ["mailforge", "dialer-multi-slot", "dialer-ai-multi-slot", "email-verifier-pro"].includes(p.slug)

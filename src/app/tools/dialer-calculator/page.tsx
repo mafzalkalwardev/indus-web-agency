@@ -1,12 +1,13 @@
 import { PageHero } from "@/components/agency/PageHero";
 import { DialerCalculator } from "@/components/tools/DialerCalculator";
 import { LeadMagnetForm } from "@/components/resources/LeadMagnetForm";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
   title: "Dialer Plan Calculator — Find Your Auto Dialer",
   description:
     "Answer two questions and get a recommended INDUS auto dialer plan — DOM starter, multi-slot, AI solo, or enterprise AI dispatch.",
-  alternates: { canonical: "/tools/dialer-calculator" },
+  ...selfReferencingMeta("/tools/dialer-calculator"),
 };
 
 export default function DialerCalculatorPage() {

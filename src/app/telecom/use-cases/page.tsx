@@ -6,12 +6,13 @@ import { TELECOM_USE_CASES } from "@/lib/telecom-usecases";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
 import { ArrowRight } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Auto Dialer Use Cases — Cold Calling, Telecom, AI Sales & More",
   description:
     "Every outbound dialer use case: cold calling, telecommunications, AI sales closing, SDR, insurance, real estate, solar, dispatch, BPO, and small business—mapped to INDUS products.",
-  alternates: { canonical: "/telecom/use-cases" },
+  ...selfReferencingMeta("/telecom/use-cases"),
 };
 
 export default function UseCasesIndexPage() {

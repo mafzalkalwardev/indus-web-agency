@@ -3,14 +3,13 @@ import type { Metadata } from "next";
 import { href } from "@/lib/paths";
 import { FAQ_ITEMS } from "@/lib/faq-content";
 import { SITE_CONTACT } from "@/lib/site-config";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Automation Software FAQ",
   description:
     "Frequently asked questions about INDUS Web Agency subscriptions, software licenses, product downloads, setup guides, and support.",
-  alternates: {
-    canonical: "/faq",
-  },
+  ...selfReferencingMeta("/faq"),
 };
 
 export default function FaqPage() {

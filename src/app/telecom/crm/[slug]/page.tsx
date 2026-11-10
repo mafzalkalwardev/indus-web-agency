@@ -9,6 +9,7 @@ import { TELECOM_CRM_TYPES, getTelecomCrm, getRelatedCrmTypes } from "@/lib/tele
 import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
 import { Check } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export function generateStaticParams() {
   return TELECOM_CRM_TYPES.map((c) => ({ slug: c.slug }));
@@ -26,7 +27,7 @@ export async function generateMetadata({
     title: `${crm.name} — Telecom CRM Guide`,
     description: crm.definition,
     keywords: [crm.primaryKeyword, crm.name, "telecom CRM", "call center CRM", "INDUS Web Agency"],
-    alternates: { canonical: `/telecom/crm/${crm.slug}` },
+    ...selfReferencingMeta(`/telecom/crm/${crm.slug}`),
   };
 }
 

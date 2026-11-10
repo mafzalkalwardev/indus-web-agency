@@ -7,11 +7,12 @@ import { TelecomCta } from "@/components/telecom/TelecomCta";
 import { TELECOM_CANADA } from "@/lib/telecom-seo";
 import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Dispatch Dialer & Outbound Software Canada",
   description: TELECOM_CANADA.description,
-  alternates: { canonical: "/telecom/canada" },
+  ...selfReferencingMeta("/telecom/canada"),
 };
 
 export default function TelecomCanadaPage() {

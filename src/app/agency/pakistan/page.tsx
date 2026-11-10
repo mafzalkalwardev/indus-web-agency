@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
 import { SITE_CONTACT } from "@/lib/site-config";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 const faqs = [
   {
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     "auto dialer Pakistan",
     "best software company Pakistan",
   ],
-  alternates: { canonical: "/agency/pakistan" },
+  ...selfReferencingMeta("/agency/pakistan"),
 };
 
 export default function PakistanAgencyPage() {
