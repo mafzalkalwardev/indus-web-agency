@@ -3,7 +3,7 @@ import Link from "next/link";
 import { href } from "@/lib/paths";
 
 export const metadata = {
-  title: "Admin Login — INDUS Web Agency",
+  title: "Admin Login",
 };
 
 export default function AdminLoginPage() {

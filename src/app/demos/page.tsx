@@ -6,7 +6,7 @@ import { href } from "@/lib/paths";
 import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
-  title: "Live Demos — INDUS Web Agency",
+  title: "Live Demos",
   description: "Preview screenshots and demos of our automation tools before you subscribe.",
   ...selfReferencingMeta("/demos"),
 };

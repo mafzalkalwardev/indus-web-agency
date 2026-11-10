@@ -4,7 +4,7 @@ import { SITE_CONTACT } from "@/lib/site-config";
 import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
-  title: "Privacy Policy — INDUS Web Agency",
+  title: "Privacy Policy",
   ...selfReferencingMeta("/privacy"),
 };
 

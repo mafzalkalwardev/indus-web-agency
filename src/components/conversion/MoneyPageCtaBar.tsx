@@ -30,7 +30,7 @@ export function MoneyPageCtaBar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackEvent("sticky_cta", { target: "whatsapp", path: pathname })}
-              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#25D366] px-3 py-2.5 text-xs font-semibold text-white sm:flex-none sm:px-4 sm:text-sm"
+              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#075E54] px-3 py-2.5 text-xs font-semibold text-white sm:flex-none sm:px-4 sm:text-sm"
             >
               <MessageCircle className="h-4 w-4" />
               WhatsApp

@@ -23,6 +23,7 @@ export const metadata: Metadata = {
   applicationName: SITE_SEO.name,
   title: {
     default: SITE_SEO.title,
+    // Pages should pass only the page name. This template adds the brand once.
     template: "%s | INDUS Web Agency",
   },
   description: SITE_SEO.description,
