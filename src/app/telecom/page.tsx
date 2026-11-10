@@ -9,12 +9,13 @@ import { TELECOM_PILLAR, DIALER_PRODUCT_CARDS } from "@/lib/telecom-seo";
 import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
 import { ArrowRight, Phone, Database, MapPin } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Outbound Telecommunications Software — Dialers & CRMs",
   description: TELECOM_PILLAR.description,
   keywords: [...TELECOM_PILLAR.keywords],
-  alternates: { canonical: "/telecom" },
+  ...selfReferencingMeta("/telecom"),
 };
 
 export default function TelecomPillarPage() {

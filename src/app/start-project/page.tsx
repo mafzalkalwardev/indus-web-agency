@@ -2,10 +2,12 @@ import { ProjectInquiryForm } from "@/components/agency/ProjectInquiryForm";
 import { FadeIn } from "@/components/agency/FadeIn";
 import { SITE_CONTACT } from "@/lib/site-config";
 import { Mail, MessageCircle } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
   title: "Start a Project — INDUS Web Agency",
   description: "Request custom software, a website, or automation project from INDUS Web Agency.",
+  ...selfReferencingMeta("/start-project"),
 };
 
 export default function StartProjectPage() {

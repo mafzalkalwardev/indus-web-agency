@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { href } from "@/lib/paths";
 import { SITE_CONTACT } from "@/lib/site-config";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export async function generateStaticParams() {
   return PORTFOLIO.map((p) => ({ slug: p.slug }));
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${project.title} — Case Study`,
     description: project.summary,
     keywords: project.tags,
-    alternates: { canonical: `/work/${project.slug}` },
+    ...selfReferencingMeta(`/work/${project.slug}`),
   };
 }
 

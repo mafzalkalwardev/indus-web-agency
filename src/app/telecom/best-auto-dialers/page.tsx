@@ -10,6 +10,7 @@ import { PRIMARY_FOCUS_KEYWORDS } from "@/lib/telecom-keywords";
 import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
 import { Check } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 const faqs = [
   {
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
   description:
     "Auto dialers for telecommunication, cold calling, and AI agents that qualify or close sales. Compare INDUS Google Voice multi-slot and AI dialers from $29/mo—global outbound teams.",
   keywords: [...PRIMARY_FOCUS_KEYWORDS],
-  alternates: { canonical: "/telecom/best-auto-dialers" },
+  ...selfReferencingMeta("/telecom/best-auto-dialers"),
 };
 
 export default function BestAutoDialersPage() {

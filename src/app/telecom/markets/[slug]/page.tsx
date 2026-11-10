@@ -9,6 +9,7 @@ import { TELECOM_MARKETS, getTelecomMarket } from "@/lib/telecom-markets";
 import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
 import { Check } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export function generateStaticParams() {
   return TELECOM_MARKETS.map((m) => ({ slug: m.slug }));
@@ -26,7 +27,7 @@ export async function generateMetadata({
     title: market.title,
     description: market.description,
     keywords: [...market.primaryKeywords, "INDUS Web Agency", "auto dialer", "cold calling"],
-    alternates: { canonical: `/telecom/markets/${market.slug}` },
+    ...selfReferencingMeta(`/telecom/markets/${market.slug}`),
   };
 }
 

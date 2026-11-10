@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SessionProvider } from "@/components/auth/SessionProvider";
 import { Analytics } from "@/components/analytics/Analytics";
+import { siteOpenGraph } from "@/lib/seo-meta";
 import { SITE_CONTACT, SITE_SEO } from "@/lib/site-config";
 import "./globals.css";
 
@@ -28,9 +29,8 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_SEO.name, url: SITE_CONTACT.siteUrl }],
   creator: SITE_SEO.name,
   publisher: SITE_SEO.name,
-  alternates: {
-    canonical: "/",
-  },
+  // Do not set alternates.canonical here. Pages that omit it inherit this
+  // value, so a root "/" canonical makes every subpage a homepage duplicate.
   robots: {
     index: true,
     follow: true,
@@ -47,19 +47,10 @@ export const metadata: Metadata = {
     apple: "/images/apple-icon.png",
   },
   openGraph: {
-    type: "website",
-    url: SITE_CONTACT.siteUrl,
-    siteName: SITE_SEO.name,
-    title: SITE_SEO.title,
-    description: SITE_SEO.description,
-    images: [
-      {
-        url: "/images/logo-trimmed.png",
-        width: 1200,
-        height: 630,
-        alt: "INDUS Web Agency business automation software",
-      },
-    ],
+    ...siteOpenGraph,
+    // Fallback for routes that do not set their own Open Graph object
+    // (login, signup, admin). Indexable pages replace this with their URL.
+    url: "/",
   },
   twitter: {
     card: "summary_large_image",

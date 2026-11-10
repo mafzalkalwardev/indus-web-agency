@@ -7,11 +7,12 @@ import { TelecomCta } from "@/components/telecom/TelecomCta";
 import { TELECOM_USA } from "@/lib/telecom-seo";
 import { breadcrumbJsonLd, faqPageJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Google Voice Auto Dialer USA — Outbound Telecom CRM",
   description: TELECOM_USA.description,
-  alternates: { canonical: "/telecom/usa" },
+  ...selfReferencingMeta("/telecom/usa"),
 };
 
 export default function TelecomUsaPage() {

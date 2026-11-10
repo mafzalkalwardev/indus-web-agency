@@ -3,12 +3,13 @@ import { PageHero } from "@/components/agency/PageHero";
 import { LeadMagnetForm } from "@/components/resources/LeadMagnetForm";
 import { href } from "@/lib/paths";
 import { Check } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
   title: "Free Auto Dialer Comparison Guide",
   description:
     "Download the INDUS dialer comparison guide — DOM starter vs multi-slot vs AI solo vs enterprise dispatch explained.",
-  alternates: { canonical: "/resources/dialer-guide" },
+  ...selfReferencingMeta("/resources/dialer-guide"),
 };
 
 const included = [

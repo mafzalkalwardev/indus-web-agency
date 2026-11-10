@@ -4,14 +4,13 @@ import { ArrowRight, Check, X } from "lucide-react";
 import { DIALER_COMPARISON } from "@/lib/products";
 import { COMPARISONS } from "@/lib/comparisons";
 import { href } from "@/lib/paths";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Compare AI Auto Dialer Software Plans",
   description:
     "Compare INDUS Web Agency auto dialer software plans, including DOM automation, Google Voice multi-slot dialing, AI agent calling, AMD, CRM, and admin dashboards. Plus AI dialer vs SaaS, custom CRM vs off-the-shelf, and Islamabad agency comparisons.",
-  alternates: {
-    canonical: "/compare",
-  },
+  ...selfReferencingMeta("/compare"),
 };
 
 const columns = [

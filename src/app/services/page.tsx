@@ -4,11 +4,13 @@ import { FadeIn } from "@/components/agency/FadeIn";
 import { Button } from "@/components/ui/button";
 import { href } from "@/lib/paths";
 import { ServicesPageContent } from "@/components/agency/ServicesPageContent";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata = {
   title: "Services — Custom Software & Web Development | INDUS Web Agency",
   description:
     "Custom software development, websites, business automation, mobile apps, and product design from INDUS Web Agency.",
+  ...selfReferencingMeta("/services"),
 };
 
 export default function ServicesPage() {

@@ -5,12 +5,13 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/schema";
 import { href } from "@/lib/paths";
 import { ArrowRight } from "lucide-react";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 
 export const metadata: Metadata = {
   title: "Web & Software Agency — Islamabad & Worldwide | INDUS",
   description:
     "INDUS Web Agency — Islamabad software studio for custom websites, AI auto dialers with CRMs, custom CRM development, and automation products. Local presence, global delivery.",
-  alternates: { canonical: "/agency" },
+  ...selfReferencingMeta("/agency"),
 };
 
 const links = [

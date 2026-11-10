@@ -1,6 +1,7 @@
 import { ContactForm } from "@/components/agency/ContactForm";
 import { FadeIn } from "@/components/agency/FadeIn";
 import { PageHero } from "@/components/agency/PageHero";
+import { selfReferencingMeta } from "@/lib/seo-meta";
 import { SITE_CONTACT } from "@/lib/site-config";
 import { href } from "@/lib/paths";
 import Link from "next/link";
@@ -10,6 +11,7 @@ export const metadata = {
   title: "Contact Us — INDUS Web Agency",
   description:
     "Get in touch with INDUS Web Agency for custom projects, product support, partnerships, or general inquiries.",
+  ...selfReferencingMeta("/contact"),
 };
 
 export default function ContactPage() {
