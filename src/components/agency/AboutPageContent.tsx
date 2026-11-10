@@ -1,12 +1,9 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { COMPANY_STORY, STUDIO_CAPABILITIES, FOUNDER, TEAM } from "@/lib/about";
 import { TEAM_MARQUEE_ITEMS } from "@/lib/team-marquee";
-import { StaggerChildren, staggerItem, FadeIn } from "@/components/agency/FadeIn";
+import { FadeIn } from "@/components/agency/FadeIn";
 
 export function AboutPageContent() {
   const marqueeTrack = [...TEAM_MARQUEE_ITEMS, ...TEAM_MARQUEE_ITEMS];
@@ -65,11 +62,10 @@ export function AboutPageContent() {
           </div>
         </div>
 
-        <StaggerChildren className="mx-auto mt-10 grid max-w-7xl gap-5 border-t border-line px-5 pt-10 sm:px-8 md:grid-cols-2">
+        <div className="mx-auto mt-10 grid max-w-7xl gap-5 border-t border-line px-5 pt-10 sm:px-8 md:grid-cols-2">
           {TEAM.map((member) => (
-            <motion.div
+            <div
               key={member.id}
-              variants={staggerItem}
               className="rounded-2xl border border-line bg-paper-raised p-7"
             >
               <div className="flex items-center gap-4">
@@ -122,9 +118,9 @@ export function AboutPageContent() {
                   </Link>
                 )}
               </div>
-            </motion.div>
+            </div>
           ))}
-        </StaggerChildren>
+        </div>
       </section>
 
       {/* Capabilities */}
@@ -137,19 +133,18 @@ export function AboutPageContent() {
           </p>
         </FadeIn>
 
-        <StaggerChildren className="mt-12 grid gap-5 md:grid-cols-2">
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
           {STUDIO_CAPABILITIES.map((cap, i) => (
-            <motion.div
+            <div
               key={cap.id}
-              variants={staggerItem}
               className="rounded-2xl border border-line bg-paper-raised p-7"
             >
               <span className="font-mono text-xs text-muted">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="mt-2 font-bold text-xl font-medium text-ink">{cap.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{cap.description}</p>
-            </motion.div>
+            </div>
           ))}
-        </StaggerChildren>
+        </div>
       </section>
 
       {/* Values */}
@@ -159,14 +154,14 @@ export function AboutPageContent() {
             <p className="eyebrow text-accent">How we work</p>
             <h2 className="mt-4 font-bold text-3xl font-medium tracking-tight sm:text-4xl">What we stand for</h2>
           </FadeIn>
-          <StaggerChildren className="mt-12 grid gap-5 md:grid-cols-2">
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
             {COMPANY_STORY.values.map((v) => (
-              <motion.div key={v.title} variants={staggerItem} className="rounded-2xl border border-line bg-paper-raised p-7">
+              <div key={v.title} className="rounded-2xl border border-line bg-paper-raised p-7">
                 <h3 className="font-bold text-xl font-medium text-ink">{v.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{v.description}</p>
-              </motion.div>
+              </div>
             ))}
-          </StaggerChildren>
+          </div>
         </div>
       </section>
     </>

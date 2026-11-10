@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
-/* INDUS brand — navy #0c2340 + cyan #0891b2 */
+/* Accessible brand cyan. Tailwind's default cyan-600 (#0092b5) is 3.6:1 on white. */
+@theme {
+  --color-cyan-600: #0e7490;
+}
+
+/* INDUS brand — navy #0c2340 + cyan #0891b2, with #0e7490 for text and buttons */
 :root {
   --indus-navy: #0c2340;
   --indus-navy-soft: #1a3a5c;
@@ -17,10 +22,12 @@
   --paper: #f8fafc;
   --paper-raised: #ffffff;
   --paper-sunk: #f1f5f9;
-  --accent: #0891b2;
-  --accent-strong: #0e7490;
+  /* #0e7490 / #007492 clear 4.5:1 for small text on white; #0891b2 does not. */
+  --accent: #0e7490;
+  --accent-strong: #007492;
   --accent-tint: #ecfeff;
-  --muted: #64748b;
+  /* #64748b is 4.43:1 on the sunk paper mix; #5c6b82 stays muted and clears 4.5:1. */
+  --muted: #5c6b82;
   --line: #e2e8f0;
   --line-strong: #cbd5e1;
 }
@@ -117,10 +124,22 @@ body {
   animation: marquee 32s linear infinite;
 }
 
+.agency-sculpture {
+  animation: floaty 7s ease-in-out infinite;
+}
+.agency-sculpture-spin {
+  animation: sculpture-spin 42s linear infinite;
+}
+@keyframes sculpture-spin {
+  to { transform: rotate(360deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .motion-frame,
   .animate-float,
-  .animate-marquee {
+  .animate-marquee,
+  .agency-sculpture,
+  .agency-sculpture-spin {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;

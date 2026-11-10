@@ -1,8 +1,5 @@
-"use client";
-
-import { motion } from "motion/react";
 import { AGENCY_SERVICES, TECH_STACK_SUGGESTIONS } from "@/lib/agency-services";
-import { StaggerChildren, staggerItem, FadeIn } from "@/components/agency/FadeIn";
+import { FadeIn } from "@/components/agency/FadeIn";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -10,9 +7,9 @@ export function ServicesPageContent() {
   return (
     <>
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
-        <StaggerChildren className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {AGENCY_SERVICES.map((service) => (
-            <motion.div key={service.id} variants={staggerItem}>
+            <div key={service.id}>
               <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-ink">
                 <CardHeader>
                   <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-paper text-ink">
@@ -37,9 +34,9 @@ export function ServicesPageContent() {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
-        </StaggerChildren>
+        </div>
       </section>
 
       <section className="border-t border-line bg-paper-sunk/50 py-20">

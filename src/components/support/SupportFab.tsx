@@ -198,7 +198,7 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
             <button
               type="submit"
               disabled={loading || !input.trim()}
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-600 text-white transition hover:bg-cyan-500 disabled:opacity-50"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-600 text-white transition hover:bg-[#007492] disabled:opacity-50"
               aria-label="Send message"
             >
               <Send className="h-4 w-4" />

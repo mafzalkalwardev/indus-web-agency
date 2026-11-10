@@ -1,10 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "motion/react";
 import { PORTFOLIO } from "@/lib/portfolio";
-import { StaggerChildren, staggerItem, FadeIn } from "@/components/agency/FadeIn";
+import { FadeIn } from "@/components/agency/FadeIn";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -13,11 +10,10 @@ import { href } from "@/lib/paths";
 export function WorkPageContent() {
   return (
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
-      <StaggerChildren className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-2">
         {PORTFOLIO.map((project) => (
-          <motion.article
+          <article
             key={project.slug}
-            variants={staggerItem}
             className="group overflow-hidden rounded-2xl border border-line bg-paper-raised transition-all duration-300 hover:-translate-y-1 hover:border-ink"
           >
             <Link href={href(`/work/${project.slug}`)} className="block">
@@ -56,9 +52,9 @@ export function WorkPageContent() {
                 Read case study <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-          </motion.article>
+          </article>
         ))}
-      </StaggerChildren>
+      </div>
 
       <FadeIn className="relative mt-20 overflow-hidden rounded-3xl bg-[#0c2340] p-12 text-center text-white sm:p-16">
         <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-64 -translate-x-1/2 rounded-full bg-cyan-500/20 blur-[100px]" />

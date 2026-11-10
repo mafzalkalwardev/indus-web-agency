@@ -35,7 +35,7 @@ export function Footer() {
               </p>
               <Link
                 href={href("/start-project")}
-                className="mt-6 inline-flex items-center gap-2 rounded-lg bg-cyan-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-500"
+                className="mt-6 inline-flex items-center gap-2 rounded-lg bg-accent-strong px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#007492]"
               >
                 Start a project <ArrowRight className="h-4 w-4" />
               </Link>
@@ -101,9 +101,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
+            <h3 className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
               Studio
-            </h4>
+            </h3>
             <ul className="mt-4 space-y-2.5">
               {FOOTER_STUDIO_LINKS.map((item) => (
                 <li key={item.href}>
@@ -116,15 +116,15 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
+            <h3 className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
               Product shelf
-            </h4>
+            </h3>
             <ul className="mt-4 space-y-3">
               {FOOTER_PRODUCT_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link href={href(item.href)} className="group block text-sm transition">
                     <span className="text-slate-300 group-hover:text-white">{item.label}</span>
-                    <span className="mt-0.5 block text-xs text-slate-500 group-hover:text-slate-400">{item.hint}</span>
+                    <span className="mt-0.5 block text-xs text-slate-400 group-hover:text-slate-400">{item.hint}</span>
                   </Link>
                 </li>
               ))}
@@ -137,9 +137,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
+            <h3 className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
               Resources
-            </h4>
+            </h3>
             <ul className="mt-4 space-y-2.5">
               <li><Link href={href("/agency/islamabad")} className="text-sm text-slate-300 transition hover:text-white">Web agencies Islamabad</Link></li>
               <li><Link href={href("/compare/web-agency-islamabad")} className="text-sm text-slate-300 transition hover:text-white">Islamabad agency comparison</Link></li>
@@ -163,9 +163,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
+            <h3 className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-cyan-400">
               Get in touch
-            </h4>
+            </h3>
             <ul className="mt-4 space-y-3 text-sm">
               <li className="flex items-start gap-2.5">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
@@ -198,10 +198,10 @@ export function Footer() {
 
       <div className="relative mt-12 border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col-reverse items-center justify-between gap-4 px-5 py-6 sm:flex-row sm:px-8">
-          <p className="text-center text-xs text-slate-500 sm:text-left">
+          <p className="text-center text-xs text-slate-400 sm:text-left">
             © {year} INDUS Web Agency. Custom software studio &amp; automation product shelf.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-500">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-400">
             <Link href={href("/faq")} className="transition hover:text-cyan-400">FAQ</Link>
             <Link href={href("/terms")} className="transition hover:text-cyan-400">Terms</Link>
             <Link href={href("/privacy")} className="transition hover:text-cyan-400">Privacy</Link>

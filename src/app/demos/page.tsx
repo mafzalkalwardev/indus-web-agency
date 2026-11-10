@@ -87,7 +87,7 @@ export default function DemosPage() {
         <div className="relative z-10">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Ready to get started?</h2>
           <p className="mt-3 text-slate-300">Choose weekly, monthly, or yearly billing. Admin approves within 24 hours.</p>
-          <Link href={href("/products")} className="mt-8 inline-block rounded-lg bg-cyan-600 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-cyan-500">
+          <Link href={href("/products")} className="mt-8 inline-block rounded-lg bg-cyan-600 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#007492]">
             View All Products
           </Link>
         </div>

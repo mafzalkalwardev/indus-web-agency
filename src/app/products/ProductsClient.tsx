@@ -10,9 +10,7 @@ import { href } from "@/lib/paths";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
-function ProductsContent() {
-  const searchParams = useSearchParams();
-  const cat = searchParams.get("cat") as ProductCategory | null;
+function ProductsContent({ cat }: { cat: ProductCategory | null }) {
   const filtered = cat ? PRODUCTS.filter((p) => p.category === cat) : PRODUCTS;
   const categories = Object.entries(CATEGORY_LABELS) as [ProductCategory, string][];
 
@@ -79,10 +77,15 @@ function ProductsContent() {
   );
 }
 
+function ProductsFromSearch() {
+  const cat = useSearchParams().get("cat") as ProductCategory | null;
+  return <ProductsContent cat={cat} />;
+}
+
 export function ProductsClient() {
   return (
-    <Suspense fallback={<div className="min-h-[40vh] bg-[#0c2340]" />}>
-      <ProductsContent />
+    <Suspense fallback={<ProductsContent cat={null} />}>
+      <ProductsFromSearch />
     </Suspense>
   );
 }
