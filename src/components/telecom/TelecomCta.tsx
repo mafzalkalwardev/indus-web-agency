@@ -17,7 +17,7 @@ export function TelecomCta({
         <Link
           href={href("/products?cat=dialer")}
           onClick={() => trackEvent("telecom_cta", { source, target: "dialers" })}
-          className="inline-flex items-center rounded-lg bg-cyan-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-500"
+          className="inline-flex items-center rounded-lg bg-cyan-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#007492]"
         >
           Browse dialers
         </Link>

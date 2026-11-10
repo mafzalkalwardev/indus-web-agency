@@ -8,9 +8,7 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { href } from "@/lib/paths";
 import { Button } from "@/components/ui/button";
 
-function ProductsContent() {
-  const searchParams = useSearchParams();
-  const cat = searchParams.get("cat") as ProductCategory | null;
+function ProductsContent({ cat }: { cat: ProductCategory | null }) {
   const filtered = cat ? PRODUCTS.filter((p) => p.category === cat) : PRODUCTS;
   const categories = Object.entries(CATEGORY_LABELS) as [ProductCategory, string][];
 
@@ -25,10 +23,10 @@ function ProductsContent() {
           These are separate from the product sites above. Subscribe, get approved, and download with a signed license.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Button asChild variant="outline" size="lg">
+          <Button asChild variant="secondary" size="lg">
             <Link href={href("/tools/dialer-calculator")}>Find my dialer plan</Link>
           </Button>
-          <Button asChild variant="outline" size="lg">
+          <Button asChild variant="secondary" size="lg">
             <Link href={href("/resources/dialer-guide")}>Free comparison guide</Link>
           </Button>
         </div>
@@ -66,10 +64,15 @@ function ProductsContent() {
   );
 }
 
+function ProductsFromSearch() {
+  const cat = useSearchParams().get("cat") as ProductCategory | null;
+  return <ProductsContent cat={cat} />;
+}
+
 export function ProductsClient() {
   return (
-    <Suspense fallback={<div className="min-h-[40vh] bg-[#0c2340]" />}>
-      <ProductsContent />
+    <Suspense fallback={<ProductsContent cat={null} />}>
+      <ProductsFromSearch />
     </Suspense>
   );
 }

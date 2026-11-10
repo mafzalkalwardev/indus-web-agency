@@ -84,7 +84,7 @@ export function DialerCalculator() {
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href={href(`/products/${rec.slug}`)}
-            className="inline-flex items-center gap-2 rounded-lg bg-cyan-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-500"
+            className="inline-flex items-center gap-2 rounded-lg bg-cyan-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#007492]"
           >
             View product <ArrowRight className="h-4 w-4" />
           </Link>

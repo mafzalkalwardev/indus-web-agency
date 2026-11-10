@@ -52,7 +52,7 @@ export function ContactForm() {
           <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-tint text-accent-strong">
             <CheckCircle2 className="h-7 w-7" />
           </span>
-          <h3 className="mt-5 font-bold text-2xl font-medium text-ink">Message sent</h3>
+          <h2 className="mt-5 font-bold text-2xl font-medium text-ink">Message sent</h2>
           <p className="mt-2 max-w-sm text-sm text-muted">
             We&apos;ll review your message and respond within 24 hours on business days.
           </p>
@@ -73,20 +73,22 @@ export function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Full name *</label>
-              <Input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+              <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium">Full name *</label>
+              <Input id="contact-name" name="name" autoComplete="name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Email *</label>
-              <Input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+              <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium">Email *</label>
+              <Input id="contact-email" name="email" type="email" autoComplete="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Phone / WhatsApp</label>
-              <Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+              <label htmlFor="contact-phone" className="mb-1.5 block text-sm font-medium">Phone / WhatsApp</label>
+              <Input id="contact-phone" name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Topic *</label>
+              <label htmlFor="contact-topic" className="mb-1.5 block text-sm font-medium">Topic *</label>
               <select
+                id="contact-topic"
+                name="topic"
                 required
                 value={form.topic}
                 onChange={(e) => setForm({ ...form, topic: e.target.value })}
@@ -100,8 +102,10 @@ export function ContactForm() {
           </div>
 
           <div>
-            <label className="mb-1.5 block text-sm font-medium">Subject</label>
+            <label htmlFor="contact-subject" className="mb-1.5 block text-sm font-medium">Subject</label>
             <Input
+              id="contact-subject"
+              name="subject"
               placeholder="Optional — e.g. Mailforge setup help"
               value={form.subject}
               onChange={(e) => setForm({ ...form, subject: e.target.value })}
@@ -109,8 +113,10 @@ export function ContactForm() {
           </div>
 
           <div>
-            <label className="mb-1.5 block text-sm font-medium">Message *</label>
+            <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium">Message *</label>
             <Textarea
+              id="contact-message"
+              name="message"
               required
               rows={5}
               placeholder="How can we help?"
@@ -119,7 +125,7 @@ export function ContactForm() {
             />
           </div>
 
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="text-sm text-red-600" role="alert">{error}</p>}
 
           <Button type="submit" disabled={loading} size="lg" className="w-full sm:w-auto">
             {loading ? (

@@ -54,7 +54,7 @@ export function ProjectInquiryForm() {
           <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-tint text-accent-strong">
             <CheckCircle2 className="h-7 w-7" />
           </span>
-          <h3 className="mt-5 font-bold text-2xl font-medium text-ink">Inquiry received</h3>
+          <h2 className="mt-5 font-bold text-2xl font-medium text-ink">Inquiry received</h2>
           <p className="mt-2 max-w-sm text-sm text-muted">
             We&apos;ll review your project details and respond within 24 hours on business days.
           </p>
@@ -75,26 +75,28 @@ export function ProjectInquiryForm() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Full name *</label>
-              <Input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+              <label htmlFor="project-name" className="mb-1.5 block text-sm font-medium">Full name *</label>
+              <Input id="project-name" name="name" autoComplete="name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Email *</label>
-              <Input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+              <label htmlFor="project-email" className="mb-1.5 block text-sm font-medium">Email *</label>
+              <Input id="project-email" name="email" type="email" autoComplete="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Company</label>
-              <Input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
+              <label htmlFor="project-company" className="mb-1.5 block text-sm font-medium">Company</label>
+              <Input id="project-company" name="company" autoComplete="organization" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Phone / WhatsApp</label>
-              <Input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+              <label htmlFor="project-phone" className="mb-1.5 block text-sm font-medium">Phone / WhatsApp</label>
+              <Input id="project-phone" name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
             </div>
           </div>
 
           <div>
-            <label className="mb-1.5 block text-sm font-medium">Project type *</label>
+            <label htmlFor="project-type" className="mb-1.5 block text-sm font-medium">Project type *</label>
             <select
+              id="project-type"
+              name="projectType"
               required
               value={form.projectType}
               onChange={(e) => setForm({ ...form, projectType: e.target.value })}
@@ -108,8 +110,10 @@ export function ProjectInquiryForm() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Budget range</label>
+              <label htmlFor="project-budget" className="mb-1.5 block text-sm font-medium">Budget range</label>
               <select
+                id="project-budget"
+                name="budget"
                 value={form.budget}
                 onChange={(e) => setForm({ ...form, budget: e.target.value })}
                 className="flex h-11 w-full rounded-lg border border-line bg-paper-raised px-3.5 text-sm text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-accent/20"
@@ -120,8 +124,10 @@ export function ProjectInquiryForm() {
               </select>
             </div>
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Timeline</label>
+              <label htmlFor="project-timeline" className="mb-1.5 block text-sm font-medium">Timeline</label>
               <select
+                id="project-timeline"
+                name="timeline"
                 value={form.timeline}
                 onChange={(e) => setForm({ ...form, timeline: e.target.value })}
                 className="flex h-11 w-full rounded-lg border border-line bg-paper-raised px-3.5 text-sm text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-accent/20"
@@ -134,8 +140,10 @@ export function ProjectInquiryForm() {
           </div>
 
           <div>
-            <label className="mb-1.5 block text-sm font-medium">Project description *</label>
+            <label htmlFor="project-description" className="mb-1.5 block text-sm font-medium">Project description *</label>
             <Textarea
+              id="project-description"
+              name="description"
               required
               rows={5}
               placeholder="What should we build? Who is it for? Any integrations, design references, or deadlines?"

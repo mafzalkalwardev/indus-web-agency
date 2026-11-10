@@ -76,7 +76,7 @@ export function ChooseYourPath() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href={href("/products")}
-                  className="inline-flex items-center gap-2 rounded-lg bg-cyan-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-500"
+                  className="inline-flex items-center gap-2 rounded-lg bg-cyan-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#007492]"
                 >
                   Browse products <ArrowRight className="h-4 w-4" />
                 </Link>

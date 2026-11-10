@@ -38,7 +38,7 @@ export default function HomePage() {
               {[...marquee, ...marquee].map((item, i) => (
                 <span key={i} className="whitespace-nowrap font-mono text-xs uppercase tracking-[0.2em] text-muted">
                   {item}
-                  <span className="ml-10 text-accent/60">/</span>
+                  <span className="ml-10 text-accent">/</span>
                 </span>
               ))}
             </div>

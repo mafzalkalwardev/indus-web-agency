@@ -59,7 +59,7 @@ export default function IslamabadAgencyPage() {
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href={href("/start-project")}
-            className="inline-flex items-center gap-2 rounded-lg bg-cyan-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-cyan-400"
+            className="inline-flex items-center gap-2 rounded-lg bg-accent-strong px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#0a6278]"
           >
             Start a project <ArrowRight className="h-4 w-4" />
           </Link>

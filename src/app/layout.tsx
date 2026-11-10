@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteChrome } from "@/components/layout/SiteChrome";
+import { Footer } from "@/components/layout/Footer";
 import { SessionProvider } from "@/components/auth/SessionProvider";
 import { Analytics } from "@/components/analytics/Analytics";
 import { siteOpenGraph } from "@/lib/seo-meta";
@@ -106,7 +107,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationJsonLd, websiteJsonLd]) }}
         />
         <SessionProvider>
-          <SiteChrome>{children}</SiteChrome>
+          <SiteChrome footer={<Footer />}>{children}</SiteChrome>
         </SessionProvider>
         <Analytics />
       </body>

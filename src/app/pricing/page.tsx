@@ -77,7 +77,7 @@ export default function PricingPage() {
         <div className="relative z-10">
           <h3 className="text-2xl font-bold tracking-tight">Not sure which dialer plan fits?</h3>
           <p className="mt-2 text-slate-300">Compare all four auto dialer tiers side by side.</p>
-          <Link href="/compare" className="mt-6 inline-block rounded-lg bg-cyan-600 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-cyan-500">
+          <Link href="/compare" className="mt-6 inline-block rounded-lg bg-cyan-600 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#007492]">
             Compare Dialer Plans
           </Link>
         </div>
