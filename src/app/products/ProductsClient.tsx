@@ -23,10 +23,10 @@ function ProductsContent({ cat }: { cat: ProductCategory | null }) {
           These are separate from the product sites above. Subscribe, get approved, and download with a signed license.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Button asChild variant="outline" size="lg">
+          <Button asChild variant="secondary" size="lg">
             <Link href={href("/tools/dialer-calculator")}>Find my dialer plan</Link>
           </Button>
-          <Button asChild variant="outline" size="lg">
+          <Button asChild variant="secondary" size="lg">
             <Link href={href("/resources/dialer-guide")}>Free comparison guide</Link>
           </Button>
         </div>
