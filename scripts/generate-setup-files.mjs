@@ -29,7 +29,7 @@ for (const [slug, g] of Object.entries(guides)) {
   const text = [
     `INDUS Web Agency — Setup Guide`,
     `Product: ${slug}`,
-    `Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503`,
+    `Support: info@mail.induswebagency.com | WhatsApp: +92 307 967 0503`,
     ``,
     `REQUIREMENTS:`,
     ...g.requirements.map((r) => `  - ${r}`),

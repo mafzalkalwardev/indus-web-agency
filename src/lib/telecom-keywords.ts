@@ -104,7 +104,7 @@ export const KEYWORD_CLUSTERS = {
   ],
 } as const;
 
-/** Flattened unique keyword list for site-wide meta / Organization knowsAbout */
+/** Flattened unique keyword list for site-wide meta keywords. */
 export const ALL_TELECOM_KEYWORDS: string[] = Array.from(
   new Set(Object.values(KEYWORD_CLUSTERS).flatMap((c) => [...c]))
 );

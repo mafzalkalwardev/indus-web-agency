@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { FOUNDER } from "@/lib/about";
 import { buildAgencyKnowledgeBase } from "@/lib/agency-knowledge";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
+import { SITE_CONTACT } from "@/lib/site-config";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -26,10 +28,10 @@ function fallbackReply(message: string): string {
     return "For custom software or websites, submit a brief at /start-project or use /contact. We typically respond within 24 hours with next steps and a rough scope.";
   }
   if (q.includes("team") || q.includes("about") || q.includes("who are you") || q.includes("afzal") || q.includes("founder")) {
-    return "INDUS Web Agency is founded by Muhammad Afzal Kalwar — Full-Stack Developer & Python Automation Engineer based in Islamabad, Pakistan. Learn more at /about or his portfolio at mafzalkalwardev.github.io.";
+    return `INDUS Web Agency is founded by ${FOUNDER.name} — ${FOUNDER.title} based in ${FOUNDER.location}. Learn more at /about or his portfolio at mafzalkalwardev.github.io.`;
   }
   if (q.includes("contact") || q.includes("whatsapp") || q.includes("email us") || q.includes("support")) {
-    return "Reach us at induswebagency@gmail.com, WhatsApp +92 307 967 0503, or the contact form at /contact.";
+    return `Reach us at ${SITE_CONTACT.email}, WhatsApp +92 307 967 0503, or the contact form at /contact.`;
   }
 
   return "I'm the INDUS Assistant. I can help with custom projects, our software products, subscriptions, and support. Try asking about dialers, email tools, pricing, or how to start a project — or visit /contact to talk to the team.";

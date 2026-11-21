@@ -29,7 +29,7 @@ export default function PrivacyPage() {
 
       <h2>Email communications</h2>
       <p>
-        We send service-related emails to your registered address. Purchase alerts go to our admin team at {SITE_CONTACT.adminNotificationEmail}. We do not sell your personal data.
+        We send service-related emails to your registered address. Purchase alerts go to our admin team. Privacy questions go to {SITE_CONTACT.email}. We do not sell your personal data.
       </p>
 
       <h2>Data storage</h2>

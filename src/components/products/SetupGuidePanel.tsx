@@ -1,6 +1,7 @@
 import { Download } from "lucide-react";
 import type { SetupGuide } from "@/lib/setup-guides";
 import { href } from "@/lib/paths";
+import { SITE_CONTACT } from "@/lib/site-config";
 
 export function SetupGuidePanel({ guide, productName }: { guide: SetupGuide; productName: string }) {
   return (
@@ -47,7 +48,7 @@ export function SetupGuidePanel({ guide, productName }: { guide: SetupGuide; pro
       )}
 
       <p className="mt-4 text-xs text-slate-500">
-        Need help? Email <a href="mailto:induswebagency@gmail.com" className="text-cyan-600 hover:underline">induswebagency@gmail.com</a> or use the INDUS Guide chat (bottom-right).
+        Need help? Email <a href={`mailto:${SITE_CONTACT.email}`} className="text-cyan-600 hover:underline">{SITE_CONTACT.email}</a> or use the INDUS Guide chat (bottom-right).
       </p>
     </section>
   );

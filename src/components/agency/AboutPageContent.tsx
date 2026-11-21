@@ -21,7 +21,7 @@ export function AboutPageContent() {
           </p>
         </FadeIn>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-5 sm:grid-cols-3">
           {COMPANY_STORY.stats.map((s) => (
             <div key={s.label} className="rounded-2xl border border-line bg-paper-raised p-6 text-center">
               <p className="font-bold text-3xl font-medium text-ink">{s.value}</p>

@@ -148,9 +148,9 @@ MIT
 
 ## Discoverability
 
-**Author:** Muhammad Afzal Kalwar ([@mafzalkalwardev](https://github.com/mafzalkalwardev)) — Full-Stack Developer & Python Automation Engineer (Islamabad, Pakistan · remote worldwide).
+**Author:** Muhammad Afzal Kalwar ([@mafzalkalwardev](https://github.com/mafzalkalwardev)) — Rust & Python Automation Engineer (Islamabad, Pakistan · remote worldwide).
 
-**Hire / contact:** GitHub [@mafzalkalwardev](https://github.com/mafzalkalwardev) · LinkedIn [@mafzalkalwardev](https://www.linkedin.com/in/mafzalkalwardev) · WhatsApp [+92 307 9670503](https://wa.me/923079670503) · [Portfolio](https://mafzalkalwardev.github.io) · [Email](mailto:kalwarmuhammadafzal3@gmail.com)
+**Hire / contact:** GitHub [@mafzalkalwardev](https://github.com/mafzalkalwardev) · LinkedIn [@mafzalkalwardev](https://www.linkedin.com/in/mafzalkalwardev) · WhatsApp [+92 307 9670503](https://wa.me/923079670503) · [Portfolio](https://mafzalkalwardev.github.io) · [Email](mailto:info@mail.induswebagency.com)
 
 ### Who is this for?
 Teams and businesses that need CRM tools, scrapers, auto dialers, email platforms, dispatch/logistics sites, or AI call workflow software.
@@ -163,7 +163,7 @@ Teams and businesses that need CRM tools, scrapers, auto dialers, email platform
 <details>
 <summary><strong>SEO / GEO / AEO keywords</strong></summary>
 
-Muhammad Afzal Kalwar, mafzalkalwardev, indus-web-agency, full-stack developer, Python automation engineer, Islamabad Pakistan, freelance remote developer, CRM scraping dialer email AI tools, indus, marketplace, saas, automation, subscriptions, logistics, typescript
+Muhammad Afzal Kalwar, mafzalkalwardev, indus-web-agency, Rust & Python Automation Engineer, Islamabad Pakistan, freelance remote developer, CRM scraping dialer email AI tools, indus, marketplace, saas, automation, subscriptions, logistics, typescript
 
 </details>
 
@@ -177,4 +177,4 @@ Muhammad Afzal Kalwar, mafzalkalwardev, indus-web-agency, full-stack developer, 
 | LinkedIn | [@mafzalkalwardev](https://www.linkedin.com/in/mafzalkalwardev) |
 | WhatsApp | [+92 307 9670503](https://wa.me/923079670503) |
 | Portfolio | [mafzalkalwardev.github.io](https://mafzalkalwardev.github.io) |
-| Email | [kalwarmuhammadafzal3@gmail.com](mailto:kalwarmuhammadafzal3@gmail.com) |
+| Email | [info@mail.induswebagency.com](mailto:info@mail.induswebagency.com) |

@@ -1,5 +1,8 @@
 /** Guided support chat — select-only Q&A tree (no free typing) */
 
+import { FOUNDER } from "@/lib/about";
+import { SITE_CONTACT } from "@/lib/site-config";
+
 export interface ChatNode {
   id: string;
   message: string;
@@ -33,7 +36,7 @@ export const CHAT_NODES: Record<string, ChatNode> = {
   "about-team": {
     id: "about-team",
     message:
-      "INDUS is founded by Muhammad Afzal Kalwar — Full-Stack Developer & Python Automation Engineer based in Islamabad, Pakistan.\n\nHe builds CRM, dispatch dialers, email tools, scrapers, and AI workflows. Portfolio: mafzalkalwardev.github.io",
+      `INDUS is founded by ${FOUNDER.name} — ${FOUNDER.title} based in ${FOUNDER.location}.\n\nHe builds CRM, dispatch dialers, email tools, scrapers, and AI workflows. Portfolio: mafzalkalwardev.github.io`,
     options: [
       { label: "About & founder page", nextId: "link-about" },
       { label: "View portfolio", nextId: "link-portfolio" },
@@ -134,7 +137,7 @@ export const CHAT_NODES: Record<string, ChatNode> = {
   contact: {
     id: "contact",
     message:
-      "Reach our team anytime:\n📧 induswebagency@gmail.com\n💬 WhatsApp: +92 307 967 0503\n📝 Contact form on our website\n\nWe typically respond within 24 hours on business days.",
+      `Reach our team anytime:\n📧 ${SITE_CONTACT.email}\n💬 WhatsApp: +92 307 967 0503\n📝 Contact form on our website\n\nWe typically respond within 24 hours on business days.`,
     options: [
       { label: "Open contact form", nextId: "link-contact" },
       { label: "Start a project", nextId: "link-start-project" },

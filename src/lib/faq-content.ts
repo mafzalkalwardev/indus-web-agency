@@ -1,3 +1,5 @@
+import { SITE_CONTACT } from "@/lib/site-config";
+
 export const FAQ_ITEMS = [
   {
     q: "How do I subscribe to a product?",
@@ -21,7 +23,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: "What is your refund policy?",
-    a: "Subscriptions are digital goods delivered immediately after approval. Refunds are considered within 7 days of purchase if the software was not successfully installed. Contact induswebagency@gmail.com with your account email and subscription ID.",
+    a: `Subscriptions are digital goods delivered immediately after approval. Refunds are considered within 7 days of purchase if the software was not successfully installed. Contact ${SITE_CONTACT.email} with your account email and subscription ID.`,
   },
   {
     q: "Which auto dialer plan should I choose?",
@@ -29,6 +31,6 @@ export const FAQ_ITEMS = [
   },
   {
     q: "How do I contact support?",
-    a: "Email induswebagency@gmail.com or use WhatsApp at +92 307 967 0503. You can also use the INDUS Guide chat on the website for instant guided answers.",
+    a: `Email ${SITE_CONTACT.email} or use WhatsApp at +92 307 967 0503. You can also use the INDUS Guide chat on the website for instant guided answers.`,
   },
 ] as const;

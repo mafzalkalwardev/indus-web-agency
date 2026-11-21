@@ -15,7 +15,7 @@ export const FOUNDER = {
   name: "Muhammad Afzal Kalwar",
   shortName: "Muhammad Afzal",
   role: "Founder & Principal Engineer",
-  title: "Full-Stack Developer & Python Automation Engineer",
+  title: "Rust & Python Automation Engineer",
   location: "Islamabad, Pakistan",
   github: "https://github.com/mafzalkalwardev",
   portfolio: "https://mafzalkalwardev.github.io",
@@ -25,7 +25,7 @@ export const FOUNDER = {
 } as const;
 
 export const COMPANY_STORY = {
-  founded: "2020",
+  founded: "2026",
   headquarters: "Islamabad, Pakistan · Remote worldwide",
   tagline: "A founder-led software studio — custom builds and licensed products under one roof.",
   mission:
@@ -49,10 +49,9 @@ export const COMPANY_STORY = {
     },
   ],
   stats: [
-    { value: "50+", label: "Projects delivered" },
-    { value: "13", label: "Licensed products" },
-    { value: "80+", label: "Open source repositories" },
-    { value: "24h", label: "Typical inquiry response" },
+    { value: "2026", label: "Founded" },
+    { value: "Islamabad", label: "Pakistan" },
+    { value: "Remote", label: "Worldwide" },
   ],
 } as const;
 
@@ -89,7 +88,7 @@ export const TEAM: TeamMember[] = [
     name: FOUNDER.name,
     role: FOUNDER.role,
     bio: `${FOUNDER.title} and founder of INDUS Web Agency. ${FOUNDER.tagline} From auto dialers and email platforms to web scrapers and CRM systems — every product on this site was designed, built, and shipped in production.`,
-    focus: ["Next.js & React", "Python & PyQt6", "Playwright automation", "AI & LLM integration", "CRM & dispatch"],
+    focus: ["Next.js & React", "Rust & Python Automation Engineer", "Playwright automation", "AI & LLM integration", "CRM & dispatch"],
     location: FOUNDER.location,
     github: FOUNDER.github,
     portfolio: FOUNDER.portfolio,

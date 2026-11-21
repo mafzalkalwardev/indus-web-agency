@@ -1,6 +1,6 @@
 INDUS Web Agency — Setup Guide
 Product: dialer-starter-dom
-Support: induswebagency@gmail.com | WhatsApp: +92 307 967 0503
+Support: info@mail.induswebagency.com | WhatsApp: +92 307 967 0503
 
 REQUIREMENTS:
   - Windows

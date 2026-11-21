@@ -95,9 +95,9 @@ export function Footer() {
               same in-house automation tools as subscriptions.
             </p>
             <div className="mt-5 flex flex-wrap gap-2 text-xs">
-              <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-slate-300">50+ projects shipped</span>
-              <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-slate-300">13 licensed products</span>
-              <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-slate-300">24h response</span>
+              <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-slate-300">Founded 2026</span>
+              <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-slate-300">Islamabad, Pakistan</span>
+              <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-slate-300">Remote worldwide</span>
             </div>
           </div>
 
@@ -172,7 +172,7 @@ export function Footer() {
             <ul className="mt-4 space-y-3 text-sm">
               <li className="flex items-start gap-2.5">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
-                <a href={`mailto:${SITE_CONTACT.email}`} className="text-slate-300 transition hover:text-white">
+                <a href={`mailto:${SITE_CONTACT.email}`} className="min-w-0 break-all text-slate-300 transition hover:text-white">
                   {SITE_CONTACT.email}
                 </a>
               </li>
