@@ -5,7 +5,15 @@ import { Footer } from "@/components/layout/Footer";
 import { SessionProvider } from "@/components/auth/SessionProvider";
 import { Analytics } from "@/components/analytics/Analytics";
 import { siteOpenGraph } from "@/lib/seo-meta";
-import { SITE_CONTACT, SITE_SEO } from "@/lib/site-config";
+import { COMPANY_STORY, FOUNDER } from "@/lib/about";
+import {
+  FOUNDER_SAME_AS,
+  SITE_ADDRESS,
+  SITE_CONTACT,
+  SITE_KNOWS_ABOUT,
+  SITE_PROFILES,
+  SITE_SEO,
+} from "@/lib/site-config";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -71,7 +79,21 @@ const organizationJsonLd = {
   logo: `${SITE_CONTACT.siteUrl}/images/logo-trimmed.png`,
   email: SITE_CONTACT.email,
   telephone: SITE_CONTACT.whatsapp,
-  sameAs: [SITE_CONTACT.whatsappUrl],
+  foundingDate: COMPANY_STORY.founded,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE_ADDRESS.streetAddress,
+    addressLocality: SITE_ADDRESS.addressLocality,
+    postalCode: SITE_ADDRESS.postalCode,
+    addressCountry: SITE_ADDRESS.addressCountry,
+  },
+  sameAs: [...Object.values(SITE_PROFILES), SITE_CONTACT.whatsappUrl],
+  founder: {
+    "@type": "Person",
+    name: FOUNDER.name,
+    jobTitle: FOUNDER.title,
+    sameAs: [...FOUNDER_SAME_AS],
+  },
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -81,7 +103,7 @@ const organizationJsonLd = {
       availableLanguage: ["en"],
     },
   ],
-  knowsAbout: SITE_SEO.keywords,
+  knowsAbout: [...SITE_KNOWS_ABOUT],
   areaServed: "Worldwide",
   knowsLanguage: ["en"],
 };

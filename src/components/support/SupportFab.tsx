@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { MessageCircle, X, Bot, RotateCcw, Send, Loader2 } from "lucide-react";
 import { CHAT_NODES, LINK_REDIRECTS, QUICK_PROMPTS } from "@/lib/support-chat";
+import { SITE_CONTACT } from "@/lib/site-config";
 import { href } from "@/lib/paths";
 import { formatChatText } from "@/lib/chat-format";
 import Link from "next/link";
@@ -68,7 +69,7 @@ export function GuideChat({ open, onClose }: { open: boolean; onClose: () => voi
     } catch {
       setMessages((m) => [
         ...m,
-        { role: "assistant", content: "Network error. Email us at induswebagency@gmail.com or use /contact." },
+        { role: "assistant", content: `Network error. Email us at ${SITE_CONTACT.email} or use /contact.` },
       ]);
     } finally {
       setLoading(false);

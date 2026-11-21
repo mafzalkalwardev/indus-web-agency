@@ -1,39 +1,36 @@
 # INDUS Web Agency
 
-> Islamabad-based web & software agency. Best AI agent custom auto dialers with CRMs, custom CRM development, Google Voice cold-calling dialers, and custom software—local Pakistan + worldwide.
+> Islamabad software studio for Rust and Python workflow automation, data pipelines, and web apps.
 
-## Local agency intents
-- best web agencies in Islamabad
-- web agencies in Islamabad
-- software house Pakistan / CRM development Islamabad
+## Core services
+- Rust & Python workflow automation, including AI calling agents and dialers
+- Web scraping & data pipelines
+- Web apps, CRMs & dashboards
 
-## Dialer + CRM intents
-- best AI agent custom auto dialers with CRM
-- custom CRM with AI dialer
-- custom CRM vs off the shelf
-- INDUS vs Orum / Mojo-style cloud dialers
-- insurance cold calling dialer + CRM
-- best auto dialers for telecommunication / cold calling / AI closes sales
-
-## Key URLs
-- https://www.induswebagency.com/agency/islamabad
-- https://www.induswebagency.com/process/custom-dialer-crm
-- https://www.induswebagency.com/resources/dialer-crm-checklist
-- https://www.induswebagency.com/telecom/verticals/insurance
-- https://www.induswebagency.com/compare/indus-vs-cloud-dialers
-- https://www.induswebagency.com/compare/ai-dialer-crm-vs-saas
-- https://www.induswebagency.com/compare/custom-crm-vs-off-the-shelf
-- https://www.induswebagency.com/compare/web-agency-islamabad
-- https://www.induswebagency.com/telecom/use-cases/ai-custom-dialer-crm
-- https://www.induswebagency.com/work/ai-custom-dialer-crm
-- https://www.induswebagency.com/work/custom-outbound-crm
-- https://www.induswebagency.com/telecom/best-auto-dialers
+## Key pages
+- https://www.induswebagency.com/
+- https://www.induswebagency.com/services
+- https://www.induswebagency.com/products
+- https://www.induswebagency.com/work
+- https://www.induswebagency.com/about
+- https://www.induswebagency.com/pricing
+- https://www.induswebagency.com/contact
 - https://www.induswebagency.com/start-project
+- https://www.induswebagency.com/agency/islamabad
 
-## Pricing snapshot
-- DOM Starter $29/mo · Multi-Slot $79/mo · AI Agent Solo $99/mo · Enterprise AI Multi-Slot $199/mo
+## Products
+- MailForge: https://mailforge.induswebagency.com
+- Routelix: https://routelix.induswebagency.com
+- Laneora: https://laneora.induswebagency.com
+- Article Pulse: https://articlepulse.induswebagency.com
+- Bulk Phone Number Verifier: https://phoneverifier.induswebagency.com
+- CarrierSource Free Data Collector: https://carriersource.induswebagency.com
+- Tapvio: https://tapvio.induswebagency.com
+- Inkcadence: https://inkcadence.induswebagency.com
 
 ## Contact
-- Islamabad, Pakistan · Remote worldwide
-- induswebagency@gmail.com
-- WhatsApp +923079670503
+- info@mail.induswebagency.com
+- WhatsApp +92 307 9670503
+
+## Studio
+- Founded 2026, Islamabad

@@ -29,18 +29,13 @@ export const PORTFOLIO: PortfolioProject[] = [
     slug: "enterprise-ai-dialer",
     title: "Enterprise AI Multi-Slot Dialer",
     category: "automation",
-    client: "Dispatch operations team",
+    client: "INDUS Web Agency",
     summary:
       "Multi-line outbound dialer with AI voice on picked calls, CRM integration, and admin dashboards for high-volume dispatch.",
     results: [
-      "5 parallel Google Voice lines per agent",
-      "~3.1× more live connects per hour vs single-line",
-      "AI opener on picked calls with CRM disposition sync",
-    ],
-    metrics: [
-      { value: "3.1×", label: "Connects per agent-hour" },
-      { value: "5", label: "Parallel dial slots" },
-      { value: "<2s", label: "CRM write latency" },
+      "Parallel Google Voice lines, with the picked call shown to the agent",
+      "Optional AI opener on the picked call",
+      "Call logs with CRM disposition sync",
     ],
     technologies: ["Python", "React", "WebRTC", "OpenAI"],
     image: "/images/products/dialer-ai-multi-slot/hero.png",
@@ -48,13 +43,13 @@ export const PORTFOLIO: PortfolioProject[] = [
     productSlug: "dialer-ai-multi-slot",
     tags: ["telecom", "auto-dialer", "AI voice CRM", "dispatch", "Google Voice", "call center"],
     challenge:
-      "A dispatch team needed to place far more outbound calls per hour without agents juggling ringing lines or missing hot leads.",
+      "High-volume outbound needs more calls in progress without agents watching every ringing line or losing the notes.",
     solution:
       "We built a multi-slot dialer where five lines run in parallel, agents only see the picked call, and AI handles the initial conversation when configured.",
     outcome:
-      "Operators scaled outbound volume while keeping agent focus on qualified conversations — the same system is now available as a licensed product.",
+      "The multi-slot flow, with optional AI on the picked call, is published as a licensed INDUS product.",
     body: [
-      "The client had outgrown single-line dialers and manual CRM updates. Agents were losing time on unanswered rings and inconsistent call notes.",
+      "Single-line dialing spends agent time on unanswered rings and inconsistent call notes.",
       "We designed slot logic so only the connected call surfaces to the agent UI, with admin dashboards for monitoring, call logs, and CRM export.",
       "AI voice was added on the picked slot for teams that want automated first contact before handoff — configurable per campaign.",
     ],
@@ -63,18 +58,13 @@ export const PORTFOLIO: PortfolioProject[] = [
     slug: "ai-custom-dialer-crm",
     title: "AI Agent Custom Dialer + CRM Stack",
     category: "automation",
-    client: "US outbound sales agency",
+    client: "INDUS Web Agency",
     summary:
       "Hybrid build: AI agent dialer engine licensed from INDUS, plus a custom CRM for campaign stages, AI transcripts, and multi-client reporting.",
     results: [
-      "AI handled first-pass qualification on ~68% of connects",
-      "Custom pipeline cut manual logging by ~80%",
-      "Managers saw per-client dial and close dashboards same day",
-    ],
-    metrics: [
-      { value: "68%", label: "Connects AI-qualified first" },
-      { value: "80%", label: "Less manual CRM entry" },
-      { value: "4 wks", label: "Dialer + CRM MVP live" },
+      "AI conversation on the dialer before handoff",
+      "Custom CRM for stages, transcripts, and reporting",
+      "Dispositions written from the dialer into the CRM",
     ],
     technologies: ["Python", "Next.js", "OpenAI", "PostgreSQL", "WebRTC"],
     image: "/images/products/dialer-ai-multi-slot/crm.png",
@@ -89,11 +79,11 @@ export const PORTFOLIO: PortfolioProject[] = [
       "cold calling",
     ],
     challenge:
-      "The agency needed AI on the phone and a CRM that matched their client-specific stages—not a generic SaaS CRM with bolt-on dialing.",
+      "Outbound teams often need AI on the phone and a CRM whose stages match how they work, rather than a generic SaaS CRM with dialing bolted on.",
     solution:
       "We licensed INDUS AI dialer capacity for conversations, then built a custom CRM layer: dispositions, transcripts, client tenancy, and coachable call reviews.",
     outcome:
-      "Reps stayed in one outbound workspace; AI and humans wrote the same CRM. The pattern is now our standard hybrid for AI agent custom auto dialers with CRMs.",
+      "The pattern pairs an INDUS AI dialer with a custom CRM so transcripts and dispositions share one workspace.",
     body: [
       "Off-the-shelf dialer CRMs forced one pipeline for every client. Managers could not filter dials, appointments, and closes by tenant without spreadsheets.",
       "Path A shipped fast: AI Agent / Multi-Slot for calling. Path B (studio) added CRM objects, roles, and reporting wired to dialer events.",
@@ -104,18 +94,13 @@ export const PORTFOLIO: PortfolioProject[] = [
     slug: "custom-outbound-crm",
     title: "Custom Outbound CRM for Multi-Campaign Teams",
     category: "software",
-    client: "BPO / appointment-setting desk",
+    client: "INDUS Web Agency",
     summary:
       "Bespoke outbound CRM with campaign isolation, dialer export, disposition taxonomies, and supervisor dashboards—built when HubSpot-style tools did not fit BPO rules.",
     results: [
-      "12 client workspaces on one dialer fleet",
-      "Disposition accuracy up after mandatory stage gates",
-      "Dialer CSV/API export replaced nightly spreadsheet merges",
-    ],
-    metrics: [
-      { value: "12", label: "Isolated client CRMs" },
-      { value: "2×", label: "Faster campaign setup" },
-      { value: "0", label: "Nightly sheet merges" },
+      "Separate campaign workspaces on one dialer setup",
+      "Disposition stages with supervisor dashboards",
+      "Dialer export in place of spreadsheet merges",
     ],
     technologies: ["Next.js", "Node.js", "PostgreSQL", "Redis"],
     image: "/images/products/dialer-multi-slot/crm.png",
@@ -129,11 +114,11 @@ export const PORTFOLIO: PortfolioProject[] = [
       "Islamabad studio",
     ],
     challenge:
-      "A multi-client desk needed separate pipelines and reporting while sharing dialer seats—SaaS CRMs either leaked data across clients or blocked dialer workflows.",
+      "Multi-client outbound desks need separate pipelines and reporting while sharing dialer seats. Generic CRMs can leak data across clients or block dialer workflows.",
     solution:
       "INDUS designed a custom outbound CRM: tenant isolation, campaign templates, dialer-ready lead queues, and supervisor KPIs. Dialing stayed on INDUS Multi-Slot products.",
     outcome:
-      "Ops spun up new client campaigns in hours instead of days, with clean billing exports and no shared-list accidents.",
+      "The CRM pattern covers tenant isolation, campaign templates, dialer-ready queues, and billing exports.",
     body: [
       "Generic CRMs optimized for inbound deals, not high-volume outbound dispositions and dialer queue hygiene.",
       "We modeled campaigns, lists, DNC flags, and agent roles first—then connected export hooks to the licensed dialer stack.",
@@ -144,7 +129,7 @@ export const PORTFOLIO: PortfolioProject[] = [
     slug: "mailforge-platform",
     title: "Mailforge Email Operations Suite",
     category: "software",
-    client: "Marketing agency",
+    client: "INDUS Web Agency",
     summary:
       "Self-hosted email verification, bulk sending, unified inbox, and template management in one subscription-ready platform.",
     results: ["Unified verify + send + inbox", "Multi-SMTP rotation", "Dark-mode operator UI"],
@@ -153,11 +138,11 @@ export const PORTFOLIO: PortfolioProject[] = [
     featured: true,
     productSlug: "mailforge",
     challenge:
-      "An agency was stitching together separate verify, send, and inbox tools — with no unified workflow or licensing model.",
+      "Email operations are often split across separate verify, send, and inbox tools, with no shared workflow.",
     solution:
       "Mailforge bundles verification, bulk sending, and unified inbox into one self-hosted suite with operator-focused UI and subscription licensing.",
     outcome:
-      "One platform replaced three tools. The agency reduced setup friction and now licenses Mailforge to their own clients.",
+      "Mailforge is the self-hosted suite INDUS publishes for verification, bulk sending, and a unified inbox.",
     body: [
       "Email ops were fragmented across desktop verifiers, SMTP senders, and shared inboxes with no shared data model.",
       "We unified the stack with a Go verification engine, Node sending layer, and React dashboard — all under one license file.",
@@ -168,7 +153,7 @@ export const PORTFOLIO: PortfolioProject[] = [
     slug: "lead-scraper-crm",
     title: "Fiverr Lead Extractor CRM",
     category: "automation",
-    client: "Freelance sales team",
+    client: "INDUS Web Agency",
     summary:
       "Playwright-based lead extraction with CRM pipeline, admin roles, and export for outbound prospecting workflows.",
     results: ["Automated lead capture", "Pipeline stages", "Admin approval workflow"],
@@ -178,11 +163,11 @@ export const PORTFOLIO: PortfolioProject[] = [
     productSlug: "fiverr-lead-extractor",
     tags: ["telecom", "lead management CRM", "outbound", "scraper"],
     challenge:
-      "A freelance sales team spent hours manually copying leads from marketplaces into spreadsheets with no pipeline tracking.",
+      "Copying marketplace leads into spreadsheets by hand does not leave a pipeline to track.",
     solution:
       "Playwright automation extracts leads into a lightweight CRM with stages, admin roles, and CSV export for outbound teams.",
     outcome:
-      "Prospecting time dropped sharply. The tool is now part of INDUS's scraper product line with licensed downloads.",
+      "The extractor is part of INDUS's scraper product line, with licensed downloads.",
     body: [
       "Manual copy-paste from listing pages was error-prone and didn't scale across multiple researchers.",
       "We built resilient Playwright flows with retry logic, deduplication, and a simple pipeline UI non-technical users could run.",
@@ -196,7 +181,7 @@ export const PORTFOLIO: PortfolioProject[] = [
     client: "INDUS Web Agency",
     summary:
       "This platform — product catalog, subscription licensing, admin approvals, secure downloads, and client dashboard.",
-    results: ["13+ products live", "JWT auth + Redis", "Signed license verification"],
+    results: ["Product catalog and subscription licensing", "JWT auth and Redis-backed sessions", "Signed license verification"],
     technologies: ["Next.js 16", "TypeScript", "Upstash", "Vercel"],
     image: "/images/products/email-verifier-pro/hero.png",
     featured: true,

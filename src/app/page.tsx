@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 const marquee = [
   "Next.js", "React", "TypeScript", "Three.js", "GSAP", "Framer Motion",
-  "Node.js", "PostgreSQL", "Tailwind", "Python", "Automation", "AI Integration",
+  "Node.js", "PostgreSQL", "Tailwind", "Rust", "Python", "Automation", "AI Integration",
 ];
 
 export default function HomePage() {

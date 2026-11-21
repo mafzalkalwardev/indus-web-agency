@@ -1,5 +1,5 @@
 import { AGENCY_SERVICES, PROJECT_TYPES, BUDGET_RANGES, TIMELINE_OPTIONS } from "@/lib/agency-services";
-import { COMPANY_STORY, TEAM } from "@/lib/about";
+import { COMPANY_STORY, FOUNDER, TEAM } from "@/lib/about";
 import { PRODUCTS, CATEGORY_LABELS, LIVE_PRODUCTS } from "@/lib/products";
 import { PORTFOLIO } from "@/lib/portfolio";
 import { FAQ_ITEMS } from "@/lib/faq-content";
@@ -25,7 +25,7 @@ export function buildAgencyKnowledgeBase(): string {
 
   const team = TEAM.map((m) => `- ${m.name}, ${m.role} (${m.location || "Remote"}): ${m.bio}`).join("\n");
 
-  const founderNote = `Founder: Muhammad Afzal Kalwar — Full-Stack Developer & Python Automation Engineer. Portfolio: https://mafzalkalwardev.github.io | GitHub: https://github.com/mafzalkalwardev`;
+  const founderNote = `Founder: ${FOUNDER.name} — ${FOUNDER.title}. Portfolio: ${FOUNDER.portfolio} | GitHub: ${FOUNDER.github}`;
 
   const faq = FAQ_ITEMS.slice(0, 8).map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n\n");
 

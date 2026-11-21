@@ -64,12 +64,12 @@ export function AgencyHero() {
 
           <div className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-white/10 pt-8">
             {[
-              ["50+", "Projects shipped"],
-              ["13", "Licensed products"],
-              ["24h", "Response time"],
+              ["2026", "Founded"],
+              ["Islamabad", "Pakistan"],
+              ["Remote", "Worldwide"],
             ].map(([v, l]) => (
               <div key={l}>
-                <p className="text-2xl font-bold text-cyan-300">{v}</p>
+                <p className="text-base font-bold leading-tight text-cyan-300 sm:text-2xl">{v}</p>
                 <p className="mt-1.5 text-xs leading-tight text-slate-300">{l}</p>
               </div>
             ))}
